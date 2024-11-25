@@ -2,8 +2,6 @@
 =====================
 HTML (HyperText Markup Language) is the standard markup language used to create the structure of web pages. It defines the content and layout of a webpage through a series of elements, which are represented by tags.
 
-## Example ##
-=============
 <!DOCTYPE html>
 <html>
 <head>
