@@ -166,3 +166,212 @@ Compared to display: inline, the major difference is that display: inline-block 
 Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not.
 
 Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.
+
+## `Combinators` ##
+====================
+A CSS selector can contain more than one simple selector. Between the simple selectors, we can include a combinator.
+
+There are four different combinators in CSS:
+
+`Descendant combinator (space)`
+---------------------------------
+The descendant combinator matches all elements that are descendants of a specified element.
+
+The following example selects all <p> elements inside <div> elements: 
+
+## Example
+----------
+```css
+div p {
+  background-color: yellow;
+}
+```
+
+`Child combinator (>)`
+----------------------
+The child combinator selects all elements that are the children of a specified element.
+
+The following example selects all <p> elements that are children of a <div> element:
+
+## Example
+----------
+```css
+div > p {
+  background-color: yellow;
+}
+```
+
+`Next sibling combinator (+)`
+-----------------------------
+The next sibling combinator is used to select an element that is directly after another specific element.
+
+Sibling elements must have the same parent element, and "adjacent" means "immediately following".
+
+The following example selects the first <p> element that are placed immediately after <div> elements:
+
+## Example
+-----------
+```css
+div + p {
+  background-color: yellow;
+}
+```
+
+`Subsequent-sibling combinator (~)`
+------------------------------------
+The subsequent-sibling combinator selects all elements that are next siblings of a specified element.
+
+The following example selects all <p> elements that are next siblings of <div> elements: 
+
+## Example
+----------
+```css
+div ~ p {
+  background-color: yellow;
+}
+```
+
+## `What are Pseudo-classes?` ##
+=================================
+A pseudo-class is used to define a special state of an element.
+
+For example, it can be used to:
+
+Style an element when a user moves the mouse over it
+Style visited and unvisited links differently
+Style an element when it gets focus
+Style valid/invalid/required/optional form elements
+
+## Syntax
+-----------
+```css
+selector:pseudo-class {
+  property: value;
+}
+```
+
+## `What are Pseudo-Elements?` ##
+==================================
+A CSS pseudo-element is used to style specific parts of an element.
+
+For example, it can be used to:
+
+Style the first letter or line, of an element
+Insert content before or after an element
+Style the markers of list items
+Style the viewbox behind a dialog box
+
+## Syntax
+----------
+```css
+selector::pseudo-element {
+  property: value;
+}
+```
+
+## `CSS [attribute] Selector` ##
+=================================
+The [attribute] selector is used to select elements with a specified attribute.
+
+The following example selects all <a> elements with a target attribute
+
+## Syntax
+---------
+```css
+Example
+a[target] {
+  background-color: yellow;
+}
+```
+## `What is Specificity?` ##
+============================
+
+If there are two or more CSS rules that point to the same element, the selector with the highest specificity value will "win", and its style declaration will be applied to that HTML element.
+
+Think of specificity as a score/rank that determines which style declaration is ultimately applied to an element.
+
+## `What is !important?` ##
+============================
+The !important rule in CSS is used to add more importance to a property/value than normal.
+
+In fact, if you use the !important rule, it will override ALL previous styling rules for that specific property on that element!
+
+## `Math function` ##
+======================
+The CSS math functions allow mathematical expressions to be used as property values. Here, we will explain the calc(), max() and min() functions.
+
+## `transform` ##
+==================
+The transform property is used to apply transformations like rotate, scale, translate, and skew to an element.
+Example transformations:
+Rotate: rotate(45deg)
+Scale: scale(1.5)
+Translate: translateX(50px)
+
+## `transition` ##
+==================
+The transition property allows smooth changes between property values over time.
+You can define:
+Property to animate (e.g., transform, background-color).
+Duration (e.g., 0.5s).
+Timing function (e.g., ease, linear).
+
+## `The CSS object-fit Property` ##
+=====================================
+The CSS object-fit property is used to specify how an <img> or <video> should be resized to fit its container.
+
+This property tells the content to fill the container in a variety of ways; such as "preserve that aspect ratio" or "stretch up and take up as much space as possible".
+
+The object-fit property can take one of the following values:
+
+fill - This is default. The image is resized to fill the given dimension. If necessary, the image will be stretched or squished to fit
+contain - The image keeps its aspect ratio, but is resized to fit within the given dimension
+cover - The image keeps its aspect ratio and fills the given dimension. The image will be clipped to fit
+none - The image is not resized
+scale-down - the image is scaled down to the smallest version of none or contain
+
+## `CSS Media Queries` ##
+=========================
+The @media rule, introduced in CSS2, made it possible to define different style rules for different media types.
+
+Media queries in CSS3 extended the CSS2 media types idea: Instead of looking for a type of device, they look at the capability of the device.
+
+Media queries can be used to check many things, such as:
+
+width and height of the viewport
+orientation of the viewport (landscape or portrait)
+resolution
+Using media queries are a popular technique for delivering a tailored style sheet to desktops, laptops, tablets, and mobile phones (such as iPhone and Android phones).
+
+## `CSS Flexbox Layout Module` ##
+==================================
+Before the Flexbox Layout module, there were four layout modes:
+
+Block, for sections in a webpage
+Inline, for text
+Table, for two-dimensional table data
+Positioned, for explicit position of an element
+
+`The flex container properties are`
+
+flex-direction
+flex-wrap
+flex-flow
+justify-content
+align-items
+align-content
+
+`The flex-wrap Property`
+
+The flex-wrap property specifies whether the flex items should wrap or not.
+
+The examples below have 12 flex items, to better demonstrate the flex-wrap property.
+
+`The flex item properties are`
+
+order
+flex-grow
+flex-shrink
+flex-basis
+flex
+align-self
