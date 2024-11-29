@@ -582,3 +582,6 @@ A thread is a sequence of instructions that can be executed independently by the
 
 
 
+Router chaining
+---------------
+to sequentially process incoming HTTP requests through a series of middleware functions.

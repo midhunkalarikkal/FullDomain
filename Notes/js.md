@@ -1,20 +1,32 @@
-
 ## `JAVASCRIPT` ##
 ===================
-Everything in javascript is happens inside the Executiom context and it have two components memory and code.
+JavaScript is a high-level, dynamic, interpreted programming language primarily used for adding interactivity and dynamic behavior to web pages. It is a single-threaded, synchronous, and event-driven language that supports both functional and object-oriented programming paradigms. JavaScript runs in the browser and server environments (like Node.js) using engines such as V8, which execute its code.
 
-The variables and functions are stored in the memory component like a key value pair.
+A `dynamic language` means you can define variables, objects, and functions without specifying their types beforehand. The type of a variable can change at runtime.
 
-The memory component is also known as variable environment.
+`Interpreted` means that the code is read and executed line by line by an interpreter, without the need for pre-compiling it into machine code.
 
-In code component the code is executed one line at a time.
+`Synchronous`
+JavaScript executes code line by line, in order. It waits for one task to complete before moving to the next.
 
-The code component is also known as thread of execution.
-Javascript is a synchronous and single threaded language
+`Single-Threaded`
+JavaScript has only one main thread to execute code, meaning it can handle one task at a time.
+
+An `event-driven` language means the flow of the program is determined by events, such as user actions (clicks, key presses), system messages, or other triggers. Instead of executing code sequentially, it waits for an event to occur and then runs the corresponding code (called an event handler).
 
 ## `Execution context` ##
 =========================
+Everything in javascript is happens inside the Executiom context and it have two components memory and code.
 The execution context is created in the call stack
+
+`Memory Component`:
+Variables and functions are stored here as key-value pairs.
+This component is also referred to as the Variable Environment.
+
+`Code Component`:
+The code is executed here, one line at a time.
+This component is also known as the Thread of Execution.
+
 
 When executing a program its first phase is memory creation
 
@@ -24,13 +36,13 @@ The second phase is code execution phase
 
 In this phase the variables will asiign with thier actual value in the program
 
-For the function in memory component it will create a new execution context in the code component when the function is invoked in the main memory component and in the code component there will be a memory and code component its self
+For the function in main memory component it will create a new execution context in the code component when the function is invoked in the main memory component and in the code component there will be a memory and code component its self
 
 There will store the parameters and variables of the function of the program in the memory component in the first phase
 
 In the second phase the parameters and variables will get the actual value
 
-when it return the a value the execution context of the function will be removed and the control will be returned to the function invoked line in the main execution context's memory component
+when it return the value the execution context of the function will be removed and the control will be returned to the function invoked line in the main execution context's main memory component
 
 After the execution of the program the global execution context will be deleted
 
@@ -57,16 +69,22 @@ Regex
 Map
 set
 
+`Set`
+------
+Set is a built-in object that allows you to store unique values of any type
+
+`Weak set`
+-----------
+A WeakSet is a built-in object in JavaScript that can only store objects
+
 ## `Window` ##
 ===============
 Window is a global object is created along with the execution context
-
 Whatever we write in the global space it will attached to the global object
 
 ## `Scope` ##
 =============
-Scope means where you can access a specific variable or function in our code
-
+Scope means where you can access a specific variable or function in our code  
 The lexical environment of Global execution context will point to null , because there is no parent for it anymore.
 
 ## `Scope chain` ##
@@ -106,6 +124,40 @@ console.log(a)  // 10  // Global scope
 console.log(b)  // 200  // Script scope		    
 console.log(c)  // 300  // Script scope		    
 =================================================
+
+## `Scope` ##
+==============
+Scope refers to the context in which variables are declared and the accessibility of those variables.
+
+`Global Scope`
+---------------
+Variables declared outside any function or block have global scope and can be accessed throughout the entire program.
+
+`Local Scope`
+-------------
+Variables declared inside a function or block have local scope and are accessible only within that function or block.
+
+`Function Scope`
+-----------------
+Each function creates its own scope, and variables declared inside that function are not accessible outside of it.
+
+`Block Scope`
+----------------
+Introduced in ECMAScript 6 (ES6) with let and const, block scope defines variables within curly braces {}.
+
+`Lexical scope`
+------------------
+Lexical scope, also known as static scope, is determined at the time of code writing and is based on the physical placement of functions within the code.
+
+Lexical environment is the local memory + reference to the lexical environment of parent
+
+`Outer and Inner Functions`
+----------------------------
+In lexical scope, inner functions have access to variables declared in their outer (enclosing) functions.
+
+`Benefits`
+----------
+Lexical scope promotes encapsulation and helps in avoiding naming conflicts, as variables declared in different scopes remain independent.
 
 ## `Function` ##
 ==================
@@ -159,7 +211,7 @@ So the xyz() is acting as a varibale of that function it is used to call that fu
 
 `Functional programming`
 -------------------------
-A programming paradigm that treats computation as the evaluation of mathematical functions, avoiding changing-state and mutable data.
+Functional programming is a programming paradigm where you build software by composing and applying pure functions, avoiding changing state and mutable data.
 
 `Higher order function`
 ------------------------
@@ -262,43 +314,9 @@ Callback Hell: Nested callbacks can lead to complex and hard-to-read code.
 Lack of Strong Typing: Dynamic typing can result in runtime errors, requiring thorough testing.
 
 
-## `Scope` ##
-==============
-Scope refers to the context in which variables are declared and the accessibility of those variables.
-
-`Global Scope`
----------------
-Variables declared outside any function or block have global scope and can be accessed throughout the entire program.
-
-`Local Scope`
--------------
-Variables declared inside a function or block have local scope and are accessible only within that function or block.
-
-`Function Scope`
------------------
-Each function creates its own scope, and variables declared inside that function are not accessible outside of it.
-
-`Block Scope`
-----------------
-Introduced in ECMAScript 6 (ES6) with let and const, block scope defines variables within curly braces {}.
-
-`Lexical scope`
-------------------
-Lexical scope, also known as static scope, is determined at the time of code writing and is based on the physical placement of functions within the code.
-
-Lexical environment is the local memory + reference to the lexical environment of parent
-
-`Outer and Inner Functions`
-----------------------------
-In lexical scope, inner functions have access to variables declared in their outer (enclosing) functions.
-
 ## `Memoization` ##
 ====================
 Memoization is a technique used in programming to optimize the performance of functions by caching the results of expensive function calls and reusing them when the same inputs occur again.
-
-`Benefits`
-----------
-Lexical scope promotes encapsulation and helps in avoiding naming conflicts, as variables declared in different scopes remain independent.
 
 ## `Prototype` ##
 ==================
@@ -1788,7 +1806,57 @@ Bubbling Phase: The event travels from the target element back up to the root.
 Event Bubbling:-
 Definition: Event bubbling specifically refers to the bubbling phase of event propagation.
 
+## `setInterval` ##
+=====================
+Definition: Executes a specified function repeatedly at a fixed time interval (in milliseconds) until explicitly stopped using clearInterval.
+Use Case: Periodically running a task, like updating a timer.
 
+## Example
+==========
+```js
+const intervalId = setInterval(() => {
+    console.log("This runs every 2 seconds");
+}, 2000);
+
+// To stop the interval
+setTimeout(() => {
+    clearInterval(intervalId);
+    console.log("Stopped the interval");
+}, 10000); // Stops after 10 seconds
+
+```
+
+## `setTimeout` ##
+====================
+Definition: Executes a specified function once after a fixed delay (in milliseconds).
+Use Case: Scheduling a one-time task, like showing a notification after a delay.
+
+## Example
+============
+```js
+setTimeout(() => {
+    console.log("This runs once after 3 seconds");
+}, 3000);
+
+```
+
+## `setImmediate (Node.js only)` ##
+=====================================
+Definition: Executes a specified function immediately after the current event loop phase. It’s faster than setTimeout(fn, 0) but still waits for I/O operations in the event loop.
+Use Case: Running a task as soon as the current event loop finishes (micro-task level timing).
+
+## Example
+===========
+```js
+console.log("Before setImmediate");
+
+setImmediate(() => {
+    console.log("This runs immediately after the current event loop");
+});
+
+console.log("After setImmediate");
+
+```
 
 
 
@@ -1803,17 +1871,12 @@ Definition: Event bubbling specifically refers to the bubbling phase of event pr
 Polyfills are code snippets or scripts that provide modern functionality in older browsers.
 For example, if a newer JavaScript method or API is not supported in older versions of a browser, a polyfill can be used to provide that functionality.
 
-Setimmediate
-------------
-After i/o event and before timer
-
 Process.nextTick()
 ------------------
 After i/o and timer
 
-
-Priority
---------
+## `Priority calling` ##
+=========================
 conosle.log()
 process.nextTick()
 promise
@@ -1821,33 +1884,27 @@ setTimeout
 setImmediate
 setInterval
 
-Router chaining
----------------
-to sequentially process incoming HTTP requests through a series of middleware functions.
 
-JIT (Just in time)
-------------------
-JIT compilation dynamically translates frequently executed code into native machine code at runtime
 
-Set
----
-Set is a built-in object that allows you to store unique values of any type
+## `JIT (Just in time)` ##
+============================
+Just-In-Time (JIT) compilation is a technique used in programming where code is dynamically translated into native machine code at runtime, instead of being compiled ahead of time (AOT). This approach allows for improved execution speed and efficiency during program execution.
 
-Weak set
---------
-A WeakSet is a built-in object in JavaScript that can only store objects
+`Working`
+----------
+Source Code Parsing:
+The source code (e.g., JavaScript) is initially parsed into an intermediate representation like bytecode.
 
-Isolation
----------
-Process working at same time not conflit together its output
+Runtime Compilation:
+During execution, frequently used parts of the code (called "hot code") are identified and compiled into machine code.
 
-Atomicity
----------
-Either comeplete the work or not do that work
+Optimization:
+The JIT compiler optimizes the machine code during this process to enhance performance.
 
-Integrity
----------
-Accuracy and readability
+Execution:
+The machine code is then directly executed by the CPU, leading to faster execution compared to interpretation.
+
+
 
 
 
