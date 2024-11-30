@@ -1,8 +1,30 @@
--------
--------
-NODE JS
--------
--------
+## `Node.js` ##
+================
+Node.js is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
+
+Developer Ryan Dahl in 2009
+
+Whereever is javascript there is js engine
+
+Joyent is a company that helped ryan dahl for developing nodejs
+
+Earlier the nodejs name was webjs because ryan thoughts he was developing it for building web server, later henrealised that it is not only used for building web serve also we can use build something else, so he changed the name from webjs to nodejs
+
+## `Spider monkey` ##
+======================
+
+## `Javascript runtime` ##
+===========================
+
+
+## `Chrome v8 javascript engine` ##
+===================================
+
+## `vent driven architechture` ##
+===================================
+
+## `Asynchronous i/o` or `Non-blocking i/o` ##
+=================================================
 
 Query Parameters
 ----------------

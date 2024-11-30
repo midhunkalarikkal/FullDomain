@@ -2268,6 +2268,10 @@ Now we are using the **redux toolkit** which is the new version in this we have 
 
 In vanila redux we need to usea **middlewares and thungs** but in the redux toolkit we have **RTK Query**
 
+`Redux principles`
+------------------
+
+
 
 
 ## React `Strictmode`

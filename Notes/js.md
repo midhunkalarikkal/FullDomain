@@ -549,7 +549,7 @@ In the arrow function in case of let or const instead of var the error will be r
 
 	2 . 3 . if the normal function is calling along with an object the result will be that 		object  // window.x()  = window
 
-3 . Inside a object method the this keyword is result in that object
+3 . Inside an object method the this keyword is result in that object
 
 `Global Context`
 -----------------
