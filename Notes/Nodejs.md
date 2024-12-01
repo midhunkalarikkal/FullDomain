@@ -2,29 +2,227 @@
 ================
 Node.js is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-Developer Ryan Dahl in 2009
+installing using `nvm` is a node version manager
 
-Whereever is javascript there is js engine
+`Whereever is javascript there is js engine`
 
-Joyent is a company that helped ryan dahl for developing nodejs
+Node.js is embedded with the V8 JavaScript engine, which powers its ability to execute JavaScript outside of a browser. Additionally, Node.js provides "superpowers" such as APIs for server-side functionality and modules for better code organization and Event loops manages asynchronous tasks by coordinating execution of code. These features make Node.js highly suitable for building servers. This combination is referred to as the `JavaScript runtime`.
 
-Earlier the nodejs name was webjs because ryan thoughts he was developing it for building web server, later henrealised that it is not only used for building web serve also we can use build something else, so he changed the name from webjs to nodejs
+A `JavaScript runtime` is an environment that provides all the necessary components to execute JavaScript code outside of a web browser
 
-## `Spider monkey` ##
-======================
+Developer Ryan Dahl created Node.js in 2009. Joyent, a technology company, supported Ryan Dahl in the development of Node.js.
 
-## `Javascript runtime` ##
-===========================
+Initially, the project was named "WebJS" because Ryan believed he was creating it primarily for building web servers. However, he later realized that it could be used for much more than just web servers, so he renamed it to Node.js to reflect its broader capabilities.
 
+At the time, most servers were blocking in nature, which led Ryan to start developing Node.js as a non-blocking, event-driven runtime to handle asynchronous operations efficiently.
+
+2009
+------
+Ryan Dahl developed Node.js, a cross-platform, open-source JavaScript runtime environment built on the V8 JavaScript engine.
+Initially called WebJS because Ryan thought it would primarily be used for building web servers. Later, he realized its potential for broader use cases and renamed it Node.js.
+Initally the nodejs is built for mac and linux then in 2011 they got support for windows
+
+2010
+-------
+The npm package manager was introduced, making it easier to share and manage JavaScript packages.
+
+2011
+-----
+Node.js added support for Windows. Until then, it primarily worked on macOS and Linux.
+
+2012
+-------
+Ryan Dahl stepped down from the project.
+Isaac Z. Schlueter, the creator of npm, took over the leadership of Node.js development under the company Joyent, which was supporting Node.js.
+
+2014
+-----
+A developer named Fedor Indutny forked Node.js to create io.js, citing dissatisfaction with Joyent's governance model.
+io.js aimed for more open governance and rapid feature development.
+
+2015
+-----
+Node.js and io.js merged to unify the community under the Node.js Foundation.
+
+2019
+-------
+The JS Foundation and the Node.js Foundation merged to form the OpenJS Foundation, which now governs Node.js along with other JavaScript-related projects.
+
+2009 nodejs ----------> 2010 npm -----------> 2011 windows support -----------> 2012 isac took over -----> 2014 fedor forked --------> 2015  node.js and io.js merged ------------> 2019  openjs foundation took controll of node.js
 
 ## `Chrome v8 javascript engine` ##
 ===================================
+V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js, among others. It implements `ECMAScript` and `WebAssembly`, and runs on Windows, macOS, and Linux systems that use x64, IA-32, or ARM processors. `V8 can be embedded into any C++ application`.
 
-## `vent driven architechture` ##
+v8 for chrome
+spider monkey for firefox
+chakra for edge
+
+js code ---->  c++ code ------> machine code --------> assembly code ---------> binary
+
+`JavaScript` Engine: Your JavaScript code is run by a JavaScript engine, like V8 (used in Chrome and Node.js). This engine is written in a language like C++.
+
+`Parsing`: The engine first parses your JavaScript code into an Abstract Syntax Tree (AST) to understand its structure.
+
+`Compilation`: Then, the engine compiles the AST into machine code. This is where it translates your JavaScript into a lower-level language that the computer's hardware can understand.
+
+`Execution`: Finally, this machine code is executed by your computer's processor. This is where the binary part comes in, as machine code consists of binary instructions that the processor can execute.
+
+
+## `Event driven architechture` ##
 ===================================
+Event-driven architecture (EDA) is a design paradigm in which the flow of a program is determined by events such as user actions, sensor outputs, or messages from other programs. It is commonly used in systems where asynchronous and dynamic responses are needed.
 
-## `Asynchronous i/o` or `Non-blocking i/o` ##
+## `Asynchronous i/o` vs `Non-blocking i/o` vs ``Synchronous i/o` ##
+======================================================================
+`Asynchronous`
+--------------
+Asynchronous I/O (AIO) is a type of input/output processing that allows other tasks to continue while I/O operations run in the background. It’s also known as overlapped I/O and is ideal for optimizing efficiency in long-running tasks like database backups or large data transfers.
+
+Efficient Resource Usage: Overlaps processing with I/O operations.
+Reduced Wait Time: Minimizes process or thread waiting.
+Immediate Service: Quickly responds to client requests.
+Handles High Load: Effectively manages bursty applications.
+Scalability: Supports large-scale operations efficiently.
+Optimal for Large Data: Best suited for transferring large datasets.
+
+`Non-blocking i/o`
+-------------------
+Non-blocking I/O is a processing method where I/O operations return immediately without waiting for the operation to complete. Instead, the system continues executing other tasks and revisits the I/O operation later when the result is ready.
+Advantages of nonblocking can handle multiple number of request with small number of threads
+
+No Waiting: The system doesn’t halt while performing I/O tasks.
+Improved Efficiency: Frees up resources for other operations during I/O processing.
+Supports Concurrency: Handles multiple tasks simultaneously without thread blocking.
+Scalability: Ideal for applications with high I/O demands, like servers managing multiple connections.
+
+`Synchronous i/o`
+------------------
+Synchronous I/O is a processing method where I/O operations block the execution of the program until the task is complete. The program waits for the I/O operation (such as reading from a file or querying a database) to finish before proceeding to the next operation.
+
+Simplicity: Easier to implement as the program flow is straightforward.
+Data Consistency: Guarantees that data is processed in order.
+Debugging: Easier to debug, as there are fewer asynchronous tasks to manage.
+
+## `Server` ##
+==============
+A server is a powerful computer or system that provides services, data, or resources to other computers, known as clients, over a network. When a client machine, such as a user's computer or smartphone, makes a request to access a website like google.com, it sends the request to the server. The server is identified by an IP address, for example, 114.126.123.8, which uniquely points to the server machine hosting the website or service. The server processes the client's request and responds with the required data, such as a webpage.
+
+## `ECMA Script` ##
+===================
+ECMAScript is a standardized specification for scripting languages, which serves as the foundation for languages like JavaScript, JScript, and ActionScript. It defines the rules, guidelines, and features for scripting languages to ensure consistency and interoperability across different platforms and browsers.
+
+## `WebAssembly` ##
+===================
+WebAssembly (Wasm) is a binary instruction format designed for efficient execution on web browsers. It enables high-performance execution of code written in languages like C, C++, Rust, and others, directly in the browser, alongside JavaScript. WebAssembly allows developers to run computationally intensive tasks faster and with lower overhead compared to traditional JavaScript.
+
+## `REPL` ##
+=============
+Read, Evaluate, Print, Loop
+Quickest way of runnig nodejs code
+A REPL is an interactive programming environment that allows users to enter and execute code one line at a time.
+
+type node in command line for activate repl
+special comands :- .help , .break , .clear
+Auto completion :- Pressing the tab key can autocomplete the names of functions , varialbles and modules
+
+## `global` ##
+==============
+One of the superpowers of Node.js is its ability to work seamlessly with the V8 engine, making development faster and more efficient.
+
+In Node.js, the this keyword in the global space refers to an empty object.
+In contrast, in a browser, the this keyword in the global space points to the window object.
+In the browser, the global object can be accessed using multiple keywords:
+
+`window`
+`this`
+`self` (used in Web Workers)
+`frames`
+To standardize how the global object is accessed across different runtimes (Node.js, browsers, and Web Workers), the OpenJS Foundation introduced globalThis in 2020. This provides a consistent way to reference the global object, regardless of the runtime environment.
+
+## `require` ##
+================
+Used to include another modules in a module by using the require function and specifying the path inside it
+
+we cant access the varibales, functions and methods inside a module in aother module by just using the require function, because the modules are protecting their variables and functions from leaking
+
+the protection will help to reuse the variable and function names in another modules if we need
+
+We need to export the variables and function from a module import it in the another module for using it.
+
+## Example
+===========
+```js
+module.exports = {variable, function}
+```
+
+## `CommonJs module (cjs)` common js module system ##
+==============================
+Older way, synchronous and the code is running in  non strict mode
+in non strict mode we can declare variables without var, let or const
+while importing a module it is not necessary to specifyt eh .js extension for the importing file in common js module
+
+the moduel.exports is an empty object by default
+
+By default the module is common js module it is  that the variables and functions are exporting using the 
+```js
+module.exports = sum; // Single export
+module.export = {Sum, Multiply}; // Multiple export
+```
+and importing using the require function
+
+```js
+const sum = require('./path'); // Single import
+const {Sum, Multiply} = require('./path'); // Multiple import
+
+// importing the whole object
+const object = require('./path')  
+// Using the exported things
+object.Sum
+object.Multiply
+```
+
+## `ES modules (mjs)` es module system ##
+===================
+Newer way asynchronous and the code running in strict mode
+in strict mode we cant decalre variable without var, let or const
+while importing a module we need to specify the .js file extension of the file in es modules
+
+For making the module ES module we need to specify the module in the package.json
+
+```js
+{
+  "type" : "module"
+}
+```
+and for exporting we can use the export keyword directly with variables and functions
+```js
+ export function sum(a,b){
+  console.log("Sum is : ",a+b);
+ }
+```
+
+and for importing we need to use the import keyword
+```js
+import {sum} from './path';
+```
+
+## `Coomon file for importinga and exporting` ##
 =================================================
+If we have a folder and inside it have multiple modules and each modules have mutiple exports, we can use an `index.js` file for importing all the modules things in to index.js file and then export all the things from the index.js file
+
+So while importing these things outside of the folder we dont need to use the index.js file name in the path, by default it will take it from the index.js file of the folder
+
+the main advantage of this method is that we can encapsulate the modules and the varibale and the functions so theat the module which is importing these things will not need to worry about the location of these things
+
+
+
+
+
+
+
+
+
 
 Query Parameters
 ----------------
@@ -256,14 +454,6 @@ export default myfunction
 import
 -------
 import myfunction from "./module.js"
-
-REPL
-----
-A REPL is an interactive programming environment that allows users to enter and execute code one line at a time.
-
-type node in command line for activate repl
-special comands :- .help , .break , .clear
-Auto completion :- Pressing the tab key can autocomplete the names of functions , varialbles and modules
 
 CLI
 ---

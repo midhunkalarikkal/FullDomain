@@ -210,7 +210,7 @@ The purpose of crossorigin attribute is used to share the resources from one dom
 
 ### WHAT IS `REACT`? ###
 ==============================
-React is a JavaScript library developed by Facebook for building user interfaces (UI), especially in single-page applications (SPAs). It enables developers to create large web applications that can efficiently update and render in response to changing data. React is component-based, meaning UIs are built using small, reusable pieces of code called components.
+React is a JavaScript library developed by Facebook for building user interfaces (UI), especially in single-page applications (SPAs). It enables developers to create large web applications that can efficiently update and render in response to changing data. React is component-based, meaning UIs are built using small, reusable pieces of code called components.React uses the ES modules by default.
 
 
 
