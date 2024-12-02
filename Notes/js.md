@@ -1759,6 +1759,9 @@ If the IIFE is running in strict mode ('use strict';), the value of this inside 
 
 Advantages are encapsulation and isolation
 
+Wrapping the function in parentheses () makes it an expression rather than a declaration.
+Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
+
 ## `Types of modules in Javascript` ##
 ======================================
 
@@ -1908,6 +1911,10 @@ The machine code is then directly executed by the CPU, leading to faster executi
 
 
 
+
+## `Topics` ##
+================
+Prefetch and Preload
 
 
 

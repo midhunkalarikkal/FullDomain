@@ -140,6 +140,24 @@ In the browser, the global object can be accessed using multiple keywords:
 `frames`
 To standardize how the global object is accessed across different runtimes (Node.js, browsers, and Web Workers), the OpenJS Foundation introduced globalThis in 2020. This provides a consistent way to reference the global object, regardless of the runtime environment.
 
+## `Module` ##
+==============
+In Node.js, each module is wrapped in a function when executed.This is an IIFE function. This design ensures that the variables and functions defined inside the module are private to that module and not accessible from other modules unless explicitly exported.
+
+When a Node.js module is executed, it is wrapped in a function like this internally
+
+```js
+(function(exports, require, module, __filename, __dirname) {
+  // Your module code here
+});
+```
+
+`Advantages of This Design`
+--------------------------
+Data Privacy: Keeps module internals hidden and secure.
+Modularity: Encourages clean, reusable, and maintainable code.
+No Global Pollution: Prevents accidental overwriting of global variables or functions.
+
 ## `require` ##
 ================
 Used to include another modules in a module by using the require function and specifying the path inside it
@@ -149,6 +167,31 @@ we cant access the varibales, functions and methods inside a module in aother mo
 the protection will help to reuse the variable and function names in another modules if we need
 
 We need to export the variables and function from a module import it in the another module for using it.
+
+Whenever the require function will call it will wrap the module inside a IIFE function and then pass it to the v8 engine.
+
+`Five steps for require('/path') to work`
+-----------------------------------------
+1. Resolving the module
+  The file path is resolved based on the type of require used, such as:
+    Local files (./module.js)
+    JSON files
+    Node.js core modules (e.g., fs, path)
+    Modules from node_modules or custom module paths
+2. Loading the module
+  The file content is loaded based on its type:
+    JavaScript files are read and parsed.
+    
+    JSON files are parsed into JavaScript objects.
+    Native modules are loaded as compiled binaries.
+3. Wrap inside IIFE
+  This provides module-level scope and access to special variables like exports, module, and __dirname.
+4. Code Evaluation
+  module.expots happens like returns it
+  The wrapped function is executed, and the module.exports object is populated with the module's public properties or methods.
+5. Module caching
+  The loaded module is cached to improve performance.
+  If the module is required again, the cached version is returned instead of re-executing the module code.
 
 ## Example
 ===========
