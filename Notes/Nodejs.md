@@ -72,6 +72,29 @@ js code ---->  c++ code ------> machine code --------> assembly code ---------> 
 `Execution`: Finally, this machine code is executed by your computer's processor. This is where the binary part comes in, as machine code consists of binary instructions that the processor can execute.
 
 
+Steps inside the v8 engine
+---------------------------
+1. `Parsing`
+  1. 1. Lexical analysis or tokenization
+  In this step the `code` is converted in to `Tokens`, so the js engine is reading the code token by token
+
+  1. 2. `Syntax analysis`
+  The tokens then converted in to Abstract syntax tree `AST`
+  `When we get a syntax error It means that our code cant create a proper abstract syntax tree`
+
+2. `Interpreter`
+  In v8 engine the interpreter is called `ignition interpreter` and the AST is passed to this interpreter and then converted to byte code.
+
+3. So if there are codes that repeats like `HOT code` it will be passed to the compiler in the v8 engine called `Turbo compiler` and then it will optimize the hot code in to optimized machine code then it will be executed.
+
+`The whole rocess of interpreter and compiler is called Just in time compiler`
+
+`deoptimization`
+----------------
+However, there are cases where the optimized machine code becomes invalid. This can happen if the assumptions made during optimization are violated. For instance, if a function is optimized for adding two numbers (e.g., integers) and later encounters inputs that are strings or characters, the optimized code might no longer be valid.
+
+When such a mismatch occurs, de-optimization happens. The V8 engine discards the optimized code and falls back to the original bytecode, which is executed by the Ignition Interpreter. The engine can then adapt to the new input type, ensuring correct execution while trading off some performance.
+
 
 
 ## `Event driven architechture` ##
@@ -295,6 +318,13 @@ the main advantage of this method is that we can encapsulate the modules and the
 ==============
 It is a cross platform  open source library written in c , handles asynchronous non blocking  operations in node js using thread pool and event loop
 js - synchronous ans single threaded language
+
++-----------node.js-----------+
+| +-----------+   +---------+ |
+| | V8 Engine |   |  libuv  | |
+| +-----------+   +---------+ |
+|  https fs crypto etc..      |
++-----------------------------+
 
 `Synchronous means`
   JavaScript executes code line by line in the order it appears.

@@ -14,6 +14,9 @@ JavaScript has only one main thread to execute code, meaning it can handle one t
 
 An `event-driven` language means the flow of the program is determined by events, such as user actions (clicks, key presses), system messages, or other triggers. Instead of executing code sequentially, it waits for an event to occur and then runs the corresponding code (called an event handler).
 
+Javascript is neighther a interpreter language or compiler language, but it uses both of them inside v8 engine.
+The compilation process inside the v8 engine is said to be the `JIT Compilation` that menas just in time compilation.
+
 ## `Execution context` ##
 =========================
 Everything in javascript is happens inside the Executiom context and it have two components memory and code.
