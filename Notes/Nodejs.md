@@ -50,6 +50,9 @@ The JS Foundation and the Node.js Foundation merged to form the OpenJS Foundatio
 
 2009 nodejs ----------> 2010 npm -----------> 2011 windows support -----------> 2012 isac took over -----> 2014 fedor forked --------> 2015  node.js and io.js merged ------------> 2019  openjs foundation took controll of node.js
 
+
+
+
 ## `Chrome v8 javascript engine` ##
 ===================================
 V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js, among others. It implements `ECMAScript` and `WebAssembly`, and runs on Windows, macOS, and Linux systems that use x64, IA-32, or ARM processors. `V8 can be embedded into any C++ application`.
@@ -69,14 +72,19 @@ js code ---->  c++ code ------> machine code --------> assembly code ---------> 
 `Execution`: Finally, this machine code is executed by your computer's processor. This is where the binary part comes in, as machine code consists of binary instructions that the processor can execute.
 
 
+
+
 ## `Event driven architechture` ##
 ===================================
 Event-driven architecture (EDA) is a design paradigm in which the flow of a program is determined by events such as user actions, sensor outputs, or messages from other programs. It is commonly used in systems where asynchronous and dynamic responses are needed.
 
+
+
+
 ## `Asynchronous i/o` vs `Non-blocking i/o` vs ``Synchronous i/o` ##
 ======================================================================
-`Asynchronous`
---------------
+`Asynchronous` / `Non-blocking i/o`
+------------------------------------
 Asynchronous I/O (AIO) is a type of input/output processing that allows other tasks to continue while I/O operations run in the background. It’s also known as overlapped I/O and is ideal for optimizing efficiency in long-running tasks like database backups or large data transfers.
 
 Efficient Resource Usage: Overlaps processing with I/O operations.
@@ -86,15 +94,7 @@ Handles High Load: Effectively manages bursty applications.
 Scalability: Supports large-scale operations efficiently.
 Optimal for Large Data: Best suited for transferring large datasets.
 
-`Non-blocking i/o`
--------------------
-Non-blocking I/O is a processing method where I/O operations return immediately without waiting for the operation to complete. Instead, the system continues executing other tasks and revisits the I/O operation later when the result is ready.
-Advantages of nonblocking can handle multiple number of request with small number of threads
-
-No Waiting: The system doesn’t halt while performing I/O tasks.
-Improved Efficiency: Frees up resources for other operations during I/O processing.
-Supports Concurrency: Handles multiple tasks simultaneously without thread blocking.
-Scalability: Ideal for applications with high I/O demands, like servers managing multiple connections.
+The main thread is the js engine running
 
 `Synchronous i/o`
 ------------------
@@ -104,17 +104,29 @@ Simplicity: Easier to implement as the program flow is straightforward.
 Data Consistency: Guarantees that data is processed in order.
 Debugging: Easier to debug, as there are fewer asynchronous tasks to manage.
 
+
+
+
 ## `Server` ##
 ==============
 A server is a powerful computer or system that provides services, data, or resources to other computers, known as clients, over a network. When a client machine, such as a user's computer or smartphone, makes a request to access a website like google.com, it sends the request to the server. The server is identified by an IP address, for example, 114.126.123.8, which uniquely points to the server machine hosting the website or service. The server processes the client's request and responds with the required data, such as a webpage.
+
+
+
 
 ## `ECMA Script` ##
 ===================
 ECMAScript is a standardized specification for scripting languages, which serves as the foundation for languages like JavaScript, JScript, and ActionScript. It defines the rules, guidelines, and features for scripting languages to ensure consistency and interoperability across different platforms and browsers.
 
+
+
+
 ## `WebAssembly` ##
 ===================
 WebAssembly (Wasm) is a binary instruction format designed for efficient execution on web browsers. It enables high-performance execution of code written in languages like C, C++, Rust, and others, directly in the browser, alongside JavaScript. WebAssembly allows developers to run computationally intensive tasks faster and with lower overhead compared to traditional JavaScript.
+
+
+
 
 ## `REPL` ##
 =============
@@ -125,6 +137,9 @@ A REPL is an interactive programming environment that allows users to enter and 
 type node in command line for activate repl
 special comands :- .help , .break , .clear
 Auto completion :- Pressing the tab key can autocomplete the names of functions , varialbles and modules
+
+
+
 
 ## `global` ##
 ==============
@@ -139,6 +154,9 @@ In the browser, the global object can be accessed using multiple keywords:
 `self` (used in Web Workers)
 `frames`
 To standardize how the global object is accessed across different runtimes (Node.js, browsers, and Web Workers), the OpenJS Foundation introduced globalThis in 2020. This provides a consistent way to reference the global object, regardless of the runtime environment.
+
+
+
 
 ## `Module` ##
 ==============
@@ -157,6 +175,9 @@ When a Node.js module is executed, it is wrapped in a function like this interna
 Data Privacy: Keeps module internals hidden and secure.
 Modularity: Encourages clean, reusable, and maintainable code.
 No Global Pollution: Prevents accidental overwriting of global variables or functions.
+
+
+
 
 ## `require` ##
 ================
@@ -181,7 +202,7 @@ Whenever the require function will call it will wrap the module inside a IIFE fu
 2. Loading the module
   The file content is loaded based on its type:
     JavaScript files are read and parsed.
-    
+
     JSON files are parsed into JavaScript objects.
     Native modules are loaded as compiled binaries.
 3. Wrap inside IIFE
@@ -198,6 +219,9 @@ Whenever the require function will call it will wrap the module inside a IIFE fu
 ```js
 module.exports = {variable, function}
 ```
+
+
+
 
 ## `CommonJs module (cjs)` common js module system ##
 ==============================
@@ -225,6 +249,9 @@ object.Sum
 object.Multiply
 ```
 
+
+
+
 ## `ES modules (mjs)` es module system ##
 ===================
 Newer way asynchronous and the code running in strict mode
@@ -250,6 +277,9 @@ and for importing we need to use the import keyword
 import {sum} from './path';
 ```
 
+
+
+
 ## `Coomon file for importinga and exporting` ##
 =================================================
 If we have a folder and inside it have multiple modules and each modules have mutiple exports, we can use an `index.js` file for importing all the modules things in to index.js file and then export all the things from the index.js file
@@ -261,9 +291,99 @@ the main advantage of this method is that we can encapsulate the modules and the
 
 
 
+## `LIBUV` ##
+==============
+js - synchronous ans single threaded language
 
+`Synchronous means`
+  JavaScript executes code line by line in the order it appears.
+  It does not jump or skip tasks or lines during execution in the main thread.
+  Each operation must complete before the next one begins, making it synchronous by default.
 
+`Single threaded means`
+  JavaScript uses a single thread from the processor to execute code.
+  This single thread is managed by the JavaScript runtime environment, such as the V8 engine.
+  All tasks (like variable declarations, function calls, etc.) are handled sequentially in this single thread.
 
+`Working synchronous`
+------------------------
+- js engine has only one call stack
+- Everything, even a piece of code is executed inside the call stack
+
+- Inside the memory heap it will keep the variables functions like that things
+
+- Garbage collector will collect the varibales and functions which is not in use furthur. garbage collector is working with heap memory
+
+- Other low level languages like c, c++ we have to handele the garbage collection, but languages like js all these things are put inside v8 engine
+
+`Working asynchronous`
+-----------------------
+- So js engine works only in synchronous format, and the node js need to gain access to file, db, web, timers and etc.... and these are controlled by OS itself So here we need a `super power` to make the js engined synchronous and make access to these things here the `LIBUV` comes 
+
+- So whatever asynchronous task the js engine need to do it will offload to the LIBUV and the LIBUV will make it possible
+- libuv is a multi-platform C library that provides support for asynchronous I/O based on event loops. It is writtten in c.
+- libuv is a dependency inside the nodejs like v8
+
+## Example
+===========
+```js
+var a = 100;
+var b = 200;
+
+https.get("http://api.fbi.com",
+  (res) => {
+    console.log(res?.secret);
+  }
+)
+
+setTimeout(() => {
+  console.log("setTimeout");
+},5000)
+
+fs.readFile("./gossip.txt","utf-8",
+  (data) => {
+    console.log("File data",data)
+  }
+)
+
+function multiply(a,b){
+  const result = a*b;
+  return result;
+}
+
+var c = multiply(a,b);
+console.log(c);
+```
+
+`Variables a and b`
+The variables a and b, along with their primitive values (100 and 200), are stored in the stack because they are simple, fixed-size data types.
+
+`HTTP Request (https.get)`
+When the JavaScript engine encounters the asynchronous fetch request using https.get, it offloads this task to libuv (the underlying library for handling async I/O in Node.js).
+libuv registers the HTTP request with its callback function (let’s call it Callback A) and continues executing other code. The Callback A is saved in the Node.js Event Loop queue, waiting for the request to complete.
+
+`setTimeout`
+The setTimeout function is also handed off to libuv with its delay timer of 5000 milliseconds. The callback (let’s call it Callback B) is registered in libuv, which will move it to the Event Loop queue once the timer completes.
+
+`File Read (fs.readFile)`
+The file-reading operation is offloaded to libuv, and its associated callback (let’s call it Callback C) is registered. Once the file is read, the data is passed back to the Event Loop.
+
+`multiply Function`
+When the JavaScript engine reaches the multiply(a, b) function:
+The function itself is stored in the heap (functions and objects are stored in the heap).
+A new execution context is created in the call stack for the multiply function.
+The variable result (a primitive value) is allocated memory in the stack.
+The function execution completes, returning result to the caller. The multiply function's execution context is removed from the call stack.
+The variable c is assigned the value of result, and this assignment is stored in the stack. Once the function call is complete, any temporary memory (like result) is eligible for garbage collection.
+
+`console.log(c)`
+The value of c (stored in the stack) is printed to the console.
+
+`Asynchronous Callbacks`
+When the file read or HTTP fetch operation is completed:
+The Event Loop moves the corresponding callback (Callback A, Callback B, or Callback C) into the call stack.
+A new execution context is created for that callback, and the code within the callback is executed.
+After execution, the execution context is removed from the call stack.
 
 
 
