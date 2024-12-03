@@ -1843,6 +1843,10 @@ setTimeout(() => {
 
 ```
 
+`Whatif the time is 0 seconds`
+------------------------------
+So the setTimeout will be offloaded to libuv and then the v8 engine finishes the synchronous code execution and empty the call stack that means removes the execution context from the call stack, then only the setTimeout will work after 0 seconds. That means the when the main thread is empty.
+
 ## `setImmediate (Node.js only)` ##
 =====================================
 Definition: Executes a specified function immediately after the current event loop phase. It’s faster than setTimeout(fn, 0) but still waits for I/O operations in the event loop.

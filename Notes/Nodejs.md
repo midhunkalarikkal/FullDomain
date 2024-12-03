@@ -293,6 +293,7 @@ the main advantage of this method is that we can encapsulate the modules and the
 
 ## `LIBUV` ##
 ==============
+It is a cross platform  open source library written in c , handles asynchronous non blocking  operations in node js using thread pool and event loop
 js - synchronous ans single threaded language
 
 `Synchronous means`
@@ -327,22 +328,26 @@ js - synchronous ans single threaded language
 ## Example
 ===========
 ```js
+const fs = require('fs');
+const https = require('https');
+
 var a = 100;
 var b = 200;
 
-https.get("http://api.fbi.com",
+https.get("https://dummyjson.com/products/1",
   (res) => {
-    console.log(res?.secret);
+    console.log("fetched data successfully");
   }
 )
 
 setTimeout(() => {
-  console.log("setTimeout");
+  console.log("setTimeout called after 5 seconds");
 },5000)
 
-fs.readFile("./gossip.txt","utf-8",
-  (data) => {
-    console.log("File data",data)
+
+fs.readFile("./file.txt","utf8",
+  (err, data ) => {
+    console.log("File data : ",data);
   }
 )
 
@@ -367,6 +372,8 @@ The setTimeout function is also handed off to libuv with its delay timer of 5000
 
 `File Read (fs.readFile)`
 The file-reading operation is offloaded to libuv, and its associated callback (let’s call it Callback C) is registered. Once the file is read, the data is passed back to the Event Loop.
+
+`If we use readFileSync it will block the main thread`
 
 `multiply Function`
 When the JavaScript engine reaches the multiply(a, b) function:
@@ -449,10 +456,6 @@ Server
 502 - Bad gateway
 503 - service unavailable
 
-LIBUV
------
-It is a cross platform  open source library written in c , handles asynchronous non blocking  operations in node js using thread pool and event loop
-
 Thread pool
 -----------
 The thread pool is used for executing heavy or blocking tasks outside the event loop, ensuring that these operations don't block the execution of other code. For example, file I/O operations or cryptographic tasks might be performed in the thread pool.
@@ -462,7 +465,7 @@ Event loop
 It checks the callback queue for the callbacks and if the call stack is empty it will push the call back from the callback queue to the call stack
 
 Types of middlewares
---------------------
+=====================
 
 Application level middleware
 ----------------------------
