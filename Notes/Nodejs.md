@@ -450,7 +450,7 @@ After execution, the execution context is removed from the call stack.
 
 `Callback queue`
 ----------------
-So when the js v8 engine that is main thread will offloads the synchronous task to the libuv, it will register that task and register that tasks callback, so when the task is done by the libuv after that it will return the callback and keep inside in the callback queue. so like this all the asynchronous functions callbacks are keeping inside this callback queue
+So when the js v8 engine that is main thread will offloads the synchronous task to the libuv, it will register that task and register that tasks callback, and it will store the callback and keep inside in the callback queue. so like this all the asynchronous functions callbacks are keeping inside this callback queue
 
 `Event loop`
 ------------
@@ -463,13 +463,13 @@ Event loop is a main hero inside the libuv it is continuesly running and checkin
                 |        |
                 |        v
                 |    +-------+                   +--------------------+
-                |    |  Pole |                   | process.nextTick() |
+                |    |  Poll |                   | process.nextTick() |
                 |    +-------+                   +--------------------+
                 |        |                              ^     |  
                 |        |                              |     |
                 |        v                              |     v
                 |    +-------+                   +--------------------+
-                |    | Check |                   | process.callback() | 
+                |    | Check |                   | promise.callback() | 
                 |    +-------+                   +--------------------+
                 |        |
                 |        v
@@ -478,6 +478,15 @@ Event loop is a main hero inside the libuv it is continuesly running and checkin
                 |    +-------+
                 |        |
                 <--------v
+
+So in this there are four phases timer, poll, check and close and when the event loop entering to the new phase it will first go through the process.nextTick() and promise.callback() like on starting of timer phase and then starting of poll phase and starting of check phase and also starting of the close phase
+
+`timer` phase is for the `setTimeout` and `setInterval` callbacks
+`poll` phase is for `i/o` callbacks like file reading/ writing, incoming connection, data, fs,crypto,https,util
+`check` phase for the `setImmediate` callback
+`close` phase for the `socket` callbacks  like .on("close");
+
+and this is the priority order of tasks in libuv
                 
                         
                     
