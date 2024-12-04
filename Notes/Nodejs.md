@@ -85,7 +85,7 @@ Steps inside the v8 engine
 2. `Interpreter`
   In v8 engine the interpreter is called `ignition interpreter` and the AST is passed to this interpreter and then converted to byte code.
 
-3. So if there are codes that repeats like `HOT code` it will be passed to the compiler in the v8 engine called `Turbo compiler` and then it will optimize the hot code in to optimized machine code then it will be executed.
+3. So if there are codes that repeats like `HOT code` it will be passed to the compiler in the v8 engine called `Turbo compiler` and then it will optimize the hot code in to optimized machine code then it will be executed. In old days there were a compiler called crank `crank shaft` and it was deprecated.
 
 `The whole rocess of interpreter and compiler is called Just in time compiler`
 
@@ -94,7 +94,6 @@ Steps inside the v8 engine
 However, there are cases where the optimized machine code becomes invalid. This can happen if the assumptions made during optimization are violated. For instance, if a function is optimized for adding two numbers (e.g., integers) and later encounters inputs that are strings or characters, the optimized code might no longer be valid.
 
 When such a mismatch occurs, de-optimization happens. The V8 engine discards the optimized code and falls back to the original bytecode, which is executed by the Ignition Interpreter. The engine can then adapt to the new input type, ensuring correct execution while trading off some performance.
-
 
 
 ## `Event driven architechture` ##
@@ -421,6 +420,67 @@ When the file read or HTTP fetch operation is completed:
 The Event Loop moves the corresponding callback (Callback A, Callback B, or Callback C) into the call stack.
 A new execution context is created for that callback, and the code within the callback is executed.
 After execution, the execution context is removed from the call stack.
+
+`Inside Libuv`
+--------------
++-----------------------------+
+|           libuv             |
+|  +-----------------------+  |
+|  |      Event Loop       |  |
+|  +-----------------------+  |
+|                             |
+|  +-----------------------+  |
+|  |    Callback Queue     |  |
+|  |    ---------------    |  |
+|  |    ---------------    |  |
+|  |    ---------------    |  |
+|  |    ---------------    |  |
+|  |    ---------------    |  |
+|  |    ---------------    |  |
+|  +-----------------------+  |
+|                             |
+|  +-----------------------+  |
+|  |  +---+  +---+  +---+  |  |
+|  |  |   |  |   |  |   |  |  |
+|  |  +---+  +---+  +---+  |  |
+|  |                       |  |
+|  |      Thread Pool      |  |
+|  +-----------------------+  |
++-----------------------------+
+
+`Callback queue`
+----------------
+So when the js v8 engine that is main thread will offloads the synchronous task to the libuv, it will register that task and register that tasks callback, so when the task is done by the libuv after that it will return the callback and keep inside in the callback queue. so like this all the asynchronous functions callbacks are keeping inside this callback queue
+
+`Event loop`
+------------
+Event loop is a main hero inside the libuv it is continuesly running and checking the main thread that is js v8 engines call stack is empty or not and also checking the libuv's callback queue have any callbacks, If the call stack is empty and the callback queue have callbacks the event loop will pop a callback from the callback queue and push it to the call stack
+
+
+                     +-------+
+                ---> | Timer |
+                |    +-------+
+                |        |
+                |        v
+                |    +-------+                   +--------------------+
+                |    |  Pole |                   | process.nextTick() |
+                |    +-------+                   +--------------------+
+                |        |                              ^     |  
+                |        |                              |     |
+                |        v                              |     v
+                |    +-------+                   +--------------------+
+                |    | Check |                   | process.callback() | 
+                |    +-------+                   +--------------------+
+                |        |
+                |        v
+                |    +-------+
+                |    | Close |
+                |    +-------+
+                |        |
+                <--------v
+                
+                        
+                    
 
 
 

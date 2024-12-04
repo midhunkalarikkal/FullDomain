@@ -465,6 +465,7 @@ Closures may have a slight performance impact compared to non-closure alternativ
 ## `Garbage collection` ##
 ===========================
 Garbage collection is the process by which the JavaScript engine automatically detects and frees up memory occupied by objects that are no longer reachable or referenced in the program. This helps prevent memory leaks and ensures efficient memory usage.
+examples: orinaco, oilfan, scavenger, Mark compact
 
 `How Garbage Collection Works`
 ==============================
