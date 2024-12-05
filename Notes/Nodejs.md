@@ -452,6 +452,9 @@ After execution, the execution context is removed from the call stack.
 ----------------
 So when the js v8 engine that is main thread will offloads the synchronous task to the libuv, it will register that task and register that tasks callback, and it will store the callback and keep inside in the callback queue. so like this all the asynchronous functions callbacks are keeping inside this callback queue
 
+and for the proccess.nextTick and promise.callback funcitions it will have a priority queue
+and for the each pahse function it will have their own callback queues
+and this is totally called a s callback queue
 `Event loop`
 ------------
 Event loop is a main hero inside the libuv it is continuesly running and checking the main thread that is js v8 engines call stack is empty or not and also checking the libuv's callback queue have any callbacks, If the call stack is empty and the callback queue have callbacks the event loop will pop a callback from the callback queue and push it to the call stack
@@ -487,6 +490,8 @@ So in this there are four phases timer, poll, check and close and when the event
 `close` phase for the `socket` callbacks  like .on("close");
 
 and this is the priority order of tasks in libuv
+
+So if the callback queue in the libuv is empty and the call stack is empty in the v8 engine the event loop will wait at the poll phase so this is called `Semi infinite loop`.
                 
                         
                     
