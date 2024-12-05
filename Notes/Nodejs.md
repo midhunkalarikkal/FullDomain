@@ -1,10 +1,9 @@
 ## `Node.js` ##
 ================
-Node.js is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
+- Node.js is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. 
+- Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
 installing using `nvm` is a node version manager
-
-`Whereever is javascript there is js engine`
 
 Node.js is embedded with the V8 JavaScript engine, which powers its ability to execute JavaScript outside of a browser. Additionally, Node.js provides "superpowers" such as APIs for server-side functionality and modules for better code organization and Event loops manages asynchronous tasks by coordinating execution of code. These features make Node.js highly suitable for building servers. This combination is referred to as the `JavaScript runtime`.
 
@@ -15,6 +14,10 @@ Developer Ryan Dahl created Node.js in 2009. Joyent, a technology company, suppo
 Initially, the project was named "WebJS" because Ryan believed he was creating it primarily for building web servers. However, he later realized that it could be used for much more than just web servers, so he renamed it to Node.js to reflect its broader capabilities.
 
 At the time, most servers were blocking in nature, which led Ryan to start developing Node.js as a non-blocking, event-driven runtime to handle asynchronous operations efficiently.
+
+So node.js is single threaded by default when there is only synchrnous code, but it is multi threaded when it have asynchrnous code because  it will use libuv to run the asynchronous code and then libuv will use thread pool.
+
+`Worker Threads` Starting with Node.js 10.5.0, we can explicitly create multiple threads using the worker_threads module if you need true multi-threading for JavaScript code execution.
 
 2009
 ------
@@ -56,6 +59,8 @@ The JS Foundation and the Node.js Foundation merged to form the OpenJS Foundatio
 ## `Chrome v8 javascript engine` ##
 ===================================
 V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js, among others. It implements `ECMAScript` and `WebAssembly`, and runs on Windows, macOS, and Linux systems that use x64, IA-32, or ARM processors. `V8 can be embedded into any C++ application`.
+
+`Whereever is javascript there is js engine`
 
 v8 for chrome
 spider monkey for firefox
@@ -452,9 +457,10 @@ After execution, the execution context is removed from the call stack.
 ----------------
 So when the js v8 engine that is main thread will offloads the synchronous task to the libuv, it will register that task and register that tasks callback, and it will store the callback and keep inside in the callback queue. so like this all the asynchronous functions callbacks are keeping inside this callback queue
 
-and for the proccess.nextTick and promise.callback funcitions it will have a priority queue
-and for the each pahse function it will have their own callback queues
-and this is totally called a s callback queue
+- For the proccess.nextTick and promise.callback funcitions it will have a priority queue like process.nextTick callback queue and process.callback callback queue
+- and for the each pahse function it will have their own callback queues
+- and this is totally called a s callback queue
+
 `Event loop`
 ------------
 Event loop is a main hero inside the libuv it is continuesly running and checking the main thread that is js v8 engines call stack is empty or not and also checking the libuv's callback queue have any callbacks, If the call stack is empty and the callback queue have callbacks the event loop will pop a callback from the callback queue and push it to the call stack
@@ -485,6 +491,9 @@ Event loop is a main hero inside the libuv it is continuesly running and checkin
 So in this there are four phases timer, poll, check and close and when the event loop entering to the new phase it will first go through the process.nextTick() and promise.callback() like on starting of timer phase and then starting of poll phase and starting of check phase and also starting of the close phase
 
 `timer` phase is for the `setTimeout` and `setInterval` callbacks
+  ## In between the timer pahse and the poll pahse there is two pahses
+  ## 1. Pending callbacks :- Execute i/o callbacks defered to the next loop iteration
+  ## 2. idle, prepare :- only used internaly.
 `poll` phase is for `i/o` callbacks like file reading/ writing, incoming connection, data, fs,crypto,https,util
 `check` phase for the `setImmediate` callback
 `close` phase for the `socket` callbacks  like .on("close");
@@ -492,7 +501,42 @@ So in this there are four phases timer, poll, check and close and when the event
 and this is the priority order of tasks in libuv
 
 So if the callback queue in the libuv is empty and the call stack is empty in the v8 engine the event loop will wait at the poll phase so this is called `Semi infinite loop`.
-                
+
+One full cycle of the event loop is known as one `tick`
+
+`Thread pool`
+-------------
+- Thread pool is a container of threads inside the libuv to run asynchronous code without blocking the main thread
+- By defaukt the thread pool have 4 threads
+- This thead pool is known as uv_thread_pool
+- whenever an asynchronous callback comes to  libuv it will offload to thread pool and thread ppol will use a freely unoccupied thread to handle that callback and then this thread will communicate to the os for like example file system, web searching,DNS lookups, crypto tasks etc...
+- so when more than 4 asynchronous code comes to thread pool the fifth asynchronus code need to wait for to gain a freely unoccupied thread to run.
+- we can also update the thread pool size using
+```js
+process.env.UV_THREADPOOL_SIZE = size;
+```
+
+`Libuv -> os api connection`
+------------------------------
+`Socket Descriptor` All API connections require a socket from the OS, called a socket descriptor.
+
+`Thread per Connection`
+Each thread handling one socket descriptor is called thread-per-connection.
+This approach is inefficient because thousands of connections would require thousands of threads.
+
+`Epoll Mechanism`
+epoll is a linux kernel system call
+To solve this, the OS provides epoll (or similar mechanisms like kqueue on macOS/BSD or IOCP on Windows).
+Epoll is a scalable I/O event notification system at the kernel level.
+It can handle multiple socket descriptors at once efficiently.
+
+`Epoll and Libuv`
+Epoll communicates with libuv, which monitors I/O events in its poll phase.
+When an event occurs, libuv sends a callback to the event loop.
+The event loop processes it, and the code runs using the V8 engine.
+The epoll mechanism in Linux internally uses a red-black tree and a linked list as its primary data structures to manage and monitor file descriptors
+
+`Like epoll in linux in windows it have i/o completion port iocp`
                         
                     
 
@@ -1067,3 +1111,9 @@ A thread is a sequence of instructions that can be executed independently by the
 Router chaining
 ---------------
 to sequentially process incoming HTTP requests through a series of middleware functions.
+
+
+
+
+
+Event emitter , streams, pipes, buffers
