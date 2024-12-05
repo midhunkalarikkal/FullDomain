@@ -460,6 +460,7 @@ So when the js v8 engine that is main thread will offloads the synchronous task 
 - For the proccess.nextTick and promise.callback funcitions it will have a priority queue like process.nextTick callback queue and process.callback callback queue
 - and for the each pahse function it will have their own callback queues
 - and this is totally called a s callback queue
+- the timer callback queue is using a min-heap datastructure
 
 `Event loop`
 ------------
