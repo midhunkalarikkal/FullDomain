@@ -539,6 +539,43 @@ The epoll mechanism in Linux internally uses a red-black tree and a linked list 
 
 `Like epoll in linux in windows it have i/o completion port iocp`
                         
+
+## `Server creation` ##
+=======================
+The node core module http is used to create a server and this createServer is a property of http. And the createServer function have a function and that function have two objects request and response
+
+```js
+const hppt = require('http');
+
+const server = http.createServer(function(req, res){
+
+})
+
+server.listen(7777);
+```
+
+## `HTTP Response` ##
+======================
+Status line - http verion , status code , status message
+Header - Additional information send by the server to client	
+Response body - Actual data send by the server to client
+
+`res.send()`
+-----------
+Used to send a complete response to the client.
+It can be used to send various types of responses, including HTML, JSON, plain text, etc.
+Automatic setting content-type
+
+`res.write()`
+-----------
+Used to write a part of the response body.
+It allows you to send chunks of data in a streaming fashion.
+It can be called multiple times to send different parts of the response.
+You need to end the response using res.end().
+Manually setting content-type
+
+`res.end()`
+-----------
                     
 
 
@@ -555,19 +592,7 @@ Path parameters are segments of a URL path that are used to pass data to the ser
 
 https://example.com/users/123/profile
 
-res.send()
------------
-Used to send a complete response to the client.
-It can be used to send various types of responses, including HTML, JSON, plain text, etc.
-Automatic setting content-type
 
-res.write()
------------
-Used to write a part of the response body.
-It allows you to send chunks of data in a streaming fashion.
-It can be called multiple times to send different parts of the response.
-You need to end the response using res.end().
-Manually setting content-type
 
 HTTP Request
 ---------------
@@ -575,11 +600,7 @@ Request line - Method , URI , http version
 Header - Additonal information that send by the client to server
 Request body - Data send by the client to server
 
-HTTP Response
---------------
-Status line - http verion , status code , status message
-Header - Additional information send by the server to client	
-Response body - Actual data send by the server to client
+
 
 Status code
 -----------

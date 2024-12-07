@@ -1,8 +1,10 @@
-						|------------|
-						|------------|
-						|  MONGO DB  |
-						|------------|
-						|------------|
+## `Databse` ##
+================
+This is a organised collection of data or a type of data store based on the use of a databse management system
+
+## `Databse management System` ##
+=================================
+Software that interacts eith end users, applications and the databse itself to capture and analyze the data.
 
 Data types in Mongo db
 -----------------------
