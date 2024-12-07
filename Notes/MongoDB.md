@@ -6,8 +6,95 @@ This is a organised collection of data or a type of data store based on the use 
 =================================
 Software that interacts eith end users, applications and the databse itself to capture and analyze the data.
 
-Data types in Mongo db
+## `Types of Databses` ##
+=========================
+Relational DB - mysql, postgresql
+No sql DB - mongo DB
+In memory DB - Redis   -> its like a cache, we can store apis that frequently used
+Distributed SQL DB - cockroach DB
+Time series DB - Influx DB
+OO DB - db40
+Graph DB - Neo4j
+Hierarchial DB - IBM IMS
+Network DB - IDMS
+Cloud DB - Amazon RDS
+
+## `Non sql db's` ##
+======================
+Mongo db
+Apache cloud db
+IBM db2
+Apache cassandra
+Neo4j
+Redis
+Amazon Dynamo DB
+Amazon Neptune
+
+## `Relational DB` ##
+=====================
+If the db folows codds 12 rule [0 - 12] then the db becomes a relational db
+
+mysql [ and maxDB, mariaDB also ] is developed by micahel videnium
+postgresql is developed by michael stonebreaker
+
+- Data structure is structured with tables.
+- Requires a fixed schema for data.
+- Utilizes SQL (Structured Query Language) for querying.
+- Typically vertically scalable, by adding more resources to a single server.
+- Provides ACID properties (Atomicity, Consistency, Isolation, Durability).
+- Best for structured data with complex relationships.
+- Examples include MySQL, PostgreSQL, Oracle.
+- Mainly relies on relational data models.
+
+## `Non SQL  DB` ##
+===================
+- Data structure is flexible and unstructured.
+- Allows dynamic or schema-less data.
+- Supports various query languages or APIs.
+- Achieves horizontal scalability, by adding more servers to a distributed system.
+- Follows BASE properties (Basically Available, Soft state, Eventually consistent).
+- Suitable for unstructured or semi-structured data with varying requirements.
+- Examples include MongoDB, Cassandra, Redis, Couchbase.
+- Supports various data models, such as Document, Key-Value, Column-Family, Graph, etc.
+
+## `MongoDB` ##
+================
+MongoDB is a NoSQL database that stores data in a flexible, schema-free format. It is designed for high-performance, scalability, and ease of development, making it suitable for a wide range of applications. MongoDB uses collections and documents to organize data and is known for its ability to handle large volumes of data and unstructured information efficiently.
+
+developed in times of 2009 by the company 10gen and the name comes from Humoungous means huge, very big. then the 10gen company later renamed to mongoDB inc.
+
+`BSON (Binary JSON)`
 -----------------------
+BSON, short for Binary JSON, is a binary-encoded serialization format used primarily for storing and transferring data in MongoDB databases. It is designed to be efficient in terms of both storage space and parsing speed compared to plain text-based formats like JSON.
+
+`MongoDB Shell`
+-----------------
+a command-line interface for MongoDB:
+Interactive command-line tool.
+Connects to MongoDB databases.
+Supports JavaScript-based queries and commands.
+
+`Advantages of MongoDB`
+------------------------
+- Flexible schema design.
+- Scalability and sharding capabilities.
+- High performance for read-heavy workloads.
+- JSON-like document format.
+- Rich query capabilities.
+- Replication and high availability.
+
+`Disadvantages of MongoDB`
+---------------------------
+- Limited transaction support.
+- Not suitable for complex, multi-join queries.
+- Memory-intensive for write-heavy workloads.
+- No built-in support for ACID transactions.
+- Inconsistent query performance.
+- Potential data integrity issues with flexible schema.
+
+
+## `Data types in Mongo db` ##
+==============================
 1. string
 2. boolean 
 3. Number
@@ -27,17 +114,13 @@ Data types in Mongo db
 8. regex - Mongodb supports querying using regular expression
 9. Bindata - Binary data can stored using this data type
 
-Date vs Timestamp
------------------
+`Date vs Timestamp`
+--------------------
 1. Date
 The "date" data type in MongoDB is used to store date and time information in a standard ISO 8601 format. It includes the year, month, day, hours, minutes, seconds, and milliseconds.
 
 2. Timestamp
 The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON timestamp. It is typically used for internal purposes and may not be as human-readable as the "date" data type.
-
-Bson
-----
-BSON, short for Binary JSON, is a binary-encoded serialization format used primarily for storing and transferring data in MongoDB databases. It is designed to be efficient in terms of both storage space and parsing speed compared to plain text-based formats like JSON.
 
 Special Bson values
 -------------------
@@ -597,17 +680,6 @@ Capped collection is a type of collection with a fixed size that behaves differe
 
 db.createCollection("logs", { capped: true, size: 1048576 });
 
-Non sql db's
-------------
-Mongo db
-Apache cloud db
-IBM db2
-Apache cassandra
-Neo4j
-Redis
-Amazon Dynamo DB
-Amazon Neptune
-
 Replace vs Update
 -----------------
 
@@ -630,62 +702,6 @@ Primary key vs Secondary key
 Primary key - In MongoDB, each document (record) has a special field called "_id," which serves as a primary key by default.
 
 Secondary key - In MongoDB, secondary keys are implemented using indexes.
-
-MongoDB
--------
-MongoDB is a NoSQL database that stores data in a flexible, schema-free format. It is designed for high-performance, scalability, and ease of development, making it suitable for a wide range of applications. MongoDB uses collections and documents to organize data and is known for its ability to handle large volumes of data and unstructured information efficiently.
-
-BSON (Binary JSON):
--------------------
-BSON is a binary-encoded serialization format used by MongoDB to represent structured data. It offers advantages like efficient storage and traversal
-
-MongoDB Shell
---------------
-a command-line interface for MongoDB:
-Interactive command-line tool.
-Connects to MongoDB databases.
-Supports JavaScript-based queries and commands.
-
-Advantages of MongoDB
-----------------------
-- Flexible schema design.
-- Scalability and sharding capabilities.
-- High performance for read-heavy workloads.
-- JSON-like document format.
-- Rich query capabilities.
-- Replication and high availability.
-
-Disadvantages of MongoDB
-------------------------
-- Limited transaction support.
-- Not suitable for complex, multi-join queries.
-- Memory-intensive for write-heavy workloads.
-- No built-in support for ACID transactions.
-- Inconsistent query performance.
-- Potential data integrity issues with flexible schema.
-
-
-SQL (Structured Query Language)
--------------------------------
-- Data structure is structured with tables.
-- Requires a fixed schema for data.
-- Utilizes SQL (Structured Query Language) for querying.
-- Typically vertically scalable, by adding more resources to a single server.
-- Provides ACID properties (Atomicity, Consistency, Isolation, Durability).
-- Best for structured data with complex relationships.
-- Examples include MySQL, PostgreSQL, Oracle.
-- Mainly relies on relational data models.
-
-NoSQL (Not Only SQL)
---------------------
-- Data structure is flexible and unstructured.
-- Allows dynamic or schema-less data.
-- Supports various query languages or APIs.
-- Achieves horizontal scalability, by adding more servers to a distributed system.
-- Follows BASE properties (Basically Available, Soft state, Eventually consistent).
-- Suitable for unstructured or semi-structured data with varying requirements.
-- Examples include MongoDB, Cassandra, Redis, Couchbase.
-- Supports various data models, such as Document, Key-Value, Column-Family, Graph, etc.
 
 Schema
 ------
@@ -812,3 +828,9 @@ needed to fulfill the query.
 View
 ----
 That allows you to create virtual collections based on aggregation pipelines. Views allow you to define complex data transformations, filtering, and aggregation logic 
+
+
+
+
+mongod - The database server.
+mongos - Sharding router.
