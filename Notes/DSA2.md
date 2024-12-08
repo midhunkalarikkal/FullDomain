@@ -1,27 +1,97 @@
-01. Bubble sort
-=================
-Definition
-----------
+## `Stack` ##
+===============
+A stack is a linear data structure that follows the LIFO principle (Last In, First Out). The last element added to the stack is the first one to be removed. Operations in a stack occur only at one end, called the top.
+
+`Operations`
+--------------
+Push: Add an element to the top of the stack.
+Pop: Remove the top element from the stack.
+Peek/Top: View the top element without removing it.
+
+`Types of Stacks`
+-----------------
+`Static Stack`
+---------------
+Implemented using arrays.
+Has a fixed size.
+Limited by predefined memory.
+
+`Dynamic Stack`
+-----------------
+Implemented using linked lists.
+Can grow or shrink dynamically as needed.
+
+`Applications-Based Stacks`
+-----------------------------
+Call Stack: Used in recursion and function calls.
+Expression Evaluation Stack: Used for evaluating postfix expressions.
+Undo/Redo Stack: Used in text editors or software with undo functionality.
+
+
+
+
+
+## `Queues` ##
+================
+A queue is a linear data structure that follows the FIFO principle (First In, First Out). The first element added to the queue is the first one to be removed. Operations in a queue occur at two ends:
+
+Enqueue: Add an element at the rear (end) of the queue.
+
+`Simple Queue`
+----------------
+Operates on the basic FIFO principle.
+Insertions occur at the rear, and deletions occur at the front.
+
+`Circular Queue`
+----------------
+The last position connects to the first, forming a circle.
+Prevents memory wastage by reusing empty slots.
+
+`Priority Queue`
+-------------------
+Each element is associated with a priority.
+Higher priority elements are dequeued before lower-priority ones.
+
+`Double-Ended Queue (Deque)`
+------------------------------
+Insertions and deletions can occur at both ends (front and rear).
+Types:
+Input-Restricted Deque: Insertions allowed only at one end.
+Output-Restricted Deque: Deletions allowed only at one end.
+
+`Concurrent Queue`
+-------------------
+Designed for multi-threaded environments.
+Ensures thread safety for enqueue and dequeue operations.
+
+
+
+
+
+## `Bubble sort` ##
+====================
+`Definition`
+-------------
 Bubble sort is a simple comparison-based sorting algorithm. It works by repeatedly stepping through the array to be sorted, comparing each pair of adjacent items and swapping them if they are in the wrong order. The pass through the array is repeated until the array is sorted.
 
-Advantages
-----------
+`Advantages`
+-------------
 Simplicity: Easy to understand and implement.
 
 No Extra Space: Requires only a single additional memory space for the temporary variable used for swapping (i.e., it is an in-place sorting algorithm).
 
 Stable: Maintains the relative order of equal elements.
 
-Disadvantages
--------------
+`Disadvantages`
+----------------
 Inefficiency: One of the least efficient sorting algorithms for large datasets. The number of comparisons and swaps can be significantly higher compared to other algorithms.
 
 Performance: Poor performance on average and worst-case scenarios, making it impractical for most applications.
 
 Redundant Comparisons: Even after the array becomes sorted, it continues to compare and swap elements.
 
-Complexity
------------
+`Complexity`
+--------------
 Best-case Time Complexity: 𝑂(𝑛) when the array is already sorted.
 
 Average-case Time Complexity: 𝑂(𝑛^2)
@@ -30,25 +100,29 @@ Worst-case Time Complexity: 𝑂(𝑛^2)
 
 Space Complexity: 𝑂(1) because it is an in-place sorting algorithm.
 
-Best Case Scenario
------------------
+`Best Case Scenario`
+--------------------
 In the best case scenario, the array is already sorted. The time complexity for this case is O(n) because the algorithm will only need to pass through the array once to verify that it is sorted.
 
-Average Case Scenario
---------------------
+`Average Case Scenario`
+-----------------------
 In the average case, the array elements are in random order. The time complexity for this case is O(n^2) because, on average, bubble sort will have to perform multiple passes through the array.
 
-Worst Case Scenario
-------------------
+`Worst Case Scenario`
+---------------------
 In the worst case scenario, the array is sorted in reverse order. The time complexity for this case is O(n^2) because bubble sort will need to perform the maximum number of comparisons and swaps.
 
-Applications of Bubble Sort
+`Applications of Bubble Sort`
 --------------------------------
 Educational Purposes
 Small Data Sets
 Simple Checks
 Simple databse management
 Stability Required Sorts
+
+
+
+
 
 02 . Selection sort
 ====================
