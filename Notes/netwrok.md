@@ -50,3 +50,19 @@ This is a server that converts the domain name in to ip address
 
 ## `Web Socket` ##
 =====================
+
+## `API` ##
+=============
+An API (Application Programming Interface) allows different software applications to communicate and exchange data with each other.
+
+`REST api`
+-------------
+A REST (Representational State Transfer) API is a web service that follows principles for creating scalable, stateless, and resource-based interactions over the web using HTTP methods.
+
+## `HTTP methods` ##
+======================
+GET	Retrieves data from the server.	Fetching a list of users or a specific user.
+POST	Sends new data to the server to create a resource.	Creating a new user or submitting a form.
+PUT	Updates an entire resource with new data.	Replacing a user's details entirely.
+PATCH	Partially updates a resource with specific data.	Changing just a user's email address.
+DELETE	Removes a resource from the server.	Deleting a user or removing a record.
