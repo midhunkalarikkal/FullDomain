@@ -6,9 +6,9 @@ CSS saves a lot of work. It can control the layout of multiple web pages all at 
 External stylesheets are stored in CSS files
 CSS (Cascading Style Sheets) was invented by Håkon Wium Lie in 1994.
 
+
 ## `Selectors` ##
 ==================
-
 `id Selector`
 -------------
 The id selector uses the id attribute of an HTML element to select a specific element.
@@ -67,19 +67,23 @@ h1 {
 }
 ```
 
+
 ## `css background attachment` ##
 =================================
 The background-attachment property specifies whether the background image should scroll or be fixed (will not scroll with the rest of the page)
 
+
 ## `order of the values` ##
 ===========================
 top right bottom left
+
 
 ## `text transofrmation` ##
 ===========================
 ```css
 text-transform : uppercase, lowercase, capitalize;
 ```
+
 
 ## `The position Property` ##
 ==============================
@@ -123,6 +127,7 @@ An element with position: sticky; is positioned based on the user's scroll posit
 
 A sticky element toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed).
 
+
 ## `CSS Overflow` ##
 =====================
 The overflow property specifies whether to clip the content or to add scrollbars when the content of an element is too big to fit in the specified area.
@@ -134,6 +139,7 @@ hidden - The overflow is clipped, and the rest of the content will be invisible
 scroll - The overflow is clipped, and a scrollbar is added to see the rest of the content
 auto - Similar to scroll, but it adds scrollbars only when necessary
 
+
 ## `The float Property` ##
 ==========================
 The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
@@ -144,6 +150,7 @@ left - The element floats to the left of its container
 right - The element floats to the right of its container
 none - The element does not float (will be displayed just where it occurs in the text). This is default
 inherit - The element inherits the float value of its parent
+
 
 ## `The clear Property` ##
 ===========================
@@ -159,6 +166,7 @@ right - The element is pushed below right floated elements
 both - The element is pushed below both left and right floated elements
 inherit - The element inherits the clear value from its parent
 
+
 ## `The display: inline-block Value` ##
 ========================================
 Compared to display: inline, the major difference is that display: inline-block allows to set a width and height on the element.
@@ -166,6 +174,7 @@ Compared to display: inline, the major difference is that display: inline-block 
 Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not.
 
 Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.
+
 
 ## `Combinators` ##
 ====================
@@ -231,6 +240,7 @@ div ~ p {
 }
 ```
 
+
 ## `What are Pseudo-classes?` ##
 =================================
 A pseudo-class is used to define a special state of an element.
@@ -249,6 +259,7 @@ selector:pseudo-class {
   property: value;
 }
 ```
+
 
 ## `What are Pseudo-Elements?` ##
 ==================================
@@ -269,6 +280,7 @@ selector::pseudo-element {
 }
 ```
 
+
 ## `CSS [attribute] Selector` ##
 =================================
 The [attribute] selector is used to select elements with a specified attribute.
@@ -283,6 +295,8 @@ a[target] {
   background-color: yellow;
 }
 ```
+
+
 ## `What is Specificity?` ##
 ============================
 
@@ -290,15 +304,18 @@ If there are two or more CSS rules that point to the same element, the selector 
 
 Think of specificity as a score/rank that determines which style declaration is ultimately applied to an element.
 
+
 ## `What is !important?` ##
 ============================
 The !important rule in CSS is used to add more importance to a property/value than normal.
 
 In fact, if you use the !important rule, it will override ALL previous styling rules for that specific property on that element!
 
+
 ## `Math function` ##
 ======================
 The CSS math functions allow mathematical expressions to be used as property values. Here, we will explain the calc(), max() and min() functions.
+
 
 ## `transform` ##
 ==================
@@ -308,6 +325,7 @@ Rotate: rotate(45deg)
 Scale: scale(1.5)
 Translate: translateX(50px)
 
+
 ## `transition` ##
 ==================
 The transition property allows smooth changes between property values over time.
@@ -315,6 +333,7 @@ You can define:
 Property to animate (e.g., transform, background-color).
 Duration (e.g., 0.5s).
 Timing function (e.g., ease, linear).
+
 
 ## `The CSS object-fit Property` ##
 =====================================
@@ -330,6 +349,7 @@ cover - The image keeps its aspect ratio and fills the given dimension. The imag
 none - The image is not resized
 scale-down - the image is scaled down to the smallest version of none or contain
 
+
 ## `CSS Media Queries` ##
 =========================
 The @media rule, introduced in CSS2, made it possible to define different style rules for different media types.
@@ -342,6 +362,7 @@ width and height of the viewport
 orientation of the viewport (landscape or portrait)
 resolution
 Using media queries are a popular technique for delivering a tailored style sheet to desktops, laptops, tablets, and mobile phones (such as iPhone and Android phones).
+
 
 ## `CSS Flexbox Layout Module` ##
 ==================================

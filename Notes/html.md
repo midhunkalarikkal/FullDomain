@@ -15,6 +15,7 @@ HTML (HyperText Markup Language) is the standard markup language used to create 
 </body>
 </html>
 
+
 `<!DOCTYPE html>`
 =================
 Declaration defines that this document is an HTML5 document
@@ -23,6 +24,7 @@ It helps the browser know how to display the web page using HTML5 standards.
 HTML5 uses the simple <!DOCTYPE html>. Previous versions had longer, more complex declarations.
 This declaration ensures the page is rendered correctly in standards mode, avoiding old, inconsistent rendering methods (quirks mode).
 
+
 `<html>`
 ========
 Element is the root element of an HTML page.
@@ -30,6 +32,7 @@ It wraps all the content of the web page, including the head and body sections.
 It defines the start and end of an HTML document. All HTML content must be inside this tag.
 It is the container for all other HTML elements such as <head> and <body>.
 The most common attribute used with the <html> tag is lang, which specifies the language of the document. For example, <html lang="en"> indicates the document is in English.
+
 
 `<head>`
 =========
@@ -48,6 +51,7 @@ It provides essential information to the browser and search engines about the we
     Loading Fonts and Other Resources
     External resources like fonts or APIs can be linked.
 
+
 `<title>`
 =========
 Element specifies a title for the HTML page (which is shown in the browser's title bar or in the page's tab)
@@ -55,15 +59,18 @@ It’s important for SEO (Search Engine Optimization) as the title is often used
 
 The <body> element defines the document's body, and is a container for all the visible contents, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
 
+
 `favicon`
 =========
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 A favicon image is displayed to the left of the page title in the browser tab, like this
 
+
 `Introduction and History`
 ==========================
 HTML was created by Tim Berners-Lee in 1991 as a way to share and link documents across the early internet.
 It became the foundation of the World Wide Web and has undergone several revisions to adapt to modern web development needs.
+
 
 `Versions of HTML`
 ==================
@@ -74,6 +81,7 @@ HTML 4.0 (1999): Introduced support for stylesheets (CSS) and improved accessibi
 XHTML 1.0 (2000): A stricter, XML-based version of HTML 4.0.
 HTML5 (2014): The most current version, focusing on multimedia (audio, video), better semantics, and support for modern web apps.
 
+
 `Uses of HTML`
 ================
 Structuring Web Pages: Defines the layout and organization of content (e.g., headings, paragraphs, lists).
@@ -81,6 +89,7 @@ Embedding Media: Supports multimedia like images, audio, and video.
 Linking: Allows linking to other web pages and resources.
 Cross-Platform Support: Works across all browsers and devices.
 Foundation for Web Development: Serves as the base for integrating CSS (styling) and JavaScript (interactivity).
+
 
 `Advantages of HTML`
 ====================
@@ -90,6 +99,7 @@ Cross-Browser Compatibility: Supported by all major browsers.
 Search Engine Friendly: Semantics in HTML improve SEO (Search Engine Optimization).
 Integration with Other Technologies: Works seamlessly with CSS, JavaScript, and server-side languages.
 
+
 `Disadvantages of HTML`
 =======================
 Static Nature: HTML alone cannot create dynamic web applications; it requires CSS and JavaScript.
@@ -98,9 +108,11 @@ Repetitive and Time-Consuming: Writing large-scale HTML can be tedious and repet
 Browser Differences: Some features may render differently in various browsers.
 Limited Functionality: By itself, HTML cannot handle complex tasks like database interactions or server-side logic.
 
+
 ## `What is XML?` ##
 ====================
 XML (eXtensible Markup Language) is a markup language used for storing and transporting data in a structured and readable format. Unlike HTML, which is used for displaying data, XML is designed to describe data and its structure. It is both human-readable and machine-readable, and is primarily used for data exchange between systems.
+
 
 `Connection between HTML and XML`
 ==================================
@@ -118,6 +130,7 @@ XHTML is a stricter, more XML-based version of HTML
 XHTML is HTML defined as an XML application
 XHTML is supported by all major browsers
 
+
 `Why XHTML?`
 ==============
 XML is a markup language where all documents must be marked up correctly (be "well-formed").
@@ -127,10 +140,10 @@ XHTML was developed to make HTML more extensible and flexible to work with other
 If you want to study XML, please read our XML Tutorial.
 
 
-
 ## `Nested HTML Elements` ##
 ============================
 HTML elements can be nested (this means that elements can contain other elements).
+
 
 ## `HTML Attributes` ##
 =======================
@@ -138,6 +151,7 @@ All HTML elements can have attributes
 Attributes provide additional information about elements
 Attributes are always specified in the start tag
 Attributes usually come in name/value pairs like: name="value"
+
 
 ## `HTML Formatting Elements` ##
 ===================================
@@ -154,6 +168,7 @@ Formatting elements were designed to display special types of text:
 <sub> - Subscript text
 <sup> - Superscript text
 
+
 ## `HTML Quotations` ##
 =========================
 The HTML <blockquote> element defines a section that is quoted from another source.
@@ -161,9 +176,11 @@ Browsers usually indent <blockquote> elements.
 The HTML <q> tag defines a short quotation.
 Browsers normally insert quotation marks around the quotation.
 
+
 ## `HTML Colors` ##
 ====================
 HTML colors are specified with predefined color names, or with RGB, HEX, HSL, RGBA, or HSLA values.
+
 
 `RGB`
 =====
@@ -176,11 +193,13 @@ An RGBA color value is specified with
 rgba(red, green, blue, alpha)
 The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (not transparent at all):
 
+
 `Hex`
 =====
 In HTML, a color can be specified using a hexadecimal value in the form:
 #rrggbb
 Where rr (red), gg (green) and bb (blue) are hexadecimal values between 00 and ff (same as decimal 0-255).
+
 
 `HSL`
 =====
@@ -189,6 +208,7 @@ hsl(hue, saturation, lightness)
 Hue is a degree on the color wheel from 0 to 360. 0 is red, 120 is green, and 240 is blue.
 Saturation is a percentage value. 0% means a shade of gray, and 100% is the full color.
 Lightness is also a percentage value. 0% is black, and 100% is white.
+
 
 ## `HTML Links` ##
 ===================
@@ -237,9 +257,8 @@ The width, height, and style attributes are all valid in HTML.
 
 ## `HTML Tables` ##
 ====================
-
 `Primary Table Tags`
-=====================
+--------------------
 <table> - Define table itself
 <thead> - Groups the header of the table
 <tbody> - Groups the body of the table
@@ -250,7 +269,7 @@ The width, height, and style attributes are all valid in HTML.
 <caption> - Add a title or description for the table before the <thead> tag
     
 `Attributes for Tables`
-=======================
+-----------------------
 border:
 Specifies the border size of the table.
 Example: <table border="1">
@@ -265,7 +284,7 @@ colspan:
 Allows a cell to span multiple columns.
 
 `colgroup`
-==========
+----------
 The <colgroup> element is used to style specific columns of a table.
 The <colgroup> element should be used as a container for the column specifications.
 
@@ -274,7 +293,7 @@ The span attribute specifies how many columns that get the style.
 The style attribute specifies the style to give the columns.
 
 ## Example ##
-=============
+-------------
 <table>
     <colgroup>
         <col span="2" style="background-color: #D6EEEE">
@@ -312,7 +331,7 @@ The style attribute specifies the style to give the columns.
 Every HTML element has a default display value, depending on what type of element it is.
 
 `Block-level Elements`
-=======================
+---------------------
 A block-level element always starts on a new line, and the browsers automatically add some space (a margin) before and after the element.
 A block-level element always takes up the full width available (stretches out to the left and right as far as it can).
 Two commonly used block elements are: <p> and <div>.
@@ -321,12 +340,11 @@ Two commonly used block elements are: <p> and <div>.
 
 
 `Inline Elements`
-===================
+-----------------
 An inline element does not start on a new line.
 An inline element only takes up as much width as necessary.
 
 <a><abbr><acronym><b><bdo><big><br><button><cite><code><dfn><em><i><img><input><kbd><label><map><object><output><q><samp><script><select><small><span><strong><sub><sup><textarea><time><tt><var>
-
 
 
 ## `The <div> Element` ##
@@ -338,19 +356,19 @@ The <div> element is often used to group sections of a web page together.
 
 ## `Attribute` ##
 ==================
-
 `class`
-=======
+-------
 The HTML class attribute is used to specify a class for an HTML element.
 Multiple HTML elements can share the same class.
 The class attribute is often used to point to a class name in a style sheet. It can also be used by a JavaScript to access and manipulate elements with the specific class name.
 
 `id`
-====
+-----
 The HTML id attribute is used to specify a unique id for an HTML element.
 You cannot have more than one element with the same id in an HTML document.
 The id attribute specifies a unique id for an HTML element. The value of the id attribute must be unique within the HTML document.
 The id attribute is used to point to a specific style declaration in a style sheet. It is also used by JavaScript to access and manipulate the element with the specific id.
+
 
 ## `iframe` ##
 ===============
@@ -376,13 +394,13 @@ Common uses for JavaScript are image manipulation, form validation, and dynamic 
 <details> - Defines additional details that the user can open and close on demand
 <summary> - Defines a heading for the <details> element
 
+
 ## `HTML` <picture> `tag` ##
 ============================
 The HTML <picture> element allows you to define different images for different browser window sizes.
 
 ## Example ##
-=============
-
+--------------
 <picture>
   <source srcset="img_smallflower.jpg" media="(max-width: 600px)">
   <source srcset="img_flowers.jpg" media="(max-width: 1500px)">
@@ -463,6 +481,7 @@ A commonly used HTML entity is the non-breaking space: &nbsp;
 €	euro	&euro;	&#8364;	
 ©	copyright	&copy;	&#169;	
 ®	trademark	&reg;	&#174;
+
 
 `Combining Diacritical Marks`
 ===============================
@@ -647,6 +666,7 @@ The input formaction attribute specifies the URL of the file that will process t
 Note: This attribute overrides the action attribute of the <form> element.
 The formaction attribute works with the following input types: submit and image.
 
+
 ## `SVG` ##
 ============
 SVG stands for Scalable Vector Graphics
@@ -658,9 +678,9 @@ SVG integrates with other standards, such as CSS, DOM, XSL and JavaScript
 The HTML <svg> element is a container for SVG graphics.
 SVG has several methods for drawing paths, rectangles, circles, polygons, text, and much more.
 
+
 ## `Multimedia tags` ##
 =======================
-
 `video`
 -------
 <video width="320" height="240" controls>
@@ -718,7 +738,7 @@ Security: Accessible only within the same origin (domain) for security reasons.
 Use Case: Ideal for storing user preferences, themes, or offline data.
 
 ## Example 
-===========
+-----------
 ```js
 // Setting an item in Local Storage
 localStorage.setItem("username", "Midhun");
@@ -747,7 +767,7 @@ Isolation: Each browser tab has its own session storage; data is not shared acro
 Use Case: Useful for temporary data, like form inputs or session-specific configurations.
 
 ## Example
-===========
+------------
 ```js
 // Setting an item in Session Storage
 sessionStorage.setItem("sessionID", "12345");
@@ -764,6 +784,7 @@ sessionStorage.clear();
 
 ```
 
+
 ## `What is a Web Worker?` ##
 ===============================
 A Web Worker is a JavaScript feature that allows you to run scripts in the background, separate from the main execution thread of a web page. This helps avoid blocking the UI or causing the browser to freeze when performing computationally intensive tasks.
@@ -774,7 +795,7 @@ Asynchronous Tasks: Perfect for tasks like data fetching, image processing, or l
 Improved Performance: Frees up the main thread for smoother user interactions.
 
 ## Example
-==========
+-----------
 ```js
 // worker.js
 self.onmessage = function (e) {
@@ -819,6 +840,7 @@ The browser creates an EventSource object and establishes a connection to the se
 The server sends data streams in the form of text messages.
 The browser listens for events and updates the UI accordingly.
 
+
 ## `HTML drag and Drop` ##
 ===========================
 `Make an Element Draggable`
@@ -834,6 +856,7 @@ The ondragover event specifies where the dragged data can be dropped.
 By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element.
 This is done by calling the event.preventDefault() method for the ondragover event
 
+
 ## `Some tags` ##
 ==================
 1. <area>
@@ -844,6 +867,7 @@ This is done by calling the event.preventDefault() method for the ondragover eve
 -----------
 The <aside> tag defines some content aside from the content it is placed in.
 The aside content should be indirectly related to the surrounding content.
+
 
 ## `HTML Canvas` ##
 ====================
