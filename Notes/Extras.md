@@ -231,8 +231,8 @@ Routing is how users navigate between different pages or components in a web app
 
 
 
-### Single Responsibility Principle (SRP)
-==========================================
+## `Single Responsibility Principle (SRP)` ##
+==============================================
 The **Single Responsibility Principle (SRP)** is one of the five SOLID principles of object-oriented design. It states:
 
 **A class or component should have only one reason to change.**
@@ -257,8 +257,8 @@ The Single Responsibility Principle helps keep code **clean**, **modular**, and 
 
 
 
-### Linting Process
-=====================
+## `Linting Process` ##
+========================
 **Linting** is the process of analyzing code to identify potential errors, style violations, or code that doesn't follow best practices. 
 
 #### Key Points:
@@ -271,8 +271,8 @@ Linting is often integrated with code editors or during the build process to ens
 
 ---
 
-### Chunking / Code Splitting / Dynamic Bundling
-================================================
+## `Chunking / Code Splitting / Dynamic Bundling` ##
+=====================================================
 These techniques involve breaking large bundles of JavaScript code into smaller, manageable pieces that can be loaded on-demand.
 
 #### Key Points:
@@ -284,8 +284,8 @@ These strategies improve the **performance** of web applications by **reducing i
 
 
 
-## onClick function
-=====================
+## `onClick function` ##
+=========================
 
 onClick = {handleAddItem}
 --------------------------
@@ -304,3 +304,59 @@ onClick = {() => handleAddItem(item)}
 This version passes an arrow function that calls handleAddItem with the item argument when the button is clicked. 
 The function is not invoked immediately.
 It will only be called when the button is clicked.
+
+
+## `Waterfall model` ##
+========================
+Requirements
+    Design
+        Development
+            Testing
+                Deployment
+                    Maintainance
+
+`Requirement` :- This will be decided by the project manager and also takes helps with designers.
+`Design`      :- Tech team like enior engineers and engineering manager defineing the architechture and discussing about the tech stack like all the things High  level design and Low level design. 
+`Development` :- SDE1 and SDE2 developing the product or service
+`Testing`     :- SDET team will test the product or service
+`Deployment`  :- Devs / devops team  managing this thing
+`Maintainance`:- Repeat these stages like the way
+
+
+## `Monolith` vs `Microservice` ##
+==================================
+## `Monolith` ##
+=================
+One big repo for the whole project and all the services are in that and so many developers are working on that single big project
+
+`Dev speed` - slower
+`Code repo` - single
+`Scalability` - tough to scale, because scaling a repo which have million lines of code is very hetic
+`Deployment` - Single deployment
+`Tech stack` - single tech stack
+`Infra const` - easier infra cost
+`Complexity` - complexity will be heigher
+`Fault isolation` - small error will crash thw whole project
+`Testing` - easy to write test case, end to end test case
+`Ownership` - central ownership
+`Maintainance` - tough
+`Rewamps` - tough
+`Debugging` - slightly easier
+
+## `Microservice` ##
+====================
+For a big project split in to small small projects that handles only one single job and then connecting these services to work together.
+
+`Dev speed` - faster
+`Code repo` - multiple
+`Scalability` - easy to scale because of the different repos
+`Deployment` - Multiple deployment
+`Tech stack` - multiple tech stack can be used for different services that are siutable for that particular service
+`Infra cost` - Slightly heigher
+`Complexity` - easy complexity
+`Fault isolation` - error will be only effect that specific service
+`Testing` - tough to write test case for end to end
+`Ownership` - small team for respective services
+`Maintainance` - easy
+`Rewamps` - easy
+`Debugging` - tough
