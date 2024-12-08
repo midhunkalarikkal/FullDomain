@@ -32,36 +32,50 @@ Amazon Neptune
 
 ## `Relational DB` ##
 =====================
+- Data is stored in structured tables with rows and columns.
+- Requires a fixed schema for organizing data.
+- Uses SQL (Structured Query Language).
+- Scales vertically by adding resources to one server.
+- Ensures strong reliability with ACID properties (Atomicity, Consistency, Isolation, Durability).
+- Ideal for structured data, like banking apps or applications with complex relationships.
+- Examples: MySQL, PostgreSQL, Oracle.
+
 If the db folows codds 12 rule [0 - 12] then the db becomes a relational db
 
 mysql [ and maxDB, mariaDB also ] is developed by micahel videnium
 postgresql is developed by michael stonebreaker
 
-- Data structure is structured with tables.
-- Requires a fixed schema for data.
-- Utilizes SQL (Structured Query Language) for querying.
-- Typically vertically scalable, by adding more resources to a single server.
-- Provides ACID properties (Atomicity, Consistency, Isolation, Durability).
-- Best for structured data with complex relationships.
-- Examples include MySQL, PostgreSQL, Oracle.
-- Mainly relies on relational data models.
-
 ## `Non SQL  DB` ##
 ===================
-- Data structure is flexible and unstructured.
-- Allows dynamic or schema-less data.
-- Supports various query languages or APIs.
-- Achieves horizontal scalability, by adding more servers to a distributed system.
+- Data is stored in flexible, schema-less formats.
+- Allows dynamic, unstructured, or semi-structured data.
+- Uses query languages or APIs, like MQL (MongoDB Query Language).
+- Scales horizontally by adding servers.
 - Follows BASE properties (Basically Available, Soft state, Eventually consistent).
-- Suitable for unstructured or semi-structured data with varying requirements.
-- Examples include MongoDB, Cassandra, Redis, Couchbase.
-- Supports various data models, such as Document, Key-Value, Column-Family, Graph, etc.
+- Great for real-time analysis, big data, and social media apps.
+- Examples: MongoDB, Cassandra, Redis.
+- Supports various models, like Document, Key-Value, Column-Family, and Graph.
 
 ## `MongoDB` ##
 ================
 MongoDB is a NoSQL database that stores data in a flexible, schema-free format. It is designed for high-performance, scalability, and ease of development, making it suitable for a wide range of applications. MongoDB uses collections and documents to organize data and is known for its ability to handle large volumes of data and unstructured information efficiently.
 
+- No need for joins
+- No need for data normalisation
+
 developed in times of 2009 by the company 10gen and the name comes from Humoungous means huge, very big. then the 10gen company later renamed to mongoDB inc.
+
+`Collection`
+------------
+In MongoDB, a collection is a grouping of MongoDB documents. It is the equivalent of an RDBMS (Relational Database Management System) table in a relational database. Collections are used to store and organize documents, which are BSON (Binary JSON) format data structures.
+
+`document`
+---------
+collection is similar to a table in a relational database. Each collection contains one or more documents, which are like rows in a table. However, unlike rows, documents in a collection can have different structures and fields, offering flexibility in data storage.
+
+`fields`
+--------
+Each collection has multiple fields
 
 `BSON (Binary JSON)`
 -----------------------
@@ -122,20 +136,20 @@ The "date" data type in MongoDB is used to store date and time information in a 
 2. Timestamp
 The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON timestamp. It is typically used for internal purposes and may not be as human-readable as the "date" data type.
 
-Special Bson values
--------------------
+`Special Bson values`
+----------------------
 1. Minkey - represents smallest possible key in mongodb , used as a placeholder
 2. Maxkey - represents largest possible key in mongodb , used as a placeholder
 3. Timestamp
 4. ObjestID
 5. Undefined
 
-Cursor
-------
+## `Cursor` ##
+==============
 Cursor is a pointer to the result set  of a query , When you query a mongodb collection the database returns a cursor. The cursor allows for efficient retrieval of large result sets without consuming excessive memory. It also supports various methods and operations to navigate, filter, and manipulate the result set.
 
-Cursor methods
---------------
+`Cursor methods`
+-----------------
 1. toArray() - This method returns an array that contains all the documents from a cursor
 eg : db.demo.find({"isAdmin" : false}).toArray()
 
@@ -155,12 +169,10 @@ eg : db.demo.find().map(function(p) { return p.name};)
 
 extras - collation() , comment() , hint() , hasNext() , isExhausted() , limit() , max() , min() , next()
 
-Collection
-----------
-In MongoDB, a collection is a grouping of MongoDB documents. It is the equivalent of an RDBMS (Relational Database Management System) table in a relational database. Collections are used to store and organize documents, which are BSON (Binary JSON) format data structures.
 
-Collection Methods
-------------------
+
+## `Collection Methods` ##
+==========================
 Create Collection - db.createCollection("collection_name")
 
 show collection - show collections
@@ -218,7 +230,7 @@ eg : db.students.deleteMany({ age: { $gte: 25 } });
 
 12. explain() - Returns information on the query execution of various methods.
 
-13. find() - Performs a query on a collection or a view and returns a cursor object.
+13. find() - Performs a query on a collection or a view and returns a cursor object. And it returns a cursor.
 
 14. findAndModify() - It provides a way to automatically update and return the document
 eg : db.collection.findAndModify({ query: <query>, sort: <sort>, update: <update>, options: <options> });
@@ -270,7 +282,7 @@ Advanges of Nested documents
 7. Easier serialization and easier deserialization
 
 Methods to insert in MongoDB
----------------------------
+------------------------------
 1. insertOne
 
 2. insertMany
@@ -510,7 +522,6 @@ $sort , $count , $limit , $skip
 
 Aggregation example
 -------------------
-
 db.collectionName.aggregate(pipeline,options)a
 
 pipeline = Array of operations
@@ -534,8 +545,8 @@ Accumulators Operators
  eg : db.users.aggregate([{$unwind: "$tags" },{$group: {_id: null,uniqueTags: { $addToSet: "$tags" } }}])
 
 
-Sharding
---------
+## `Sharding` ##
+=================
 Sharding is a method for distributing data across multiple servers or nodes to ensure horizontal scalability and improved performance.
 
 Shard Key: The shard key is a field or a combination of fields that determines how data is distributed across different shards.MongoDB uses the shard key to route documents to the appropriate shard
@@ -548,16 +559,16 @@ Query Router (mongos): The query router is an interface between the application 
 
 Chunks: Data is divided into smaller segments called "chunks." Each chunk is a range of shard key values and is stored on a specific shard.
 
-Advantages of sharding
-----------------------
+`Advantages of sharding`
+-------------------------
 Horizontal scalability
 Load balancing
 High availability
 Geographic distribution
 Efficient use of hardware
 
-Types of sharding
------------------
+`Types of sharding`
+------------------
 1. Hashed Sharding:
 
 In Hashed Sharding, MongoDB distributes data across shards by applying a hash function to a specific field (the shard key). The hash function converts the shard key value into a hash value, which is used to determine the target shard.
@@ -570,8 +581,8 @@ Ranged Sharding involves distributing data based on specific ranges of shard key
 
 Zone Sharding is used when you want to control the placement of data based on specific criteria such as data center locations, geographic regions, or other attributes.
 
-Shard key types 
----------------
+`Shard key types `
+-----------------
 1. shard hotspots
 ------------------
 A shard hotspot occurs when a large proportion of read or write operations are directed to a single shard, causing that shard to become a bottleneck.
@@ -584,20 +595,21 @@ A normal shard key is chosen based on the application's access patterns, queries
 -------------------
 A hashed shard key involves applying a hash function to a specific field (the shard key) to determine the target shard. 
 
-Vertical scaling
-----------------
+
+## `Vertical scaling` ##
+=========================
 Vertical Scaling: Vertical scaling involves increasing the capacity of a single server by adding more resources, such as CPU, RAM, or storage. It's also known as "scaling up."
 
-Horizontal scaling
-------------------
+## `Horizontal scaling` ##
+===========================
 Horizontal Scaling: Horizontal scaling, on the other hand, involves adding more servers to a cluster to distribute the workload. MongoDB's sharding is a form of horizontal scaling.
 
-Zones
-----
+## `Zones` ##
+==============
 Zones in MongoDB are used for data partitioning and routing control. You can create zones to control which data is stored on specific shards within a sharded cluster.
 
-Auto balancing
---------------
+## `Auto balancing` ##
+========================
 The auto-balancer is a feature in MongoDB that automatically redistributes data across the shards in a sharded cluster to maintain even data distribution.
 
 Cluster
@@ -834,3 +846,7 @@ That allows you to create virtual collections based on aggregation pipelines. Vi
 
 mongod - The database server.
 mongos - Sharding router.
+
+## `Connection mongoDB to using nodejs` ##
+===========================================
+- We need a npm `mongodb` , this is only for dev but for the production it will not use.

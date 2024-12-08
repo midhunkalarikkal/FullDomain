@@ -544,6 +544,8 @@ The epoll mechanism in Linux internally uses a red-black tree and a linked list 
 =======================
 The node core module http is used to create a server and this createServer is a property of http. And the createServer function have a function and that function have two objects request and response
 
+in production we dont use this native module, we will use express framework built on top of nodejs.
+
 ```js
 const hppt = require('http');
 
