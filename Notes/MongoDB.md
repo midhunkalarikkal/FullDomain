@@ -19,17 +19,6 @@ Hierarchial DB - IBM IMS
 Network DB - IDMS
 Cloud DB - Amazon RDS
 
-## `Non sql db's` ##
-======================
-Mongo db
-Apache cloud db
-IBM db2
-Apache cassandra
-Neo4j
-Redis
-Amazon Dynamo DB
-Amazon Neptune
-
 ## `Relational DB` ##
 =====================
 - Data is stored in structured tables with rows and columns.
@@ -56,6 +45,21 @@ postgresql is developed by michael stonebreaker
 - Examples: MongoDB, Cassandra, Redis.
 - Supports various models, like Document, Key-Value, Column-Family, and Graph.
 
+`Non sql db's`
+---------------
+Mongo db
+Apache cloud db
+IBM db2
+Apache cassandra
+Neo4j
+Redis
+Amazon Dynamo DB
+Amazon Neptune
+
+
+
+
+
 ## `MongoDB` ##
 ================
 MongoDB is a NoSQL database that stores data in a flexible, schema-free format. It is designed for high-performance, scalability, and ease of development, making it suitable for a wide range of applications. MongoDB uses collections and documents to organize data and is known for its ability to handle large volumes of data and unstructured information efficiently.
@@ -72,6 +76,36 @@ In MongoDB, a collection is a grouping of MongoDB documents. It is the equivalen
 `document`
 ---------
 collection is similar to a table in a relational database. Each collection contains one or more documents, which are like rows in a table. However, unlike rows, documents in a collection can have different structures and fields, offering flexibility in data storage.
+
+1. Adding new document 
+ insertOne()
+ insertMany()
+
+2. Nested documents - Nested documents are documents that are embedded within the fields of another document.
+
+`Advanges of Nested documents`
+-------------------------------
+1. Hierarchical Data representation
+
+2. Reduced number of collection
+
+3. Atomic updates
+
+4. Improved query performance
+
+5. Schema flexibility
+
+6. Denormalization
+
+7. Easier serialization and easier deserialization
+
+`View`
+-------
+That allows you to create virtual collections based on aggregation pipelines. Views allow you to define complex data transformations, filtering, and aggregation logic 
+
+`Query`
+-------
+a query is a request for specific information or data from a database. It is a way to retrieve, filter, and manipulate data stored in a database to meet specific criteria or requirements. Queries are used to communicate with a database management system (DBMS) to extract the desired data.
 
 `fields`
 --------
@@ -105,6 +139,19 @@ Supports JavaScript-based queries and commands.
 - No built-in support for ACID transactions.
 - Inconsistent query performance.
 - Potential data integrity issues with flexible schema.
+
+`Primary key vs Secondary key`
+------------------------------
+Primary key - In MongoDB, each document (record) has a special field called "_id," which serves as a primary key by default.
+
+Secondary key - In MongoDB, secondary keys are implemented using indexes.
+
+`Schema`
+-----------
+A schema, in the context of databases, is a blueprint or structure that defines the organization and format of data in a database. It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
+
+
+
 
 
 ## `Data types in Mongo db` ##
@@ -144,6 +191,10 @@ The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON
 4. ObjestID
 5. Undefined
 
+
+
+
+
 ## `Cursor` ##
 ==============
 Cursor is a pointer to the result set  of a query , When you query a mongodb collection the database returns a cursor. The cursor allows for efficient retrieval of large result sets without consuming excessive memory. It also supports various methods and operations to navigate, filter, and manipulate the result set.
@@ -168,6 +219,8 @@ eg : db.demo.find().close()
 eg : db.demo.find().map(function(p) { return p.name};)
 
 extras - collation() , comment() , hint() , hasNext() , isExhausted() , limit() , max() , min() , next()
+
+
 
 
 
@@ -255,34 +308,11 @@ eg :  db.users.updateOne( { name: "Alice" }, { $set: { age: 26 } } );
 eg : db.users.updateOne( { status: "Active" }, { $set: { age: 30 } } );
 
 
-Document
---------
-document is a fundamental unit of data storage and retrieval. It is a structured data object that represents a single record or entry in a MongoDB collection. 
 
-1. Adding new document 
- insertOne()
- insertMany()
 
-2. Nested documents - Nested documents are documents that are embedded within the fields of another document.
 
-Advanges of Nested documents
-----------------------------
-1. Hierarchical Data representation
-
-2. Reduced number of collection
-
-3. Atomic updates
-
-4. Improved query performance
-
-5. Schema flexibility
-
-6. Denormalization
-
-7. Easier serialization and easier deserialization
-
-Methods to insert in MongoDB
-------------------------------
+## `Methods to insert in MongoDB` ##
+======================================
 1. insertOne
 
 2. insertMany
@@ -302,8 +332,11 @@ eg : db.product.aggregate( [
  If the condition is satisfied, then it will return a new collection with name "highvalueProduct"
 
 
-Finding or Querying
---------------------
+
+
+
+## `Finding or Querying` ##
+=============================
 1. Find()
 eg : db.collection.find(query, projection);
 
@@ -329,8 +362,11 @@ projection - An optional parameter that specifies which fields should be include
  eg : db.products.aggregate([{ $match: { price: { $gt: 10, $lt: 20 } } },{ $match: { quantity: { $gt: 100 } ]);
 
 
-Array 
------
+
+
+
+## `Array` ##
+===============
 1. with specific order
  eg : db.books.find({ "genres": { $in: ["Fantasy", "Adventure", "Mystery", "Science Fiction"] } });
 
@@ -344,8 +380,11 @@ Array
  eg : db.std.find({ scores : {$size : 5}})
 
 
-Projection
-----------
+
+
+
+## `Projection` ##
+=====================
 1. Include and exclude fields
  eg : db.std.find({ "scores.1": { $exists: true } });
 
@@ -353,8 +392,11 @@ Projection
  eg : db.collection.aggregate([ { $match: { "field": "value" } }, { $project: { "field1": 1, "field2": 1, "_id": 0 } } ])
 
 
-Filtering
----------
+
+
+
+## `Filtering` ##
+==================
 1. find( filter )
  eg : db.collectionName.find({ "fieldName": "value" })
 
@@ -362,8 +404,11 @@ Filtering
  eg : db.collection.find( {field : value }, { field1 : 1, field2 : 1, field3 :  0})
 
 
-Method chaining
----------------
+
+
+
+## `Method chaining` ##
+========================
 1. count() - The count() method in MongoDB is used to count the number of documents that match a specific query criteria within a collection.
  eg : db.collection.count({ field : "value"})
 
@@ -377,8 +422,11 @@ Method chaining
  eg : db.collection.find().skip(num)
 
 
-Operators
----------
+
+
+
+## `Operators` ##
+====================
 
 1. $gt - greater than , $gte - greater than or equal
 
@@ -473,12 +521,62 @@ Operators
       db.collection.update( { _id: documentId },{ $pop: { arrayField: -1 } } ) // To remove the first element
 
 
-Aggregation
------------
+
+
+
+## `$or vs $in vs $and` ##
+==========================
+$or - performs a logical OR operation on an array of two or more expressions, and selects documents that satisfy at least one of the expressions.
+ eg : db.products.find({ $or: [{ price: { $lt: 10 } }, { quantity: { $gt: 20 } }] })
+
+$in - used to select documents where the value of a field matches any value in a specified array.
+ eg : db.products.find({ color: { $in: ["red", "blue"] } })
+
+$and - used to combine multiple expressions into a single query, and selects documents that satisfy all the specified conditions.
+ eg : db.products.find({
+  $and: [{ category: "electronics" }, { price: { $lt: 100 } }]
+})
+
+
+
+
+
+## `Unary Operators` ##
+=======================
+1. $type 
+2. $lt 
+3. $gt 
+4. $or 
+5. $and
+6. $multiply
+
+
+
+
+
+## `Replace vs Update` ##
+==========================
+Replace - replace entire document
+Update - Updating specific field
+
+## `Drop vs Remove` ##
+========================
+Drop - deleting the entire collection
+ eg : db.coolectionName.drop()
+
+Remove - deleting document from a collection that satisfiying the condition
+ eg : db.collectionName.remove({ field :  "value" })
+
+
+
+
+
+## `Aggregation` ##
+====================
 1. How does it work ? 
 Aggregation in MongoDB is a framework for processing and transforming data within a collection. It allows you to perform various operations on documents, such as filtering, grouping, sorting, and computing new values. Aggregation is a powerful tool for generating reports, extracting insights, and preparing data for analysis.
  
-2. Advantages 
+`Advantages` 
 -------------
 a. Data transformation
 b. Data reduction
@@ -488,8 +586,8 @@ e. Array and join operations
 f. perform optimization
 g. Pipelining
 
-Aggregation stages
------------------
+`Aggregation stages`
+--------------------
 $sort , $count , $limit , $skip
 
 1. $match - used to filter documents based on specified criteria. It's similar to the find method.
@@ -519,16 +617,18 @@ $sort , $count , $limit , $skip
  6c. Grouping by nested field
 	eg : db.customers.aggregate( [ { $group: { _id: "$address.city", totalCustomers: { $sum: 1 } } } ] )
 
-
-Aggregation example
--------------------
+`Aggregation example`
+----------------------
 db.collectionName.aggregate(pipeline,options)a
 
 pipeline = Array of operations
 
 
-Accumulators Operators
-----------------------
+
+
+
+## `Accumulators Operators` ##
+===============================
 1. $sum
  eg : db.orders.aggregate([ { $group: { _id: { name: "$name", size: "$size" }, totalRevenue: { $sum: { $multiply: ["$price", "$quantity"] } } } } ] )
 
@@ -543,6 +643,9 @@ Accumulators Operators
 
 5. addToset - used to add values to an array field without duplicates.
  eg : db.users.aggregate([{$unwind: "$tags" },{$group: {_id: null,uniqueTags: { $addToSet: "$tags" } }}])
+
+
+
 
 
 ## `Sharding` ##
@@ -583,17 +686,20 @@ Zone Sharding is used when you want to control the placement of data based on sp
 
 `Shard key types `
 -----------------
-1. shard hotspots
-------------------
+1. `shard hotspots`
+---------------------
 A shard hotspot occurs when a large proportion of read or write operations are directed to a single shard, causing that shard to become a bottleneck.
 
-2. normal shard key
--------------------
+2. `normal shard key`
+----------------------
 A normal shard key is chosen based on the application's access patterns, queries, and distribution of data. It is designed to evenly distribute the data across the shards to avoid hotspots. 
 
-3. hashed shard key
--------------------
+3. `hashed shard key`
+----------------------
 A hashed shard key involves applying a hash function to a specific field (the shard key) to determine the target shard. 
+
+
+
 
 
 ## `Vertical scaling` ##
@@ -612,143 +718,91 @@ Zones in MongoDB are used for data partitioning and routing control. You can cre
 ========================
 The auto-balancer is a feature in MongoDB that automatically redistributes data across the shards in a sharded cluster to maintain even data distribution.
 
-Cluster
--------
+## `Gridfs` ##
+================
+GridFS (Grid File System) is a specification for storing and retrieving large binary objects, such as audio, video, images, and other binary data, in MongoDB.  which has a 16 MB size limit for individual documents. GridFS allows you to store and manage files larger than this size limit by dividing them into smaller chunks.
+
+
+
+
+## `Cluster` ##
+=================
 In MongoDB, a cluster is a group of servers or nodes that work together to store and manage the data. MongoDB clusters are designed for high availability, fault tolerance, and horizontal scalability.
 
-Types of clusters
------------------
-Replica set
------------
+`Types of clusters`
+-------------------
+`Replica set`
+--------------
 A replica set is the basic building block of MongoDB's high availability architecture. It consists of multiple MongoDB instances (nodes) that replicate data to ensure fault tolerance and data redundancy.
 
-Sharded cluster
-----------------
+`Sharded cluster`
+-------------------
 A sharded cluster is designed to horizontally scale MongoDB by distributing data across multiple shards
 
-Arbiter
--------
+`Arbiter`
+----------
 An arbiter is a lightweight member in a replica set that does not store data but participates in replica set elections
 
-Embedding
-----------
+`Embedding`
+-------------
 Embedding involves nesting one or more documents or objects within another document.
 
-Linking (Normalization)
------------------------
+`Linking (Normalization)`
+--------------------------
 Linking involves storing references or foreign keys to related documents in separate collections rather than embedding them directly.
 
 
-$or vs $in vs $and
------------------
-$or - performs a logical OR operation on an array of two or more expressions, and selects documents that satisfy at least one of the expressions.
- eg : db.products.find({ $or: [{ price: { $lt: 10 } }, { quantity: { $gt: 20 } }] })
 
-$in - used to select documents where the value of a field matches any value in a specified array.
- eg : db.products.find({ color: { $in: ["red", "blue"] } })
 
-$and - used to combine multiple expressions into a single query, and selects documents that satisfy all the specified conditions.
- eg : db.products.find({
-  $and: [{ category: "electronics" }, { price: { $lt: 100 } }]
-})
 
-Gridfs
-------
-GridFS (Grid File System) is a specification for storing and retrieving large binary objects, such as audio, video, images, and other binary data, in MongoDB.  which has a 16 MB size limit for individual documents. GridFS allows you to store and manage files larger than this size limit by dividing them into smaller chunks.
 
-Journaling
-----------
+
+## `Journaling` ##
+=====================
  "journaling" refers to a technique used to ensure the durability and consistency of data in the face of system failures or crashes. Journaling is particularly important for databases like MongoDB to maintain data integrity and recover from unexpected events.
 
-Journaling Working
-------------------
+`Journaling Working`
+---------------------
 Write Operations: When data is written to MongoDB, it is first written to an in-memory data structure known as the "write-ahead log" (WAL) or "journal."
 
 Asynchronous Disk Write: Periodically, MongoDB flushes the in-memory write-ahead log to disk in a sequential and efficient manner. This process is asynchronous, which means that MongoDB can continue processing new write operations while the journal is being written to disk.
 
 Commit to Data Files: Once the data is safely stored in the journal, MongoDB writes it to the permanent data files on disk.
 
-CAP Theorom
------------
+
+
+
+
+## `CAP Theorom` ##
+====================
 The CAP theorem, also known as Brewer's theorem, is a fundamental concept in distributed computing. According to the CAP theorem, a distributed system can achieve at most two of these properties simultaneously but not all three.
 
 Properties are - Consistency , Availability , Partiton Tolerance
 
-Consistency
------------
+`Consistency`
+--------------
 All the clients see the same view of data  even right after  update or delete
 
-Availability
-------------
+`Availability`
+---------------
 All clients can find a  replica of data even in case of partial node failures
 
-Partition tolerance
--------------------
+`Partition tolerance`
+----------------------
 It is a guarentee the system continue to operation even if there is a  network issue in the data center and some of the computers  are unreachable
 
-Capped collection
------------------
+`Capped collection`
+--------------------
 Capped collection is a type of collection with a fixed size that behaves differently from a regular collection. It has some unique characteristics such as fixed size , insertion order , auto deletion and no updation.
 
 db.createCollection("logs", { capped: true, size: 1048576 });
 
-Replace vs Update
------------------
 
-Replace - replace entire document
 
-Update - Updating specific field
 
-Drop vs Remove
---------------
 
-Drop - deleting the entire collection
- eg : db.coolectionName.drop()
-
-Remove - deleting document from a collection that satisfiying the condition
- eg : db.collectionName.remove({ field :  "value" })
-
-Primary key vs Secondary key
-----------------------------
-
-Primary key - In MongoDB, each document (record) has a special field called "_id," which serves as a primary key by default.
-
-Secondary key - In MongoDB, secondary keys are implemented using indexes.
-
-Schema
-------
-A schema, in the context of databases, is a blueprint or structure that defines the organization and format of data in a database. It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
-
-Unary Operators
----------------
-1. $type 
-2. $lt 
-3. $gt 
-4. $or 
-5. $and
-6. $multiply
-
-Relationships
--------------
-1. Embedding - Embedding is a way to represent relationships by directly including one document or entity within another.
-2. Referencing - Referencing involves representing relationships by storing references (such as IDs) to related documents or entities.
-3. One to one - This represents a relationship where one entity is associated with exactly one other entity.
-4. One to many - This represents a relationship where one entity is associated with more than one	 entity.
-5. One to Squillions - This is similar to one-to-many, but with a much larger number of related entities.
-6. Many to many - In a many-to-many relationship, multiple entities on one side can be related to multiple entities on the other side.
-
-Batch size
-----------
-The batchSize option specifies the maximum number of documents that should be returned in a single batch from the server to the client. A batch is essentially a chunk of query results.
- eg : db.myCollection.find({}).batchSize(50);
-
-Atomic operations
------------------
-Atomic operations are database operations that are guaranteed to be executed as a single, indivisible unit. 
-set inc push pull addToset unset
-
-Types of index
---------------
+## `Types of index` ##
+=======================
 1. Single Field Index
  eg : db.demo.createIndex({name : 1})
 
@@ -789,8 +843,30 @@ Functionality: They are useful for managing data that has a temporal aspect, lik
 an index that only includes documents that contain the indexed field. 
 
 
-Fault tolerance
----------------
+
+
+
+## `Relationships` ##
+======================
+1. Embedding - Embedding is a way to represent relationships by directly including one document or entity within another.
+2. Referencing - Referencing involves representing relationships by storing references (such as IDs) to related documents or entities.
+3. One to one - This represents a relationship where one entity is associated with exactly one other entity.
+4. One to many - This represents a relationship where one entity is associated with more than one	 entity.
+5. One to Squillions - This is similar to one-to-many, but with a much larger number of related entities.
+6. Many to many - In a many-to-many relationship, multiple entities on one side can be related to multiple entities on the other side.
+
+## `Batch size` ##
+=====================
+The batchSize option specifies the maximum number of documents that should be returned in a single batch from the server to the client. A batch is essentially a chunk of query results.
+ eg : db.myCollection.find({}).batchSize(50);
+
+## `Atomic operations` ##
+==========================
+Atomic operations are database operations that are guaranteed to be executed as a single, indivisible unit. 
+set inc push pull addToset unset
+
+## `Fault tolerance` ##
+=======================
 Fault tolerance in MongoDB refers to the system's ability to continue functioning and providing services in the presence of hardware failures, software errors, or other unexpected issues.
 
 To achieve fault tolerance 
@@ -801,14 +877,12 @@ Data distribution
 Journaling
 Backup and restore
 
-Query
------
-a query is a request for specific information or data from a database. It is a way to retrieve, filter, and manipulate data stored in a database to meet specific criteria or requirements. Queries are used to communicate with a database management system (DBMS) to extract the desired data.
 
 
-Regex
-------
 
+
+## `Regex` ##
+=============
 /a$/ - last a
 
 /^a/ - first a
@@ -837,16 +911,13 @@ Namespace - a namespace refers to the combination of the database name and the c
 Covered query - a query where all the fields in the query are covered by an index, and the index itself provides all the data 
 needed to fulfill the query. 
 
-View
-----
-That allows you to create virtual collections based on aggregation pipelines. Views allow you to define complex data transformations, filtering, and aggregation logic 
 
 
 
-
-mongod - The database server.
-mongos - Sharding router.
 
 ## `Connection mongoDB to using nodejs` ##
 ===========================================
 - We need a npm `mongodb` , this is only for dev but for the production it will not use.
+
+mongod - The database server.
+mongos - Sharding router.
