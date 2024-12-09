@@ -578,6 +578,141 @@ Manually setting content-type
 
 `res.end()`
 -----------
+The res.end() method is part of the Response Object in Node.js (not specific to Express). It is used to end the response process and optionally send some data to the client as the final part of the response.
+
+## `HTTP Request` ##
+======================
+Request line - Method , URI , http version
+Header - Additonal information that send by the client to server
+Request body - Data send by the client to server
+
+`app.get('/ab?c')`
+---------------------
+Definition: Matches the path /abc or /ac. The ? indicates that the preceding character (b) is optional.
+## Example
+-----------
+URL: /abc → Matched.
+URL: /ac → Matched.
+URL: /ab or /abcd → Not matched.
+
+`app.get('/ab+c')`
+---------------------
+Definition: Matches the path where b appears one or more times, followed by c. The + indicates repetition of the preceding character (b).
+## Example
+------------
+URL: /abc → Matched.
+URL: /abbc → Matched.
+URL: /ac or /abcd → Not matched.
+
+`app.get('/ab*cd')`
+--------------------
+Definition: Matches the path where any number of characters (including none) replace the * between ab and cd.
+## Example
+--------------
+URL: /abcd → Matched.
+URL: /abxyzcd → Matched.
+URL: /abx or /cd → Not matched.
+
+`app.get('/a(bc)?d')`
+----------------------
+Definition: Matches the path /ad or /abcd. The (bc)? makes bc an optional group.
+## Example
+-------------
+URL: /ad → Matched.
+URL: /abcd → Matched.
+URL: /abcdx or /a → Not matched.
+
+`app.get('/user/:userId/:name')`
+----------------------------------
+Definition: Matches a path with two dynamic segments, :userId and :name. These are placeholders for values extracted from the URL.
+## Example
+--------------
+URL: /user/123/john → Matched. userId = 123, name = john.
+URL: /user/456/jane → Matched. userId = 456, name = jane.
+URL: /user/123 → Not matched.
+
+
+`req.params`
+--------------
+Definition: Extracts route parameters defined by :placeholder in the URL path.
+## Example
+-------------
+```js
+app.get('/user/:userId/:name', (req, res) => {
+    console.log(req.params); 
+    // Output: { userId: '123', name: 'john' } for `/user/123/john`
+});
+```
+Use Case: For mandatory dynamic parts of the URL.
+
+`req.query`
+-------------
+Definition: Extracts query string parameters from the URL, which appear after ?.
+## Example
+```js
+app.get('/search', (req, res) => {
+    console.log(req.query);
+    // Output: { q: 'nodejs', sort: 'desc' } for `/search?q=nodejs&sort=desc`
+});
+```
+Use Case: For optional parameters or filters.
+
+
+
+
+
+## `Request handler` ##
+========================
+A Request Handler is the server-side code (typically a function) that processes an incoming HTTP request and generates an appropriate response.
+
+`How It Works`
+
+It receives an HTTP request (from the client), analyzes it, and decides what to do with it.
+It can read the request's URI, headers, query parameters, route parameters, or body to take appropriate actions.
+It sends back a response to the client.
+
+`ORDER OF THE ROUTES MATTER`
+
+`Generic Request Handler`
+--------------------------
+This sample request handler will always respond with the same message regardless of the incoming path
+
+```js
+app.use((req,res)=>{
+    res.send("Hello from server");
+})
+```
+
+`Explicit Path-Specific Handler`
+---------------------------------
+In Express, a route defined with / acts as a catch-all (or a default handler) for any path, because / matches every route as a prefix.
+
+If this is the first handler in your server and you define more specific route handlers later (e.g., /about, /contact), they won’t execute.
+This happens because the / path matches any route that begins with /, which includes all other routes.
+```js
+app.use("/",(req,res)=>{
+    res.send('Hello from dashboard');
+})
+```
+
+`How to Ensure Other Handlers Work`
+------------------------------------
+If you want other handlers to respond appropriately, make sure to
+Place more specific handlers before generic ones.
+
+```js
+app.use("/about", (req, res) => {
+    res.send("Hello from about");
+});
+
+app.use("/", (req, res) => {
+    res.send("Hello from dashboard");
+});
+```
+In this case 
+/about will match /about.
+/ will act as a catch-all for any remaining unmatched paths.
+
                     
 
 
@@ -593,14 +728,6 @@ Path Parameters (Params)
 Path parameters are segments of a URL path that are used to pass data to the server as part of the URL's path. They are typically used to identify a specific resource or endpoint.
 
 https://example.com/users/123/profile
-
-
-
-HTTP Request
----------------
-Request line - Method , URI , http version
-Header - Additonal information that send by the client to server
-Request body - Data send by the client to server
 
 
 

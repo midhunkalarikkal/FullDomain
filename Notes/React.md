@@ -460,6 +460,10 @@ A: Browserslist defines and shares the list of target browsers between various f
 - **Resolved**  
   The `resolved` property shows the exact URL from which the package was downloaded, ensuring npm fetches the correct version during installation.
 
+- **version in 3 numbers**
+  first number is the `major` version [ internally changing something, so the library need to update ]
+  second number is the `minor` version [ a small featue updation, backward compatable it means we can still use the older version]
+  third number is the `patch` version [ like a small change, bug fix ]
 
 
 
