@@ -634,7 +634,7 @@ URL: /user/123 → Not matched.
 
 `req.params`
 --------------
-Definition: Extracts route parameters defined by :placeholder in the URL path.
+Extracts route parameters defined by :placeholder in the URL path.
 ## Example
 -------------
 ```js
@@ -647,7 +647,7 @@ Use Case: For mandatory dynamic parts of the URL.
 
 `req.query`
 -------------
-Definition: Extracts query string parameters from the URL, which appear after ?.
+Extracts query string parameters from the URL, which appear after ?.
 ## Example
 ```js
 app.get('/search', (req, res) => {
@@ -664,9 +664,9 @@ Use Case: For optional parameters or filters.
 ## `Request handler` ##
 ========================
 A Request Handler is the server-side code (typically a function) that processes an incoming HTTP request and generates an appropriate response.
+if we not sen any response back like example `res.send()` the request handler will be like a loop sendning request
 
 `How It Works`
-
 It receives an HTTP request (from the client), analyzes it, and decides what to do with it.
 It can read the request's URI, headers, query parameters, route parameters, or body to take appropriate actions.
 It sends back a response to the client.
@@ -712,6 +712,23 @@ app.use("/", (req, res) => {
 In this case 
 /about will match /about.
 / will act as a catch-all for any remaining unmatched paths.
+
+`Request hanlder with multiple callback and next`
+-------------------------------------------------
+- In this the next function is called for trigger the next callback function
+- here we have two response but only the first callback functions response will workd and we will get an error because `The server can only send a single response to a single url then if we try to send a second response it will throw an error`
+` Here the control will go to the next function after executing the first one but the second callback functions console will only work
+- If there are multiple callback functions, we can wrap those callbacks inside an array, or we can wrap a specific set of callback functions.
+```js
+app.get('/user',(req,res,next) => {
+    console.log("First callback");
+    res.send("Response from first callback");
+    next();
+},(req,res) => {
+    console.log("Second callback");
+    res.send("Response from second callback");
+})
+```
 
                     
 
