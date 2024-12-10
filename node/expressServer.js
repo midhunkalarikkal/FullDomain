@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
@@ -15,7 +15,6 @@ const app = express();
 //     res.send("response from server with test ")
 // })
 
-
 // ## Two
 // In this we will get exact response because the / will not order ride the other routes
 
@@ -28,7 +27,6 @@ const app = express();
 // app.use("/",(req,res) => {
 //     res.send("response from server with / ");
 // })
-
 
 // ## Third
 // in this we can get different response
@@ -45,7 +43,6 @@ const app = express();
 //     res.send("Data deleted successfully.");
 // })
 
-
 // ## fourth
 // just rout example with constraints
 
@@ -59,7 +56,6 @@ const app = express();
 //     res.send("user GET call with * after e in route");
 // })
 
-
 // ## req.params
 // app.get('/user/:userId',(req,res) => {
 //     console.log(req.params);
@@ -71,7 +67,6 @@ const app = express();
 //     console.log(req.query);
 //     res.send("response from server with req.query");
 // })
-
 
 // ## Five
 // ## request hanlder with multiple callback with next parameter
@@ -150,7 +145,7 @@ const app = express();
 //     next();
 // },(req,res,next) => {
 //     console.log("Third callback");
-//     next();  
+//     next();
 // })
 
 // Sample eight
@@ -167,6 +162,22 @@ const app = express();
 //     res.send("Response from third callback.");
 // }])
 
-app.listen(4000,() => {
-    console.log("Server is listening on port 4000");
-})
+// Six
+// MIddlewares
+
+const { adminAuth } = require('./middlewares/auth')
+app.use("/admin",adminAuth);
+
+app.get("/admin/getData", (req, res) => {
+  res.send("adin authenticated");
+  console.log("data fetched");
+});
+
+app.post("/admin/postData", (req, res) => {
+  res.send("admin authenticated");
+  console.log("data saved");
+});
+
+app.listen(4000, () => {
+  console.log("Server is listening on port 4000");
+});

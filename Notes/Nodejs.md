@@ -661,9 +661,9 @@ Use Case: For optional parameters or filters.
 
 
 
-## `Request handler` ##
+## `Route handler` ##
 ========================
-A Request Handler is the server-side code (typically a function) that processes an incoming HTTP request and generates an appropriate response.
+A Route Handler is the server-side code (typically a function) that processes an incoming HTTP request and generates an appropriate response.
 if we not sen any response back like example `res.send()` the request handler will be like a loop sendning request
 
 `How It Works`
@@ -673,7 +673,7 @@ It sends back a response to the client.
 
 `ORDER OF THE ROUTES MATTER`
 
-`Generic Request Handler`
+`Generic Route Handler`
 --------------------------
 This sample request handler will always respond with the same message regardless of the incoming path
 
@@ -713,7 +713,7 @@ In this case
 /about will match /about.
 / will act as a catch-all for any remaining unmatched paths.
 
-`Request hanlder with multiple callback and next`
+`Route hanlder with multiple callback and next`
 -------------------------------------------------
 - In this the next function is called for trigger the next callback function
 - here we have two response but only the first callback functions response will workd and we will get an error because `The server can only send a single response to a single url then if we try to send a second response it will throw an error`
@@ -729,60 +729,41 @@ app.get('/user',(req,res,next) => {
     res.send("Response from second callback");
 })
 ```
+or
+```js
+app.get('/user',(req,res,next) => {
+    console.log("First callback");
+    next();
+})
+app.get('/user',(req,res,next) => {
+    console.log("First callback");
+    res.send("Response from first callback");
+})
+```
 
-                    
-
-
-
-Query Parameters
-----------------
-Query parameters are appended to the end of a URL after a question mark (?) and are used to send additional data to the server. They consist of key-value pairs separated by ampersands (&). Query parameters are typically used for filtering, sorting, or specifying additional options.
-
-https://example.com/search?q=javascript&page=1&sort=asc
-
-Path Parameters (Params)
-------------------------
-Path parameters are segments of a URL path that are used to pass data to the server as part of the URL's path. They are typically used to identify a specific resource or endpoint.
-
-https://example.com/users/123/profile
+`So why there is this mutiple route handler code, the answer is middlewares`
 
 
 
-Status code
------------
-Informational
-100 - server has recieved inital part and expect the client to continue
 
-Success
-200 - Request was successfull and the server returned the data
-201 - request fullfilled and new resource has been created
 
-Redirection
-301 - requested resourse are permenantly moved to a new location
-302 - requested resourse are temporarly moved to a new location
+## `Working of express` ##
+=================================
+If a request route comes to express js it will execute the code from top to bottom like it go through the middlewares and last it send the response back from  the route handler
 
-Client 
-400 - server didnot understand the request
-401 - unauthorised
-402 - payment required
-403 - Understood but server refused to autherise
+## `Middlewares` ##
+=====================
+In Express.js, a middleware is a function that executes during the lifecycle of a request to the server. Middleware functions have access to the request (req), response (res), and the next middleware in the application’s request-response cycle.
 
-Server
-500 - Internal server error
-502 - Bad gateway
-503 - service unavailable
-
-Thread pool
------------
-The thread pool is used for executing heavy or blocking tasks outside the event loop, ensuring that these operations don't block the execution of other code. For example, file I/O operations or cryptographic tasks might be performed in the thread pool.
-
-Event loop
-----------
-It checks the callback queue for the callbacks and if the call stack is empty it will push the call back from the callback queue to the call stack
+```js
+app.use((req, res, next) => {
+    // Middleware logic
+    next(); // Pass control to the next middleware
+});
+```
 
 Types of middlewares
 =====================
-
 Application level middleware
 ----------------------------
 that are bound to the entire application and are executed on every incoming request
@@ -829,6 +810,49 @@ app.get('/profile/:username', (req, res) => {
   const username = req.params.username;
   res.send(`User Profile for ${username}`);
 });
+
+
+
+Query Parameters
+----------------
+Query parameters are appended to the end of a URL after a question mark (?) and are used to send additional data to the server. They consist of key-value pairs separated by ampersands (&). Query parameters are typically used for filtering, sorting, or specifying additional options.
+
+https://example.com/search?q=javascript&page=1&sort=asc
+
+Path Parameters (Params)
+------------------------
+Path parameters are segments of a URL path that are used to pass data to the server as part of the URL's path. They are typically used to identify a specific resource or endpoint.
+
+https://example.com/users/123/profile
+
+
+
+Status code
+-----------
+Informational
+100 - server has recieved inital part and expect the client to continue
+
+Success
+200 - Request was successfull and the server returned the data
+201 - request fullfilled and new resource has been created
+
+Redirection
+301 - requested resourse are permenantly moved to a new location
+302 - requested resourse are temporarly moved to a new location
+
+Client 
+400 - server didnot understand the request
+401 - unauthorised
+402 - payment required
+403 - Understood but server refused to autherise
+
+Server
+500 - Internal server error
+502 - Bad gateway
+503 - service unavailable
+
+
+
 
 
 CORS
