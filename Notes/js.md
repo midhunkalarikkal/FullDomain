@@ -317,6 +317,74 @@ Callback Hell: Nested callbacks can lead to complex and hard-to-read code.
 Lack of Strong Typing: Dynamic typing can result in runtime errors, requiring thorough testing.
 
 
+
+
+
+
+## `JavaScript Object` ##
+===========================
+A JavaScript Object is a data structure in JavaScript that stores data in the form of key-value pairs. It is versatile and dynamic, allowing for the representation of both simple and complex data structures.
+
+`Key-Value Pair Structure`
+--------------------------------
+Each property (key) maps to a value.
+```js
+const obj = { name: "Midhun", age: 25 };
+```
+`Dynamic Nature`
+---------------------
+Properties can be added, updated, or deleted at runtime.
+```js
+obj.email = "midhun@example.com"; // Adds a property
+delete obj.age; // Removes the 'age' property
+```
+`Support for Complex Values`
+---------------------------------
+Values can include primitives, arrays, objects, or functions.
+```js
+const obj = { 
+    name: "Midhun", 
+    details: { age: 25, city: "Kerala" }, 
+    greet: () => "Hello!" 
+};
+```
+
+## `JSON (JavaScript Object Notation)` ##
+==========================================
+JSON is a lightweight data-interchange format inspired by JavaScript object syntax. It is primarily used to transmit data between a server and a client and must follow strict formatting rules.
+
+`Stringified Data Structure`
+------------------------------
+Keys and values are always enclosed in double quotes (except numbers, booleans, null).
+```js
+{
+    "name": "Midhun",
+    "age": 25
+}
+```
+`No Methods or Undefined Values`
+------------------------------------
+JSON can only contain simple data types: objects, arrays, numbers, strings, booleans, and null.
+```js
+{
+    "greet": () => "Hello!" // Invalid in JSON
+}
+```
+`Static and Read-Only Format`
+---------------------------------
+Once parsed into an object in JavaScript, it can be manipulated. Otherwise, JSON itself is static.
+`Conversion Example`
+JavaScript Object:
+```js
+const obj = { name: "Midhun", age: 25 };
+
+'{"name": "Midhun", "age": 25}'
+```
+
+
+
+
+
 ## `Memoization` ##
 ====================
 Memoization is a technique used in programming to optimize the performance of functions by caching the results of expensive function calls and reusing them when the same inputs occur again.

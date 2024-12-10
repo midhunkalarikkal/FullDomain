@@ -259,12 +259,14 @@ while importing a module it is not necessary to specifyt eh .js extension for th
 the moduel.exports is an empty object by default
 
 By default the module is common js module it is  that the variables and functions are exporting using the 
+
+`named export`
 ```js
 module.exports = sum; // Single export
 module.export = {Sum, Multiply}; // Multiple export
 ```
-and importing using the require function
 
+`named import`
 ```js
 const sum = require('./path'); // Single import
 const {Sum, Multiply} = require('./path'); // Multiple import
@@ -280,7 +282,7 @@ object.Multiply
 
 
 ## `ES modules (mjs)` es module system ##
-===================
+===============================================
 Newer way asynchronous and the code running in strict mode
 in strict mode we cant decalre variable without var, let or const
 while importing a module we need to specify the .js file extension of the file in es modules
@@ -293,22 +295,35 @@ For making the module ES module we need to specify the module in the package.jso
 }
 ```
 and for exporting we can use the export keyword directly with variables and functions
+
+`named export`
 ```js
  export function sum(a,b){
   console.log("Sum is : ",a+b);
  }
 ```
-
 and for importing we need to use the import keyword
+
+`named import`
 ```js
 import {sum} from './path';
+```
+
+`default export`
+```js
+export default  = { function, variable }
+```
+
+`default import`
+```js
+import defaultFunc from './module.js';
 ```
 
 
 
 
 ## `Coomon file for importinga and exporting` ##
-=================================================
+====================================================
 If we have a folder and inside it have multiple modules and each modules have mutiple exports, we can use an `index.js` file for importing all the modules things in to index.js file and then export all the things from the index.js file
 
 So while importing these things outside of the folder we dont need to use the index.js file name in the path, by default it will take it from the index.js file of the folder
@@ -791,8 +806,9 @@ express.JSON
 express.urlencoded
 
 express.json()
---------------
-This middleware is used to parse incoming requests with JSON payloads. It automatically parses the JSON body of incoming requests and makes it available in req.body.
+---------------
+- This middleware is used to parse incoming requests with JSON payloads. 
+- Threquest suppose contains a JSON body it is not readable by the server so the express middleware `express.json` is used to parse JSON body and convert it in to a javascript object.
 
 express.json() is for JSON data
 

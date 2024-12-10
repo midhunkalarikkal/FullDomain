@@ -918,6 +918,19 @@ needed to fulfill the query.
 ## `Connection mongoDB to using nodejs` ##
 ===========================================
 - We need a npm `mongodb` , this is only for dev but for the production it will not use.
+- For the production we use `mongoose` npm.
 
 mongod - The database server.
 mongos - Sharding router.
+
+a
+## `Schema creation` ##
+========================
+```js
+const userSchema = new mongoose.Schema({
+   name : {
+      type : String
+   }
+})
+module.export = mongoose.model("User",userSchema);
+```
