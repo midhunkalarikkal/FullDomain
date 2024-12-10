@@ -720,22 +720,22 @@ In this case
 ` Here the control will go to the next function after executing the first one but the second callback functions console will only work
 - If there are multiple callback functions, we can wrap those callbacks inside an array, or we can wrap a specific set of callback functions.
 ```js
-app.get('/user',(req,res,next) => {
+app.get('/user',(err,req,res,next) => {
     console.log("First callback");
     res.send("Response from first callback");
     next();
-},(req,res) => {
+},(err,req,res) => {
     console.log("Second callback");
     res.send("Response from second callback");
 })
 ```
 or
 ```js
-app.get('/user',(req,res,next) => {
+app.get('/user',(err,req,res,next) => {
     console.log("First callback");
     next();
 })
-app.get('/user',(req,res,next) => {
+app.get('/user',(err,req,res,next) => {
     console.log("First callback");
     res.send("Response from first callback");
 })

@@ -4,7 +4,8 @@ const adminAuth = (req, res, next) => {
     if (authenticate) {
       next();
     } else {
-      res.send("Unautherized request");
+    //   res.send("Unautherized request");
+    next(new Error("Something went wrong."))
     }
   }
 

@@ -164,19 +164,29 @@ const app = express();
 
 // Six
 // MIddlewares
+// the middle ware is exporte from the middleware/auth
+const { adminAuth } = require('./middlewares/auth');
+const { adminErr } = require('./middlewares/err');
 
-const { adminAuth } = require('./middlewares/auth')
 app.use("/admin",adminAuth);
 
 app.get("/admin/getData", (req, res) => {
-  res.send("adin authenticated");
-  console.log("data fetched");
+    res.send("adin authenticated");
+    console.log("data fetched");
 });
 
 app.post("/admin/postData", (req, res) => {
-  res.send("admin authenticated");
-  console.log("data saved");
+    res.send("admin authenticated");
+    console.log("data saved");
 });
+
+app.get('/admin/userDataErr',(req,res, next) => {
+    next(new Error("User data send."));
+})
+
+app.use('/',adminErr); 
+
+
 
 app.listen(4000, () => {
   console.log("Server is listening on port 4000");
