@@ -66,3 +66,9 @@ POST	Sends new data to the server to create a resource.	Creating a new user or s
 PUT	Updates an entire resource with new data.	Replacing a user's details entirely.
 PATCH	Partially updates a resource with specific data.	Changing just a user's email address.
 DELETE	Removes a resource from the server.	Deleting a user or removing a record.
+
+## `Authentication` ##
+========================
+Once a use login the server will create a jwt token and wrap inside a cookie and send baxk to client then the client browser will store it and whenever a request go to the server the cookie will send alogn with that request and then validate that token and if the token is valid then only the next thing will work otherwise redirect to.
+
+JWT stands for `JSON web token` and it have header, payload and signature.

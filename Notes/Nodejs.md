@@ -263,7 +263,7 @@ By default the module is common js module it is  that the variables and function
 `named export`
 ```js
 module.exports = sum; // Single export
-module.export = {Sum, Multiply}; // Multiple export
+module.exports = {Sum, Multiply}; // Multiple export
 ```
 
 `named import`

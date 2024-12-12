@@ -149,8 +149,27 @@ Secondary key - In MongoDB, secondary keys are implemented using indexes.
 `Schema`
 -----------
 A schema, in the context of databases, is a blueprint or structure that defines the organization and format of data in a database. It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
+Any key that is not present in the schema and we are passsing it to updated, it will not make that field.
+We can add properties to a field to control the value of that field and this method is called `data sanitizing`.
+- We can also add `schema methods` that handles functions example creating jwt token etc...., we must use normal function there and use `this` keyword for referencing the schema.
 
+`Schema types`
+--------------
+String
+Number
+Boolean | Bool
+Array
+Buffer
+Date
+ObjectId | Oid
+Mixed
+UUID
+BigInt
 
+`__v verssion`
+----------------
+ __v field is a special property automatically added by Mongoose.
+ When multiple operations try to update the same document simultaneously, Mongoose uses the __v field to detect conflicting modifications.
 
 
 
@@ -343,7 +362,7 @@ eg : db.collection.find(query, projection);
 query - An optional query condition or filter that specifies which documents to retrieve.
 projection - An optional parameter that specifies which fields should be included or excluded in the result.
 
-2. findOne({ filter }) -  It returns the first document that satisfies the filter criteria.
+2. findOne({ filter }) -  It returns the first document that satisfies the filter criteria. if we didnt pass any filter, it will return any arbitary document.
 
 3. finding in nested array
  eg : db.employees.find({ename : "Rahul"},{ename : 1,"address.city" : 1})
