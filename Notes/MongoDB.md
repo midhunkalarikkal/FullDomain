@@ -151,7 +151,15 @@ Secondary key - In MongoDB, secondary keys are implemented using indexes.
 A schema, in the context of databases, is a blueprint or structure that defines the organization and format of data in a database. It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
 Any key that is not present in the schema and we are passsing it to updated, it will not make that field.
 We can add properties to a field to control the value of that field and this method is called `data sanitizing`.
+
 - We can also add `schema methods` that handles functions example creating jwt token etc...., we must use normal function there and use `this` keyword for referencing the schema.
+
+- We can also add `Schema.pre` function to call this function on everytime while saving the model;
+```js
+Schema.pre("save",function(){
+   const schmea = this; // Here this is pointing the Schema;
+})
+```
 
 `Schema types`
 --------------
@@ -820,13 +828,30 @@ db.createCollection("logs", { capped: true, size: 1048576 });
 
 
 
-## `Types of index` ##
-=======================
+## `Index` ##
+================
+Suppose the collection have millions of documenets the querying will be expensive this time we need indexing for the documents.
+If we are making a filed in a model `unique : true` mongodb will make this filed automatically indexing.
+
+1 (Ascending): Sorts and queries data in ascending order.
+-1 (Descending): Sorts and queries data in descending order.
+2d: Index for querying geospatial data in a flat, two-dimensional plane.
+2dsphere: Index for querying geospatial data on a spherical surface (Earth-like geometry).
+geoHaystack: Index for fast querying of geospatial data in small areas with a supporting field.
+hashed: Index for hashing field values to distribute data evenly across shards.
+text: Index for searching text fields with support for stemming, scoring, and language analysis.
+
+Example : If a collection is storing the user connection to other user data and suppose the application have 1000 users and 1000 users are send 100 request then the collection will have 100000 documents this time we need indexing for our databse.
+`Types of index`
+-----------------
+
 1. Single Field Index
  eg : db.demo.createIndex({name : 1})
+ eg: Schema.index({ field : 1}) // 1 for ascending and -1 for descending
 
 2. Compound Index - A compound index is created on multiple fields within a document. It is useful when queries involve multiple fields and can improve the efficiency of queries that filter or sort by a combination of these fields.
  eg : db.demo.createIndex({name : 1,age : 1})
+ eg: Schema.index({ field1 : 1, field2 : 1})
 
 3. Unique Index - ensures that the values for a specified field or a combination of fields are unique across all documents in a collection. 
  eg : db.collection.createIndex({ unique_field: 1 }, { unique: true });
