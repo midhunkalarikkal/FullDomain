@@ -1,23 +1,35 @@
 ## `Databse` ##
 ================
-This is a organised collection of data or a type of data store based on the use of a databse management system
+An organised collection of data or a type of data store based on the use of a databse management system
 
 ## `Databse management System` ##
 =================================
-Software that interacts eith end users, applications and the databse itself to capture and analyze the data.
+Software that interacts with end users, applications and the databse itself to capture and analyze the data.
 
 ## `Types of Databses` ##
 =========================
-Relational DB - mysql, postgresql
-No sql DB - mongo DB
-In memory DB - Redis   -> its like a cache, we can store apis that frequently used
-Distributed SQL DB - cockroach DB
-Time series DB - Influx DB
-OO DB - db40
-Graph DB - Neo4j
-Hierarchial DB - IBM IMS
-Network DB - IDMS
-Cloud DB - Amazon RDS
+- Relational DB - `mysql, postgresql`
+
+- No sql DB - `mongoDB, CouchDB`
+
+- In memory DB - `Redis`   -> its like a cache, we can store apis that frequently used
+
+- Distributed SQL DB - `cockroach DB`  -> A relational database that horizontally scales across multiple servers, 
+  maintaining ACID compliance and SQL querying
+
+- Time series DB - `Influx DB`   -> A database optimized for storing and querying time-stamped or time-series data
+
+- Object orientent DB - `db40`   -> Storing data as an object
+
+- Graph DB - `Neo4j`  -> A database designed to manage and query data with complex relationships, 
+  represented as nodes and edges
+
+- Hierarchial DB - `IBM IMS`   -> A database that organizes data in a tree-like structure 
+  with parent-child relationships.
+
+- Network DB - `IDMS`   -> A database that uses a graph-like structure with many-to-many relationships
+
+- Cloud DB - `Amazon RDS`   -> A database hosted on cloud platforms
 
 ## `Relational DB` ##
 =====================
@@ -34,7 +46,15 @@ If the db folows codds 12 rule [0 - 12] then the db becomes a relational db
 mysql [ and maxDB, mariaDB also ] is developed by micahel videnium
 postgresql is developed by michael stonebreaker
 
-## `Non SQL  DB` ##
+`mysql vs postgresql`
+-----------------------
+`MySQL` is primarily known for its speed and simplicity, making it a go-to choice for web applications and read-heavy workloads.
+
+`PostgreSQL` emphasizes advanced features and standards compliance, excelling in handling complex queries, extensibility, and support for diverse data types.
+
+extensibility means supports user defined functions, data types and operators and allows procedural language and advanced indexing and more.
+
+## `No SQL  DB` ##
 ===================
 - Data is stored in flexible, schema-less formats.
 - Allows dynamic, unstructured, or semi-structured data.
@@ -48,11 +68,11 @@ postgresql is developed by michael stonebreaker
 `Non sql db's`
 ---------------
 Mongo db
-Apache cloud db
-IBM db2
-Apache cassandra
-Neo4j
 Redis
+IBM db2
+Neo4j
+Apache cloud db
+Apache cassandra
 Amazon Dynamo DB
 Amazon Neptune
 
@@ -62,54 +82,74 @@ Amazon Neptune
 
 ## `MongoDB` ##
 ================
-MongoDB is a NoSQL database that stores data in a flexible, schema-free format. It is designed for high-performance, scalability, and ease of development, making it suitable for a wide range of applications. MongoDB uses collections and documents to organize data and is known for its ability to handle large volumes of data and unstructured information efficiently.
-
+- MongoDB is a NoSQL database that stores data in a flexible, schema-free format. 
+- It is designed for high-performance, scalability, and ease of development, making it suitable for a wide range of applications. 
+- MongoDB uses collections and documents to organize data.
+- MongoDB known for its ability to handle large volumes of data and unstructured information efficiently.
 - No need for joins
 - No need for data normalisation
 
-developed in times of 2009 by the company 10gen and the name comes from Humoungous means huge, very big. then the 10gen company later renamed to mongoDB inc.
+developed in times of 2009 by the company 10gen and the name comes from Humoungous means huge, very big. 
+Then the 10gen company later renamed to mongoDB inc.
 
 `Collection`
 ------------
-In MongoDB, a collection is a grouping of MongoDB documents. It is the equivalent of an RDBMS (Relational Database Management System) table in a relational database. Collections are used to store and organize documents, which are BSON (Binary JSON) format data structures.
+- In MongoDB, a collection is a grouping of MongoDB documents. 
+- It is the equivalent of an table in a relational database. 
+- Collections are used to store and organize documents, which are BSON (Binary JSON) format data structures.
 
 `document`
 ---------
-collection is similar to a table in a relational database. Each collection contains one or more documents, which are like rows in a table. However, unlike rows, documents in a collection can have different structures and fields, offering flexibility in data storage.
+- Each collection contains one or more documents, which are like rows in a table. 
+- However, unlike rows, documents in a collection can have different structures and fields, 
+  offering flexibility in data storage.
 
 1. Adding new document 
  insertOne()
  insertMany()
 
-2. Nested documents - Nested documents are documents that are embedded within the fields of another document.
+2. `Nested documents` - Nested documents are documents that are embedded within the fields of another document.
 
 `Advanges of Nested documents`
 -------------------------------
 1. Hierarchical Data representation
-
 2. Reduced number of collection
-
 3. Atomic updates
-
 4. Improved query performance
-
 5. Schema flexibility
-
-6. Denormalization
-
-7. Easier serialization and easier deserialization
+6. `Denormalization` -> process of intentionally adding redundancy to a database by 
+   storing related data together in a single place.
+7. Easier `serialization` and `deserialization`
+   `serialisation` -> Converting a programming language's object (like a JavaScript object) into a format that can be stored in MongoDB (like BSON, a binary JSON format).
 
 `View`
 -------
-That allows you to create virtual collections based on aggregation pipelines. Views allow you to define complex data transformations, filtering, and aggregation logic 
+- View allows you to create virtual collections based on aggregation pipelines. 
+- Views allow you to define complex data transformations, filtering, and aggregation logic .
 
+```json
+
+db.createView(
+  "electronicsView",       // Name of the view
+  "products",              // Source collection
+  [
+    { $match: { category: "Electronics" } }  // Query to filter data
+  ]
+);
+
+db.electronicsView.find();
+
+```
 `Query`
 -------
-a query is a request for specific information or data from a database. It is a way to retrieve, filter, and manipulate data stored in a database to meet specific criteria or requirements. Queries are used to communicate with a database management system (DBMS) to extract the desired data.
+- A query is a request for specific information or data from a database.
+- It is used to retrieve, filter, and manipulate data based on specific criteria.
+- Queries enable communication with a Database Management System (DBMS).
+- The purpose is to extract desired data efficiently.
 
 `fields`
 --------
-Each collection has multiple fields
+Each document has multiple fields
 
 `BSON (Binary JSON)`
 -----------------------
@@ -117,10 +157,9 @@ BSON, short for Binary JSON, is a binary-encoded serialization format used prima
 
 `MongoDB Shell`
 -----------------
-a command-line interface for MongoDB:
-Interactive command-line tool.
-Connects to MongoDB databases.
-Supports JavaScript-based queries and commands.
+- An interactive command-line interface for MongoDB
+- It connects to MongoDB databases.
+- Supports JavaScript-based queries and commands.
 
 `Advantages of MongoDB`
 ------------------------
@@ -151,6 +190,17 @@ Secondary key - In MongoDB, secondary keys are implemented using indexes.
 A schema, in the context of databases, is a blueprint or structure that defines the organization and format of data in a database. It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
 Any key that is not present in the schema and we are passsing it to updated, it will not make that field.
 We can add properties to a field to control the value of that field and this method is called `data sanitizing`.
+
+`Schema flexibility` in MongoDB means that you don't have to define a fixed structure (schema) for your data before storing it. Each document in a collection can have a different structure, with varying fields, types, and sizes.
+
+```js
+const userSchema = new mongoose.Schema({
+   name : {
+      type : String
+   }
+})
+module.export = mongoose.model("User",userSchema);
+```
 
 - We can also add `schema methods` that handles functions example creating jwt token etc...., we must use normal function there and use `this` keyword for referencing the schema.
 
@@ -627,7 +677,21 @@ $sort , $count , $limit , $skip
  eg : db.orders.aggregate( [ { $project : { _id : 0, name : "Prod_name", total_revenue : { $multiply : [ "price","quantity" ] } } } ] )
 
 4. $lookup - used for performing a left outer join between documents from the current collection and documents from another collection based on a common field.
- eg : db.sales.aggregate( [ { $lookup: { from: "products", localField: "productId", foreignField: "_id", as: "productInfo" } } ] )
+ syntax : 
+ ```json
+ {
+  $lookup: {
+    from: "otherCollection",        // The target collection to join
+    localField: "fieldInThisCollection",  // Field from the current collection
+    foreignField: "fieldInOtherCollection", // Field from the target collection
+    as: "outputArray"             // The name of the array to store the matched results
+  }
+}
+```
+ eg : 
+ ```json
+ db.sales.aggregate( [ { $lookup: { from: "products", localField: "productId", foreignField: "_id", as: "productInfo" } } ] )
+ ```
 
 5. $unwind - used to deconstruct arrays within documents, creating separate documents for each element in the array.
  eg : db.collectionName.aggregate( [ { $unwind : arrayfieldName } ] )
@@ -899,6 +963,10 @@ an index that only includes documents that contain the indexed field.
 5. One to Squillions - This is similar to one-to-many, but with a much larger number of related entities.
 6. Many to many - In a many-to-many relationship, multiple entities on one side can be related to multiple entities on the other side.
 
+`ref` with `populate`
+------------------------
+So ref field is used to reference a model to another model and then we use populate function with the query. Inside the query we can pass the in which field we are using the `ref` and the array with fields which we need to get from the referencing model.
+
 ## `Batch size` ##
 =====================
 The batchSize option specifies the maximum number of documents that should be returned in a single batch from the server to the client. A batch is essentially a chunk of query results.
@@ -966,15 +1034,3 @@ needed to fulfill the query.
 
 mongod - The database server.
 mongos - Sharding router.
-
-a
-## `Schema creation` ##
-========================
-```js
-const userSchema = new mongoose.Schema({
-   name : {
-      type : String
-   }
-})
-module.export = mongoose.model("User",userSchema);
-```
