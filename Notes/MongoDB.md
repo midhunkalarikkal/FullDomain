@@ -172,24 +172,36 @@ BSON, short for Binary JSON, is a binary-encoded serialization format used prima
 
 `Disadvantages of MongoDB`
 ---------------------------
-- Limited transaction support.
-- Not suitable for complex, multi-join queries.
-- Memory-intensive for write-heavy workloads.
-- No built-in support for ACID transactions.
-- Inconsistent query performance.
-- Potential data integrity issues with flexible schema.
+- Limited support for transactions across multiple documents.
+- Not ideal for complex queries involving multiple joins.
+- Can use a lot of memory for write-heavy operations.
+- ACID transactions are supported but limited compared to relational databases.
+- Query performance may vary based on data structure and indexing.
+- Flexible schema can lead to data inconsistency if not managed carefully.
 
-`Primary key vs Secondary key`
-------------------------------
+`Primary key`
+-------------
 Primary key - In MongoDB, each document (record) has a special field called "_id," which serves as a primary key by default.
 
+`Secondary key`
+-----------------
 Secondary key - In MongoDB, secondary keys are implemented using indexes.
+
+`__v verssion`
+----------------
+ __v field is a special property automatically added by Mongoose.
+ When multiple operations try to update the same document simultaneously, Mongoose uses the __v field to detect conflicting modifications.
+
+`Namespace`
+--------------
+a namespace refers to the combination of the database name and the collection name. It is a way to uniquely identify a specific collection within a database.
 
 `Schema`
 -----------
-A schema, in the context of databases, is a blueprint or structure that defines the organization and format of data in a database. It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
-Any key that is not present in the schema and we are passsing it to updated, it will not make that field.
-We can add properties to a field to control the value of that field and this method is called `data sanitizing`.
+- A schema is a blueprint or structure that defines the organization and format of data in a database. 
+- It specifies how data is organized, what types of data can be stored, and the relationships between different data   elements.
+- Any key that is not present in the schema and we are passsing it to update that document, it will not make that field.
+- We can add properties to a field to control the value of that field and this method is called `data sanitizing`.
 
 `Schema flexibility` in MongoDB means that you don't have to define a fixed structure (schema) for your data before storing it. Each document in a collection can have a different structure, with varying fields, types, and sizes.
 
@@ -204,30 +216,32 @@ module.export = mongoose.model("User",userSchema);
 
 - We can also add `schema methods` that handles functions example creating jwt token etc...., we must use normal function there and use `this` keyword for referencing the schema.
 
+```js
+userSchema.methods.generateJWT = async function() {
+    const user = this;
+    const token = await jwt.sign({_id : user._id},process.env.JWT_HASH,{ expiresIn : "1d" });
+    return token;
+};
+```
 - We can also add `Schema.pre` function to call this function on everytime while saving the model;
 ```js
-Schema.pre("save",function(){
+userSchema.pre("save",function(){
    const schmea = this; // Here this is pointing the Schema;
 })
 ```
+- Validate function in schema is used to velidate  specific value
+```js
+firstName : {
+        type : String,
+        validate(value) {
+            if(!validator.isAlpha(value)){
+                throw new Error("Enter only alphabets.");
+            }
+        }
+    },
+```
 
-`Schema types`
---------------
-String
-Number
-Boolean | Bool
-Array
-Buffer
-Date
-ObjectId | Oid
-Mixed
-UUID
-BigInt
 
-`__v verssion`
-----------------
- __v field is a special property automatically added by Mongoose.
- When multiple operations try to update the same document simultaneously, Mongoose uses the __v field to detect conflicting modifications.
 
 
 
@@ -251,6 +265,8 @@ BigInt
 7. Decimal128 - store decimal value with high precision
 8. regex - Mongodb supports querying using regular expression
 9. Bindata - Binary data can stored using this data type
+10. Array
+11. null
 
 `Date vs Timestamp`
 --------------------
@@ -266,7 +282,57 @@ The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON
 2. Maxkey - represents largest possible key in mongodb , used as a placeholder
 3. Timestamp
 4. ObjestID
-5. Undefined
+
+`javascript scope inside mongodb`
+---------------------------------
+1. With scope
+```js
+{
+   $code : "function() {return x+y}",
+   $scope : { x : 5, y : 10}
+}
+```
+2. Without scope
+```js
+{
+   $code : "function(){return Math.random()}"
+}
+```
+
+
+
+
+
+## `Regex` ##
+=============
+/^a/ - first a
+
+/a$/ - last a
+
+/a/ - a in that field
+
+/iam/ - string
+
+/A.a/ - starting A then any single character and end with a, The dot (.) is used in regular expressions to match any single character except newline characters.
+```js
+db.products.find({
+  name: /A.a/
+});
+```
+
+'[aeiou]{2,3}' - specifies that you are looking for 2 or 3 consecutive vowels in the value of "testProperty".
+```js
+db.words.find({
+  testProperty: /[aeiou]{2,3}/
+});
+```
+/^abcx*/ - starting with abc and is followed by zero or more x
+
+/^abcx+/ - starting with abc and is followed by one or more x
+
+/^abcx?/ - Find documents where 'fieldName' can be either 'abc' or 'abcx' here x is optional.
+
+/m/i - case insensitive
 
 
 
@@ -274,28 +340,60 @@ The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON
 
 ## `Cursor` ##
 ==============
-Cursor is a pointer to the result set  of a query , When you query a mongodb collection the database returns a cursor. The cursor allows for efficient retrieval of large result sets without consuming excessive memory. It also supports various methods and operations to navigate, filter, and manipulate the result set.
+Cursor is a pointer to the result set  of a query , When we query a mongodb collection the database returns a cursor. The cursor allows for efficient retrieval of large result sets without consuming excessive memory. Cursors are lazy-loaded, meaning the data is fetched as we iterate over it, not all at once.
 
 `Cursor methods`
 -----------------
 1. toArray() - This method returns an array that contains all the documents from a cursor
-eg : db.demo.find({"isAdmin" : false}).toArray()
+eg : db.cm.find().toArray()
 
-2. forEach() - This method has a function as its parameter
-eg :  db.demo.find().forEach( function(myDoc) { print( "user: " + myDoc.name ); } );
+2. forEach() -  This method takes a function as a parameter and applies it to each document returned by the cursor.
+eg :  db.cm.find().forEach(doc => print(doc.name))
 
-3. addOption(flag) -to change the behaviour of the query using a flag 
-eg : db.demo.find().addOption(DBquery.Option.tailable)
+3. limit(): Limits the number of documents returned by the query.
+eg : db.cm.find().limit(5);
 
-4. close() - Instruct the server to close a cursor and free associated server resources
-eg : db.demo.find().close()
+4. close() - This method instruct the server to close a cursor and free associated server resources
+eg : db.cm.find().close()
 
 5. isclosed() - return true if it is closed
 
-6. map() - This method will return an array according to the function of map
-eg : db.demo.find().map(function(p) { return p.name};)
+6. map() - This method allows you to apply a function to each document in the cursor and return an array of results.
+eg : db.cm.find().map(doc => doc.name)
 
-extras - collation() , comment() , hint() , hasNext() , isExhausted() , limit() , max() , min() , next()
+7. skip(): used to skip a specified number of documents in the result set.
+eg : db.cm.find().skip()
+
+8. max(): Limits the results to documents with field values less than or equal to the specified value.
+eg : db.cm.find().max({ age: 30 })
+
+9. min(): Limits the results to documents with field values greater than or equal to the specified value.
+eg : db.cm.find().min({ age: 30 })
+
+10. next(): Returns the next document in the cursor.
+eg : var cursor = db.cm.find();
+cursor.next()
+
+11. hasNext(): Returns true if there are more documents to be returned from the cursor, otherwise false.
+eg : db.cm.find().hasNext()
+
+12. isExhausted(): Returns true if the cursor has returned all documents, otherwise false.
+eg : db.cm.find().isExhausted()
+
+13. collation(): Specifies the collation (language-specific rules for string comparison) for the query.
+eg : db.cm.find().collation({ locale: "en", strength: 2 })
+
+14. comment(): Adds a comment to the query for easier debugging or logging.
+eg : db.cm.find().comment("Fetching all users")
+
+15. hint(): Provides an index to use for the query.
+eg : db.cm.find().hint({ age: 1 })
+
+16. rewind(): used to reset a cursor to the beginning. After calling this method, we can iterate over the cursor from the start again.
+eg : db.cm.find().rewind()
+
+17. addOption(flag) - This method allows us to change the behavior of the query using a flag. Flags are set using DBQuery.Option and can modify the query's behavior.
+eg : db.cm.find().addOption(DBQuery.Option.tailable)
 
 
 
@@ -303,200 +401,248 @@ extras - collation() , comment() , hint() , hasNext() , isExhausted() , limit() 
 
 ## `Collection Methods` ##
 ==========================
+Create databse - use db;
+
 Create Collection - db.createCollection("collection_name")
 
 show collection - show collections
 
 remane collection - db.oldcollectionname.renamecollection("newcollection")
 
-1. aggregate() - An aggregation pipeline consists of one or more stages that process documents. An aggregation pipeline supports operations on sharded collections
-eg : db.sales.aggregate([
-   // Stage 1: Calculate total revenue for each product
-   {
-      $project: {
-         product: 1,
-         totalRevenue: { $multiply: ["$quantity", "$price"] }
-      }
-   },
+`countDocuments()` - return the number of documents
+```js
+db.collectionName.coutDocuments();
+```
 
-   // Stage 2: Group by product and calculate the average price
-   {
-      $group: {
-         _id: "$product",
-         totalRevenue: { $sum: "$totalRevenue" },
-         averagePrice: { $avg: "$price" }
-      }
-   }
+`datasize()` - return the size of the collection
+```js
+db.collectionName.dataSize();
+```
+
+`explain()` - Returns information on the query execution of various methods.
+```js
+db.orders.explain();
+```
+
+`drop()` - Removes the specified collection from the database.
+```js
+db.collectionName.drop();
+```
+
+`distinct()` - Returns an array of documents that have distinct values for the specified field.
+```js
+db.collectionName.distinct("name");
+```
+
+`find()` - Performs a query on a collection or a view and returns a cursor object.
+```js
+db.collectionName.find();   // returns all documents
+db.collectionName.find({ name : "Midhun" });  // return all documents with name "Midhun"
+db.collectionName.find({}, { name: 1, email: 1, _id: 0 });   // projection to display only the name and email fields
+db.collectionName.find({ "address.city": "San Antonio" });   // find documents with nested field
+```
+
+`findOne()` - return one document that satisfies the query
+```js
+db.collectionName.findOne({ _id: 20 });   // find only one document with id = 20
+```
+
+`findOneAndUpdate()` - It provides a way to find one and automatically update and return the document
+```js
+db.collectionName.findOneAndUpdate(
+  { email: "tina@example.com" },
+  { $set: { "preferences.theme": "light" } },
+  { returnDocument: "after" }
+);  // This is find a single document and update its nested field theme and return the updated docuement
+
+```
+
+`findOneAndReplace` - to replace an entire docuement
+```js
+db.collectionName.findOneAndReplace(
+  { _id: 21 },
+  {
+    name: "Uma",
+    age: 30,
+    isActive: true,
+    email: "uma_new@example.com",
+    roles: ["admin"],
+    address: { city: "Austin", zip: "73301" },
+    preferences: { newsletter: false, theme: "light" }
+  },
+  { returnDocument: "after" }
+);
+```
+
+`findOneAndDelete` - to delete a single docuement
+```js
+db.collectioName.findOneAndDelete({ _id : 20 });
+```
+
+`insertOne()` - Used to insert a single document
+```js
+db.collectionName.insertOne({
+  _id: 22,
+  name: "John",
+});
+```
+
+`insertMany()` - used to insert multiple document it must be inside an array
+```js
+db.collectionName.insertMany([
+  {
+    _id: 23,
+    name: "Sophia",
+  },
+  {
+    _id: 24,
+    name: "Liam",
+  }
 ]);
+```
 
-2. countDocuments - return the number of documents
+`bulkwrite()` - Performs multiple write operations (insert, update, delete) in a single request.
+```js
+db.collectionName.bulkWrite([
+  {
+    insertOne: {
+      document: {
+        _id: 25,
+        name: "Emma",
+      }
+    }
+  },
+  {
+    updateOne: {
+      filter: { _id: 22 },
+      update: { $set: { age: 29 } }
+    }
+  },
+  {
+    deleteOne: {
+      filter: { _id: 23 }
+    }
+  }
+]);
+```
 
-3. bulwrite() - This method is used to perform multiple write operation in a single call
-eg : db.collection.bulkWrite([
-   { insertOne: { document: { _id: 1, name: "Alice", age: 25 } } },
-   { updateOne: { filter: { name: "Bob" }, update: { $set: { age: 30 } } } } ])
+`updateOne()` - Modifies a single document in a collection.
+```js
+db.collectionName.updateOne(
+  { _id: 21 },  // Filter
+  { 
+    $set: { email: "uma_new@example.com", age: 30 }  // Update
+  }
+);
+```
+`updateMany()` - Modifies multiple documents in a collection.
+```js
+db.collectionName.updateMany(
+  { isActive: true },  // Filter
+  { 
+    $set: { status: "active" }  // Update
+  }
+);
+```
+`replaceOne()` - eplaces a single document that matches the filter. Does not return the replaced document.
+```js
+db.collectionName.replaceOne(
+  { _id: 2 },
+  {
+    name: "Bob Updated",
+    age: 35,
+    isActive: true,
+    email: "bob.updated@example.com",
+    roles: ["user"],
+    address: { city: "San Diego", zip: "92101" },
+    preferences: { newsletter: true, theme: "dark" }
+  }
+);
+```
 
-4. createIndex() - Create an index for one or more field it improves querying
-eg : db.products.createIndex({ productName: 1 });
+`deleteOne()` - Used to delete a document in the collection
+```js
+db.collectionName.deleteOne({ name: "Bob" });
+```
+`deleteMany()` - used to delete multiple document in a collection
+```js
+db.collectionName.deleteMany({ age: { $gte: 25 } });
+```
 
-5. createIndexes - It allow us to create multiple indexes on a single operation
-eg : db.products.createIndexes([
-   { key: { productName: 1 } },
-   { key: { category: 1 } } ]);
+`createIndex()` - Create an index for one or more field it improves querying
+```js
+db.collectionName.createIndex({ email : 1});
+```
+`createIndexes()` - It allow us to create multiple indexes on a single operation
+```js
+db.collectionName.createIndexes({email : 1, age : -1});
+```
+`dropIndex()` - Removes a specified index on a collection.
+```js
+db.collectionName.dropIndex({email : 1});
+```
+`dropIndexes()` - Removes all indexes on a collection.
+```js
+db.collectionName.dropIndexes();
+```
+`getIndexes()` - List all the indexes on the collection
+```js
+db.collectionName.getIndexes();
+```
 
-6. datasize() - return the size of the collection
+`mapReduce()` - The mapReduce() method is used for processing data and generating aggregated results using a map and reduce function.
+```js
+// Map function to emit key-value pairs (name, 1)
+var mapFunction = function() {
+  emit(this.name, 1);
+};
 
-7. deleteOne - Used to delete a document in the collection
-eg : db.students.deleteOne({ name: "Bob" });
+// Reduce function to sum the values for each name
+var reduceFunction = function(key, values) {
+  return Array.sum(values);
+};
 
-8. deleteMany - used to delete multiple document in a collection
-eg : db.students.deleteMany({ age: { $gte: 25 } });
+// Running mapReduce to count occurrences of each name in the "users" collection
+db.collectionName.mapReduce(
+  mapFunction,
+  reduceFunction,
+  { out: "name_count" }
+);
+```
 
-9. drop() - Removes the specified collection from the database.
-
-10. dropIndex() - Removes a specified index on a collection.
-
-11. dropIndexes() - Removes all indexes on a collection.
-
-12. explain() - Returns information on the query execution of various methods.
-
-13. find() - Performs a query on a collection or a view and returns a cursor object. And it returns a cursor.
-
-14. findAndModify() - It provides a way to automatically update and return the document
-eg : db.collection.findAndModify({ query: <query>, sort: <sort>, update: <update>, options: <options> });
-	extras - findOneAndReplace(), findOneAndUpdate() , findOneAndDelete()
-
-15. findOne() - return one document that satisfies the query
-
-16. distinct() - Returns an array of documents that have distinct values for the specified field.
-
-17. getIndexes() - return the array of documents that describes the existing indexes on a collection
-
-18. insertOne() - Used to insert a single document
-
-19. insertMany() - used to insert multiple document it must be inside an array
-
-20. mapReduce() - used for processing and analyzing large amounts of data in a collection.
-
-21. updateOne() - Modifies a single document in a collection.
-eg :  db.users.updateOne( { name: "Alice" }, { $set: { age: 26 } } );
-
-22. updateMany() - Modifies multiple documents in a collection.
-eg : db.users.updateOne( { status: "Active" }, { $set: { age: 30 } } );
+`remove()` - Deleting document from a collection that satisfiying the condition
+```js
+db.collectionName.remove( { _id : 2 } );  // remove the document which satisfies the condition
+db.collectionName.remove({}); // remove all documents
+```
 
 
 
 
 
-## `Methods to insert in MongoDB` ##
+## `Methods to insert in MongoDB` ##   
 ======================================
 1. insertOne
 
 2. insertMany
 
 3. bulkWrite
-eg : const bulkInsertOperations = [
+```js
+const bulkInsertOperations = [
    { insertOne: { document: { orderNumber: "124", customerName: "Jane Smith" } } },
    { insertOne: { document: { orderNumber: "125", customerName: "Tom Johnson" } } }
 ];
-db.orders.bulkWrite(bulkInsertOperations);
+db.collectionName.bulkWrite(bulkInsertOperations);
+```
 
 4. aggregate
-eg : db.product.aggregate( [
+```js
+db.collectionName.aggregate( [
 	{ $match : { price : {$gte : 15} } },
 	{$out : "highvalueProduct"}
 ])
- If the condition is satisfied, then it will return a new collection with name "highvalueProduct"
-
-
-
-
-
-## `Finding or Querying` ##
-=============================
-1. Find()
-eg : db.collection.find(query, projection);
-
-query - An optional query condition or filter that specifies which documents to retrieve.
-projection - An optional parameter that specifies which fields should be included or excluded in the result.
-
-2. findOne({ filter }) -  It returns the first document that satisfies the filter criteria. if we didnt pass any filter, it will return any arbitary document.
-
-3. finding in nested array
- eg : db.employees.find({ename : "Rahul"},{ename : 1,"address.city" : 1})
-
- 3a.field.field
- eg : db.collection.find({ field.filed : "vlaue" })
-
- 3b. $match - The $match stage is used to filter the documents based on specific conditions.
-	eg: db.collection.aggregate( [ { $match : { date : { $gte : "value" , $lte : "value" } } } ] )
-
- 3c. exact match
- eg : db.books.find({ title: "The Great Gatsby" }); - normal matching 
-      db.books.find({ title: { $eq: "The Great Gatsby" }, author: { $eq: "F. Scott Fitzgerald" } });
-
- 3d. multiple match - including multiple match stages in aggregate function
- eg : db.products.aggregate([{ $match: { price: { $gt: 10, $lt: 20 } } },{ $match: { quantity: { $gt: 100 } ]);
-
-
-
-
-
-## `Array` ##
-===============
-1. with specific order
- eg : db.books.find({ "genres": { $in: ["Fantasy", "Adventure", "Mystery", "Science Fiction"] } });
-
-2. without specific order
- eg : db.books.find({ "genres": { $all: ["Fantasy", "Adventure", "Mystery", "Science Fiction"] } });
-
-3. query by array index
- eg : db.std.find({scores.1 : {$eq : 80 , $exists : true}})
-
-4. query by array size
- eg : db.std.find({ scores : {$size : 5}})
-
-
-
-
-
-## `Projection` ##
-=====================
-1. Include and exclude fields
- eg : db.std.find({ "scores.1": { $exists: true } });
-
-2. Projection in aggregation
- eg : db.collection.aggregate([ { $match: { "field": "value" } }, { $project: { "field1": 1, "field2": 1, "_id": 0 } } ])
-
-
-
-
-
-## `Filtering` ##
-==================
-1. find( filter )
- eg : db.collectionName.find({ "fieldName": "value" })
-
-2. find( filter , fields to get)
- eg : db.collection.find( {field : value }, { field1 : 1, field2 : 1, field3 :  0})
-
-
-
-
-
-## `Method chaining` ##
-========================
-1. count() - The count() method in MongoDB is used to count the number of documents that match a specific query criteria within a collection.
- eg : db.collection.count({ field : "value"})
-
-2. limit() - The limit() method in MongoDB is used to restrict the number of documents returned by a query to a specified maximum number.
- eg : db.collection.find().limit(num)
-
-3. sort(1 or -1) - the sort() method is used to sort the documents in the result set of a query. 1 for ascending and -1 for descending order
- eg : db.collection.find().sort({ name : 1})
-
-4. skip() - the skip() method is used to skip the specified number of dicument in a result
- eg : db.collection.find().skip(num)
+ // If the condition is satisfied, then it will return a new collection with name "highvalueProduct"
+ ```
 
 
 
@@ -505,114 +651,200 @@ projection - An optional parameter that specifies which fields should be include
 ## `Operators` ##
 ====================
 
-1. $gt - greater than , $gte - greater than or equal
+`$gt` - greater than , `$gte` - greater than or equal
+```js
+db.collectionName.find( { age : { $gt : 20 } } );
+db.collectionName.find( { age : { $gte : 20 } } );
+```
 
-2. $lt - less than , $lte - less than or equal
+`$lt` - less than , ~$lte~ - less than or equal
+```js
+db.collectionName.find( { agr : { $lt : 20 } } );
+db.collectionName.find( { agr : { $lte : 20 } } );
+```
 
-3. $or - used to query for documents that match at least one of several conditions.
- eg : db.books.find( { $or: [ { genre: "Mystery" },{ author: "Agatha Christie" },{ year: { $gte: 2000 } } ] } )
+`$set` - Using with updateOne and updateMany to update a field value.
+ ```js
+ db.collectionName.updateOne( { _id : 2 },{ $set : { age : 20 } } );
+ ```
 
-4. $and - used to query for documents that match all of several conditions.
- eg : db.collection.find( { $and : [{ field1 : "value 1"},{field2 : "value 2"}] } )
+`$unset` - Using with updateOne and updateMany to remove a value of a field.
+```js
+db.collectionName.updateOne( { _id : 2 },{ $unset : { age : "" }});
+```
 
-5. $not - used to negate a condition, effectively returning documents that do not match the specified condition.
- eg : db.collection.find( { field1 : {$not : {$eq : "value"} } } )
+`$not` - used to negate a condition, effectively returning documents that do not match the specified condition.
+```js
+db.collectionName.find( { age : { $not : { $eq : 30 } } } );
+```
 
-6. $in - used to querys for a documents where a specific field value  matches any value  in a provided array
- eg : db.collection.find( { filed : {$in : [ v1,v2,v3 ] } } )
+`$or` - used to query for documents that match at least one of several conditions.
+```js
+db.collectionName.find( { $or : [ { isActive : true } , { roles : 'admin' } ] } )
+```
 
-7. $nin -  operator is the negation of $in. It is used to query for documents where a specific field's value does not match any value in a provided array.
- eg : db.collection.find( { filed : {$nin : [ v1,v2,v3 ] }} )
+`$and` - used to query for documents that match all of several conditions.
+```js
+db.collectionName.find( { $and : [ { isAdmin : true } , { roles : 'admin' } ] } );
+```
 
-8. $all - used to query for documents where a specific field contains an array that includes all of the specified values.
- eg : db.std.find({scores : {$all : [value,value,value] } } )
+`$inc 1` - used to increment the field by 1 used with update, updateOne, updateMany
+ ```js
+ db.collectionName.updateOne( { _id : 2 }, { $inc : { age : 1 } } );
+ ```
 
-9. $set - Using with updateOne, updateMany and update.
- eg : db.demo.updateOne( { name : "Midhun" },{ $set : { age : 22 } } )
+`$inc -1` - used to decrement the field by 1 used with update, updateOne, updateMany
+```js
+db.collectionName.updateOne( { _id : 2}, { $inc : { age : -1 } } );
+```
 
-10. $unset - used to remove a specific field from a document. Using with updateOne, updateMany and update.
- eg : db.demo.updateOne( { name : "Midhun" },{ $unset : { age : "" } } )
+`$eq` - used to compare values and retrieve documents where a specified field is equal to a particular value.
+```js
+db.collectionName.find( { age : { $eq : 30 } } );
+```
 
-11. $elemMatch - used to check whether the field and value is in the object array
- eg : db.person.find( { array : { $elemMatch : { field : value , field : value } } } )
+`$ne` - used to compare values and retrieve documents where a specified field is not equal to a particular value.
+```js
+db.collectionName.find( { _id :2 },{ age : { $ne : 30 } } );
+```
 
-12. $slice - used to limit the number of elements returned in an array field.
- eg : db.person.find({},{ addresses : { $slice : 1 } } )
+`$rename` - used to rename a field within a document.
+ ```js
+ db.collectionName.updateMany( {}, { $rename : { "email" : "new eamil" } } );
+ ```
 
-13. $size - used to query documents where an array field has a specific number of elements
- eg : db.person.find( { addresses : { $size : 2 } } )
+`$upsert` - The upsert operation can be useful when you want to modify a document if it exists, or create a new one if it doesn't
+```js
+db.collectionName.updateOne( { _id : 26 },{ $set : { name : "Midhun" } },{ upsert : true } );
+```
 
-14. $inc 1 - used to increment the field by 1 used with update, updateOne, updateMany
- eg : db.demo.updateOne({name : "Midhun"}, {$inc : {age : 1}})
+`$exists` - used to check for the existence of a field within a document. If the field exist the query will return the document
+```js
+db.collectionName.find({ anem : { $exists : true } } );
+```
 
-15. $inc -1 - used to decrement the field by 1 used with update, updateOne, updateMany
- eg : db.demo.updateOne({name : "Midhun"}, {$inc : {age : -1}})
+`$currentDate` - used to set the value of a field to the current date and time or to a timestamp.
+```js
+db.collectionName.updateOne(
+  { _id: 1 },
+  { $currentDate: { "lastLogin": true } }
+);
+```
 
-16. $push - used to add an element to an array field, a specified value to the end of the array within a document.
- eg : db.std.updateOne( { name : "Alice" },{ $push : { scores : 100} } )
+`$expr` - allows the use of aggregation expressions within a query
+```js
+db.collectionName.find({
+  $expr: { $gt: ["$age", "$score"] }
+});
+```
 
-17. $pull - used to remove elements from an array field that match a specified condition.
- eg : db.std.updateOne( { name : "Alice" },{ $pull : { scores : 100 } } )
+`$text` - used for performing full-text search in MongoDB. To use $text, you need to create a text index.
+```js
+db.collectionName.createIndex( { "name": "text" } ) ;
+db.collectionName.find( { $text : { $search : "mongodb"}})
+```
 
-18. $each - used with the push operator to insert the values of an array to the existing array.
- eg : db.std.updateOne( { name : "Alice" }, { $push : { scores : { $each : [100,200] } } } )
-
-19. $pull , $in - the in operator can use with the pull operator to remove multiple elemnts from the array at a time
- eg : db.std.updateOne( { name : "Alice" }, { $pull : { scores : { $in : [100,200] } } } ) 
-
-20. $eq - used to compare values and retrieve documents where a specified field is equal to a particular value.
- eg : db.std.find( { name : { $eq : " Alice" } } 
-
-21. $ne - used to compare values and retrieve documents where a specified field is not equal to a particular value.
- eg : db.std.find( { name : { $ne : "Alice"} } )
-
-22. $currentDate - used to set the value of a field to the current date and time or to a timestamp.
- eg : db.std.updateOne({name : "Alice"},{$currentDate : {date : true } } ) - this will add a new date field
-
-23. $exists - used to check for the existence of a field within a document. If the field exist the query will return the document
- eg : db.std.find( {name : { $exists : true } } )   
-
-24. $rename - used to rename a field within a document. It allows you to change the name of a field while keeping its value intact.
- eg : db.collectionName.update( {},{ $rename : { "oldfiledName" : "newfieldName"} },{multi : true} )
-
-25. $expr - allows you to perform complex expressions and comparisons within queries. It is often used to compare fields within a document or to perform arithmetic operations.
- eg : db.prod.find( { $expr : { $lt : [ "$discount",{ $multiply : [ "$price",0.8 ] } ] } } )
- eg : db.prod.find( { $expr : { $ne : [ "$discount","$price" ] } } )
-
-26. $upsert - The upsert operation can be useful when you want to modify a document if it exists, or create a new one if it doesn't
- eg : db.myCollection.update( { _id: 123 },{ $set: { name: "John" } },{ upsert: true } )
-
-27. $text - used for performing full-text search in MongoDB. To use $text, you need to create a text index on one or more fields in your collection.
- eg : db.articles.createIndex({ content: "text" });
-      db.articles.find({ $text: { $search: "mongodb" } })
-
-28. $where - allows you to run JavaScript expressions within your queries.
- eg : db.myCollection.find({
+`$where` - used to run JavaScript expressions within our queries.
+```js
+ db.myCollection.find({
   $where: function() {
     return this.field1 + this.field2 === 10;
   }
 });
+```
 
-29. $pop - used to remove first or last element from an array
- eg : db.collection.update( { _id: documentId },{ $pop: { arrayField: 1 } } ) //to remove last element
-      db.collection.update( { _id: documentId },{ $pop: { arrayField: -1 } } ) // To remove the first element
+```````````Array operators```````````
+
+`$in` - used to query for a documents where a specific field value matches any value  in a provided array
+```js
+db.collectionName.find({
+  roles: { $in: ['admin', 'user'] }
+});
+```
+
+`$nin` -  operator is the negation of $in. It is used to query for documents where a specific field's value does not match any value in a provided array.
+```js
+db.collectionName.find( { age : { $nin : [1,2,3,4] } } );
+```
+
+`$all` - used to query for documents where a specific field contains an array that includes all of the specified values.
+```js
+db.collectionName.find( { hobbies : { $all : ['reading','cycling','coding'] } } );
+```
+
+`$elemMatch` - used to match documents containing an array field, where at least one object in the array satisfies all the specified query conditions.
+```js
+db.collectionName.find({
+  roles: {
+    $elemMatch: { level: { $gt: 3 } }
+  }
+});
+```
+
+`$slice` - used to limit the number of elements returned from an array field.
+ ```js
+ db.collectionName.find( { _id : 2},{ roles : { $slice : 3 } } ); // this will return the first 3 values of roles array
+ db.collectionName.find( { _id : 2},{ roles : { $slice : -2 } } ); // this will return the last 2 values of roles array
+ db.collectionName.find( { _id : 2},{ roles : { $slice : {offset,limit} } } ); // this will return the limited number of values from the offset of roles array
+ ```
+
+`$size` - used to match documents based on the number of elements in an array.
+```js
+db.collectionName.find( { roles : { $size : 2 } } );  // return the document where the roles array have 2 elements
+```
+
+`$push` - used to add a new element to an array field.
+```js
+db.collectionName.updateOne( { _id : 2},{ $push : { roles : "trainer" } } );
+```
+
+`$pull` - used to remove a specific element from an array.
+```js
+db.coolectionName.updateOne( { _id : 2 },{ $pull : { roles : "admin" } } );
+```
+
+`$each` with `$push` - used to push multiple values to an array with in an array.
+ ```js
+ db.collectionName.updateOne( { _id :2 },{ $push : { roles : { $each : [1,2,3] } } } );
+ ```
+
+`$pull` with `$in` - pull with in is used to to remove multiple values from an array at a time.
+ ```js
+ db.collectionName.updateOne( { _id :2 },{ $pull : { roles : { $in : [1,2,3] } } } );
+ ```
+
+`$pop` - used to remove first or last element from an array.
+```js
+db.collectionName.updateOne( { _id :2 },{ $pop : { roles : 1 } } );  // remove the first element of the array
+db.collectionName.updateOne( { _id :2 },{ $pop : { roles : -1 } } ); // remove the last element of the array
+```
 
 
 
 
 
-## `$or vs $in vs $and` ##
-==========================
-$or - performs a logical OR operation on an array of two or more expressions, and selects documents that satisfy at least one of the expressions.
- eg : db.products.find({ $or: [{ price: { $lt: 10 } }, { quantity: { $gt: 20 } }] })
+## `Method chaining` ##
+========================
+`count()` - The count() method in MongoDB is used to count the number of documents that match a specific query criteria within a collection.
+```js
+db.collectionName.find({}).count(); // returns the number of documents
+```
 
-$in - used to select documents where the value of a field matches any value in a specified array.
- eg : db.products.find({ color: { $in: ["red", "blue"] } })
+`limit()` - The limit() method in MongoDB is used to restrict the number of documents returned by a query.
+```js
+db.collectionName.find({}).limit(); // to restrict the number of returning docuements.
+```
 
-$and - used to combine multiple expressions into a single query, and selects documents that satisfy all the specified conditions.
- eg : db.products.find({
-  $and: [{ category: "electronics" }, { price: { $lt: 100 } }]
-})
+`sort({fieldName : 1 or -1})` - the sort() method is used to sort the documents in the result set of a query. 1 for ascending and -1 for descending order.
+```js
+db.collection.find().sort({ name : 1});
+```
+
+`skip()` - the skip() method is used to skip the specified number of dicument in a result.
+```js
+db.collection.find().skip(num);
+```
+
 
 
 
@@ -620,6 +852,7 @@ $and - used to combine multiple expressions into a single query, and selects doc
 
 ## `Unary Operators` ##
 =======================
+Unary operators are operators that are applied to a single operand or value
 1. $type 
 2. $lt 
 3. $gt 
@@ -631,27 +864,18 @@ $and - used to combine multiple expressions into a single query, and selects doc
 
 
 
-## `Replace vs Update` ##
-==========================
-Replace - replace entire document
-Update - Updating specific field
-
-## `Drop vs Remove` ##
-========================
-Drop - deleting the entire collection
- eg : db.coolectionName.drop()
-
-Remove - deleting document from a collection that satisfiying the condition
- eg : db.collectionName.remove({ field :  "value" })
-
-
-
-
-
 ## `Aggregation` ##
 ====================
+Aggregation operations process multiple documents and return computed results
+
+An aggregation pipeline consists of one or more stages that process documents
+
+db.collectionName.aggregate(pipeline,options)a
+pipeline = Array of operations
+
 1. How does it work ? 
-Aggregation in MongoDB is a framework for processing and transforming data within a collection. It allows you to perform various operations on documents, such as filtering, grouping, sorting, and computing new values. Aggregation is a powerful tool for generating reports, extracting insights, and preparing data for analysis.
+Aggregation in MongoDB is a framework for processing and transforming data within a collection. It allows us to perform various operations on documents, such as filtering, grouping, sorting, and computing new values. 
+Aggregation is a powerful tool for generating reports, extracting insights, and preparing data for analysis.
  
 `Advantages` 
 -------------
@@ -665,54 +889,116 @@ g. Pipelining
 
 `Aggregation stages`
 --------------------
-$sort , $count , $limit , $skip
 
-1. $match - used to filter documents based on specified criteria. It's similar to the find method.
- eg : db.orders.aggregate( [ { $match : { price : { $gte : 10, $lte :16 } } } ] )
-
-2. $out - used to save the result of an aggregation pipeline to a new collection. 
- eg : db.orders.aggregate( [ { $match : { price : { $gte : 10 , $lte : 16 } } },{ $out : "newcollection" } ] )
-
-3. $project - allows you to reshape documents by selecting specific fields, renaming them, or adding computed fields.
- eg : db.orders.aggregate( [ { $project : { _id : 0, name : "Prod_name", total_revenue : { $multiply : [ "price","quantity" ] } } } ] )
-
-4. $lookup - used for performing a left outer join between documents from the current collection and documents from another collection based on a common field.
- syntax : 
- ```json
- {
-  $lookup: {
-    from: "otherCollection",        // The target collection to join
-    localField: "fieldInThisCollection",  // Field from the current collection
-    foreignField: "fieldInOtherCollection", // Field from the target collection
-    as: "outputArray"             // The name of the array to store the matched results
-  }
-}
+`$match` - used to filter documents based on specified criteria. It's similar to the find method.
+```js
+db.collectionName.aggregate([{ $match: { age: { $gte: 25 } } }]);
 ```
- eg : 
- ```json
- db.sales.aggregate( [ { $lookup: { from: "products", localField: "productId", foreignField: "_id", as: "productInfo" } } ] )
+
+`$project` - used to reshape documents by selecting specific fields, renaming them, or adding computed fields.
+```js
+ db.collectionName.aggregate( [ { $project : { _id : 0, name : "Prod_name", total_revenue : { $multiply : [ "price","quantity" ] } } } ] );
+
+ db.collectionName.aggregate( [ { $project : { name : 1, age : 1, _id : 0 } } ] );
+```
+
+`$group` - Groups documents by a specified identifier
+```js
+db.collectionName.aggregate( [ { $group : { _id : "isActive"}}]);
+```
+
+`$sort` - sort the docuements
+```js
+db.collectionName.aggregate( [ { $sort : { age : -1 } } ] );
+```
+
+`$limit` - Restricts the number of documents passing through the pipeline.
+```js
+db.collectionName.aggregate( [ { $sort : { age : -1 } },{ $limit : 1} ] );
+```
+
+`$skip` - Skips a specified number of documents and passes the remaining ones.
+```js
+db.collection.aggregate( [ { $sort : {age : -1 } } , { $skip : 5 } ] );
+```
+
+`$count` - Count the documents that returns the stages.
+```js
+db.collection.aggregate( [ { $sort : {age : -1 } } , { $skip : 5 } ] );
+```
+
+`$unwind` - used to deconstruct arrays within documents, creating separate documents for each element in the array.
+```js
+ db.collectionName.aggregate( [ { $unwind : "$arrayfieldName" } ] )
  ```
 
-5. $unwind - used to deconstruct arrays within documents, creating separate documents for each element in the array.
- eg : db.collectionName.aggregate( [ { $unwind : arrayfieldName } ] )
+ `$lookup` - used for performing a left outer join between documents from the current collection and documents from another collection based on a common field.
+ 
+ ```js
+ db.collectionName.aggregation([{
+  $lookup: {
+    from: "targetedCollectionName",        // The target collection to join
+    localField: "fieldInThisCollection",  // Field from the current collection
+    foreignField: "fieldInTheTargetedCollection", // Field from the target collection
+    as: "outputArray"             // The name of the array to store the matched results
+  }
+}]);
+```
 
-6. $group
- 6a. Group by a field
-	group documents by a specific field and perform aggregations within each group
-	eg :  db.sales.aggregate( [ { $group: { _id: "$product",totalRevenue: { $sum: { $multiply: [ "$price","$quantity" ] } } } } ] )
+`$out` - used to save the result of an aggregation pipeline to a new collection.
+```js
+ db.collectionName.aggregate( [ { $match : { price : { $gte : 10 , $lte : 16 } } },{ $out : "newcollection" } ] )
+``` 
 
- 6b. Grouping by multiple field
-	group by multiple fields to create more granular groups.
-	eg : db.sales.aggregate( [ { $group: { _id: { product: "$product", year: { $year: "$date" } }, totalRevenue: { $sum: { $multiply: ["$price", "$quantity"] } } } } ] )
+`$facet` -  Processes multiple aggregation pipelines in parallel within a single stage.
+```js
+db.collectionName.aggregate([
+  {
+    $facet: {
+      activeUsers: [{ $match: { isActive: true } }, { $count: "count" }],
+      averageAge: [{ $group: { _id: null, avgAge: { $avg: "$age" } } }]
+    }
+  }
+]);
+```
 
- 6c. Grouping by nested field
-	eg : db.customers.aggregate( [ { $group: { _id: "$address.city", totalCustomers: { $sum: 1 } } } ] )
+`$addFields` - Adds new fields to the input documents or modifies existing ones.
+```js
+db.collectionName.aggregate([{ $addFields: { fullName: { $concat: ["$firstName", " ", "$lastName"] } } }]);
+```
 
-`Aggregation example`
-----------------------
-db.collectionName.aggregate(pipeline,options)a
+`$replaceRoot` - Replaces the input document with the specified document.
+```js
+db.collectionName.aggregate([{ $replaceRoot: { newRoot: "$address" } }]);
+```
 
-pipeline = Array of operations
+`$redact` - Modifies the documents' structure by removing or keeping parts of the document based on conditions.
+```js
+db.collectionName.aggregate([{ $redact: { $cond: { if: { $eq: ["$isActive", true] }, then: "$$KEEP", else: "$$PRUNE" } } }]);
+```
+
+`$bucket` - Categorizes documents into groups, or "buckets", based on specified ranges.
+
+`$bucketAuto` - Automatically creates "buckets" based on the distribution of data.
+```js
+db.collectionName.aggregate([{ $bucketAuto: { groupBy: "$age", buckets: 4 } }]);
+```
+
+`$collStats` - Returns statistics about a collection, such as storage size, document count, and index usage.
+```js
+db.collectionName.aggregate([{ $collStats: { storageStats: {} } }]);
+```
+
+`$geoNear` - Returns documents that are near a specified geospatial point, sorted by distance.
+
+`$sample` - Randomly selects a specified number of documents from the input.
+```js
+db.users.aggregate([{ $sample: { size: 3 } }]);
+```
+
+`$merge` - Writes the result of the aggregation pipeline to a collection, merging the data with an existing collection.
+
+
 
 
 
@@ -720,19 +1006,19 @@ pipeline = Array of operations
 
 ## `Accumulators Operators` ##
 ===============================
-1. $sum
+`$sum`
  eg : db.orders.aggregate([ { $group: { _id: { name: "$name", size: "$size" }, totalRevenue: { $sum: { $multiply: ["$price", "$quantity"] } } } } ] )
 
-2. $max
+`$max`
  eg : db.orders.aggregate([{$group: {_id: {name: "$name",size: "$size"},maxPrice: { $max: "$price" }}}])
 
-3. $avg
+`$avg`
  eg : db.orders.aggregate([{$group: {_id: {name: "$name",size: "$size"},avgQuantity: { $avg: "$quantity" }}}])
 
-4. $min
+`$min`
  eg : db.orders.aggregate([{$group: {_id: {name: "$name",size: "$size"},minDate: { $min: "$date" }}}])
 
-5. addToset - used to add values to an array field without duplicates.
+`$addToset` - used to add values to an array field without duplicates.
  eg : db.users.aggregate([{$unwind: "$tags" },{$group: {_id: null,uniqueTags: { $addToSet: "$tags" } }}])
 
 
@@ -741,17 +1027,23 @@ pipeline = Array of operations
 
 ## `Sharding` ##
 =================
-Sharding is a method for distributing data across multiple servers or nodes to ensure horizontal scalability and improved performance.
+Sharding is a method for distributing data across multiple servers to ensure horizontal scalability and improved performance.
 
-Shard Key: The shard key is a field or a combination of fields that determines how data is distributed across different shards.MongoDB uses the shard key to route documents to the appropriate shard
+`Shard Key`: The shard key is a field or a combination of fields that determines how data is distributed across different shards in the sharded cluster. MongoDB uses the shard key to route documents to the appropriate shard
 
-Shard Servers: These are individual MongoDB instances or clusters that store a subset of the data. Each shard contains a portion of the entire dataset, and collectively they hold the entire dataset of the MongoDB deployment.
+`Shard Servers`: These are individual MongoDB instances or replica sets, collectively referred to as shards. Each shard contains a portion of the entire dataset, and collectively they hold the complete dataset of the MongoDB deployment.
 
-Config Servers: Config servers store metadata about the sharded cluster, including the distribution of data across shards and the shard key ranges.
+`Config Servers`: Config servers store metadata about the sharded cluster, including the distribution of data across shards and the shard key ranges.
 
-Query Router (mongos): The query router is an interface between the application and the sharded cluster. It directs queries to the appropriate shard and aggregates the results.
+`Query Router (mongos)`: The query router is an interface between the application and the sharded cluster. It directs queries to the appropriate shard and aggregates the results.
 
-Chunks: Data is divided into smaller segments called "chunks." Each chunk is a range of shard key values and is stored on a specific shard.
+`sharded cluster`: A group of shard servers, along with config servers and at least one query router (mongos), is collectively referred to as a sharded cluster in MongoDB.
+
+`Chunks`: Data is divided into smaller segments called "chunks." Each chunk represents a contiguous range of shard key values and is stored on a specific shard. MongoDB automatically manages and balances chunks across shards to ensure even data distribution and load balancing.
+
+`shard hotspots`
+---------------------
+A shard hotspot occurs when a large proportion of read or write operations are directed to a single shard, causing that shard to become a bottleneck.
 
 `Advantages of sharding`
 -------------------------
@@ -764,54 +1056,24 @@ Efficient use of hardware
 `Types of sharding`
 ------------------
 1. Hashed Sharding:
-
 In Hashed Sharding, MongoDB distributes data across shards by applying a hash function to a specific field (the shard key). The hash function converts the shard key value into a hash value, which is used to determine the target shard.
 
 2. Ranged Sharding:
-
 Ranged Sharding involves distributing data based on specific ranges of shard key values. Each shard is responsible for a specific range of values, and data is distributed according to these ranges.
 
 3. Zone Sharding:
-
 Zone Sharding is used when you want to control the placement of data based on specific criteria such as data center locations, geographic regions, or other attributes.
 
 `Shard key types `
 -----------------
-1. `shard hotspots`
----------------------
-A shard hotspot occurs when a large proportion of read or write operations are directed to a single shard, causing that shard to become a bottleneck.
-
-2. `normal shard key`
+1. `normal shard key`
 ----------------------
-A normal shard key is chosen based on the application's access patterns, queries, and distribution of data. It is designed to evenly distribute the data across the shards to avoid hotspots. 
+A normal shard key is a field (or combination of fields) selected based on how the application queries and accesses data. It ensures that data is distributed evenly across shards to prevent overloading any single shard.
 
-3. `hashed shard key`
+2. `hashed shard key`
 ----------------------
 A hashed shard key involves applying a hash function to a specific field (the shard key) to determine the target shard. 
 
-
-
-
-
-## `Vertical scaling` ##
-=========================
-Vertical Scaling: Vertical scaling involves increasing the capacity of a single server by adding more resources, such as CPU, RAM, or storage. It's also known as "scaling up."
-
-## `Horizontal scaling` ##
-===========================
-Horizontal Scaling: Horizontal scaling, on the other hand, involves adding more servers to a cluster to distribute the workload. MongoDB's sharding is a form of horizontal scaling.
-
-## `Zones` ##
-==============
-Zones in MongoDB are used for data partitioning and routing control. You can create zones to control which data is stored on specific shards within a sharded cluster.
-
-## `Auto balancing` ##
-========================
-The auto-balancer is a feature in MongoDB that automatically redistributes data across the shards in a sharded cluster to maintain even data distribution.
-
-## `Gridfs` ##
-================
-GridFS (Grid File System) is a specification for storing and retrieving large binary objects, such as audio, video, images, and other binary data, in MongoDB.  which has a 16 MB size limit for individual documents. GridFS allows you to store and manage files larger than this size limit by dividing them into smaller chunks.
 
 
 
@@ -822,27 +1084,19 @@ In MongoDB, a cluster is a group of servers or nodes that work together to store
 
 `Types of clusters`
 -------------------
-`Replica set`
+1. Replica set
 --------------
 A replica set is the basic building block of MongoDB's high availability architecture. It consists of multiple MongoDB instances (nodes) that replicate data to ensure fault tolerance and data redundancy.
 
-`Sharded cluster`
+   `Arbiter` -> An arbiter is a lightweight member in a replica set that does not store data but participates in replica set elections
+
+2. Sharded cluster
 -------------------
 A sharded cluster is designed to horizontally scale MongoDB by distributing data across multiple shards
 
-`Arbiter`
-----------
-An arbiter is a lightweight member in a replica set that does not store data but participates in replica set elections
-
-`Embedding`
--------------
-Embedding involves nesting one or more documents or objects within another document.
-
-`Linking (Normalization)`
---------------------------
-Linking involves storing references or foreign keys to related documents in separate collections rather than embedding them directly.
-
-
+3. Standalone cluster
+-----------------------
+A single MongoDB instance running without replication or sharding. It does not involve any additional nodes like replicas or arbiters.
 
 
 
@@ -856,7 +1110,7 @@ Linking involves storing references or foreign keys to related documents in sepa
 ---------------------
 Write Operations: When data is written to MongoDB, it is first written to an in-memory data structure known as the "write-ahead log" (WAL) or "journal."
 
-Asynchronous Disk Write: Periodically, MongoDB flushes the in-memory write-ahead log to disk in a sequential and efficient manner. This process is asynchronous, which means that MongoDB can continue processing new write operations while the journal is being written to disk.
+Asynchronous Disk Write: Periodically, MongoDB flushes the in-memory write-ahead log to disk in a sequential and efficient manner.
 
 Commit to Data Files: Once the data is safely stored in the journal, MongoDB writes it to the permanent data files on disk.
 
@@ -872,15 +1126,15 @@ Properties are - Consistency , Availability , Partiton Tolerance
 
 `Consistency`
 --------------
-All the clients see the same view of data  even right after  update or delete
+All the clients see the same view of data even right after update or delete
 
 `Availability`
 ---------------
-All clients can find a  replica of data even in case of partial node failures
+All clients can find a replica of data even in case of partial node failures
 
 `Partition tolerance`
 ----------------------
-It is a guarentee the system continue to operation even if there is a  network issue in the data center and some of the computers  are unreachable
+It is a guarentee the system continue to operate even if there is a  network issue in the data center and some of the computers are unreachable
 
 `Capped collection`
 --------------------
@@ -906,9 +1160,9 @@ hashed: Index for hashing field values to distribute data evenly across shards.
 text: Index for searching text fields with support for stemming, scoring, and language analysis.
 
 Example : If a collection is storing the user connection to other user data and suppose the application have 1000 users and 1000 users are send 100 request then the collection will have 100000 documents this time we need indexing for our databse.
+
 `Types of index`
 -----------------
-
 1. Single Field Index
  eg : db.demo.createIndex({name : 1})
  eg: Schema.index({ field : 1}) // 1 for ascending and -1 for descending
@@ -945,7 +1199,7 @@ Functionality: They enable MongoDB to execute queries involving spatial data, su
 10. TTL Indexes:-
 Purpose: TTL indexes, or Time-To-Live indexes, automatically remove documents from a collection after a specified amount of time.
 
-Functionality: They are useful for managing data that has a temporal aspect, like logs or sessions that should be automatically purged after a certain duration.
+Functionality: They are useful for managing data that has a temporal aspect, like logs or sessions that should be automatically removed after a certain duration.
 
 11. Sparse Index:-
 an index that only includes documents that contain the indexed field. 
@@ -965,7 +1219,43 @@ an index that only includes documents that contain the indexed field.
 
 `ref` with `populate`
 ------------------------
-So ref field is used to reference a model to another model and then we use populate function with the query. Inside the query we can pass the in which field we are using the `ref` and the array with fields which we need to get from the referencing model.
+So ref field is used to reference a model to another model and then we use populate function with the query. Inside the query we can pass in which field we are using the `ref` and the array with fields which we need to get from the referencing model.
+
+`Embedding`
+-------------
+Embedding involves nesting one or more documents or objects within another document.
+
+`Linking (Normalization)`
+--------------------------
+Linking involves storing references or foreign keys to related documents in separate collections rather than embedding them directly.
+
+
+
+
+
+## `Vertical scaling` ##
+=========================
+Vertical Scaling: involves increasing the capacity of a single server by adding more resources, such as CPU, RAM, or storage. It's also known as "scaling up."
+
+## `Horizontal scaling` ##
+===========================
+Horizontal Scaling: involves adding more servers to a cluster to distribute the workload. MongoDB's sharding is a form of horizontal scaling.
+
+## `Zones` ##
+==============
+Zones in MongoDB are used for data partitioning and routing control. We can create zones to control which data is stored on specific shards within a sharded cluster.
+
+## `Auto balancing` ##
+========================
+The auto-balancer is a feature in MongoDB that automatically redistributes data across the shards in a sharded cluster to maintain even data distribution.
+
+## `Gridfs` ##
+================
+GridFS (Grid File System) is a specification for storing and retrieving large binary objects, such as audio, video, images, and other binary data, in MongoDB. which has a 16 MB size limit for individual documents. GridFS allows us to store and manage files larger than this size limit by dividing them into smaller chunks.
+
+## `NTFS` ##
+==============
+New Technology File System, is a file system developed by Microsoft. It is the default file system for Windows operating systems
 
 ## `Batch size` ##
 =====================
@@ -989,43 +1279,14 @@ Data distribution
 Journaling
 Backup and restore
 
+## `Scatter gather` ##
+=========================
+Scatter-gather is a query process where MongoDB sends a query to all shards and then gathers the results to return a complete response. This happens when the query cannot use the shard key to target a specific shard.
 
-
-
-
-## `Regex` ##
-=============
-/a$/ - last a
-
-/^a/ - first a
-
-/a/ - a in that field
-
-/iam/ - string
-
-/A.a/ - starting A then any single character and end with a
-
-'[aeiou]{2,3}' - specifies that you are looking for 2 or 3 consecutive vowels in the value of "testProperty".
-
-/^abcx*/ - starting with abc and is followed by zero or more x
-
-/^abcx+/ - starting with abc and is followed by one or more x
-
-/^abcx?/ - Find documents where 'fieldName' can be either 'abc' or 'ab'
-
-/m/i - case insensitive
-
-
-NTFS -  New Technology File System, is a file system developed by Microsoft. It is the default file system for Windows operating systems
-
-Namespace - a namespace refers to the combination of the database name and the collection name. It is a way to uniquely identify a specific collection within a database. For example, if you have a database named "mydatabase" and a collection named "mycollection," the namespace would be "mydatabase.mycollection."
-
-Covered query - a query where all the fields in the query are covered by an index, and the index itself provides all the data 
+## `Covered query` ##
+=======================
+A query where all the fields in the query are covered by an index, and the index itself provides all the data 
 needed to fulfill the query. 
-
-
-
-
 
 ## `Connection mongoDB to using nodejs` ##
 ===========================================

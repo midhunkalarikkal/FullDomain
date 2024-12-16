@@ -251,7 +251,7 @@ module.exports = {variable, function}
 
 
 ## `CommonJs module (cjs)` common js module system ##
-==============================
+==========================================================
 Older way, synchronous and the code is running in  non strict mode
 in non strict mode we can declare variables without var, let or const
 while importing a module it is not necessary to specifyt eh .js extension for the importing file in common js module
@@ -322,7 +322,7 @@ import defaultFunc from './module.js';
 
 
 
-## `Coomon file for importinga and exporting` ##
+## `Coomon file for importing and exporting` ##
 ====================================================
 If we have a folder and inside it have multiple modules and each modules have mutiple exports, we can use an `index.js` file for importing all the modules things in to index.js file and then export all the things from the index.js file
 
@@ -649,12 +649,17 @@ URL: /user/123 → Not matched.
 
 `req.params`
 --------------
+Path parameters are segments of a URL path that are used to pass data to the server as part of the URL's path. They are typically used to identify a specific resource or endpoint.
+
 Extracts route parameters defined by :placeholder in the URL path.
+
+  https://example.com/users/123/profile
+
 ## Example
 -------------
 ```js
 app.get('/user/:userId/:name', (req, res) => {
-    console.log(req.params); 
+  console.log(req.params); 
     // Output: { userId: '123', name: 'john' } for `/user/123/john`
 });
 ```
@@ -662,7 +667,12 @@ Use Case: For mandatory dynamic parts of the URL.
 
 `req.query`
 -------------
+Query parameters are appended to the end of a URL after a question mark (?) and are used to send additional data to the server. They consist of key-value pairs separated by ampersands (&). Query parameters are typically used for filtering, sorting, or specifying additional options.
+
 Extracts query string parameters from the URL, which appear after ?.
+
+  https://example.com/search?q=javascript&page=1&sort=asc
+  
 ## Example
 ```js
 app.get('/search', (req, res) => {
@@ -777,49 +787,50 @@ app.use((req, res, next) => {
 });
 ```
 
-Types of middlewares
-=====================
-Application level middleware
-----------------------------
+`Types of middlewares`
+------------------------
+1. Application level middleware
+----------------------------------
 that are bound to the entire application and are executed on every incoming request
 Example :- Body parsing middleware
 
-Router level middleware
------------------------
+2. Router level middleware
+-----------------------------
  bound to a specific router instance using router.use().
 
-Error handling middleware
--------------------------
+3. Error handling middleware
+-------------------------------
 Middleware functions with four parameters (err, req, res, next) are considered error-handling middleware.
 
-Third party middleware
-----------------------
+3. Third party middleware
+----------------------------
 Developers often use third-party middleware to add additional functionality to their applications.
 Example :- morgan , helmet
 
-Built in middleware
--------------------
+4. Built in middleware
+-------------------------
 Express, a popular Node.js web framework, comes with built-in middleware functions that perform common tasks, such as serving static files 
 
 express.static
 express.JSON
 express.urlencoded
 
-express.json()
----------------
+5. express.json()
+---------------------
 - This middleware is used to parse incoming requests with JSON payloads. 
 - Threquest suppose contains a JSON body it is not readable by the server so the express middleware `express.json` is used to parse JSON body and convert it in to a javascript object.
 
 express.json() is for JSON data
 
-express.urlencoded()
---------------------
+6. express.urlencoded()
+--------------------------
 This middleware is used to parse incoming requests with URL-encoded payloads, typically used for parsing form data.
 
 express.urlencoded() is for URL-encoded form data.
 
-Dynamic routing
----------------
+
+## `Dynamic routing` ##
+==========================
 dynamic routing in Node.js allows you to handle different kinds of requests by capturing and using values from the URL. 
 
 app.get('/profile/:username', (req, res) => {
@@ -828,18 +839,6 @@ app.get('/profile/:username', (req, res) => {
 });
 
 
-
-Query Parameters
-----------------
-Query parameters are appended to the end of a URL after a question mark (?) and are used to send additional data to the server. They consist of key-value pairs separated by ampersands (&). Query parameters are typically used for filtering, sorting, or specifying additional options.
-
-https://example.com/search?q=javascript&page=1&sort=asc
-
-Path Parameters (Params)
-------------------------
-Path parameters are segments of a URL path that are used to pass data to the server as part of the URL's path. They are typically used to identify a specific resource or endpoint.
-
-https://example.com/users/123/profile
 
 
 
@@ -914,16 +913,6 @@ application
 cdn
 object
 database
-
-npm
----
-npm is the default package manager for Node.js.
-It is used for installing, managing, and publishing Node.js packages (libraries and tools).
-It allows you to declare project dependencies in a package.json file and then install those dependencies using the npm install command.
-
-npx
----
-npx is a tool that comes with npm to execute Node.js binaries that are not globally installed. used to execute Node.js packages directly from the command line.
 
 Modules
 -------
