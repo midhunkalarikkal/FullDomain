@@ -878,3 +878,32 @@ Canvas has several methods for drawing paths, boxes, circles, text, and adding i
 <canvas id="myCanvas" width="200" height="100"></canvas>
 
 use the script tag and javascript to draw in the canvas
+
+
+## `Prefetch` ##
+===================
+Purpose: Prefetch is used to download resources in advance that the browser anticipates might be needed in the future, such as assets for future navigation or upcoming pages.
+Behavior: Resources fetched with prefetch have low priority and are downloaded when the browser is idle.
+Use Case: Helpful for resources on pages the user is likely to visit next.
+
+<!-- Prefetching an image for a future page -->
+<link rel="prefetch" href="next-page-image.jpg" as="image">
+
+<!-- Prefetching a script for a future page -->
+<link rel="prefetch" href="next-page-script.js" as="script">
+
+
+## `Preload` ##
+===================
+Purpose: Preload is used to load resources with high priority that are needed early in the page load process. It informs the browser to start fetching critical resources as soon as possible.
+Behavior: Resources fetched with preload are given high priority.
+Use Case: Helpful for resources like scripts, styles, fonts, or images that are required to render the current page quickly.
+
+<!-- Preload a critical CSS file -->
+<link rel="preload" href="styles.css" as="style">
+
+<!-- Preload a font -->
+<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload a script -->
+<link rel="preload" href="app.js" as="script">

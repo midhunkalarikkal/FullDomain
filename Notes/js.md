@@ -1021,9 +1021,9 @@ let students = [
 
 4. `Find`
 ==========
- used to retrieve the first element in an array that satisfies a specified condition.
+used to retrieve the first element in an array that satisfies a specified condition.
 ```js
-let result = array.find(function(element, index, array) {
+let result = array.find(function(currentValue, currentIndex, array) {
   
 });
 ```
@@ -1070,7 +1070,7 @@ console.log(num); // 11
 
 5. `Sort`
 ==========
-used to sort the elements of an array. By default, it sorts the elements as strings in lexicographic (dictionary) order. However, you can provide a compare function to determine the sorting order based on numeric or custom criteria.
+used to sort the elements of an array. By default, it sorts the elements as strings in ascending order. However, you can provide a compare function to determine the sorting order based on numeric or custom criteria.
 ```js
 let newArray = array.sort([compareFunction]);
 ```
@@ -1138,45 +1138,54 @@ console.log(newarr)
 
 6. `forEach`
 ==============
-allows you to iterate over the elements of an array and perform a specified action for each element.
-
+allows us to iterate over the elements of an array and perform a specified action for each element.
+```js
 array.forEach(function(element, index, array) {
   
 });
+```
 
 `Logging array elements`
 ------------------------
-let arr = ["black","red","yello","orange"]
+```js
+let arr = ["black","red","yello","orange"];
 arr.forEach((element,index,arr)=>{
-    console.log(element)
-})
+    console.log(element);
+});
+```
 
 `Modifying the array elements`
 -------------------------------
-let arr = [1,2,3,4,5]
+```js
+let arr = [1,2,3,4,5];
 arr.forEach((element,index,arr)=>{
-    arr[index] = element*2
+    return arr[index] = element*2;
 })
-console.log(arr)
+console.log(arr);
+```
 
 `Summing array elements`
 -------------------------
+```js
 let arr = [1,2,3,4,5]
 var sum = 0
 arr.forEach((element,index,arr)=>{
     sum += element
 })
 console.log(sum)
+```
 
 7. `Push`
 ============
-used to add one or more elements to the end of an array. It modifies the original array and returns the new length of the array.
+The push method used to add one or more elements to the end of an array. It modifies the original array and returns the new length of the array.
 
 `Adding element to an array`
 -----------------------------
-let arr = ["midhun","Jithin","goutham","thejus"]
-arr.push("Lamborghini","porsche","jaguar","mclaren")
-console.log(arr)
+```js
+let arr = ["midhun","Jithin","goutham","thejus"];
+arr.push("Lamborghini","porsche","jaguar","mclaren");
+console.log(arr);
+```
 
 `Appending a new array`
 ------------------------
@@ -1376,6 +1385,96 @@ let arr = []
 arr.splice(0,0,1,2,3,4,5)
 console.log(arr)  // [1,2,3,4,5]
 
+12. `for...in loop`
+=======================
+The for...in loop iterates over the enumerable properties (keys) of an object or array.
+```js
+let obj = { name: "Alice", age: 25, grade: "A" };
+for (let key in obj) {
+    console.log(key, obj[key]); // Logs keys and values
+}
+```
+
+13. `for...of loop`
+=======================
+The for...of loop iterates over the values of iterable objects like arrays, strings, or maps.
+```js
+let arr = [10, 20, 30];
+for (let value of arr) {
+    console.log(value); // Outputs 10, 20, 30
+}
+```
+
+14. `reduceRight()`
+======================
+The reduceRight() method applies a function to reduce an array from right-to-left to a single value.
+```js
+let arr = [1, 2, 3, 4];
+let sum = arr.reduceRight((acc, curr) => acc + curr, 0);
+console.log(sum); // Outputs 10
+```
+
+15. `some()`
+===============
+The some() method checks if at least one element in the array passes the given condition.
+```js
+let arr = [1, 3, 5, 8];
+let hasEven = arr.some((value) => value % 2 === 0);
+console.log(hasEven); // Outputs true
+```
+
+16. `every()`
+===============
+The every() method checks if all elements in the array pass the given condition.
+```js
+let arr = [2, 4, 6];
+let allEven = arr.every((value) => value % 2 === 0);
+console.log(allEven); // Outputs true
+```
+
+17. `findIndex()`
+=====================
+The findIndex() method returns the index of the first element that satisfies the condition.
+```js
+let arr = [10, 20, 30, 40];
+let index = arr.findIndex((value) => value > 25);
+console.log(index); // Outputs 2
+```
+
+18. `entries()`
+===================
+The entries() method returns an iterator for key-value pairs of the array.
+```js
+let arr = ['a', 'b', 'c'];
+for (let [index, value] of arr.entries()) {
+    console.log(index, value);
+}
+// Outputs:
+// 0 'a'
+// 1 'b'
+// 2 'c'
+```
+
+19. `keys()`
+================
+The keys() method returns an iterator for the keys (indexes) of an array.
+```js
+let arr = ['x', 'y', 'z'];
+for (let key of arr.keys()) {
+    console.log(key); // Outputs 0, 1, 2
+}
+```
+
+20. `values()`
+==================
+The values() method returns an iterator for the values of an array.
+```js
+let arr = [100, 200, 300];
+for (let value of arr.values()) {
+    console.log(value); // Outputs 100, 200, 300
+}
+```
+
 
 
 
@@ -1387,70 +1486,124 @@ console.log(arr)  // [1,2,3,4,5]
 ==============================
 Returns an array of a given object's own property names.
 
-let ob = {name : "Midhun", age : 23}
-let arr = Object.keys(ob)
-console.log(arr)  // [name,age]
+```js
+let ob = {name : "Midhun", age : 23};
+let arr = Object.keys(ob);
+console.log(arr);  // [name,age]
+```
 
 2. `Object.values(ObjectName)`
-=================================
+==================================
 Returns an array of a given object's own property values.
 
-let ob = {name : "midhun",age : 23}
-let arr = Object.values(ob)
-console.log(arr)  // [midhun,23]
+```js
+let ob = {name : "midhun",age : 23};
+let arr = Object.values(ob);
+console.log(arr);  // [midhun,23]
+```
 
 3. `Object.entries(ObjectName)`
-=================================
+==================================
 Returns an array of a given object's own enumerable property [key, value] pairs.
 
-let ob = {name : "midhun", age : 23}
-let arr = Object.entries(ob)
-console.log(arr)  // [[name : "midhun"],[age : 23]]
+```js
+let ob = {name : "midhun", age : 23};
+let arr = Object.entries(ob);
+console.log(arr);  // [[name : "midhun"],[age : 23]]
+```
 
 4. `Object.assign(ObjectName)`
-===============================
+=================================
 Copies the values of all enumerable own properties from one or more source objects to a target object.
 
+```js
 Object.assign(target, source1, source2, ...);
 
-let ob1 = {name : "Midhun", age : 23}
-let ob2 = {age : 24, state : "kerala"}
-let merge = Object.assign({},ob1,ob2)
-console.log(merge)  // {name : "midhun",age : 24, state : "kerala"}
+let ob1 = {name : "Midhun", age : 23};
+let ob2 = {age : 24, state : "kerala"};
+let merge = Object.assign({},ob1,ob2);
+console.log(merge);  // {name : "midhun",age : 24, state : "kerala"}
+```
 
 5. `Object.freeze(ObjectName)`
-===============================
+==============================
 This method makes an object immutable by preventing any changes to the object's properties and preventing the addition or removal of properties.
 
 It deeply freezes an object, meaning that not only the object itself but also its nested objects (if any) become immutable.
 
-let ob = {name : "midhun", age : 23}
-Object.freeze(ob)
+```js
+let ob = {name : "midhun", age : 23};
+Object.freeze(ob);
+```
 
 6. `Object.seal(ObjectName)`
-====================================
+==============================
 This method makes an object's properties non-extensible (i.e., prevents the addition of new properties), but allows the values of existing properties to be changed.
 
 It does not affect the mutability of the values themselves, so you can still modify the contents of object properties or nested objects.
 
-let ob = {name : "midhun",age : 23}
-Object.seal(ob)
+```js
+let ob = {name : "midhun",age : 23};
+Object.seal(ob);
+```
 
 7. `Object.hasOwnProperty(key)`
 =================================
 Returns a boolean indicating whether the object has the specified property as its own property (not inherited).
 
-let ob = {name : "midhun",age : 23}
-const hasname = ob.hasOwnProperty("name")
-console.log(hasname) // true
+```js
+let ob = {name : "midhun",age : 23};
+const hasname = ob.hasOwnProperty("name");
+console.log(hasname); // true
+```
 
 8. `Object.fromEntries(arrayName)`
 ====================================
 Transforms a list of key-value pairs into an object.
 
-let arr = [["name" , "midhun"],["age" , 23]]
-let ob = Object.fromEntries(arr)
-console.log(ob)  // {name : "midhun",age : 23}
+```js
+let arr = [["name" , "midhun"],["age" , 23]];
+let ob = Object.fromEntries(arr);
+console.log(ob);  // {name : "midhun",age : 23}
+```
+
+
+
+
+
+## `Shallow copy` ##
+========================
+A shallow copy is a copy of an object where only the top-level structure of the original object is duplicated, while the nested objects and their references are shared between the original and the copied object.
+
+using Object.assign
+
+const originalObject = { a: 1, b: { c: 2 } };
+const shallowCopy = Object.assign({}, originalObject);
+
+using spread operator
+
+const originalObject = { a: 1, b: { c: 2 } };
+const shallowCopy = { ...originalObject };
+
+modification to the nested value in the shallow copy will affect in the original objhect
+
+
+
+
+
+## `Deep copy` ##
+====================
+A deep copy creates a completely independent copy of the original object along with all of its nested objects. Changes made to the nested objects within the copied structure do not affect the original object, and vice versa.
+
+const originalObject = { a: 1, b: { c: 2 } };
+const deepCopy = JSON.parse(JSON.stringify(originalObject));
+
+`structuredClone`
+-------------------
+The structuredClone function is a built-in method introduced in modern JavaScript to create a deep copy of a value. It is a reliable way to duplicate complex data structures, including objects, arrays, and other supported types, without sharing references.
+
+
+
 
 
 ## `Callback` ##
@@ -1469,6 +1622,7 @@ Readbility
 
 
 
+
 ## `Callback hell` ##
 ========================
 Callback Hell refers to the situation where multiple nested callbacks are used in asynchronous JavaScript code, leading to code that is difficult to read, understand, and maintain.
@@ -1477,490 +1631,9 @@ Callback Hell refers to the situation where multiple nested callbacks are used i
 ----------------------------
 Use promises and async await
 
-## `Promises` ##
-====================
-A Promise is an object representing the eventual completion or failure of an asynchronous operation and its resulting value. It allows you to write more readable and manageable asynchronous code compared to traditional callback-based approaches.
 
-Pending: The initial state; the promise is neither fulfilled nor rejected.
-Fulfilled: The operation completed successfully, and the promise has a resulting value.
-Rejected: The operation failed, and the promise has a reason for the failure.
 
-`Creating a promise`
----------------------
-const promise = new Promise((resolve,reject)=>{
-	if(operation-Successfull){
-		resolve(result)
-	}else{
-		reject(error)
-	}
-})
 
-promise.then(		// pending
-  result => {		// Fullfilled	
-    console.log(result);
-  },
-  error => {		// Rejected
-    console.error(error);
-  }
-);
-
-`Advantages of Promises`
--------------------------
-
-Readability: Promises provide a more readable and structured way to handle asynchronous code compared to callbacks.
-
-Error Handling: Promises offer better error handling through the use of the catch method.
-
-Chaining: Promises support chaining, making it easy to compose sequences of asynchronous operations.
-
-State Management: Promises clearly define states (pending, fulfilled, rejected), making it easier to reason about asynchronous code.
-
-`Promise chaining`
--------------------
-Promise chaining is a technique in JavaScript where you chain multiple asynchronous operations using promises to make the code more readable and maintainable. This is achieved by returning a new promise from each then or catch block, allowing you to chain subsequent asynchronous operations or handle errors in a sequential and organized manner.
-
-async1("Initial data")
-  .then(result1 => async2(result1))
-  .then(result2 => async3(result2))
-  .then(result3 => {
-    console.log("Final result = ", result3);
-  })
-  .catch(error => {
-    console.log("Error occurred:", error);
-  });
-
-`Promise.all`
---------------
-Promise.all is a method in JavaScript that takes an iterable (e.g., an array) of promises as input and returns a single promise. This new promise fulfills with an array of results when all the input promises have been fulfilled, or it rejects with the reason of the first promise that rejects.
-
-`Promise.allSettled`
----------------------
-Promise.allSettled is another method in JavaScript for handling multiple promises. It is similar to Promise.all, but it doesn't short-circuit when one of the promises is rejected. Instead, it waits for all promises to settle (either fulfill or reject) and then returns an array of objects, each representing the outcome of the corresponding promise.
-
-result
-Async 1 completed promise1
-Async 2 completed promise2
-Async 3 completed promise3
-All promises fullfilled =   [
-  { status: 'fulfilled', value: 'Result from async 1' },
-  { status: 'rejected', reason: 'Error in async 2' },
-  { status: 'fulfilled', value: 'Result from async 3' }
-]
-
-`Promise.race`
-----------------
- that takes an iterable of promises and returns a new promise. This new promise settles (fulfills or rejects) as soon as one of the promises in the iterable settles, regardless of whether the other promises have settled.
-
- Uses are -: Timeout , race conditions , Load balancing , Parallel request , Real time updates
-
-`Then`
---------
-The then method is used to handle the fulfillment of a promise. It takes two callback functions: one for the fulfillment (onFulfilled) and another for the rejection (onRejected).
-
-`Finally`
------------
-The finally method is used to specify a function to be executed when the promise is settled (either fulfilled or rejected). This function will be executed regardless of the promise's outcome.
-
-`Catch`
----------
-The catch method is a shorthand for handling only the rejection of a promise. It is equivalent to using then(undefined, onRejected).
-
-
-
-
-## `Async Await` ##
-=======================
-async and await are keywords in JavaScript that simplify the handling of asynchronous code, making it more readable and easier to work with. The async keyword is used to define an asynchronous function, and the await keyword is used to wait for a promise to settle inside that function.
-
-
-
-
-## `Spread and Rest` ##
-==========================
-The spread (...) and rest (...) operators are both introduced in JavaScript to work with arrays and objects in a concise and powerful way.
-
-## `DOM` ##
-==============
-The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a document as a tree of objects, where each object corresponds to a part of the document, such as elements, attributes, and text.
-Components are :- Nodes , methods , events
-
-## `BOM` ##
-===========
-The Browser Object Model (BOM) is a set of objects provided by the browser, separate from the document, that allows interaction with the browser itself and the user's environment.
-Components are :- Window , navigator , location , history
-
-## `Call stack` ##
-=====================
-It keeps track of the execution context (or frames) of functions in a program. When a function is called, a new frame is added to the top of the call stack, and when a function is completed, its frame is removed from the stack.
-
-`Function Invocation`
-----------------------
-When a function is called, a new frame is created and pushed onto the top of the call stack.
-This frame contains information about the function, such as its parameters and local variables.
-
-`Execution`
--------------
-The JavaScript engine executes the code within the function frame by frame, from top to bottom.
-
-`Function Completion`
-----------------------
-When the function completes, its frame is popped off the stack, and the control returns to the previous frame.
-
-## `Call back queue` ##
-========================
-Asynchronous operations, such as setTimeout, AJAX requests, and event listeners, are handled outside the call stack.
-When an asynchronous operation completes, its callback function is placed in the callback queue.
-The callback queue stores callback functions that are ready to be executed.
-Callback functions are moved from the callback queue to the call stack only when the call stack is empty.
-
-
-
-
-## `Event Loop` ##
-===================
-The event loop is a crucial part of JavaScript's concurrency model, responsible for handling asynchronous operations and ensuring that the program remains responsive to user interactions
-
-The event loop constantly checks the callback queue for completed asynchronous operations.
-If the call stack is empty, the event loop takes the first callback from the queue and pushes it to the call stack for execution.
-
-
-
-
-## `ES6 FUNCTIONS AND FEATURES` ##
-=====================================
-`VAR`
------
-Definition:
-
-var was the original way to declare variables in JavaScript before the introduction of let and const.
-
-Scope:
-
-var variables are function-scoped, meaning they are only visible within the function where they are declared.
-
-Hoisting:
-
-Variables declared with var are hoisted to the top of their scope, allowing them to be used before the actual declaration in the code.
-
-`LET`
-------
-Definition:
-
-let allows you to declare block-scoped variables.
-
-Scope:
-
-Variables declared with let are block-scoped, meaning they are only visible within the block (statements inside curly braces) where they are declared.
-
-Hoisting:
-
-Like var, variables declared with let are hoisted to the top of their scope, but they are not initialized until the actual declaration in the code.
-
-`CONST`
---------
-Definition:
-
-const is used to declare variables whose values should not be reassigned.
-
-Scope:
-
-Variables declared with const are block-scoped.
-
-Hoisting:
-
-Like let, variables declared with const are hoisted to the top of their scope, but they are not initialized until the actual declaration in the code.
-
-`Ternary Operator`
--------------------
-The ternary operator, also known as the conditional operator, is a concise way to write conditional statements in JavaScript. It is a shorthand form of the if...else statement.
-
-example: 
-
-const age = 25;
-const message = age >= 18 ? 'You are an adult' : 'You are a minor';
-console.log(message);
-
-`Default parameters`
----------------------
-Default parameters in JavaScript allow you to assign default values to function parameters. If a parameter is not provided when the function is called, the default value will be used.
-
-`Object destructuring`
-----------------------
-Object destructuring is a feature in JavaScript that allows you to extract values from objects and assign them to variables in a more concise and readable way.
-
-`Classes`
-----------
-Classes in JavaScript provide a more structured and intuitive way to work with object-oriented programming concepts. They are widely used in modern JavaScript development, especially in frameworks and libraries that leverage object-oriented patterns.
-
-`Static methods`
------------------
-Static methods are methods that are called on the class itself, rather than on instances of the class.
-
-`Super keyword`
-----------------
-In a derived class constructor, super() is used to call the constructor of the parent class. This is necessary when the child class has its own constructor, and you want to ensure that the initialization code in the parent class's constructor is also executed.
-
-it is used inside the child class's constructor
-
-it is also used in the child class's method to invoke the parent class method
-
-super.parentclassmethodname()
-
-super is not allowed to be used outside of a derived class.
-When using super in a method, it must be used before this is used in the method.
-
-`Modules`
-------------
-In JavaScript, modules are a way to organize code into separate files or modules, making it more maintainable, reusable, and easier to manage. Modules help break down a large codebase into smaller, more manageable pieces, and they provide a mechanism for encapsulation and abstraction.
-
-for exporting :- export const add = (a,b) => a+b;
-for importing :- import {add} from "./filename"
-
-`Iterator`
-----------
-An iterator is an object that provides a standardized way to access the elements or members of a collection (such as an array or an object) one at a time. Iterators allow you to loop through the elements of a collection and perform actions on each element.
-
-the iterator protocol, which consists of two main methods: next and symbol.iterator
-
-The next method return an object with two propertiex  value and done
-value is the current element in the collection
-done is the boolean value representing whether the iteration is complete or not
-
-symbol.iterator returns an iterator obbject for the collection
-
-`Pass by value`
-----------------
-When a primitive data type (e.g., number, string, boolean) is passed as an argument to a function, a copy of the actual value is passed. Changes made to the parameter within the function do not affect the original variable outside the function.
-
-function updatex(x){
-	x = 42;
-}
-
-let num = 10
-updatex(num)
-console.log(num) //10  will not change the value
-
-because the function received a copy of the value, not a reference to the original variable.
-
-`Pass by reference`
---------------------
-For objects (including arrays and functions), what is passed to the function is a reference to the object in memory, not a copy of the object itself.
-
-function updateArray(arr) {
-  arr.push(4);
-}
-
-let myArray = [1, 2, 3];
-updateArray(myArray);
-console.log(myArray);  //[1,2,3,4]
-
-In the example above, the function updateArray receives a copy of the reference to the array myArray, and when the function modifies the array by pushing an element, the original array outside the function is also modified.
-
-in the case of objects if we are reassigning the object with new key value pair , it will not modify the outside object
-
-function updateReference(obj) {
-    // obj.name = "newname"
-    obj = {name : "newname"}
-  }
-  
-  let myObject = { key: 'value' };
-  updateReference(myObject);
-  console.log(myObject); // {key : 'value'}
-
-if we are modifying the object without reassigning , it will affect the outside object
-
-function updateReference(obj) {
-    // obj.name = "newname"
-  }
-  
-  let myObject = { key: 'value' };
-  updateReference(myObject);
-  console.log(myObject); {key : 'value' , name : 'newname'}
-
-`Message queue`
------------------
-The callback queue, also known as the message queue, holds messages or tasks that are ready to be processed. These tasks are typically generated as a result of asynchronous operations, such as timers, AJAX requests, or user interactions.
-
-`Generator`
--------------
-Generators are a type of iterable in JavaScript that allows pausing and resuming the execution of a function. They are defined using function* syntax and yield values one at a time.
-
-`Javascript is dynamically typed`
-----------------------------------
-JavaScript is a dynamically typed language. This means that the type of a variable is not explicitly declared in the code; instead, it is determined at runtime. In a dynamically typed language like JavaScript, variables can hold values of any type, and their types can change during the execution of a program.
-
-`Currying`
-------------
-Currying is a functional programming technique in which a function is transformed into a sequence of partially applied functions, each taking a single argument. The result is a chain of functions, each taking a single argument, until the final function in the chain produces the desired result.
-
-function add(x){
-    return function(y){
-        return function(z){
-            return x+y+z
-        }
-    }
-}
-console.log(add(1)(2)(3)) // 6
-
-`Tasks`
---------
-Micro tasks : - 
-Microtasks are tasks with higher priority that are executed asynchronously as soon as the current execution context is emptied and before the event loop advances to the next macrotask.
-promises , Mutation obeserver , callbacks
-
-Macro tasks : - 
-Macrotasks are tasks with lower priority that are executed asynchronously after the microtask queue has been emptied.
-
-setTimeout , setInterval , eventListener , i/o op
-
-`Message queue`
-----------------
-a queue where microtasks are enqueued for execution. Microtasks are a specific category of tasks that have higher priority than macrotasks
-Microtasks are usually scheduled to run after the current execution context but before the next macrotask is processed.
-
-`Shallow copy`
-----------------
-A shallow copy is a copy of an object where only the top-level structure of the original object is duplicated, while the nested objects and their references are shared between the original and the copied object.
-
-using Object.assign
-
-const originalObject = { a: 1, b: { c: 2 } };
-const shallowCopy = Object.assign({}, originalObject);
-
-using spread operator
-
-const originalObject = { a: 1, b: { c: 2 } };
-const shallowCopy = { ...originalObject };
-
-modification to the nested value in the shallow copy will affect in the original objhect
-
-`Deep copy`
-------------
-A deep copy creates a completely independent copy of the original object along with all of its nested objects. Changes made to the nested objects within the copied structure do not affect the original object, and vice versa.
-
-const originalObject = { a: 1, b: { c: 2 } };
-const deepCopy = JSON.parse(JSON.stringify(originalObject));
-
-`structuredClone`
--------------------
-The structuredClone function is a built-in method introduced in modern JavaScript to create a deep copy of a value. It is a reliable way to duplicate complex data structures, including objects, arrays, and other supported types, without sharing references.
-
-`Json parse`
--------------
-The JSON.parse() method is used to parse a JSON string and convert it into a JavaScript object. It takes a JSON-formatted string as its argument and returns the corresponding JavaScript object.
-
-const jsonString = '{"name": "John", "age": 30, "city": "New York"}';
-const parsedObject = JSON.parse(jsonString);
-
-console.log(parsedObject); // Output: { name: 'John', age: 30, city: 'New York' }
-
-`Json stringify`
-------------------
-The JSON.stringify() method is used to convert a JavaScript object into a JSON-formatted string. It takes an object as its first argument and an optional replacer function and space parameter.
-
-const personObject = { name: 'Alice', age: 25, city: 'London' };
-const jsonString = JSON.stringify(personObject);
-
-console.log(jsonString); // Output: '{"name":"Alice","age":25,"city":"London"}'
-
-
-`Immutabiity`
---------------
-Immutability in JavaScript refers to the idea that once an object (or data structure) is created, it cannot be changed. Instead of modifying the existing object, you create a new object with the desired changes. 
-
-`Implicit coercion`
---------------------
-Implicit coercion happens automatically by the JavaScript engine when values of different types are used together. JavaScript tries to make sense of the operation and convert the values as needed.
-
-const x = 5
-const y = "10"
-console.log(x+y) // "510"
-
-`Explicit conversion`
-------------------------
-Explicit conversion involves intentionally converting a value from one type to another using functions or methods provided by the language.
-
-const x = "123";
-const y = Number(x);
-
-const x = "5";
-const y = parseInt(x);
-
-`==`	or `Loose equality`
--------------------------
-In JavaScript, the == (loose equality) operator performs type coercion if the operands are of different types. It tries to convert the operands to the same type before making the comparison.
-
-`===` or `strict equality`
-------------------------------
-The === (strict equality) operator, on the other hand, does not perform type coercion. It checks both the value and the type.
-
-`IIFE`
-----------
-Immediately Invoked Function Expression, is a JavaScript function that is defined and executed immediately after its creation. It is a common pattern used to create a new scope for variables to avoid polluting the global scope and to encapsulate code.
-
-(function(x){
-	code
-})()
-
-It creates a new scope , avoiding polluting global scope
-
-Uses are :- Encapsulation , Data privacy , Avoiding Hoisting Issues , Creating modules
-
-this keyword inside the iife is will be global object for nodejs and window for browser environment in non strcit mode
-
-If the IIFE is running in strict mode ('use strict';), the value of this inside the IIFE will be undefined.
-
-Advantages are encapsulation and isolation
-
-Wrapping the function in parentheses () makes it an expression rather than a declaration.
-Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
-
-## `Types of modules in Javascript` ##
-======================================
-
-1. `ES6 Modules`
-==================
-- **Environment**: Modern Browsers, Node.js  
-- **Syntax Example**: `import/export`  
-- **Key Features**: Standardized, strict mode, asynchronous  
-
-2. `CommonJS Modules`
-=======================
-- **Environment**: Node.js  
-- **Syntax Example**: `require/module.exports`  
-- **Key Features**: Synchronous, widely used in Node.js  
-
-3. `UMD Modules`
-==================
-- **Environment**: Browsers, Node.js  
-- **Syntax Example**: Hybrid format  
-- **Key Features**: Universal compatibility  
-
-4. `AMD Modules`
-================
-- **Environment**: Browsers  
-- **Syntax Example**: `define/require`  
-- **Key Features**: Asynchronous, suited for front-end  
-
-5. `IIFE Modules`
-===================
-- **Environment**: Any (Legacy)  
-- **Syntax Example**: Self-executing  
-- **Key Features**: Encapsulation, avoids global scope  
-
-## `Event deligation` ##
-=========================
-Event delegation is a JavaScript programming pattern where a single event listener is attached to a common ancestor element of multiple child elements. Instead of attaching individual event listeners to each child element, you delegate the responsibility of handling events to a higher-level ancestor. When an event occurs on a child element, it bubbles up to the ancestor where a single event listener can respond to it.
-
-## `Event propogation` ##
-==========================
-Event propagation refers to the process of an event traveling through the DOM hierarchy.
-
-Capturing Phase (Trickling Phase): The event travels from the root of the document to the target element.
-Bubbling Phase: The event travels from the target element back up to the root.
-
-Event Bubbling:-
-Definition: Event bubbling specifically refers to the bubbling phase of event propagation.
 
 ## `setInterval` ##
 =====================
@@ -2009,17 +1682,883 @@ Once the call stack is empty (all synchronous tasks have finished), the browserâ
 
 
 
-## `Polyfills` ##
-=================
-Polyfills are code snippets or scripts that provide modern functionality in older browsers.
-For example, if a newer JavaScript method or API is not supported in older versions of a browser, a polyfill can be used to provide that functionality.
+## `Currying` ##
+======================
+Currying is a functional programming technique in which a function is transformed into a sequence of partially applied functions, each taking a single argument. The result is a chain of functions, each taking a single argument, until the final function in the chain produces the desired result.
 
-Process.nextTick()
-------------------
-After i/o and timer
+```js
+function add(x){
+    return function(y){
+        return function(z){
+            return x+y+z
+        }
+    }
+}
+console.log(add(1)(2)(3)) // 6
+```
 
-## `Priority calling` ##
+
+
+
+
+## `Promises` ##
+====================
+A Promise is an object representing the eventual completion or failure of an asynchronous operation and its resulting value. It allows you to write more readable and manageable asynchronous code compared to traditional callback-based approaches.
+
+Pending: The initial state; the promise is neither fulfilled nor rejected.
+Fulfilled: The operation completed successfully, and the promise has a resulting value.
+Rejected: The operation failed, and the promise has a reason for the failure.
+
+`Creating a promise`
+---------------------
+```js
+const promise = new Promise((resolve,reject)=>{
+	if(operation-Successfull){
+		resolve(result)
+	}else{
+		reject(error)
+	}
+})
+
+promise.then(		// pending
+  result => {		// Fullfilled	
+    console.log(result);
+  },
+  error => {		// Rejected
+    console.error(error);
+  }
+);
+```
+
+`Advantages of Promises`
+-------------------------
+
+Readability: Promises provide a more readable and structured way to handle asynchronous code compared to callbacks.
+
+Error Handling: Promises offer better error handling through the use of the catch method.
+
+Chaining: Promises support chaining, making it easy to compose sequences of asynchronous operations.
+
+State Management: Promises clearly define states (pending, fulfilled, rejected), making it easier to reason about asynchronous code.
+
+`Promise chaining`
+-------------------
+Promise chaining is a technique in JavaScript where you chain multiple asynchronous operations using promises to make the code more readable and maintainable. This is achieved by returning a new promise from each then or catch block, allowing you to chain subsequent asynchronous operations or handle errors in a sequential and organized manner.
+
+```js
+async1("Initial data")
+  .then(result1 => async2(result1))
+  .then(result2 => async3(result2))
+  .then(result3 => {
+    console.log("Final result = ", result3);
+  })
+  .catch(error => {
+    console.log("Error occurred:", error);
+  });
+```
+
+`Promise.all`
+--------------
+Promise.all is a method in JavaScript that takes an iterable (e.g., an array) of promises as input and returns a single promise. This new promise fulfills with an array of results when all the input promises have been fulfilled, or it rejects with the reason of the first promise that rejects.
+
+`Promise.allSettled`
+---------------------
+Promise.allSettled is another method in JavaScript for handling multiple promises. It is similar to Promise.all, but it doesn't short-circuit when one of the promises is rejected. Instead, it waits for all promises to settle (either fulfill or reject) and then returns an array of objects, each representing the outcome of the corresponding promise.
+
+```js
+result
+Async 1 completed promise1
+Async 2 completed promise2
+Async 3 completed promise3
+All promises fullfilled =   [
+  { status: 'fulfilled', value: 'Result from async 1' },
+  { status: 'rejected', reason: 'Error in async 2' },
+  { status: 'fulfilled', value: 'Result from async 3' }
+]
+```
+
+`Promise.race`
+----------------
+ that takes an iterable of promises and returns a new promise. This new promise settles (fulfills or rejects) as soon as one of the promises in the iterable settles, regardless of whether the other promises have settled.
+
+ Uses are -: Timeout , race conditions , Load balancing , Parallel request , Real time updates
+
+`Then`
+--------
+The then method is used to handle the fulfillment of a promise. It takes two callback functions: one for the fulfillment (onFulfilled) and another for the rejection (onRejected).
+
+`Finally`
+-----------
+The finally method is used to specify a function to be executed when the promise is settled (either fulfilled or rejected). This function will be executed regardless of the promise's outcome.
+
+`Catch`
+---------
+The catch method is a shorthand for handling only the rejection of a promise. It is equivalent to using then(undefined, onRejected).
+
+
+
+
+## `Async Await` ##
+=======================
+async and await are keywords in JavaScript that simplify the handling of asynchronous code, making it more readable and easier to work with. The async keyword is used to define an asynchronous function, and the await keyword is used to wait for a promise to settle inside that function.
+
+
+
+
+
+## `Observable` ##
+====================
+An Observable is a design pattern used to manage asynchronous data streams. It represents a collection of values that can be observed over time. Observables are often used in scenarios where multiple values are emitted asynchronously, such as user input, data fetching, or event handling.
+```js
+```
+
+
+
+
+
+## `DOM` ##
+==============
+The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a document as a tree of objects, where each object corresponds to a part of the document, such as elements, attributes, and text.
+Components are :- Nodes , methods , events
+
+
+
+
+
+## `BOM` ##
+===========
+The Browser Object Model (BOM) is a set of objects provided by the browser, separate from the document, that allows interaction with the browser itself and the user's environment.
+Components are :- Window , navigator , location , history
+
+
+
+
+
+## `Call stack` ##
+=====================
+It keeps track of the execution context (or frames) of functions in a program. When a function is called, a new frame is added to the top of the call stack, and when a function is completed, its frame is removed from the stack.
+
+`Function Invocation`
+----------------------
+When a function is called, a new frame is created and pushed onto the top of the call stack.
+This frame contains information about the function, such as its parameters and local variables.
+
+`Execution`
+-------------
+The JavaScript engine executes the code within the function frame by frame, from top to bottom.
+
+`Function Completion`
+----------------------
+When the function completes, its frame is popped off the stack, and the control returns to the previous frame.
+
+
+
+
+
+## `Call back queue` ##
+========================
+Asynchronous operations, such as setTimeout, AJAX requests, and event listeners, are handled outside the call stack.
+When an asynchronous operation completes, its callback function is placed in the callback queue.
+The callback queue stores callback functions that are ready to be executed.
+Callback functions are moved from the callback queue to the call stack only when the call stack is empty.
+
+
+
+
+## `Event Loop` ##
+===================
+The event loop is a crucial part of JavaScript's concurrency model, responsible for handling asynchronous operations and ensuring that the program remains responsive to user interactions
+
+The event loop constantly checks the callback queue for completed asynchronous operations.
+If the call stack is empty, the event loop takes the first callback from the queue and pushes it to the call stack for execution.
+
+
+
+
+
+## `Operators` ##
+===================
+## `Destructuring`
+========================
+Destructuring in JavaScript is a feature that allows you to unpack values from arrays or properties from objects into distinct variables. It simplifies extracting data from complex structures.
+
+1. `Object Destructuring`
+-------------------------
+```js
+const person = {
+    name: 'Midhun',
+    age: 25,
+    country: 'India'
+};
+
+// Destructuring
+const { name, age, country } = person;
+
+console.log(name);    // Output: Midhun
+console.log(age);     // Output: 25
+console.log(country); // Output: India
+```
+
+2. `Renaming Variables While Destructuring`
+----------------------------------------------
+```js
+const user = {
+    firstName: 'Alice',
+    lastName: 'Smith'
+};
+
+// Renaming variables
+const { firstName: fName, lastName: lName } = user;
+
+console.log(fName); // Output: Alice
+console.log(lName); // Output: Smith
+```
+
+3. `Default Values in Destructuring`
+---------------------------------------
+```js
+const employee = {
+    id: 101,
+    name: 'John'
+};
+
+// Default value for 'position'
+const { name, position = 'Developer' } = employee;
+
+console.log(name);      // Output: John
+console.log(position);  // Output: Developer
+```
+
+4. `Destructuring with Nested Objects`
+-----------------------------------------
+```js
+const student = {
+    name: 'Sara',
+    details: {
+        grade: 'A',
+        subject: 'Math'
+    }
+};
+
+// Destructuring nested object
+const { name, details: { grade, subject } } = student;
+
+console.log(name);   // Output: Sara
+console.log(grade);  // Output: A
+console.log(subject);// Output: Math
+```
+
+5. `Array Destructuring`
+---------------------------
+```js
+const colors = ['red', 'blue', 'green', 'yellow'];
+
+// Skip 'blue' and destructure
+const [firstColor, , thirdColor] = colors;
+
+console.log(firstColor); // Output: red
+console.log(thirdColor); // Output: green
+```
+
+6. `Default Values in Array Destructuring`
+---------------------------------------------
+```js
+const scores = [85];
+
+// Default value for second element
+const [math = 50, science = 60] = scores;
+
+console.log(math);    // Output: 85
+console.log(science); // Output: 60
+```
+
+7. `Combined Example: Object and Array Destructuring`
+--------------------------------------------------------
+```js
+const data = {
+    user: 'Midhun',
+    hobbies: ['coding', 'gaming', 'reading']
+};
+
+// Destructuring object and array
+const { user, hobbies: [firstHobby, secondHobby] } = data;
+
+console.log(user);       // Output: Midhun
+console.log(firstHobby); // Output: coding
+console.log(secondHobby);// Output: gaming
+```
+
+## `Ternary Operator`
+====================
+The ternary operator, also known as the conditional operator, is a concise way to write conditional statements in JavaScript. It is a shorthand form of the if...else statement.
+```js
+const age = 25;
+const message = age >= 18 ? 'You are an adult' : 'You are a minor';
+console.log(message);
+```
+
+## `Rest Operator`
+====================
+```js
+const fruits = ['apple', 'banana', 'cherry', 'mango'];
+
+// Destructuring with rest
+const [firstFruit, secondFruit, ...restFruits] = fruits;
+
+console.log(firstFruit); // Output: apple
+console.log(secondFruit);// Output: banana
+console.log(restFruits); // Output: ['cherry', 'mango']
+```
+
+## `Arithmetic Operators`
+=============================
++ (Addition)
+- (Subtraction)
+* (Multiplication)
+/ (Division)
+% (Remainder/Modulus)
+** (Exponentiation)
+++ (Increment)
+-- (Decrement)
+
+## `Comparison Operators`
+==========================
+== (Equal to)
+=== (Strict equal to)
+!= (Not equal to)
+!== (Strict not equal to)
+> (Greater than)
+< (Less than)
+>= (Greater than or equal to)
+<= (Less than or equal to)
+
+## `Logical Operators`
+========================
+&& (Logical AND)
+|| (Logical OR)
+! (Logical NOT)
+
+## `Bitwise Operators`
+========================
+& (AND)
+| (OR)
+^ (XOR)
+~ (NOT)
+<< (Left shift)
+>> (Right shift)
+>>> (Zero fill right shift)
+
+## `Assignment Operators`
+==========================
+= (Assignment)
++= (Addition assignment)
+-= (Subtraction assignment)
+*= (Multiplication assignment)
+/= (Division assignment)
+%= (Modulus assignment)
+**= (Exponentiation assignment)
+<<= (Left shift assignment)
+>>= (Right shift assignment)
+>>>= (Zero fill right shift assignment)
+&= (AND assignment)
+^= (XOR assignment)
+|= (OR assignment)
+
+## `Optional Chaining Operator (?.)`
+=======================================
+The optional chaining operator (?.) allows you to access deeply nested properties of an object without having to check if each reference in the chain is null or undefined. If any reference in the chain is null or undefined, it stops evaluation and returns undefined instead of throwing an error.
+
+```js
+const user = {
+  profile: {
+    name: "Alice",
+    address: {
+      city: "Wonderland"
+    }
+  }
+};
+
+console.log(user.profile?.name); // "Alice" (accesses name property safely)
+console.log(user.profile?.address?.city); // "Wonderland" (accesses city property safely)
+console.log(user.profile?.phone); // undefined (phone doesn't exist, no error)
+```
+
+## `Nullish Coalescing Operator (??)`
+=======================================
+The nullish coalescing operator (??) returns the right-hand operand when the left-hand operand is null or undefined. It is similar to the logical OR (||), but the difference is that ?? only considers null or undefined as "nullish" values, whereas || considers any falsy value (0, false, NaN, '', null, or undefined) as falsy.
+
+```js
+const value1 = null;
+const value2 = undefined;
+const value3 = 0;
+const value4 = 'Hello';
+
+console.log(value1 ?? 'Default'); // "Default" (value1 is null)
+console.log(value2 ?? 'Default'); // "Default" (value2 is undefined)
+console.log(value3 ?? 'Default'); // 0 (value3 is 0, but it's not null or undefined)
+console.log(value4 ?? 'Default'); // 'Hello' (value4 is a non-null value)
+```
+
+
+
+
+
+## `Variable Shadowing` ##
+==============================
+Variable shadowing occurs when a variable declared in a certain scope (e.g., inside a function or block) has the same name as a variable declared in an outer scope. The inner variable "shadows" or overrides the outer variable within its own scope, meaning the inner variable takes precedence when accessed in that scope.
+```js
+let name = "Alice";  // Outer variable
+
+function greet() {
+  let name = "Bob";  // Inner variable shadows the outer variable
+  console.log(name);  // Bob, because the inner variable 'name' is in scope
+}
+
+greet();  // Output: Bob
+console.log(name);  // Output: Alice, because the outer variable is still in scope outside the function
+```
+
+
+
+
+
+## `Illegal shadowing` ##
+===========================
+Illegal shadowing in JavaScript occurs when a variable in a scope is declared using the same name as a variable from an outer scope, but the declaration is done in a way that violates the rules of variable scoping, especially with let, const, and class.
+```js
+let name = "Alice";
+let name = "Bob";  // Error: Identifier 'name' has already been declared
+
+function greet() {
+  const name = "Alice";
+
+  function greet() {  // Error: Function 'greet' has already been declared
+    console.log("Hello");
+  }
+}
+```
+
+
+
+
+
+## `Classes` ##
+=====================
+Classes in JavaScript provide a more structured and intuitive way to work with object-oriented programming concepts. They are widely used in modern JavaScript development, especially in frameworks and libraries that leverage object-oriented patterns.
+
+`Static methods`
+-----------------
+Static methods are methods that are called on the class itself, rather than on instances of the class.
+
+`Super keyword`
+----------------
+In a derived class constructor, super() is used to call the constructor of the parent class. This is necessary when the child class has its own constructor, and you want to ensure that the initialization code in the parent class's constructor is also executed.
+
+it is used inside the child class's constructor
+
+it is also used in the child class's method to invoke the parent class method
+
+super.parentclassmethodname()
+
+super is not allowed to be used outside of a derived class.
+When using super in a method, it must be used before this is used in the method.
+
+`Encapsulation`
+---------------
+Encapsulation refers to the concept of bundling data (variables) and methods (functions) that operate on the data into a single unit, typically a class or object. It also involves restricting access to certain details of an object and only exposing necessary parts of the object.
+```js
+class Person {
+  #name; // private property
+
+  constructor(name, age) {
+    this.#name = name; // setting the private property
+    this.age = age;
+  }
+
+  getName() { // public method to access private property
+    return this.#name;
+  }
+
+  setName(newName) { // public method to modify private property
+    this.#name = newName;
+  }
+}
+
+const person = new Person('Alice', 25);
+console.log(person.getName()); // Alice
+person.setName('Bob');
+console.log(person.getName()); // Bob
+
+// The following will throw an error as #name is private
+// console.log(person.#name); 
+```
+
+`Abstraction`
+-----------------
+Abstraction is the process of hiding the complex reality and showing only the necessary parts of an object or function. It helps reduce complexity by focusing only on the relevant details and ignoring unnecessary ones. Abstraction is often implemented using classes, functions, or modules in
+```js
+class Car {
+  constructor(brand, model) {
+    this.brand = brand;
+    this.model = model;
+  }
+
+  startEngine() {
+    console.log('Engine started');
+  }
+
+  drive() {
+    this.startEngine();  // abstraction: hiding engine-starting logic
+    console.log(`${this.brand} ${this.model} is driving.`);
+  }
+}
+
+const myCar = new Car('Toyota', 'Camry');
+myCar.drive(); // Outputs: Engine started
+               // Outputs: Toyota Camry is driving.
+```
+
+`Access Modifiers`
+--------------------
+`Public`
+Public members are accessible from anywhere. By default, all properties and methods in a JavaScript class are public.
+
+`Private`
+Private members can only be accessed within the class they are defined in. In JavaScript, private fields are denoted with # before the property or method name.
+
+`Protected (Not natively in JavaScript, but can be simulated)`
+Protected members are intended to be accessible only within the class and its subclasses. JavaScript does not natively support protected, but it can be simulated by convention (using an underscore _) or by extending the class.
+
+`Static`
+Static members belong to the class itself, rather than to instances of the class. Static methods or properties are accessed directly from the class, not an instance.
+
+
+
+
+
+## `Iterator` ##
+===================
+An iterator is an object that provides a standardized way to access the elements or members of a collection (such as an array or an object) one at a time. Iterators allow you to loop through the elements of a collection and perform actions on each element.
+
+the iterator protocol, which consists of two main methods: next and symbol.iterator
+
+The next method return an object with two propertiex  value and done
+value is the current element in the collection
+done is the boolean value representing whether the iteration is complete or not
+
+symbol.iterator returns an iterator obbject for the collection
+
+
+
+
+
+## `Pass by value` ##
 =========================
+When a primitive data type (e.g., number, string, boolean) is passed as an argument to a function, a copy of the actual value is passed. Changes made to the parameter within the function do not affect the original variable outside the function.
+
+function updatex(x){
+	x = 42;
+}
+
+let num = 10
+updatex(num)
+console.log(num) //10  will not change the value
+
+because the function received a copy of the value, not a reference to the original variable.
+
+
+
+
+
+## `Pass by reference` ##
+=============================
+For objects (including arrays and functions), what is passed to the function is a reference to the object in memory, not a copy of the object itself.
+
+function updateArray(arr) {
+  arr.push(4);
+}
+
+let myArray = [1, 2, 3];
+updateArray(myArray);
+console.log(myArray);  //[1,2,3,4]
+
+In the example above, the function updateArray receives a copy of the reference to the array myArray, and when the function modifies the array by pushing an element, the original array outside the function is also modified.
+
+in the case of objects if we are reassigning the object with new key value pair , it will not modify the outside object
+
+function updateReference(obj) {
+    // obj.name = "newname"
+    obj = {name : "newname"}
+  }
+  
+  let myObject = { key: 'value' };
+  updateReference(myObject);
+  console.log(myObject); // {key : 'value'}
+
+if we are modifying the object without reassigning , it will affect the outside object
+
+function updateReference(obj) {
+    // obj.name = "newname"
+  }
+  
+  let myObject = { key: 'value' };
+  updateReference(myObject);
+  console.log(myObject); {key : 'value' , name : 'newname'}
+
+
+
+
+
+## `Message Queue (Macrotask Queue)` ##
+===========================================
+This queue holds macrotasks (regular tasks) that are ready to be executed.
+
+Examples include
+setTimeout
+setInterval
+I/O tasks like network or file operations
+Event listeners (clicks, scrolls, etc.)
+These tasks are executed after the current execution context is complete.
+
+
+
+
+
+## `Microtask Queue` ##
+========================
+This queue holds microtasks that have higher priority than macrotasks.
+
+Examples include:
+Promises (e.g., .then() or .catch())
+MutationObserver
+queueMicrotask()
+Microtasks are executed immediately after the current execution context and before the message queue (macrotasks).
+
+
+
+
+
+
+
+`Default parameters`
+---------------------
+Default parameters in JavaScript allow you to assign default values to function parameters. If a parameter is not provided when the function is called, the default value will be used.
+
+
+
+
+
+## `Tasks` ##
+=================
+`Micro tasks`
+----------------
+Microtasks are tasks with higher priority that are executed asynchronously as soon as the current execution context is emptied and before the event loop advances to the next macrotask.
+promises , Mutation obeserver , callbacks
+
+`Macro tasks`
+--------------
+Macrotasks are tasks with lower priority that are executed asynchronously after the microtask queue has been emptied.
+setTimeout , setInterval , eventListener , i/o op
+
+
+
+
+
+## `Coercion & Convertion` ##
+=================================
+`Implicit coercion`
+--------------------
+Implicit coercion happens automatically by the JavaScript engine when values of different types are used together. JavaScript tries to make sense of the operation and convert the values as needed.
+
+const x = 5
+const y = "10"
+console.log(x+y) // "510"
+
+`Explicit conversion`
+------------------------
+Explicit conversion involves intentionally converting a value from one type to another using functions or methods provided by the language.
+
+const x = "123";
+const y = Number(x);
+
+const x = "5";
+const y = parseInt(x);
+
+`Type Casting`
+---------------
+Definition: Type casting refers to the explicit conversion of one data type to another using functions or methods.
+When it happens: Type casting is done manually by the programmer, not automatically by JavaScript.
+```js
+let number = 5;
+let string = String(number);  // Explicitly casting number to string
+console.log(string);  // "5"
+```
+
+
+
+
+
+## `Storage` ##
+==================
+`localStorage`
+---------------
+`Persistence`
+Data in localStorage persists even after the browser is closed and reopened.
+The data will remain until it is manually removed by the user or through JavaScript.
+
+`Scope`
+Data is accessible across all tabs and windows from the same origin (same protocol, domain, and port).
+
+`Storage Limit`
+Typically allows up to 5-10 MB of data per origin, depending on the browser.
+
+`Expiration`
+There is no expiration by default. Data stays indefinitely unless it is explicitly cleared.
+
+`Use Cases`
+Storing data that needs to persist across sessions, such as user preferences, application settings, or cached data.
+
+```js
+// Set an item
+localStorage.setItem('username', 'Alice');
+
+// Retrieve an item
+console.log(localStorage.getItem('username')); // 'Alice'
+
+// Remove an item
+localStorage.removeItem('username');
+```
+
+`sessionStorage`
+------------------
+`Persistence`
+Data in sessionStorage is only stored for the duration of the page session.
+The data is automatically cleared when the tab or browser is closed.
+
+`Scope`
+Data is only accessible within the same tab or window. Different tabs or windows will not share the sessionStorage data.
+
+`Storage Limit`
+Typically allows up to 5 MB of data per session, similar to localStorage.
+
+`Expiration`
+Data is cleared automatically once the browser session ends (i.e., when the tab or browser is closed).
+
+`Use Cases`
+Storing data that is only needed for a single session, such as temporary form data or data related to a particular page interaction.
+
+```js
+// Set an item
+sessionStorage.setItem('sessionData', 'active');
+
+// Retrieve an item
+console.log(sessionStorage.getItem('sessionData')); // 'active'
+
+// Remove an item
+sessionStorage.removeItem('sessionData');
+```
+
+
+
+
+## `Modules` ##
+================
+In JavaScript, modules are a way to organize code into separate files or modules, making it more maintainable, reusable, and easier to manage. Modules help break down a large codebase into smaller, more manageable pieces, and they provide a mechanism for encapsulation and abstraction.
+
+for exporting :- export const add = (a,b) => a+b;
+for importing :- import {add} from "./filename"
+
+## `Types of modules in Javascript`
+====================================
+
+1. `ES6 Modules`
+-------------------
+ES6 introduced a native module system, allowing developers to split code into separate files and import/export functionalities between them.
+
+import and export statements are used.
+Modules are lexically scoped, meaning the variables or functions inside them are scoped to the module.
+Strict mode is automatically enabled.
+
+2. `CommonJS Modules`
+-----------------------
+CommonJS is the module system used primarily in Node.js. It uses require to import modules and module.exports to export functionality.
+
+require for importing.
+module.exports for exporting.
+Synchronous loading (not suitable for browsers without bundlers like Webpack or Browserify).
+
+3. `UMD Modules`
+---------------------
+UMD is a module format designed to work in both browser and Node.js environments. It is a combination of the best parts of AMD, CommonJS, and Global definitions.
+
+It works in both Node.js and the browser.
+Uses define or module.exports depending on the environment.
+
+4. `AMD Modules`
+--------------------
+AMD is a module format used primarily for browser environments. It defines modules asynchronously, making it suitable for applications that need to load modules in parallel (e.g., using the RequireJS library). 
+
+Modules are loaded asynchronously.
+Uses the define function to define modules.
+
+5. `SystemJS Modules`
+---------------------
+SystemJS is a module loader that supports loading ES6, CommonJS, and AMD modules, allowing you to use multiple module formats in the same application.
+
+Compatible with multiple module formats.
+Can be used in both client-side and server-side applications.
+
+
+
+
+
+## `Event deligation` ##
+=========================
+Event delegation is a JavaScript programming pattern where a single event listener is attached to a common ancestor element of multiple child elements. Instead of attaching individual event listeners to each child element, you delegate the responsibility of handling events to a higher-level ancestor. When an event occurs on a child element, it bubbles up to the ancestor where a single event listener can respond to it.
+
+
+
+
+
+## `Event propogation` ##
+==========================
+Event propagation refers to the process of an event traveling through the DOM hierarchy.
+
+Capturing Phase (Trickling Phase): The event travels from the root of the document to the target element.
+Bubbling Phase: The event travels from the target element back up to the root.
+
+Event Bubbling:-
+Definition: Event bubbling specifically refers to the bubbling phase of event propagation.
+
+
+
+
+
+## `Polyfills` ##
+====================
+Polyfills are code snippets or scripts that implement modern functionality in older browsers that do not natively support certain features. If a newer JavaScript method, API, or feature is not available in an older browser, a polyfill can be used to mimic or "polyfill" that functionality, ensuring compatibility across different browser versions.
+
+```js
+// Polyfill for Array.prototype.includes()
+if (!Array.prototype.includes) {
+    Array.prototype.includes = function(element) {
+        return this.indexOf(element) !== -1;
+    };
+}
+
+// Now you can use includes() in older browsers
+const arr = [1, 2, 3, 4];
+console.log(arr.includes(3)); // true
+console.log(arr.includes(5)); // false
+```
+
+
+
+
+
+
+`Priority calling`
+--------------------
 conosle.log()
 process.nextTick()
 promise
@@ -2027,9 +2566,108 @@ setTimeout
 setImmediate
 setInterval
 
+`==`	or `Loose equality`
+-------------------------
+In JavaScript, the == (loose equality) operator performs type coercion if the operands are of different types. It tries to convert the operands to the same type before making the comparison.
+
+`===` or `strict equality`
+------------------------------
+The === (strict equality) operator, on the other hand, does not perform type coercion. It checks both the value and the type.
+
+`Json parse`
+-------------
+The JSON.parse() method is used to parse a JSON string and convert it into a JavaScript object. It takes a JSON-formatted string as its argument and returns the corresponding JavaScript object.
+
+const jsonString = '{"name": "John", "age": 30, "city": "New York"}';
+const parsedObject = JSON.parse(jsonString);
+
+console.log(parsedObject); // Output: { name: 'John', age: 30, city: 'New York' }
+
+`Json stringify`
+------------------
+The JSON.stringify() method is used to convert a JavaScript object into a JSON-formatted string. It takes an object as its first argument and an optional replacer function and space parameter.
+
+const personObject = { name: 'Alice', age: 25, city: 'London' };
+const jsonString = JSON.stringify(personObject);
+
+console.log(jsonString); // Output: '{"name":"Alice","age":25,"city":"London"}'
 
 
 
+
+
+
+<!-- Need to move to function topic -->
+`IIFE`
+======
+Immediately Invoked Function Expression, is a JavaScript function that is defined and executed immediately after its creation. It is a common pattern used to create a new scope for variables to avoid polluting the global scope and to encapsulate code.
+
+```js
+(function(x){
+	code
+})()
+```
+
+It creates a new scope , avoiding polluting global scope
+
+Uses are :- Encapsulation , Data privacy , Avoiding Hoisting Issues , Creating modules
+
+this keyword inside the iife is will be global object for nodejs and window for browser environment in non strcit mode
+
+If the IIFE is running in strict mode ('use strict';), the value of this inside the IIFE will be undefined.
+
+Advantages are encapsulation and isolation
+
+Wrapping the function in parentheses () makes it an expression rather than a declaration.
+Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
+
+
+`Generator`
+--------------
+Generators are a type of iterable in JavaScript that allow pausing and resuming the execution of a function. They are defined using the function* syntax, and they use the yield keyword to produce values one at a time. A generator function returns an iterator which can be used to traverse the yielded values.
+
+Key Features :-
+Defined using function* syntax.
+Uses the yield keyword to yield values.
+The function can be paused and resumed.
+Can be used with for...of loops or manually using the iterator's next() method.
+
+```js
+// Generator function definition
+function* countUpTo(max) {
+    let count = 1;
+    while (count <= max) {
+        yield count;  // Pause and yield the current value of count
+        count++;
+    }
+}
+
+// Create a generator instance
+const counter = countUpTo(5);
+
+// Use next() to get the next value
+console.log(counter.next().value); // 1
+console.log(counter.next().value); // 2
+console.log(counter.next().value); // 3
+console.log(counter.next().value); // 4
+console.log(counter.next().value); // 5
+console.log(counter.next().value); // undefined (iteration is complete)
+```
+
+`break` vs `continue`
+---------------------
+`break`
+--------
+The break statement is used to exit a loop or a switch statement immediately, regardless of whether the loop condition is still true or not.
+
+`continue`
+----------
+The continue statement is used to skip the current iteration of a loop and proceed with the next iteration.
+
+
+
+
+<!-- Move to the first topic -->
 
 ## `JIT (Just in time)` ##
 ============================
@@ -2048,15 +2686,6 @@ The JIT compiler optimizes the machine code during this process to enhance perfo
 
 Execution:
 The machine code is then directly executed by the CPU, leading to faster execution compared to interpretation.
-
-
-
-
-
-
-## `Topics` ##
-================
-Prefetch and Preload
 
 
 
