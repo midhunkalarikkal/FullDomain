@@ -2,7 +2,7 @@
 ===================
 JavaScript is a high-level, dynamic, interpreted programming language primarily used for adding interactivity and dynamic behavior to web pages. It is a single-threaded, synchronous, and event-driven language that supports both functional and object-oriented programming paradigms. JavaScript runs in the browser and server environments (like Node.js) using engines such as V8, which execute its code.
 
-A `dynamic language` means you can define variables, objects, and functions without specifying their types beforehand. The type of a variable can change at runtime.
+A `dynamic language` means we can define variables, objects, and functions without specifying their types beforehand. The type of a variable can change at runtime.
 
 `Interpreted` means that the code is read and executed line by line by an interpreter, without the need for pre-compiling it into machine code.
 
@@ -14,8 +14,35 @@ JavaScript has only one main thread to execute code, meaning it can handle one t
 
 An `event-driven` language means the flow of the program is determined by events, such as user actions (clicks, key presses), system messages, or other triggers. Instead of executing code sequentially, it waits for an event to occur and then runs the corresponding code (called an event handler).
 
-Javascript is neighther a interpreter language or compiler language, but it uses both of them inside v8 engine.
+Javascript is neighther a interpreter language nor compiler language, but it uses both of them inside v8 engine.
 The compilation process inside the v8 engine is said to be the `JIT Compilation` that menas just in time compilation.
+
+## `Advantages of JavaScript` ##
+==================================
+
+Versatility: Used for both client and server-side development.
+
+Asynchronous Programming: Supports non-blocking code for responsive applications.
+
+Rich Ecosystem: Abundance of libraries and frameworks for efficient development.
+
+Dynamic Typing: Flexible handling of variable types simplifies coding.
+
+Community Support: Large and active developer community for shared knowledge.
+
+
+## `Disadvantages of JavaScript` ##
+====================================
+
+Browser Compatibility: Inconsistencies in how browsers interpret JavaScript.
+
+Security Concerns: Vulnerable to issues like Cross-Site Scripting (XSS) attacks.
+
+Single Threaded: Limited to one operation at a time, potentially causing bottlenecks.
+
+Callback Hell: Nested callbacks can lead to complex and hard-to-read code.
+
+Lack of Strong Typing: Dynamic typing can result in runtime errors, requiring thorough testing.
 
 ## `Execution context` ##
 =========================
@@ -27,7 +54,7 @@ Variables and functions are stored here as key-value pairs.
 This component is also referred to as the Variable Environment.
 
 `Code Component`:
-The code is executed here, one line at a time.
+The code is executed one line at a time.
 This component is also known as the Thread of Execution.
 
 
@@ -39,7 +66,7 @@ The second phase is code execution phase
 
 In this phase the variables will asiign with thier actual value in the program
 
-For the function in main memory component it will create a new execution context in the code component when the function is invoked in the main memory component and in the code component there will be a memory and code component its self
+For the function in main memory component it will create a new execution context in the code component when the function is invoked and in the code component there will be a memory and code component its self
 
 There will store the parameters and variables of the function of the program in the memory component in the first phase
 
@@ -58,9 +85,21 @@ lexical environment means -> where is the code physically appear
 Number
 String
 Boolean
-Null
-Undefined
-Symbol
+`Null` - A value that explicitly represents "nothing" or an empty value.
+```js
+let y = null; // y is explicitly set to "no value"
+```
+
+`Undefined` - A variable or property that has been declared but not given a value yet
+```js
+let x; // x is undefined
+```
+`Symbol` -  unique and immutable data type that is often used as an identifier for object properties.
+```js
+const sym2 = Symbol('example');  // Symbol with a description
+const sym3 = Symbol('example');  // Another Symbol with the same description
+console.log(sym2 === sym3);      // false (they are unique)
+```
 
 ## `Non primitive data` ##
 ===========================
@@ -69,32 +108,31 @@ Array
 Function
 Date
 Regex
-Map
-set
+`Map` - A Map is a collection of key-value pairs where keys can be of any data type.
+`Weak map` - A WeakMap is a collection of key-value pairs where keys must be an objects, and the keys are weakly referenced.
+`set` - Set is a built-in object that allows you to store unique values of any type.
+`Weak set` - A WeakSet is a built-in object in JavaScript that can only store unique objects.
+Error
 
-`Set`
-------
-Set is a built-in object that allows you to store unique values of any type
-
-`Weak set`
------------
-A WeakSet is a built-in object in JavaScript that can only store objects
 
 ## `Window` ##
 ===============
 Window is a global object is created along with the execution context
-Whatever we write in the global space it will attached to the global object
+Whatever we write in the global space it will attached to the window
+
 
 ## `Scope` ##
 =============
 Scope means where you can access a specific variable or function in our code  
 The lexical environment of Global execution context will point to null , because there is no parent for it anymore.
 
+
 ## `Scope chain` ##
 ====================
 Chain of the lexical environment and its lexical environment of parent
 
 If the js engine does not find any variable in the local memory it will move to the lexical scope , this continue until it find the value or null
+
 
 ## `Block scope` ##
 ====================
@@ -127,6 +165,7 @@ console.log(a)  // 10  // Global scope
 console.log(b)  // 200  // Script scope		    
 console.log(c)  // 300  // Script scope		    
 =================================================
+
 
 ## `Scope` ##
 ==============
@@ -161,6 +200,7 @@ In lexical scope, inner functions have access to variables declared in their out
 `Benefits`
 ----------
 Lexical scope promotes encapsulation and helps in avoiding naming conflicts, as variables declared in different scopes remain independent.
+
 
 ## `Function` ##
 ==================
@@ -206,9 +246,9 @@ var b = function xyz(){
 console.log("xyz called")
 }
 
-This is named function expression , which is nothing but a normal function is assinged to a variable
+This is named function expression , which is nothing but a normal function statement is assinged to a variable
 
-But we cant access the xyz() like this in outside , it will cause an reference error
+But we cant invoke ths function using xyz() like this in outside , it will cause an reference error
 
 So the xyz() is acting as a varibale of that function it is used to call that function inside that function itself
 
@@ -277,7 +317,8 @@ it uses new keyword to reate its instance
 
 `Factory function`
 -------------------
-Factory function is a function in javascript it returns an object , use of it is encapsulates the object
+Factory function is a function in javascript it returns an object
+use of it is encapsulates the object
 
 `Pure function`
 -----------------
@@ -286,36 +327,6 @@ it has no side effects, it always returns the same result for the same inputs, a
 `Impure function`
 ------------------
 it modifies the external state (result variable) as a side effect.
-
-
-
-## `Advantages of JavaScript` ##
-==================================
-
-Versatility: Used for both client and server-side development.
-
-Asynchronous Programming: Supports non-blocking code for responsive applications.
-
-Rich Ecosystem: Abundance of libraries and frameworks for efficient development.
-
-Dynamic Typing: Flexible handling of variable types simplifies coding.
-
-Community Support: Large and active developer community for shared knowledge.
-
-
-## `Disadvantages of JavaScript` ##
-====================================
-
-Browser Compatibility: Inconsistencies in how browsers interpret JavaScript.
-
-Security Concerns: Vulnerable to issues like Cross-Site Scripting (XSS) attacks.
-
-Single Threaded: Limited to one operation at a time, potentially causing bottlenecks.
-
-Callback Hell: Nested callbacks can lead to complex and hard-to-read code.
-
-Lack of Strong Typing: Dynamic typing can result in runtime errors, requiring thorough testing.
-
 
 
 
