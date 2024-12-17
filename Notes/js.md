@@ -1145,15 +1145,6 @@ array.forEach(function(element, index, array) {
 });
 ```
 
-`Logging array elements`
-------------------------
-```js
-let arr = ["black","red","yello","orange"];
-arr.forEach((element,index,arr)=>{
-    console.log(element);
-});
-```
-
 `Modifying the array elements`
 -------------------------------
 ```js
@@ -1162,17 +1153,6 @@ arr.forEach((element,index,arr)=>{
     return arr[index] = element*2;
 })
 console.log(arr);
-```
-
-`Summing array elements`
--------------------------
-```js
-let arr = [1,2,3,4,5]
-var sum = 0
-arr.forEach((element,index,arr)=>{
-    sum += element
-})
-console.log(sum)
 ```
 
 7. `Push`
@@ -1189,41 +1169,12 @@ console.log(arr);
 
 `Appending a new array`
 ------------------------
+```js
 let arr = [1,2,3,4,5]
 let newarr = [6,7,8,9,10,11,12]
 arr.push(...newarr)
 console.log(arr)
-
-`Adding elements dynamically`
-------------------------------
-let arr = []
-
-function addelement(element){
-    arr.push(element)
-}
-
-addelement(10)
-addelement(20)
-addelement(30)
-
-console.log(arr)
-
-`Building an array incrementally`
-----------------------------------
-let arr = []
-
-for(var i = 0; i < 10; i++){
-    arr.push(i)
-}
-console.log(arr)
-
-`Adding object to an array`
-----------------------------
-let arr = []
-
-arr.push({name : "Midhun", age : 23, place : "Kerala"})
-
-console.log(arr)
+```
 
 8. `Shift`
 ============
@@ -1233,20 +1184,15 @@ var shiftedElement = array.shift();
 
 `Removing the first element`
 -----------------------------
-let arr = ["one","two","three","four","five"]
-let currentelement = arr.shift()
-console.log(currentelement)
-
-`Processing elements one by one`
----------------------------------
-let arr = [1,2,3,4,5]
-while(arr.length > 0){
-    let ce = arr.shift()
-    console.log(ce)
-}
+```js
+let arr = ["one","two","three","four","five"];
+let currentelement = arr.shift();
+console.log(currentelement);  // ["two","three","four","five"]
+```
 
 `Implementing FIFO Data structure`
 -----------------------------------
+```js
 let arr = []
 function add(event){
     arr.push(event)
@@ -1261,129 +1207,104 @@ add(4)
 add(5)
 add(6)
 console.log(arr)  // [2,3,4,5,6]    // 1 will be removed
+```
 
 9. `Unshift`
 =============
 that adds one or more elements to the beginning of an array. It modifies the original array and returns the new length of the array.
-
+```js
 var newLength = array.unshift(element1, element2, ..., elementN);
-
-`Adding elements to the bigining`
-----------------------------------
-let arr = ["hi","hello","Namaste"]
-arr.unshift("Good morning","Welcom")
-console.log(arr)
-
-`Implementing an array`
-------------------------
-let arr = []
-for(var i = 1; i <= 5; i++){
-    arr.unshift(i)
-}
-console.log(arr) // [5,4,3,2,1]
+```
 
 `Combining two arrays`
 -----------------------
+```js
 let arr1 = [1,2]
 let arr2 = [3,4]
 arr2.unshift(...arr1)
 console.log(arr2) // [1,2,3,4]
-
-`Adding elements dynamically`
-------------------------------
-let arr = ["hi"]
-function add(element){
-    arr.unshift(element)
-}
-add("Welcome")
-console.log(arr) // ["welcome","hi"]
+```
 
 10. `Slice`
 ===========
 that returns a shallow copy of a portion of an array. It does not modify the original array but instead creates a new array containing the elements from the specified start index to the specified end index (excluding the end index).
 
+```js
 var newArray = array.slice(startIndex, endIndex);
-
+```
 startIndex - inclusive
 endIndex - exclusive
 
 `Extracting a subarray`
 ------------------------
-let arr = ["one","two","three","four"]
-
-let newarr = arr.slice(0,2)
-
-console.log(newarr)  // ["one","two"]
+```js
+let arr = ["one","two","three","four"];
+let newarr = arr.slice(0,2);
+console.log(newarr);  // ["one","two"]
+```
 
 `Extrating the last three elements from an array`
 --------------------------------------------------
-let arr = [ 1,2,3,4,5]
-
-let newarr = arr.slice(-3)
-
-console.log(newarr)  // [3,4,5]
+```js
+let arr = [ 1,2,3,4,5];
+let newarr = arr.slice(-3);
+console.log(newarr);  // [3,4,5]
+```
 
 `Extracting the remaining elements`
 ------------------------------------
-let arr = [1,2,3,4,5]
-
-let newarr = arr.slice(3)
-
-console.log(newarr)  // [4,5]  the first three elements will be ignored
+```js
+let arr = [1,2,3,4,5];
+let newarr = arr.slice(3);
+console.log(newarr);  // [4,5]  the first three elements will be ignored
+```
 
 `Extracting the elements using negetive numbers`
 -------------------------------------------------
-let arr = [1,2,3,4,5]
-
-let newarr = arr.slice(-3,-1)  // from -1 to -3 , -3rd element 
-
-console.log(newarr)  //  [3,4]
-
-`Extracting and modifying the subarray`
-----------------------------------------
-let arr = [1,2,3,4,5]
-
-let newarr = arr.slice(1,4)  // [2,3,4]
-
-newarr[0] = "first"
-
-console.log(newarr)  // ["first",3,4]
+```js
+let arr = [1,2,3,4,5];
+let newarr = arr.slice(-3,-1);  // from -1 to -3 , -3rd element 
+console.log(newarr);  //  [3,4]
+```
 
 11. `Splice`
 =============
 that is used for adding or removing elements from an array. It directly modifies the original array and returns an array containing the removed elements.
-
+```js
 var removedElements = array.splice(startIndex, deleteCount, item1, item2, ...);  // item1 , item2 is the adding elements
+```
 
 `Deleting elements from an array`
 ----------------------------------
-let arr = [1,2,3,4,5]
-let newarr = arr.splice(2,2)
-console.log(newarr) // [3,4]
+```js
+let arr = [1,2,3,4,5];
+let newarr = arr.splice(2,2);
+console.log(newarr); // [3,4]
+```
 
 `Adding elements to a specified index of an array without removing any elements`
 ---------------------------------------------------------------------------------
-let arr = [1,2,3,4,5]
-let newarr = arr.splice(1,0,111,222)
-console.log(arr)  // [1,111,222,2,3,4,5]
+```js
+let arr = [1,2,3,4,5];
+let newarr = arr.splice(1,0,111,222);
+console.log(arr);  // [1,111,222,2,3,4,5]
+```
 
 `Replacing element`
 --------------------
-let arr = ["one","two","three","four"]
-arr.splice(1,1,"add1","add2")
-console.log(arr)  // ["one","add1","add2","three","four"]
+```js
+let arr = ["one","two","three","four"];
+arr.splice(1,1,"add1","add2");
+console.log(arr);  // ["one","add1","add2","three","four"]
+```
 
 `Removing element from end`
 ----------------------------
-let arr = ["one","two","three","four"]
-arr.splice(-1)
-console.log(arr) // ["one","two","three"]
-
-`Adding elements to an empty array`
-------------------------------------
-let arr = []
-arr.splice(0,0,1,2,3,4,5)
-console.log(arr)  // [1,2,3,4,5]
+```js
+let arr = ["one","two","three","four"];
+arr.splice(-1);
+console.log(arr); // ["one","two","three"]
+```
 
 12. `for...in loop`
 =======================
