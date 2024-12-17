@@ -147,6 +147,7 @@ let and const are block scoped and those are not accessed from outside
 After executing the block in the program , the block scope will remove from the memory so thats why the let and const are not accessible from outside
 
 =================================================
+```js
 var a = 100;  // Global scope			        
 let b = 200;  // Script scope			        
 const c = 300;  // Script scope			        
@@ -164,6 +165,7 @@ console.log(c)  // 30  // Block scope
 console.log(a)  // 10  // Global scope		    
 console.log(b)  // 200  // Script scope		    
 console.log(c)  // 300  // Script scope		    
+```
 =================================================
 
 
@@ -207,17 +209,21 @@ Lexical scope promotes encapsulation and helps in avoiding naming conflicts, as 
 
 `Function statement`
 ---------------------
+```js
 function a(){
 console.log("a called")
 }
+```
 
 This is a function statement , in hoisted phase it will get the result because it is a  normal function
 
 `Funtion expression`
 ---------------------
+```js
 var b = function(){
 console.log("b called")
 }
+```
 
 This is a function expression , in the hoisting phase it will get undefined because js engine treat it as a variable so that it wont be accessible before its definition
 
@@ -228,9 +234,11 @@ It is same as function statement
 
 `Anonymous function`
 ---------------------
+```js
 function (){
 
 }
+```
 
 This will cause a syntax error by using an anonymous function we need to assign it to a vaiable
 
@@ -242,9 +250,11 @@ example : setTimeout(function(){ conole.log("Javascript") },1000)
 
 `Named function expression`
 ----------------------------
+```js
 var b = function xyz(){
 console.log("xyz called")
 }
+```
 
 This is named function expression , which is nothing but a normal function statement is assinged to a variable
 
@@ -270,12 +280,15 @@ Stored in datastructure
 
 `Assigned to a variable`
 -------------------------
+```js
 const greet = function(name) {
   return "Hello, " + name + "!";
 };
+```
 
 `Passed as an argument`
 ------------------------
+```js
 const square = function(x) {
   return x * x;
 };
@@ -285,10 +298,11 @@ const applyOperation = function(func, operand) {
 };
 
 console.log(applyOperation(square, 4)); // 16
-
+```
 
 `Retrned from function`
 --------------------------
+```js
 const createMultiplier = function(factor) {
   return function(x) {
     return x * factor;
@@ -297,21 +311,26 @@ const createMultiplier = function(factor) {
 
 const double = createMultiplier(2);
 console.log(double(5)); // 10
+```
 
 `Stored in datastructure`
 --------------------------
+```js
 const functionsArray = [
   function(x) { return x + 1; },
   function(x) { return x * 2; }
 ];
 
 console.log(functionsArray[0](3)); // 4
+```
 
 `Contructor function`
 ----------------------
+```js
 function Dog(name) {
   this.name = name;
 }
+```
 
 it uses new keyword to reate its instance
 
@@ -360,6 +379,10 @@ const obj = {
 };
 ```
 
+
+
+
+
 ## `JSON (JavaScript Object Notation)` ##
 ==========================================
 JSON is a lightweight data-interchange format inspired by JavaScript object syntax. It is primarily used to transmit data between a server and a client and must follow strict formatting rules.
@@ -402,16 +425,13 @@ Memoization is a technique used in programming to optimize the performance of fu
 
 ## `Prototype` ##
 ==================
-In JavaScript, each object has an internal property called [[Prototype]] 
-
-In JavaScript, the prototype is a fundamental concept that allows objects to inherit properties and methods from other objects. Every JavaScript object has a prototype, which is either null or references another object.
+In JavaScript, prototype refers to an internal property of an object that allows the object to inherit properties and methods from another object. Every object in JavaScript has a prototype (except for null, which has no prototype).
 
 `Prototype Chain`
 ------------------
-The prototype chain is a series of objects linked together by their prototypes. When you access a property or method on an object, JavaScript first checks if that property or method exists directly on the object. If it doesn't find it, JavaScript then looks at the object's prototype, and if it's not there, it continues up the prototype chain until it either finds the property/method or reaches the end of the chain (when the prototype is null).
+The prototype chain is a series of objects linked together by their prototypes. When you access a property or method on an object, JavaScript first checks if that property or method exists directly on the object. If it doesn't find it, JavaScript then looks at the object's prototype, and if it's not there, it continues up the prototype chain until it either finds the property/method or reaches the end of the chain that points to null.
 
-arr or function or object
-everything in javascript is an object
+The prototype chain allows for inheritance in JavaScript: an object can inherit properties and methods from another object.
 
 arr.__proto__     is an object
 arr.__proto__.__proto__      is an object.prototype
@@ -419,6 +439,7 @@ arr.__proto__.__proto__.__proto__      is an  object.prototype.prototype == null
 
 `Object creation`
 -------------------
+```js
 function Dog(name) {
   this.name = name;
 }
@@ -429,9 +450,11 @@ Dog.prototype.bark = function() {
 
 const myDog = new Dog('Buddy');
 myDog.bark(); // Outputs: Buddy says Woof!
+```
 
 `Inheritance`
 --------------
+```js
 function Animal(voice) {
   this.voice = voice;
 }
@@ -449,10 +472,15 @@ Cat.prototype.constructor = Cat;
 
 const myCat = new Cat('Whiskers');
 myCat.makeSound(); // Outputs: Animal makes a undefined sound
+```
 
 `Prototype` vs `Prototype Chain`
 -------------------------------
 The prototype is an object's direct reference, while the prototype chain is the series of prototypes leading to the root object, often Object.prototype.
+
+
+
+
 
 ## `Closure` ##
 ================
@@ -469,20 +497,17 @@ Information hiding
 Private variables and functions
 Currying
 Functions like once
-memoize
-maintaining state in async world
+memoization
+callbacks
+maintaining state in asynchronous code
 setTimeouts
 Iterators
+event handler
 
 
-`Closure applications`
-=======================
-Creating private variables , factory functions , Event handlers
-
-`Data encapsulation`
-----------------------
-Closures help in creating private variables and methods, allowing you to encapsulate data and restrict access to certain parts of your code.
-
+`Data encapsulation Example`
+--------------------------------
+```js
 function counter() {
   let count = 0;
 
@@ -495,13 +520,11 @@ function counter() {
 const increment = counter();
 increment(); // Outputs: 1
 increment(); // Outputs: 2
+```
 
-
-`Factory Functions`
----------------------
-Factory function is a function that returns an object
-Closures are often used in factory functions to create objects with private state.
-
+`Factory Functions example`
+---------------------------
+```js
 function createPerson(name) {
   let age = 0;
 
@@ -522,47 +545,42 @@ const person = createPerson("Alice");
 console.log(person.getName()); // Outputs: Alice
 person.increaseAge();
 console.log(person.getAge()); // Outputs: 1
+```
 
-`Event Handlers`
-------------------
-Closures are useful in event handling to maintain the context in which a function was created.
+
 
 `Closure disadvantages`
-========================
-`Memory Usage`
----------------
-Closures can lead to memory leaks if not managed carefully. Since the inner function retains references to outer variables, it keeps them alive even when they are no longer needed.
+------------------------------
+Memory leaks
+Debugging complexity
+Performance issue
+overhead of variables
 
-`Readability and Maintainability`
-----------------------------------`
-Overusing closures can make code harder to read and maintain, especially if closures are deeply nested or if the scope chain becomes complex.
 
-`Performance Impact`
-----------------------
-Closures may have a slight performance impact compared to non-closure alternatives, especially in situations where optimization is critical.
+
+
 
 ## `Garbage collection` ##
 ===========================
-Garbage collection is the process by which the JavaScript engine automatically detects and frees up memory occupied by objects that are no longer reachable or referenced in the program. This helps prevent memory leaks and ensures efficient memory usage.
-examples: orinaco, oilfan, scavenger, Mark compact
+Garbage collection is the process by which the JavaScript engine automatically detects and frees up memory occupied by objects that are no longer reachable or not referenced in the program. This helps prevent memory leaks and ensures efficient memory usage.
+examples: orinaco, oilfan, scavenger, `Mark compact` -> v8
 
 `How Garbage Collection Works`
-==============================
+-----------------------------
 `Mark and Sweep Algorithm`
----------------------------
 The most common garbage collection algorithm used in JavaScript is the Mark and Sweep algorithm.
 
 `Mark Phase`
--------------
 During the mark phase, the garbage collector identifies and marks all objects that are reachable or in use by the program. It starts from the root objects, such as global variables and local variables in execution context, and traverses the object graph.
 
 `Sweep Phase`
---------------
-In the sweep phase, the garbage collector scans the entire heap and deallocates (frees up) memory occupied by objects that were not marked as reachable. These are considered garbage and are candidates for removal.
+In the sweep phase, the garbage collector scans the entire heap and deallocates (frees up) memory occupied by objects that were not marked. These are considered garbage and are candidates for removal.
 
 `Memory Reclamation`
----------------------
 After the sweep phase, the memory occupied by the unreferenced objects is reclaimed and made available for future use.
+
+
+
 
 
 ## `Hoisting` ##
@@ -585,6 +603,7 @@ let variable cant redeclare with var or const again in the same scope
 
 const need to initialize with its declaration
 
+```js
 console.log(y); // undefined
 var y = 10;
 
@@ -593,6 +612,7 @@ let z = 20;
 
 console.log(z); // ReferenceError: Cannot access 'z' before initialization
 const z = 20;
+```
 
 `Function` vs `Arrow Function`
 -------------------------------
@@ -600,24 +620,32 @@ In the execution context in the first phase the function get its whole code that
 
 Function declarations are fully hoisted, meaning they are moved to the top of their containing scope and can be called before their declaration.
 
+```js
 sample()  //Midhun
 function sample(){
     console.log("Midhun");
 }
+```
 
 In the execution context in the first phase the arrow function is allocated with the placeholder undefined , that's why it is showing  
 the function name is not a function
 
 Arrow functions, however, are not hoisted in the same way. They are part of an expression and are only assigned when that line of code is executed.
 
+```js
 sample()  //Not a function because undefined
 var sample = ()=>{
     console.log("Midhun");
 }
 sample2()  //Not a function because undefined
 var sample2 = function(){}
+```
 
 In the arrow function in case of let or const instead of var the error will be reference error
+
+
+
+
 
 ## `This keyword` ##
 =====================
@@ -626,33 +654,29 @@ In the arrow function in case of let or const instead of var the error will be r
 
 2 . inside a normal function the this keyword is “undefined” in strict mode and window in non strict mode
 
-	2 . 1 . this is because the this substitution or if the value of this keyword is 		undefined or null this keyword will be replaced by javascipt with global 		object only in non strict mode
+	2 . 1 . this is because the this substitution or if the value of this keyword is  undefined or null this keyword will be replaced by javascipt with global object only in non strict mode
 
 	2 . 2. if the normal  function is calling alone it is undefined  // x()  = undefined
 
-	2 . 3 . if the normal function is calling along with an object the result will be that 		object  // window.x()  = window
+	2 . 3 . if the normal function is calling along with an object the result will be that object  // window.x()  = window
 
 3 . Inside an object method the this keyword is result in that object
-
-`Global Context`
------------------
-In the global context, outside of any function, this refers to the global object, which is window in a browser environment.
-console.log(this === window);
 
 `Function Context`
 -------------------
 Inside a function, the value of this depends on how the function is invoked.
-
+```js
 function showThis() {
   console.log(this);
 }
 
 showThis();
+```
 
 `Object Methods`
 -----------------
-When a function is a method of an object, this refers to the object on which the method is called.
-
+When a function is a method of an object, `this` refers to the object on which the method is called.
+```js
 const myObject = {
   greeting: 'Hello',
   sayHello: function() {
@@ -661,59 +685,59 @@ const myObject = {
 };
 
 myObject.sayHello();
+```
 
 `Constructor Functions`
 ------------------------
-When a function is used as a constructor with the new keyword, this refers to the newly created instance.
-
+When a function is used as a constructor with the new keyword, `this` refers to the newly created instance.
+```js
 function Person(name) {
   this.name = name;
 }
 
 const john = new Person('John');
 console.log(john.name); // Outputs: John
+```
 
 `Event Handlers`
 -----------------
-In event handlers, this typically refers to the element that triggered the event.
+In event handlers, `this` typically refers to the element that triggered the event.
 <button onclick="console.log(this)">Click me</button>
 
 `Arrow Functions`
 ------------------
 Arrow functions do not have their own this. They inherit this from the enclosing scope. In other words, they do not have the concept of dynamic this.
-
+```js
 const myFunction = () => {
   console.log(this); // 'this' is determined by the surrounding scope
 };
+```
+
+
 
 
 ## `Function methods` or `context changing methods` or `function binding methods`
 ==================================================================================
-
 The three functions call(), apply(), and bind() are often referred to as "function methods" or "context-changing methods" in JavaScript. They are methods provided by the Function prototype in JavaScript and are used for manipulating the this value in functions.
 
-`Call()`
+`Call()`   
 ---------
-Function borrowing
-
-The call method is used to invoke a function with a specified this value
-The this value is referencing the object
-In call method we can pass arguments by separating with commas
-
+`function borrowing`
+The call method is used to invoke a function immediately with a specified this context and arguments passed individually by seperated by commas..
+```js
 const person = { name: 'John' };
 
-function sayHello(greeting) {
-  console.log(`${greeting}, ${this.name}!`);
+function sayHello(greeting, home) {
+  console.log(`${greeting}, ${this.name}!, ${home}`);
 }
 
-sayHello.call(person, 'Hello');
+sayHello.call(person, 'Hello',"homename");
+```
 
 `Apply()`
 ----------
-The call method is used to invoke a function with a specified this value
-The this value is referencing the object
-In call method we can pass arguments using an array
-
+The apply method is similar to call, but arguments are passed as a single array or an array-like object.
+```js
 function greet(message1, message2) {
   console.log(`${message1}, ${message2}, ${this.name}`);
 }
@@ -721,13 +745,14 @@ function greet(message1, message2) {
 const person = { name: 'John' };
 
 greet.apply(person, ['Hello', 'How are you?']); // Outputs: Hello, How are you?, John
+```
 
 `Bind()`
 --------
-The bind() method creates a new function that, when invoked, has its this value set to a specific value. It's useful when you want to create a function with a permanently bound this value.
+The bind method is similar to the call method in that both are used to explicitly set the value of this for a function.
+bind does not immediately invoke the function. Instead, it returns a new copy of the function
 
-This will not invoke the function at the bind method but it creates a ne function for using it later
-
+```js
 function greet(message) {
   console.log(`${message}, ${this.name}`);
 }
@@ -736,6 +761,9 @@ const person = { name: 'John' };
 
 const greetJohn = greet.bind(person);
 greetJohn('Hi'); // Outputs: Hi, John
+```
+
+
 
 
 ## `String methods` ##
@@ -744,97 +772,114 @@ greetJohn('Hi'); // Outputs: Hi, John
 `Length`
 ---------
 Used to get the length of a string
-
+```js
 var str = "Midhun"
 console.log(str.length) //6
+```
 
 `toUpperCase`
 --------------
 Used to covert all the characters in a string to uppercase
-
+```js
 var str = "Midhun"
 console.log(str.toUpperCase())  //MIDHUN
+```
 
 `toLowerCase`
 --------------
 Used to convert all the characters in a string to lowercase
-
+```js
 var str = "MIDHUN"
 console.log(str.toLowerCase())  //midhun
+```
 
-`Trim`
--------
+`Trim`, `trimEnd`, `trimStart`
+--------------------------------
 Used to remove whitespace from both ends of a string
-
+```js
 var str = " Hello Midhun "
 console.log(str.trim())  // "Hello Midhun"
+```
 
 `PadStart / padEnd`
 --------------------
 Used to add characters in the starting or ending to achieve a desired length
-
+```js
 var str = "Midhun"
 console.log(str.padStart(10,"$"))  //$$$$Midhun
 console.log(str.padEnd(10,"$"))  //Midhun$$$$
+```
 
 `charAt`
 ---------
 Used to get the character on a specified index on a string
-
+```js
 var str = "Midhun"
 console.log(str.charAt(5))  //u
+```
 
 `split`
 --------
 Used to split a string to an array of substrings based on a specified delimiter
-
+```js
 var str = "Hello midhun k paniker"
 console.log(str.split(" "))  // ["Hello","midhun","k","paniker"]
+```
 
 `concat`
 ---------
 Used to concatenate one or more strings
-
+```js
 var str1 = "Midhun"
 var str2 = "Good morning "
 console.log(str2.concat(str1))
+```
 
 `substring`
 ------------
 Used to extract a portion of a string based on a specified start and end indices
-
+```js
 var str = "Midhun k paniker"
 console.log(str.substr(9,13)) // pani  here end indices is ignored
+```
 
 `substr`
 ---------
 Used to extract a substring from a string using the start indices and the desired length
-
+```js
 var str4 = "Midhun k paniker"
 console.log("Substr :",str4.substr(3,10))
+```
+
+
+
+
 
 ## `Array methods` ##
 =======================
+`Map`
+-----
+The map() method is a built-in method in JavaScript that allows you to apply a function to each element of an array and return a new array with the results.
 
-1. `Map`
-=========
-The map() method is a built-in method in JavaScript that allows you to apply a function to each element of an array and create a new array with the results.
-
-let newArray = array.map(function(currentValue, index, array) {
+```js
+let newArray = array.map(function(currentValue, currentIndex, array) {
   
 });
+```
 
 `Transforming Elements`
 ------------------------
+```js
 let arr = [1,2,3,4,5,6]
 let newarr = arr.map( (x) => x * 2 ) 
 console.log(newarr)
 
 // [ 2, 4, 6, 8, 10, 12 ]
-
+```
 
 `Extracting a property`
 ------------------------
+```js
 let users = [
     { name: 'Alice', age: 30 },
     { name: 'Bob', age: 25 },
@@ -845,55 +890,59 @@ let users = [
   console.log(newarr)
 
 // [ 'Alice', 'Bob', 'Charlie' ]
-
+```
 
 `Converting datatypes`
 -----------------------
+```js
 let arr = ["1","2","3"]
 let newarr = arr.map((x) => parseInt(x))
 console.log(newarr)
 
 // [ 1, 2, 3 ]
+```
 
 
 2. `reduce`
 ============
-used to reduce the elements of an array to a single value. It iterates over each element of the array, applying a callback function that you provide, and accumulates a result. The result could be of any type
+The reduce is used to reduce the elements of an array to a single value. It iterates over each element of the array, applying a callback function, and accumulates a result. The result could be of any type.
 
+```js
 array.reduce(function(accumulator, currentValue, currentIndex, array) {
 
 }, initialAccumulator);
-
+```
 accumulator:  is a running total or an accumulated value that gets updated at each iteration of the array
 
 `Summing an array`
 -------------------
+```js
 let arr = [1,2,3,4,5]
 let sum = arr.reduce(function(accumulator , currentValue , currentIndex , array){
     return  accumulator + currentValue
 },0)
-console.log(sum)
-
-// 15
+console.log(sum) // 15
+```
 
 `Finding the maximum value`
 ----------------------------
+```js
 let arr = [1,5,2,7,9,10,44,77,88]
 let highval = arr.reduce((accumulator,currentValue)=> Math.max(accumulator,currentValue),0)
-console.log(highval)
-
-// 88
+console.log(highval) // 88
+```
 
 `Flatering an array of arrays`
 --------------------------------
+```js
 let arr = [[1,2],[3,4],[5,6]]
 let newarr = arr.reduce((accumuator,currentvalue)=> accumuator.concat(currentvalue),[])
-console.log(newarr)
-
-// [ 1, 2, 3, 4, 5, 6 ]
+console.log(newarr) // [ 1, 2, 3, 4, 5, 6 ]
+```
 
 `Grouping objects by a property`
 ---------------------------------
+```js
 let students = [
   { name: 'Alice', age: 22, grade: 'A' },
   { name: 'Bob', age: 24, grade: 'B' },
@@ -903,12 +952,12 @@ let students = [
 let groupedByGrade = students.reduce(function(accumulator, currentValue) {
   (accumulator[currentValue.grade] = accumulator[currentValue.grade] || []).push(currentValue);
   return accumulator;
-}, {});
-
-// groupedByGrade is now { A: [{...}, {...}], B: [{...}] }
+}, {}); // groupedByGrade is now { A: [{...}, {...}], B: [{...}] }
+```
 
 `Calculating average`
 ----------------------
+```js
 let arr = [1,2,3,4,5]
 
 let avg = arr.reduce((acc,cv,ci,arr)=>{
@@ -921,35 +970,42 @@ let avg = arr.reduce((acc,cv,ci,arr)=>{
 })
 
 console.log(avg)
+```
 
 3. `Filter`
 =============
 used to create a new array with elements that pass a certain condition defined by a provided function. 
-
-let newArray = array.filter(function(curent value, index, array) {
+```js
+let newArray = array.filter(function(curentvalue, currentIndex, array) {
 
 });
+```
 
 `Filtering odd numbers`
 ------------------------
+```js
 let arr = [1,2,3,4,5]
 let newarr = arr.filter((element,index,arr)=>{
 	return element % 2 == 1
 })
 
 console.log(newarr)  // [1,3,5]
+```
 
 `Filtering strings longer than a certain length`
 ------------------------------------------------
+```js
 let arr = ["midhun","hello","programer","coding","passion","practice"]
 let newarr = arr.filter((element,index,arr)=>{
     return element.length > 7
 })
 
 console.log(newarr)  //  ["programer","practice"]
+```
 
 `Filter objects based on a condition`
 --------------------------------------
+```js
 let students = [
     { name: 'Alice', age: 22, grade: 'A' },
     { name: 'Bob', age: 24, grade: 'B' },
@@ -960,27 +1016,32 @@ let students = [
     return element.grade === "A"
   })
 
-  console.log(newarr)
+  console.log(newarr);
+  ```
 
 4. `Find`
 ==========
  used to retrieve the first element in an array that satisfies a specified condition.
-
+```js
 let result = array.find(function(element, index, array) {
   
 });
+```
 
 `Finding an element based on a condition`
 ------------------------------------------
+```js
 let arr = [1,2,3,4,5,]
 let num = arr.find((element,index,arr)=>{
     return element > 3
 })
 
-console.log(num)  // 4
+console.log(num);  // 4
+```
 
 `Finding an object based on a property`
 ----------------------------------------
+```js
 let students = [
     { name: 'Alice', age: 22, grade: 'A' },
     { name: 'Bob', age: 24, grade: 'B' },
@@ -991,10 +1052,12 @@ let students = [
     return element.grade === "A"
   })
 
-  console.log(std)
+  console.log(std);
+  ```
 
 `Using find() with an external function`
 -----------------------------------------
+```js
 function check (element){
     return element > 10
 }
@@ -1002,70 +1065,76 @@ function check (element){
 let arr = [11,3,23,45,16,74,4,6,7,8,3,56,67]
 let num = arr.find(check)
 
-console.log(num) // 11
+console.log(num); // 11
+```
 
 5. `Sort`
 ==========
 used to sort the elements of an array. By default, it sorts the elements as strings in lexicographic (dictionary) order. However, you can provide a compare function to determine the sorting order based on numeric or custom criteria.
-
+```js
 let newArray = array.sort([compareFunction]);
+```
 
 `Sorting numeric values`
 -------------------------
-let arr = [1,4,2,7,33,56,83,85,3,66]
-
-let newarr = arr.sort((a,b) => a-b)
-
-console.log(newarr)
+```js
+let arr = [1,4,2,7,33,56,83,85,3,66];
+let newarr = arr.sort((a,b) => a-b);
+console.log(newarr);
+```
 
 `Sorting string`
 -----------------
-let arr = ["Banana","Pinapple","Apple","Grapes"]
-
-let newarr = arr.sort()
-
-console.log(newarr)
+```js
+let arr = ["Banana","Pinapple","Apple","Grapes"];
+let newarr = arr.sort();
+console.log(newarr);
+```
 
 `Sorting string in reverse`
 ----------------------------
-let arr = ["Grapes","Apple","Banana","Pineapple"]
-
-let newarr = arr.sort().reverse()
-
-console.log(newarr)
+```js
+let arr = ["Grapes","Apple","Banana","Pineapple"];
+let newarr = arr.sort().reverse();
+console.log(newarr);
+```
 
 `Sorting the object based on th year property`
 -----------------------------------------------
+```js
 let cars = [
     { make: 'Toyota', model: 'Camry', year: 2019 },
     { make: 'Honda', model: 'Civic', year: 2020 },
     { make: 'Ford', model: 'Focus', year: 2018 }
   ];
 
-  let newarr = cars.sort((a,b)=> a.year - b.year)
-
-  console.log(newarr)
+  let newarr = cars.sort((a,b)=> a.year - b.year);
+  console.log(newarr);
+  ```
 
 `Sorting the object based on the make property`
 ------------------------------------------------
+```js
 let cars = [
     { make: 'Toyota', model: 'Camry', year: 2019 },
     { make: 'Honda', model: 'Civic', year: 2020 },
     { make: 'Ford', model: 'Focus', year: 2018 }
   ];
 
-  let newarr = cars.sort((a,b) => a.make.localeCompare(b.make))
-
-  console.log(newarr)
+  let newarr = cars.sort((a,b) => a.make.localeCompare(b.make));
+  console.log(newarr);
+  ```
 
 `Sorting strings in custom order`
 ----------------------------------
+```js
 let arr = ["red","yellow","black","white"]
 let newarr = arr.sort((a,b)=>{
     const order = {black : 1 , red : 2, yellow : 3, white : 4}
     return order[a] - order[b]
 })
 console.log(newarr)
+```
 
 6. `forEach`
 ==============
@@ -1306,6 +1375,7 @@ console.log(arr) // ["one","two","three"]
 let arr = []
 arr.splice(0,0,1,2,3,4,5)
 console.log(arr)  // [1,2,3,4,5]
+
 
 
 
@@ -1928,29 +1998,12 @@ setTimeout(() => {
 
 `Whatif the time is 0 seconds`
 ------------------------------
-So the setTimeout will be offloaded to libuv and then the v8 engine finishes the synchronous code execution and empty the call stack that means removes the execution context from the call stack, then only the setTimeout will work after 0 seconds. That means the when the main thread is empty.
+When the delay for setTimeout or setInterval is set to 0 seconds, the callback function is not executed immediately. Instead:
 
-## `setImmediate (Node.js only)` ##
-=====================================
-Definition: Executes a specified function immediately after the current event loop phase. It’s faster than setTimeout(fn, 0) but still waits for I/O operations in the event loop.
-Use Case: Running a task as soon as the current event loop finishes (micro-task level timing).
-
-## Example
-===========
-```js
-console.log("Before setImmediate");
-
-setImmediate(() => {
-    console.log("This runs immediately after the current event loop");
-});
-
-console.log("After setImmediate");
-
-```
-
-
-
-
+The setTimeout is registered with the Web API (provided by the browser).
+The browser offloads the timer task and waits for the specified delay (0 seconds in this case).
+Meanwhile, the JavaScript engine (V8) continues executing the synchronous code.
+Once the call stack is empty (all synchronous tasks have finished), the browser’s event loop moves the setTimeout callback from the task queue (macrotask queue) to the call stack for execution.
 
 
 
@@ -1973,6 +2026,8 @@ promise
 setTimeout
 setImmediate
 setInterval
+
+
 
 
 

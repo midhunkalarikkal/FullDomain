@@ -55,3 +55,4 @@ function pure(x){
     return x*x;
 }
 console.log(pure(10));
+

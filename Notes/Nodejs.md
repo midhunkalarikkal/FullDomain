@@ -1314,3 +1314,21 @@ to sequentially process incoming HTTP requests through a series of middleware fu
 
 
 Event emitter , streams, pipes, buffers
+
+## `setImmediate (Node.js only)` ##
+=====================================
+Definition: Executes a specified function immediately after the current event loop phase. It’s faster than setTimeout(fn, 0) but still waits for I/O operations in the event loop.
+Use Case: Running a task as soon as the current event loop finishes (micro-task level timing).
+
+## Example
+===========
+```js
+console.log("Before setImmediate");
+
+setImmediate(() => {
+    console.log("This runs immediately after the current event loop");
+});
+
+console.log("After setImmediate");
+
+```
