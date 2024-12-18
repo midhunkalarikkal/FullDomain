@@ -4,5 +4,6 @@ var printFullName = function(greeting, home){
 
 const obj = { fname : "Midhun", lname : "Kalarikkal"};
 
-printFullName.call(obj,"hi "," kalarikkal");
-printFullName.apply(obj,["hi "," kalarikkal"]);
+const result = printFullName.bind(obj,"hi "," kalarikkal");
+
+result();

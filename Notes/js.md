@@ -1405,7 +1405,7 @@ for (let value of arr.values()) {
 
 1. `Object.keys(ObjectName)`
 ==============================
-Returns an array of a given object's own property names.
+Returns an array of a given object's property names.
 
 ```js
 let ob = {name : "Midhun", age : 23};
@@ -1433,8 +1433,8 @@ let arr = Object.entries(ob);
 console.log(arr);  // [[name : "midhun"],[age : 23]]
 ```
 
-4. `Object.assign(ObjectName)`
-=================================
+4. `Object.assign(target, source1, source2)`
+============================================
 Copies the values of all enumerable own properties from one or more source objects to a target object.
 
 ```js
@@ -1468,8 +1468,8 @@ let ob = {name : "midhun",age : 23};
 Object.seal(ob);
 ```
 
-7. `Object.hasOwnProperty(key)`
-=================================
+7. `object.hasOwnProperty(property)`
+=====================================
 Returns a boolean indicating whether the object has the specified property as its own property (not inherited).
 
 ```js
@@ -1494,19 +1494,22 @@ console.log(ob);  // {name : "midhun",age : 23}
 
 ## `Shallow copy` ##
 ========================
-A shallow copy is a copy of an object where only the top-level structure of the original object is duplicated, while the nested objects and their references are shared between the original and the copied object.
+A shallow copy means we copy only the outer layer of an object. If the object has other objects inside it (nested objects), those are not fully copied. Instead, the shallow copy just points to the same nested object of the original object.
+ 
+ - if you change something inside the nested object, it will also change in the original because both are sharing the same inner object.
 
-using Object.assign
+ - But if we change the outer layer property value it will not effect on both.
+```js
+`using` Object.assign
 
 const originalObject = { a: 1, b: { c: 2 } };
 const shallowCopy = Object.assign({}, originalObject);
 
-using spread operator
+`using` spread operator
 
 const originalObject = { a: 1, b: { c: 2 } };
 const shallowCopy = { ...originalObject };
-
-modification to the nested value in the shallow copy will affect in the original objhect
+```
 
 
 
@@ -1516,12 +1519,17 @@ modification to the nested value in the shallow copy will affect in the original
 ====================
 A deep copy creates a completely independent copy of the original object along with all of its nested objects. Changes made to the nested objects within the copied structure do not affect the original object, and vice versa.
 
+```js
 const originalObject = { a: 1, b: { c: 2 } };
 const deepCopy = JSON.parse(JSON.stringify(originalObject));
+```
 
 `structuredClone`
 -------------------
-The structuredClone function is a built-in method introduced in modern JavaScript to create a deep copy of a value. It is a reliable way to duplicate complex data structures, including objects, arrays, and other supported types, without sharing references.
+The structuredClone function is a built-in method introduced in modern JavaScript to create a deep copy of a value.
+```js
+const copy = structuredClone(original);
+```
 
 
 
@@ -1529,7 +1537,6 @@ The structuredClone function is a built-in method introduced in modern JavaScrip
 
 ## `Callback` ##
 ===================
-
 A callback in JavaScript is a function that is passed as an argument to another function and is executed after the completion of a specific task. Callbacks are a crucial concept in asynchronous programming, allowing you to control the flow of the program and handle asynchronous operations such as fetching data, processing events, or performing I/O operations.
 
 Used in setTimeout , setInterval , Promises , Event handling , Higherorder functions
@@ -1539,6 +1546,8 @@ Used in setTimeout , setInterval , Promises , Event handling , Higherorder funct
 Callback hell
 Error handling
 Readbility
+`Inversion of control` - means that we loose the control over the code
+Unmaintainable code
 
 
 
@@ -1546,7 +1555,9 @@ Readbility
 
 ## `Callback hell` ##
 ========================
-Callback Hell refers to the situation where multiple nested callbacks are used in asynchronous JavaScript code, leading to code that is difficult to read, understand, and maintain.
+Callback Hell refers to the situation where multiple nested callbacks are used in asynchronous code, leading to code that is difficult to read, understand, and maintain.
+
+The structure is known as pyramid of doom
 
 `Solution for callbackhell`
 ----------------------------
@@ -1558,7 +1569,7 @@ Use promises and async await
 
 ## `setInterval` ##
 =====================
-Definition: Executes a specified function repeatedly at a fixed time interval (in milliseconds) until explicitly stopped using clearInterval.
+Executes a specified function repeatedly at a fixed time interval (in milliseconds) until explicitly stopped using clearInterval.
 Use Case: Periodically running a task, like updating a timer.
 
 ## Example
@@ -1578,7 +1589,7 @@ setTimeout(() => {
 
 ## `setTimeout` ##
 ====================
-Definition: Executes a specified function once after a fixed delay (in milliseconds).
+Executes a specified function once after a fixed delay (in milliseconds).
 Use Case: Scheduling a one-time task, like showing a notification after a delay.
 
 ## Example
@@ -1627,56 +1638,45 @@ console.log(add(1)(2)(3)) // 6
 A Promise is an object representing the eventual completion or failure of an asynchronous operation and its resulting value. It allows you to write more readable and manageable asynchronous code compared to traditional callback-based approaches.
 
 Pending: The initial state; the promise is neither fulfilled nor rejected.
-Fulfilled: The operation completed successfully, and the promise has a resulting value.
+Resolved: The operation completed successfully, and the promise has a resulting value.
 Rejected: The operation failed, and the promise has a reason for the failure.
 
 `Creating a promise`
 ---------------------
 ```js
-const promise = new Promise((resolve,reject)=>{
-	if(operation-Successfull){
-		resolve(result)
-	}else{
-		reject(error)
-	}
-})
+const myPromise = new Promise((resolve, reject) => {
+  let success = true;  // Change this to false to see the rejection
 
-promise.then(		// pending
-  result => {		// Fullfilled	
-    console.log(result);
-  },
-  error => {		// Rejected
-    console.error(error);
+  if (success) {
+    resolve("The operation was successful!");
+  } else {
+    reject("The operation failed!");
   }
-);
+});
+
+// Using .then() to handle the successful resolution
+myPromise
+  .then((result) => {
+    console.log(result);  // This will run if the promise is resolved
+  })
+  .catch((error) => {
+    console.log(error);   // This will run if the promise is rejected
+  });
 ```
 
 `Advantages of Promises`
 -------------------------
-
 Readability: Promises provide a more readable and structured way to handle asynchronous code compared to callbacks.
 
 Error Handling: Promises offer better error handling through the use of the catch method.
 
-Chaining: Promises support chaining, making it easy to compose sequences of asynchronous operations.
+Promise chaining: Promises support chaining, making it easy to compose sequences of asynchronous operations.
 
-State Management: Promises clearly define states (pending, fulfilled, rejected), making it easier to reason about asynchronous code.
+State Management: Promises clearly define states (pending, resolved, rejected), making it easier to reason about asynchronous code.
 
 `Promise chaining`
 -------------------
-Promise chaining is a technique in JavaScript where you chain multiple asynchronous operations using promises to make the code more readable and maintainable. This is achieved by returning a new promise from each then or catch block, allowing you to chain subsequent asynchronous operations or handle errors in a sequential and organized manner.
-
-```js
-async1("Initial data")
-  .then(result1 => async2(result1))
-  .then(result2 => async3(result2))
-  .then(result3 => {
-    console.log("Final result = ", result3);
-  })
-  .catch(error => {
-    console.log("Error occurred:", error);
-  });
-```
+Promise chaining in JavaScript is a technique where you chain multiple asynchronous operations using promises to make the code more readable and maintainable. Each .then() or .catch() block returns a new promise, allowing subsequent asynchronous operations to be executed in a sequence
 
 `Promise.all`
 --------------
@@ -1684,29 +1684,17 @@ Promise.all is a method in JavaScript that takes an iterable (e.g., an array) of
 
 `Promise.allSettled`
 ---------------------
-Promise.allSettled is another method in JavaScript for handling multiple promises. It is similar to Promise.all, but it doesn't short-circuit when one of the promises is rejected. Instead, it waits for all promises to settle (either fulfill or reject) and then returns an array of objects, each representing the outcome of the corresponding promise.
-
-```js
-result
-Async 1 completed promise1
-Async 2 completed promise2
-Async 3 completed promise3
-All promises fullfilled =   [
-  { status: 'fulfilled', value: 'Result from async 1' },
-  { status: 'rejected', reason: 'Error in async 2' },
-  { status: 'fulfilled', value: 'Result from async 3' }
-]
-```
+Promise.allSettled is another method in JavaScript for handling multiple promises. It is similar to Promise.all, but it doesn't short-circuit when one of the promises is rejected. Instead, it waits for all promises to settle (either fulfill or reject) and then returns an array of objects, each representing the outcome of the corresponding promise with status and value.
 
 `Promise.race`
 ----------------
- that takes an iterable of promises and returns a new promise. This new promise settles (fulfills or rejects) as soon as one of the promises in the iterable settles, regardless of whether the other promises have settled.
+ this method takes an iterable of promises and returns a new promise. This new promise settles (fulfills or rejects) as soon as one of the promises in the iterable settles, regardless of whether the other promises have settled.
 
  Uses are -: Timeout , race conditions , Load balancing , Parallel request , Real time updates
 
 `Then`
 --------
-The then method is used to handle the fulfillment of a promise. It takes two callback functions: one for the fulfillment (onFulfilled) and another for the rejection (onRejected).
+The then method is used to handle the fulfillment of a promise.
 
 `Finally`
 -----------
@@ -1729,9 +1717,7 @@ async and await are keywords in JavaScript that simplify the handling of asynchr
 
 ## `Observable` ##
 ====================
-An Observable is a design pattern used to manage asynchronous data streams. It represents a collection of values that can be observed over time. Observables are often used in scenarios where multiple values are emitted asynchronously, such as user input, data fetching, or event handling.
-```js
-```
+An Observable is a design pattern in JavaScript used to manage asynchronous data streams. It allows you to work with data that can change over time, such as user inputs, server responses, or other events. Unlike promises, Observables can emit multiple values over time, and subscribers can react to each emitted value.
 
 
 
@@ -1739,8 +1725,30 @@ An Observable is a design pattern used to manage asynchronous data streams. It r
 
 ## `DOM` ##
 ==============
-The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a document as a tree of objects, where each object corresponds to a part of the document, such as elements, attributes, and text.
-Components are :- Nodes , methods , events
+The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a document as a tree of objects, where each object corresponds to a part of the document, such as elements, attributes, or text. The DOM allows developers to manipulate the structure, style, and content of a webpage dynamically.
+
+`Nodes`
+Nodes are the building blocks of the DOM.
+
+Document node (document),
+Element nodes (e.g., <div>),
+Text nodes (e.g., text inside an element),
+Attribute nodes.
+
+`Methods`
+Methods are functions provided by the DOM to interact with or manipulate nodes.
+getElementById(),
+querySelector(),
+createElement(),
+appendChild(),
+removeChild().
+
+`Events`
+Events are actions or occurrences that happen in the document and can be handled using JavaScript.
+onclick,
+onmouseover,
+onkeydown,
+onload.
 
 
 
@@ -1803,112 +1811,6 @@ If the call stack is empty, the event loop takes the first callback from the que
 ========================
 Destructuring in JavaScript is a feature that allows you to unpack values from arrays or properties from objects into distinct variables. It simplifies extracting data from complex structures.
 
-1. `Object Destructuring`
--------------------------
-```js
-const person = {
-    name: 'Midhun',
-    age: 25,
-    country: 'India'
-};
-
-// Destructuring
-const { name, age, country } = person;
-
-console.log(name);    // Output: Midhun
-console.log(age);     // Output: 25
-console.log(country); // Output: India
-```
-
-2. `Renaming Variables While Destructuring`
-----------------------------------------------
-```js
-const user = {
-    firstName: 'Alice',
-    lastName: 'Smith'
-};
-
-// Renaming variables
-const { firstName: fName, lastName: lName } = user;
-
-console.log(fName); // Output: Alice
-console.log(lName); // Output: Smith
-```
-
-3. `Default Values in Destructuring`
----------------------------------------
-```js
-const employee = {
-    id: 101,
-    name: 'John'
-};
-
-// Default value for 'position'
-const { name, position = 'Developer' } = employee;
-
-console.log(name);      // Output: John
-console.log(position);  // Output: Developer
-```
-
-4. `Destructuring with Nested Objects`
------------------------------------------
-```js
-const student = {
-    name: 'Sara',
-    details: {
-        grade: 'A',
-        subject: 'Math'
-    }
-};
-
-// Destructuring nested object
-const { name, details: { grade, subject } } = student;
-
-console.log(name);   // Output: Sara
-console.log(grade);  // Output: A
-console.log(subject);// Output: Math
-```
-
-5. `Array Destructuring`
----------------------------
-```js
-const colors = ['red', 'blue', 'green', 'yellow'];
-
-// Skip 'blue' and destructure
-const [firstColor, , thirdColor] = colors;
-
-console.log(firstColor); // Output: red
-console.log(thirdColor); // Output: green
-```
-
-6. `Default Values in Array Destructuring`
----------------------------------------------
-```js
-const scores = [85];
-
-// Default value for second element
-const [math = 50, science = 60] = scores;
-
-console.log(math);    // Output: 85
-console.log(science); // Output: 60
-```
-
-7. `Combined Example: Object and Array Destructuring`
---------------------------------------------------------
-```js
-const data = {
-    user: 'Midhun',
-    hobbies: ['coding', 'gaming', 'reading']
-};
-
-// Destructuring object and array
-const { user, hobbies: [firstHobby, secondHobby] } = data;
-
-console.log(user);       // Output: Midhun
-console.log(firstHobby); // Output: coding
-console.log(secondHobby);// Output: gaming
-```
-
 ## `Ternary Operator`
 ====================
 The ternary operator, also known as the conditional operator, is a concise way to write conditional statements in JavaScript. It is a shorthand form of the if...else statement.
@@ -1961,13 +1863,19 @@ console.log(restFruits); // Output: ['cherry', 'mango']
 
 ## `Bitwise Operators`
 ========================
-& (AND)
-| (OR)
-^ (XOR)
-~ (NOT)
-<< (Left shift)
->> (Right shift)
->>> (Zero fill right shift)
+`& (AND)` -> This operator compares each bit of two numbers and returns 1 if both bits are 1; otherwise, it returns 0.
+
+`| (OR) `-> This operator compares each bit of two numbers and returns 1 if at least one of the bits is 1.
+
+`^ (XOR)` -> This operator compares each bit of two numbers and returns 1 if the bits are different, and 0 if they are the same.
+
+`~ (NOT)` -> This operator inverts all bits of a number (i.e., changes 1 to 0 and 0 to 1).
+
+`<< (Left shift)` -> The left shift operator shifts bits to the left by the specified number of positions, filling with zeros on the right.
+
+`>> (Right shift)` -> The signed right shift operator shifts bits to the right by the specified number of positions, preserving the sign (leftmost bit).
+
+`>>> (Zero fill right shift)` -> The unsigned right shift operator shifts bits to the right, filling zeros from the left. The sign bit is not preserved, treating the number as unsigned.
 
 ## `Assignment Operators`
 ==========================
@@ -1987,7 +1895,7 @@ console.log(restFruits); // Output: ['cherry', 'mango']
 
 ## `Optional Chaining Operator (?.)`
 =======================================
-The optional chaining operator (?.) allows you to access deeply nested properties of an object without having to check if each reference in the chain is null or undefined. If any reference in the chain is null or undefined, it stops evaluation and returns undefined instead of throwing an error.
+The optional chaining operator (?.) makes it easy to access properties of an object, even if some parts of the object don’t exist. If anything in the chain is null or undefined, it stops and returns undefined instead of throwing an error.
 
 ```js
 const user = {
@@ -2006,7 +1914,7 @@ console.log(user.profile?.phone); // undefined (phone doesn't exist, no error)
 
 ## `Nullish Coalescing Operator (??)`
 =======================================
-The nullish coalescing operator (??) returns the right-hand operand when the left-hand operand is null or undefined. It is similar to the logical OR (||), but the difference is that ?? only considers null or undefined as "nullish" values, whereas || considers any falsy value (0, false, NaN, '', null, or undefined) as falsy.
+The nullish coalescing operator (??) helps us provide a default value when the left-hand side is null or undefined. It’s like a more precise version of || (logical OR), but it only works with null or undefined, not other "falsy" values like 0, false, or an empty string ('').
 
 ```js
 const value1 = null;
@@ -2073,10 +1981,9 @@ Static methods are methods that are called on the class itself, rather than on i
 
 `Super keyword`
 ----------------
-In a derived class constructor, super() is used to call the constructor of the parent class. This is necessary when the child class has its own constructor, and you want to ensure that the initialization code in the parent class's constructor is also executed.
+In a derived class constructor, super() keyword is used to call the constructor of the parent class. This is necessary when the child class has its own constructor, and you want to ensure that the initialization code in the parent class's constructor is also executed.
 
 it is used inside the child class's constructor
-
 it is also used in the child class's method to invoke the parent class method
 
 super.parentclassmethodname()
@@ -2086,58 +1993,11 @@ When using super in a method, it must be used before this is used in the method.
 
 `Encapsulation`
 ---------------
-Encapsulation refers to the concept of bundling data (variables) and methods (functions) that operate on the data into a single unit, typically a class or object. It also involves restricting access to certain details of an object and only exposing necessary parts of the object.
-```js
-class Person {
-  #name; // private property
-
-  constructor(name, age) {
-    this.#name = name; // setting the private property
-    this.age = age;
-  }
-
-  getName() { // public method to access private property
-    return this.#name;
-  }
-
-  setName(newName) { // public method to modify private property
-    this.#name = newName;
-  }
-}
-
-const person = new Person('Alice', 25);
-console.log(person.getName()); // Alice
-person.setName('Bob');
-console.log(person.getName()); // Bob
-
-// The following will throw an error as #name is private
-// console.log(person.#name); 
-```
+Encapsulation means combining data variables and methods into one unit, such as a class or object. It also hides unnecessary details and only shows the important parts, making the object easier to use and safer.
 
 `Abstraction`
 -----------------
 Abstraction is the process of hiding the complex reality and showing only the necessary parts of an object or function. It helps reduce complexity by focusing only on the relevant details and ignoring unnecessary ones. Abstraction is often implemented using classes, functions, or modules in
-```js
-class Car {
-  constructor(brand, model) {
-    this.brand = brand;
-    this.model = model;
-  }
-
-  startEngine() {
-    console.log('Engine started');
-  }
-
-  drive() {
-    this.startEngine();  // abstraction: hiding engine-starting logic
-    console.log(`${this.brand} ${this.model} is driving.`);
-  }
-}
-
-const myCar = new Car('Toyota', 'Camry');
-myCar.drive(); // Outputs: Engine started
-               // Outputs: Toyota Camry is driving.
-```
 
 `Access Modifiers`
 --------------------
@@ -2167,7 +2027,7 @@ The next method return an object with two propertiex  value and done
 value is the current element in the collection
 done is the boolean value representing whether the iteration is complete or not
 
-symbol.iterator returns an iterator obbject for the collection
+symbol.iterator returns an iterator object for the collection
 
 
 
@@ -2176,14 +2036,6 @@ symbol.iterator returns an iterator obbject for the collection
 ## `Pass by value` ##
 =========================
 When a primitive data type (e.g., number, string, boolean) is passed as an argument to a function, a copy of the actual value is passed. Changes made to the parameter within the function do not affect the original variable outside the function.
-
-function updatex(x){
-	x = 42;
-}
-
-let num = 10
-updatex(num)
-console.log(num) //10  will not change the value
 
 because the function received a copy of the value, not a reference to the original variable.
 
@@ -2203,7 +2055,7 @@ let myArray = [1, 2, 3];
 updateArray(myArray);
 console.log(myArray);  //[1,2,3,4]
 
-In the example above, the function updateArray receives a copy of the reference to the array myArray, and when the function modifies the array by pushing an element, the original array outside the function is also modified.
+In the above example, the function updateArray receives a reference to the array myArray, and when the function modifies the array by pushing an element, the original array outside the function is also modified.
 
 in the case of objects if we are reassigning the object with new key value pair , it will not modify the outside object
 
