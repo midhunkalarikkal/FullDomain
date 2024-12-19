@@ -17,6 +17,37 @@ An `event-driven` language means the flow of the program is determined by events
 Javascript is neighther a interpreter language nor compiler language, but it uses both of them inside v8 engine.
 The compilation process inside the v8 engine is said to be the `JIT Compilation` that menas just in time compilation.
 
+
+
+
+
+## `JIT (Just in time)` ##
+============================
+Just-In-Time (JIT) Compilation: JavaScript is traditionally an interpreted language, meaning code is executed directly without a compilation step. However, modern JavaScript engines like V8 use JIT compilation to improve performance.
+
+`Ignition` interpreter and `turbofan` compiler
+
+JIT Compilation means that V8 doesn't compile the entire code upfront. Instead, it compiles JavaScript code just in time — as it runs. It first runs the code and collects runtime data. If it detects that certain parts of the code are used frequently, it compiles those parts into machine code for faster execution.
+
+
+`Working`
+----------
+`Source Code Parsing`
+The source code (e.g., JavaScript) is initially parsed into an intermediate representation like bytecode.
+
+`Runtime Compilation`
+During execution, frequently used parts of the code (called "hot code") are identified and compiled into machine code.
+
+`Optimization`
+The JIT compiler optimizes the machine code during this process to enhance performance.
+
+`Execution`
+The machine code is then directly executed by the CPU, leading to faster execution compared to interpretation.
+
+
+
+
+
 ## `Advantages of JavaScript` ##
 ==================================
 
@@ -31,6 +62,9 @@ Dynamic Typing: Flexible handling of variable types simplifies coding.
 Community Support: Large and active developer community for shared knowledge.
 
 
+
+
+
 ## `Disadvantages of JavaScript` ##
 ====================================
 
@@ -43,6 +77,10 @@ Single Threaded: Limited to one operation at a time, potentially causing bottlen
 Callback Hell: Nested callbacks can lead to complex and hard-to-read code.
 
 Lack of Strong Typing: Dynamic typing can result in runtime errors, requiring thorough testing.
+
+
+
+
 
 ## `Execution context` ##
 =========================
@@ -80,6 +118,10 @@ whenever an execution context is created , the memory component will get the acc
 
 lexical environment means -> where is the code physically appear
 
+
+
+
+
 ## `Primitive data` ##
 ======================
 Number
@@ -101,6 +143,10 @@ const sym3 = Symbol('example');  // Another Symbol with the same description
 console.log(sym2 === sym3);      // false (they are unique)
 ```
 
+
+
+
+
 ## `Non primitive data` ##
 ===========================
 Object
@@ -115,27 +161,28 @@ Regex
 Error
 
 
+
+
+
 ## `Window` ##
 ===============
 Window is a global object is created along with the execution context
 Whatever we write in the global space it will attached to the window
 
-
-## `Scope` ##
-=============
+`Scope`
+----------
 Scope means where you can access a specific variable or function in our code  
 The lexical environment of Global execution context will point to null , because there is no parent for it anymore.
 
-
-## `Scope chain` ##
-====================
+`Scope chain`
+-------------
 Chain of the lexical environment and its lexical environment of parent
 
 If the js engine does not find any variable in the local memory it will move to the lexical scope , this continue until it find the value or null
 
 
-## `Block scope` ##
-====================
+`Block scope`
+-----------------
 { from this to } is a block is used for grouping together the statements , it is also known as compund statement
 
 it is used when javascript expect a single statement to run
@@ -168,11 +215,6 @@ console.log(c)  // 300  // Script scope
 ```
 =================================================
 
-
-## `Scope` ##
-==============
-Scope refers to the context in which variables are declared and the accessibility of those variables.
-
 `Global Scope`
 ---------------
 Variables declared outside any function or block have global scope and can be accessed throughout the entire program.
@@ -202,6 +244,9 @@ In lexical scope, inner functions have access to variables declared in their out
 `Benefits`
 ----------
 Lexical scope promotes encapsulation and helps in avoiding naming conflicts, as variables declared in different scopes remain independent.
+
+
+
 
 
 ## `Function` ##
@@ -270,6 +315,41 @@ Functional programming is a programming paradigm where you build software by com
 ------------------------
 A function that takes one or more functions as arguments or returns a function as a result. It enables functional programming concepts like mapping, filtering, and reducing.
 
+`IIFE`
+======
+Immediately Invoked Function Expression, is a JavaScript function that is defined and executed immediately after its creation. It is a common pattern used to create a new scope for variables to avoid polluting the global scope and to encapsulate code.
+
+```js
+(function(x){
+	code
+})()
+```
+
+It creates a new scope , avoid polluting global scope
+
+Uses are :- Encapsulation , Data privacy , Avoiding Hoisting Issues , Creating modules
+
+Inside an Immediately Invoked Function Expression (IIFE) in non-strict mode:
+In a browser environment, this refers to the global object, which is window.
+In Node.js, this refers to the global object, which is global.
+
+If the IIFE is running in strict mode ('use strict';), the value of this inside the IIFE will be undefined.
+
+Advantages are encapsulation and isolation
+
+Wrapping the function in parentheses () makes it an expression rather than a declaration.
+Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
+
+`Generator`
+--------------
+Generators are a type of iterable in JavaScript that allow pausing and resuming the execution of a function. They are defined using the function* syntax, and they use the yield keyword to produce values one at a time. A generator function returns an iterator which can be used to traverse the yielded values.
+
+Key Features :-
+Defined using function* syntax.
+Uses the yield keyword to yield values.
+The function can be paused and resumed.
+Can be used with for...of loops or manually using the iterator's next() method.
+
 `First class function`
 ------------------------
 In JavaScript, functions are first-class citizens, which means they can be 
@@ -331,8 +411,7 @@ function Dog(name) {
   this.name = name;
 }
 ```
-
-it uses new keyword to reate its instance
+it uses new keyword to create its instance
 
 `Factory function`
 -------------------
@@ -346,6 +425,10 @@ it has no side effects, it always returns the same result for the same inputs, a
 `Impure function`
 ------------------
 it modifies the external state (result variable) as a side effect.
+
+`Default parameters`
+---------------------
+Default parameters in JavaScript allow you to assign default values to function parameters. If a parameter is not provided when the function is called, the default value will be used.
 
 
 
@@ -2059,25 +2142,6 @@ In the above example, the function updateArray receives a reference to the array
 
 in the case of objects if we are reassigning the object with new key value pair , it will not modify the outside object
 
-function updateReference(obj) {
-    // obj.name = "newname"
-    obj = {name : "newname"}
-  }
-  
-  let myObject = { key: 'value' };
-  updateReference(myObject);
-  console.log(myObject); // {key : 'value'}
-
-if we are modifying the object without reassigning , it will affect the outside object
-
-function updateReference(obj) {
-    // obj.name = "newname"
-  }
-  
-  let myObject = { key: 'value' };
-  updateReference(myObject);
-  console.log(myObject); {key : 'value' , name : 'newname'}
-
 
 
 
@@ -2086,12 +2150,12 @@ function updateReference(obj) {
 ===========================================
 This queue holds macrotasks (regular tasks) that are ready to be executed.
 
-Examples include
 setTimeout
 setInterval
 I/O tasks like network or file operations
 Event listeners (clicks, scrolls, etc.)
-These tasks are executed after the current execution context is complete.
+
+These tasks are executed after the micro tasks are completed.
 
 
 
@@ -2101,21 +2165,11 @@ These tasks are executed after the current execution context is complete.
 ========================
 This queue holds microtasks that have higher priority than macrotasks.
 
-Examples include:
 Promises (e.g., .then() or .catch())
 MutationObserver
 queueMicrotask()
+
 Microtasks are executed immediately after the current execution context and before the message queue (macrotasks).
-
-
-
-
-
-
-
-`Default parameters`
----------------------
-Default parameters in JavaScript allow you to assign default values to function parameters. If a parameter is not provided when the function is called, the default value will be used.
 
 
 
@@ -2123,15 +2177,16 @@ Default parameters in JavaScript allow you to assign default values to function 
 
 ## `Tasks` ##
 =================
+`Macro tasks`
+--------------
+Macrotasks are tasks with lower priority that are executed asynchronously after the microtask queue has been emptied.
+setTimeout , setInterval , eventListener , i/o op
+
 `Micro tasks`
 ----------------
 Microtasks are tasks with higher priority that are executed asynchronously as soon as the current execution context is emptied and before the event loop advances to the next macrotask.
 promises , Mutation obeserver , callbacks
 
-`Macro tasks`
---------------
-Macrotasks are tasks with lower priority that are executed asynchronously after the microtask queue has been emptied.
-setTimeout , setInterval , eventListener , i/o op
 
 
 
@@ -2141,31 +2196,11 @@ setTimeout , setInterval , eventListener , i/o op
 =================================
 `Implicit coercion`
 --------------------
-Implicit coercion happens automatically by the JavaScript engine when values of different types are used together. JavaScript tries to make sense of the operation and convert the values as needed.
+Implicit coercion occurs automatically when the JavaScript engine converts values from one type to another during an operation, attempting to make sense of the context without explicit instructions from the programmer.
 
-const x = 5
-const y = "10"
-console.log(x+y) // "510"
-
-`Explicit conversion`
-------------------------
-Explicit conversion involves intentionally converting a value from one type to another using functions or methods provided by the language.
-
-const x = "123";
-const y = Number(x);
-
-const x = "5";
-const y = parseInt(x);
-
-`Type Casting`
----------------
-Definition: Type casting refers to the explicit conversion of one data type to another using functions or methods.
-When it happens: Type casting is done manually by the programmer, not automatically by JavaScript.
-```js
-let number = 5;
-let string = String(number);  // Explicitly casting number to string
-console.log(string);  // "5"
-```
+`Explicit conversion` or `Type casting`
+----------------------------------------
+Explicit conversion is the deliberate transformation of a value from one type to another, performed using built-in functions or methods provided by JavaScript.
 
 
 
@@ -2295,13 +2330,19 @@ Event delegation is a JavaScript programming pattern where a single event listen
 
 ## `Event propogation` ##
 ==========================
-Event propagation refers to the process of an event traveling through the DOM hierarchy.
+Event propagation refers to the process by which an event moves through the DOM tree. It consists of three phases:
 
-Capturing Phase (Trickling Phase): The event travels from the root of the document to the target element.
-Bubbling Phase: The event travels from the target element back up to the root.
+Capturing Phase: The event starts at the root of the DOM and moves down to the target element.
+Target Phase: The event reaches the target element.
+Bubbling Phase: The event bubbles back up from the target element to the root.
 
-Event Bubbling:-
-Definition: Event bubbling specifically refers to the bubbling phase of event propagation.
+
+
+
+
+## `Event Bubbling` ##
+=======================
+Event bubbling is a part of event propagation where the event starts at the target element and propagates upward through its ancestors in the DOM tree. It allows parent elements to react to events triggered by their child elements.
 
 
 
@@ -2311,24 +2352,22 @@ Definition: Event bubbling specifically refers to the bubbling phase of event pr
 ====================
 Polyfills are code snippets or scripts that implement modern functionality in older browsers that do not natively support certain features. If a newer JavaScript method, API, or feature is not available in an older browser, a polyfill can be used to mimic or "polyfill" that functionality, ensuring compatibility across different browser versions.
 
-```js
-// Polyfill for Array.prototype.includes()
-if (!Array.prototype.includes) {
-    Array.prototype.includes = function(element) {
-        return this.indexOf(element) !== -1;
-    };
-}
-
-// Now you can use includes() in older browsers
-const arr = [1, 2, 3, 4];
-console.log(arr.includes(3)); // true
-console.log(arr.includes(5)); // false
-```
 
 
 
 
+## `use strict` ##
+=====================
+use strict is a directive in JavaScript that enforces a stricter set of rules on our code. It helps us write cleaner and less error-prone code by catching common mistakes and preventing the use of unsafe features.
 
+Helps in catching silent errors early.
+Encourages better coding practices.
+Improves performance by enabling optimizations in JavaScript engines.
+
+
+
+## `Extras` ##
+===============
 
 `Priority calling`
 --------------------
@@ -2351,84 +2390,10 @@ The === (strict equality) operator, on the other hand, does not perform type coe
 -------------
 The JSON.parse() method is used to parse a JSON string and convert it into a JavaScript object. It takes a JSON-formatted string as its argument and returns the corresponding JavaScript object.
 
-const jsonString = '{"name": "John", "age": 30, "city": "New York"}';
-const parsedObject = JSON.parse(jsonString);
-
-console.log(parsedObject); // Output: { name: 'John', age: 30, city: 'New York' }
-
 `Json stringify`
 ------------------
 The JSON.stringify() method is used to convert a JavaScript object into a JSON-formatted string. It takes an object as its first argument and an optional replacer function and space parameter.
 
-const personObject = { name: 'Alice', age: 25, city: 'London' };
-const jsonString = JSON.stringify(personObject);
-
-console.log(jsonString); // Output: '{"name":"Alice","age":25,"city":"London"}'
-
-
-
-
-
-
-<!-- Need to move to function topic -->
-`IIFE`
-======
-Immediately Invoked Function Expression, is a JavaScript function that is defined and executed immediately after its creation. It is a common pattern used to create a new scope for variables to avoid polluting the global scope and to encapsulate code.
-
-```js
-(function(x){
-	code
-})()
-```
-
-It creates a new scope , avoiding polluting global scope
-
-Uses are :- Encapsulation , Data privacy , Avoiding Hoisting Issues , Creating modules
-
-this keyword inside the iife is will be global object for nodejs and window for browser environment in non strcit mode
-
-If the IIFE is running in strict mode ('use strict';), the value of this inside the IIFE will be undefined.
-
-Advantages are encapsulation and isolation
-
-Wrapping the function in parentheses () makes it an expression rather than a declaration.
-Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
-
-
-`Generator`
---------------
-Generators are a type of iterable in JavaScript that allow pausing and resuming the execution of a function. They are defined using the function* syntax, and they use the yield keyword to produce values one at a time. A generator function returns an iterator which can be used to traverse the yielded values.
-
-Key Features :-
-Defined using function* syntax.
-Uses the yield keyword to yield values.
-The function can be paused and resumed.
-Can be used with for...of loops or manually using the iterator's next() method.
-
-```js
-// Generator function definition
-function* countUpTo(max) {
-    let count = 1;
-    while (count <= max) {
-        yield count;  // Pause and yield the current value of count
-        count++;
-    }
-}
-
-// Create a generator instance
-const counter = countUpTo(5);
-
-// Use next() to get the next value
-console.log(counter.next().value); // 1
-console.log(counter.next().value); // 2
-console.log(counter.next().value); // 3
-console.log(counter.next().value); // 4
-console.log(counter.next().value); // 5
-console.log(counter.next().value); // undefined (iteration is complete)
-```
-
-`break` vs `continue`
----------------------
 `break`
 --------
 The break statement is used to exit a loop or a switch statement immediately, regardless of whether the loop condition is still true or not.
@@ -2436,29 +2401,3 @@ The break statement is used to exit a loop or a switch statement immediately, re
 `continue`
 ----------
 The continue statement is used to skip the current iteration of a loop and proceed with the next iteration.
-
-
-
-
-<!-- Move to the first topic -->
-
-## `JIT (Just in time)` ##
-============================
-Just-In-Time (JIT) compilation is a technique used in programming where code is dynamically translated into native machine code at runtime, instead of being compiled ahead of time (AOT). This approach allows for improved execution speed and efficiency during program execution.
-
-`Working`
-----------
-Source Code Parsing:
-The source code (e.g., JavaScript) is initially parsed into an intermediate representation like bytecode.
-
-Runtime Compilation:
-During execution, frequently used parts of the code (called "hot code") are identified and compiled into machine code.
-
-Optimization:
-The JIT compiler optimizes the machine code during this process to enhance performance.
-
-Execution:
-The machine code is then directly executed by the CPU, leading to faster execution compared to interpretation.
-
-
-
