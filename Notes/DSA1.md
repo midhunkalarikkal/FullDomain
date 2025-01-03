@@ -6,10 +6,14 @@ Data structures are ways of organizing and storing data so that it can be access
 `Types of Data Structures`
 ----------------------------
 Primitive Data Structures:
-Basic structures like Number , String , undefined , null , symbol , bigint
+Number , String , boolean , undefined , null , symbol , bigint
 
 Non-Primitive Data Structures: 
-More complex structures like Arrays, Object , Map , Set 
+Linear Datastructures : Array ,  Linked list , Stack , Queue
+Heirarchical or Tree based Datastructure : Binary tree , Binary search tree ,  Heap , AVL tree , Red black tree
+Hashing Datastructures : Hash table , Map , Weak map
+Graph based Datastructures : Graph
+Other : Set , Weakset , Priority queue
 
 `Common Data Structures`
 ---------------------------
@@ -90,13 +94,13 @@ Greedy Algorithms: Making the locally optimal choice at each stage (e.g., Kruska
 
 `Linear search`
 -----------------
-iterates through each element in an array sequentially
+Iterates through each element in an array sequentially
 linear search has a time complexity of O(n)
 Linear search works efficiently on both sorted and unsorted array
 
 `Binary search`
 -----------------
-requires the array to be sorted. It repeatedly divides the search interval in half by comparing the middle element with the target value. Depending on the comparison, it eliminates half of the remaining elements from consideration.
+Requires the array to be sorted. It repeatedly divides the search interval in half by comparing the middle element with the target value. Depending on the comparison, it eliminates half of the remaining elements from consideration.
 Binary search operates with a time complexity of O(log n)
 
 `Importance of Algorithms`
@@ -306,20 +310,11 @@ Regular Testing: Regularly running tests to check for memory leaks during develo
 ============================
 `Mark Phase`
 -------------
-Traverse References: Start from a set of "root" objects, such as global variables, stack variables, and active threads.
-
-Mark Reachable Objects: Follow references from these root objects to mark all objects that are still reachable.
-
-Process: From each root object, traverse through references to other objects.
-Mark: Set a flag or tag on objects to indicate they are in use (reachable).
+The garbage collector identifies all objects that are still reachable or in use by traversing from the "roots" (like global variables and function scopes). These objects are marked as active.
 
 `Sweep Phase`
 --------------
-Scan Memory: Go through all objects in memory.
-
-Collect Unmarked Objects: Remove or free objects that were not marked in the Mark Phase.
-
-Process: Delete or deallocate memory for unmarked objects.
+After marking, the garbage collector scans through the memory and removes objects that were not marked, freeing up space for future use.
 
 
 
@@ -362,19 +357,12 @@ Deletion - O(n) (shifting elements)
 
 2. `Linked Lists`
 ------------------
-Singly Linked List
----------------
-Access -  O(n)
-Search -  O(n)
-Insertion -  O(1) (if inserting at the head)
-Deletion -  O(1) (if deleting at the head)
-
-Doubly Linked List
----------------
-Access - O(n)
-Search - O(n)
-Insertion - O(1) (if inserting at the head/tail)
-Deletion -  O(1) (if deleting at the head/tail)
+Singly Linked List / Doubly Linked List
+----------------------------------------
+Access -  O(n) -> Accessing an element requires traversal from the head (or tail), making it linear in complexity.
+Search -  O(n) -> Searching for a specific value requires traversal, as there is no direct indexing.
+Insertion -  O(1) (if inserting at the head) otherwise o(n)
+Deletion -  O(1) (if deleting at the head) otherwise o(n)
 
 3. `Stacks`
 ------------
@@ -422,21 +410,14 @@ Search - O(n)
 Insertion -  O(log n)
 Deletion -  O(log n) (delete min/max)
 
-Fibonacci Heap
------------------
-Access - O(n)
-Search - O(n)
-Insertion - O(1)
-Deletion - O(log n)
-
 8. `Graphs`
 ------------
 Adjacency Matrix
 ----------------
-Access -  O(1)
-Search -  O(V) (checking all vertices)
-Insertion -  O(1) (adding an edge)
-Deletion -  O(1) (removing an edge)
+Access: O(1)
+Search: O(v) (Check all the vertices)
+Insertion: O(1)
+Deletion: O(1)
 
 Adjacency List
 --------------
@@ -452,6 +433,7 @@ Deletion -  O(E) (removing an edge)
 ## `Array` ##
 =============
 An array is a collection of items stored at contiguous memory locations. The items can be of the same data type, and they are accessed using an index.
+In JavaScript, arrays are inherently heterogeneous, meaning we can store different types of data
 
 `Multi-Dimensional Array`
 -------------------------
@@ -466,17 +448,15 @@ Example: Arrays in C/C++ with a predefined size.
 Efficient but less flexible.
 
 `Dynamic Array`
-----------------
-Can change size during runtime.
-Example: ArrayList in Java, Python list, JavaScript Array.
-Flexible but may consume more memory during resizing.
+-----------------
+ A dynamic array automatically resizes itself when it reaches its capacity. It typically starts with a small fixed size, and as elements are added, it allocates a new, larger array (usually double the current size) and copies the existing elements to this new array.
 
 `Sparse array`
 ----------------
-A sparse array is a data structure that specifically stores only the non-zero (or significant) values and their corresponding indices, which makes it more memory-efficient for storing large datasets with mostly zero or default values.
-
-Advantages :- Memory efficeincy , efficient storage
-Disadvantages :- Access time , complex operation
+A sparse array in JavaScript is an array where not all indices have assigned values. It contains "holes" where some indices are skipped or undefined. Sparse arrays are created by intentionally leaving some indices empty.
+```js
+const sparseArray = [1, , 3, , 5];
+```
 
 `Jagged Array`
 ---------------
@@ -485,13 +465,6 @@ An array of arrays where each sub-array can have different lengths.
 `Dense array`
 ----------------
 A dense array stores all its values, including zeros, in a contiguous block of memory without explicitly storing indices for each element.
-
-`Dynamic Array`
------------------
-Working :-
- A dynamic array automatically resizes itself when it reaches its capacity. It typically starts with a small fixed size, and as elements are added, it allocates a new, larger array (usually double the current size) and copies the existing elements to this new array.
-Memory Allocation :-
- Initially, a fixed amount of memory is allocated. When more space is needed, a larger block of memory is allocated, elements are copied to this new block, and the old block is deallocated. This resizing operation involves overhead but ensures that appending elements is efficient on average.
 
 `Homogeneous Array`
 --------------------
@@ -584,17 +557,17 @@ Used in representing sparse arrays efficiently.
 ---------------------
 Used in stacks and queues.
 Used in undo functionality in applications (e.g., text editors).
-Used in implementing hash tables to handle collisions.
+Used for implementing hash tables to handle collisions.
 Used in adjacency lists for representing graphs.
 Used in memory management systems (e.g., malloc() and free() in C).
 
 `Doubly Linked List`
 ---------------------
-Used in implementing advanced data structures like deques.
+Used for implementing advanced data structures like dequeues.
 Used in navigation systems (e.g., forward and backward buttons).
-Used in implementing LRUs (Least Recently Used) in caching.
+Used for implementing LRUs (Least Recently Used) in caching.
 Used in undo/redo functionality with efficient traversal in both directions.
-Used in implementing adjacency lists for bidirectional graphs.
+Used for implementing adjacency lists for bidirectional graphs.
 
 `Stack`
 ---------
@@ -627,22 +600,6 @@ Used in decision-making processes (e.g., decision trees).
 Used in representing parse trees in compilers.
 Used in representing organizational structures.
 
-`Binary Search Tree (BST)`
----------------------------
-Used in implementing associative arrays and dictionaries with ordered keys.
-Used in range queries and nearest neighbor searches.
-Used in database systems for indexing and efficient searching.
-Used in implementing balanced BSTs for efficient operations.
-Used in optimizing search and insertion operations.
-
-`AVL Tree`
-------------
-Used in applications requiring fast insertion, deletion, and search operations.
-Used in databases and file systems for maintaining sorted order.
-Used in optimizing operations that require balanced trees.
-Used in optimizing range queries and successor/predecessor searches.
-Used in self-balancing binary search trees.
-
 `Heap`
 -------
 Used in priority queues for efficient retrieval of the highest (or lowest) priority element.
@@ -671,27 +628,6 @@ Asymptotic notations are mathematical tools used to analyze the performance of a
 ----------
 In the context of algorithm analysis, ranking refers to the classification of algorithms based on their performance, usually measured by their time and space complexities. It helps in comparing the efficiency of different algorithms.
 
-`Big O Notation`
------------------
-Big O notation describes the upper bound of an algorithm's time or space complexity. It represents the worst-case scenario, giving the maximum amount of time or space an algorithm will require as the input size grows.
-
-O(1): Constant time; the operation does not depend on the input size. Constant number of steps
-
-O(log n): Logarithmic time; the operation reduces the problem size by a constant factor each step. Doubling input adds one more step
-
-O(n): Linear time; the operation scales directly with the input size. Time grows linearly with input size
-
-O(n log n): Linearithmic time; common in efficient sorting algorithms.
-
-O(n^2): Quadratic time; typical of algorithms with nested loops. Time grows as the square of input size
-
-o(n^3): Cubic time complexity. Time grows as the cube of input size
- eg : 3D matrix operations , Brute force algorithm for finding all triplets
-
-O(2^n): Exponential time; typical of algorithms that solve problems by trying all possibilities. Time doubles with each added element
-
-O(n!): Factorial time; typical of algorithms that generate all permutations of the input
-
 `Omega Notation (Ω)`
 --------------------
 Omega notation describes the lower bound of an algorithm's time or space complexity. It represents the best-case scenario, giving the minimum amount of time or space an algorithm will require as the input size grows.
@@ -706,14 +642,17 @@ Theta notation provides a tight bound on an algorithm's time or space complexity
 
 ## `Virtual Memory` ##
 =========================
-
 `Definition`
 -------------
 Virtual memory is a memory management technique used by computer operating systems to provide an "idealized abstraction of the storage resources that are actually available on a given machine." It creates an illusion for users of a very large (main) memory.
 
 `How it Works`
 --------------
-It uses both hardware and software to enable a computer to compensate for physical memory shortages by temporarily transferring data from random access memory (RAM) to disk storage. This process is called paging or swapping. When an application uses more memory than is physically available, the operating system uses virtual memory to make up the difference.
+Logical Addressing: Virtual memory makes applications think they have more memory than what is physically available by creating a virtual layer between RAM and the memory they use.
+
+Paging: The system breaks RAM and virtual memory into small blocks called pages. If RAM is full, less-used data is moved to storage (a page file on Windows or swap space on Linux).
+
+Swapping: When a program needs data that was moved to storage, the system brings it back to RAM and swaps out other data if needed. This keeps the illusion of having more memory.
 
 `Advantages`
 -------------
@@ -732,14 +671,13 @@ Requires complex hardware and software management.
 
 ## `Amortized Analysis` ##
 =============================
-
 `Definition`
 --------------
-Amortized analysis is a method used in computer science to average the time required to perform a sequence of data structure operations over all the operations performed. It provides a more accurate measure of the performance of an algorithm over a worst-case scenario by spreading the cost of expensive operations over multiple cheaper ones.
+Amortized analysis is a way to measure the average time for a sequence of operations in a data structure. It spreads the cost of expensive operations over several cheaper ones to show the overall efficiency.
 
 `How it Works`
 --------------
-Instead of analyzing the time complexity of each operation individually, amortized analysis looks at a sequence of operations and calculates the average time per operation in that sequence. This helps in understanding the long-term performance and efficiency of an algorithm.
+Instead of looking at each operation separately, it calculates the average time for a group of operations. This gives a better understanding of how an algorithm performs in the long run.
 
 
 
@@ -765,8 +703,6 @@ No Random Access
 Complexity in Implementation
 Inefficient Search Operations
 Extra Overhead for Pointers
-Cache Unfriendliness
-Greater Programming Effort
 Difficulties with Reverse Traversal (in singly linked lists)
 
 
@@ -809,14 +745,17 @@ Common Methods: Object.keys, Object.values, Object.entries.
 ---
 Key-Value Pairs: Stores data in key-value pairs.
 Any Data Type for Keys: Keys can be of any data type (including objects and functions).
-No Prototype Chain: Does not inherit from any prototype.
+No Prototype Chain: Does not inherit property from any prototype.
 Efficient for Large Data Sets: Designed to handle a large number of key-value pairs efficiently.
 Common Methods: set, get, has, delete, clear, forEach.
 
 
+
+
+
 ## `ASCII` ##
 ================
-Definition: American Standard Code for Information Interchange. A character encoding standard for electronic communication, representing text in computers.
+American Standard Code for Information Interchange. A character encoding standard for electronic communication, representing text in computers.
 
 32 - Space: The space character.
 
@@ -836,7 +775,6 @@ Example: 97 is 'a', 98 is 'b', ..., 122 is 'z'.
 ## `UNICODE` ##
 ==================
 A universal character encoding standard that assigns a unique code to every character in every language.
-
 UTF-8   :-   A variable-width character encoding for Unicode. It can encode every character in the Unicode character set using one to four bytes.
 
 
@@ -845,7 +783,6 @@ UTF-8   :-   A variable-width character encoding for Unicode. It can encode ever
 
 ## `How strings are stored in memory` ##
 ============================================
-
 `In javascript two types`
 --------------------------
 primitive and object string

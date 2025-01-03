@@ -1202,7 +1202,7 @@ Purpose: TTL indexes, or Time-To-Live indexes, automatically remove documents fr
 Functionality: They are useful for managing data that has a temporal aspect, like logs or sessions that should be automatically removed after a certain duration.
 
 11. Sparse Index:-
-an index that only includes documents that contain the indexed field. 
+An index that only includes documents that contain the indexed field. 
 
 
 

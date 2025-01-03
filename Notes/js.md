@@ -30,21 +30,6 @@ Just-In-Time (JIT) Compilation: JavaScript is traditionally an interpreted langu
 JIT Compilation means that V8 doesn't compile the entire code upfront. Instead, it compiles JavaScript code just in time — as it runs. It first runs the code and collects runtime data. If it detects that certain parts of the code are used frequently, it compiles those parts into machine code for faster execution.
 
 
-`Working`
-----------
-`Source Code Parsing`
-The source code (e.g., JavaScript) is initially parsed into an intermediate representation like bytecode.
-
-`Runtime Compilation`
-During execution, frequently used parts of the code (called "hot code") are identified and compiled into machine code.
-
-`Optimization`
-The JIT compiler optimizes the machine code during this process to enhance performance.
-
-`Execution`
-The machine code is then directly executed by the CPU, leading to faster execution compared to interpretation.
-
-
 
 
 
@@ -1786,6 +1771,9 @@ The finally method is used to specify a function to be executed when the promise
 `Catch`
 ---------
 The catch method is a shorthand for handling only the rejection of a promise. It is equivalent to using then(undefined, onRejected).
+
+`Promise.any(iterable)`
+-------------------------
 
 
 

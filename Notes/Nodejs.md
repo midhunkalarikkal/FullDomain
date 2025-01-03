@@ -1,7 +1,7 @@
 ## `Node.js` ##
 ================
 - Node.js is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. 
-- Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
+- Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside of a web browser.
 
 installing using `nvm` is a node version manager
 
@@ -15,9 +15,9 @@ Initially, the project was named "WebJS" because Ryan believed he was creating i
 
 At the time, most servers were blocking in nature, which led Ryan to start developing Node.js as a non-blocking, event-driven runtime to handle asynchronous operations efficiently.
 
-So node.js is single threaded by default when there is only synchrnous code, but it is multi threaded when it have asynchrnous code because  it will use libuv to run the asynchronous code and then libuv will use thread pool.
+So node.js is single threaded by default when there is only synchrnous code, but it is multi threaded when it have asynchrnous code because it will use libuv to run the asynchronous code and then libuv will use thread pool.
 
-`Worker Threads` Starting with Node.js 10.5.0, we can explicitly create multiple threads using the worker_threads module if you need true multi-threading for JavaScript code execution.
+`Worker Threads`  In JavaScript, the main thread is single-threaded, meaning it handles tasks like UI updates, events, and running JavaScript code. However, in some cases, we might want to offload heavy computations or tasks to separate threads to avoid blocking the main thread. This is where Web Workers (also referred to as Worker Threads) come into picture.
 
 2009
 ------
@@ -68,14 +68,6 @@ chakra for edge
 
 js code ---->  c++ code ------> machine code --------> assembly code ---------> binary
 
-`JavaScript` Engine: Your JavaScript code is run by a JavaScript engine, like V8 (used in Chrome and Node.js). This engine is written in a language like C++.
-
-`Parsing`: The engine first parses your JavaScript code into an Abstract Syntax Tree (AST) to understand its structure.
-
-`Compilation`: Then, the engine compiles the AST into machine code. This is where it translates your JavaScript into a lower-level language that the computer's hardware can understand.
-
-`Execution`: Finally, this machine code is executed by your computer's processor. This is where the binary part comes in, as machine code consists of binary instructions that the processor can execute.
-
 
 Steps inside the v8 engine
 ---------------------------
@@ -90,15 +82,18 @@ Steps inside the v8 engine
 2. `Interpreter`
   In v8 engine the interpreter is called `ignition interpreter` and the AST is passed to this interpreter and then converted to byte code.
 
-3. So if there are codes that repeats like `HOT code` it will be passed to the compiler in the v8 engine called `Turbo compiler` and then it will optimize the hot code in to optimized machine code then it will be executed. In old days there were a compiler called crank `crank shaft` and it was deprecated.
+3. So if there are codes that repeats like `HOT code` it will be passed to the compiler in the v8 engine called `Turbo fan compiler` and then it will optimize the hot code in to optimized machine code then it will be executed. In old days there were a compiler called `crank shaft` and it was deprecated.
 
-`The whole rocess of interpreter and compiler is called Just in time compiler`
+`The whole process of interpreter and compiler is called Just in time compiler`
 
 `deoptimization`
 ----------------
 However, there are cases where the optimized machine code becomes invalid. This can happen if the assumptions made during optimization are violated. For instance, if a function is optimized for adding two numbers (e.g., integers) and later encounters inputs that are strings or characters, the optimized code might no longer be valid.
 
 When such a mismatch occurs, de-optimization happens. The V8 engine discards the optimized code and falls back to the original bytecode, which is executed by the Ignition Interpreter. The engine can then adapt to the new input type, ensuring correct execution while trading off some performance.
+
+
+
 
 
 ## `Event driven architechture` ##
@@ -108,7 +103,8 @@ Event-driven architecture (EDA) is a design paradigm in which the flow of a prog
 
 
 
-## `Asynchronous i/o` vs `Non-blocking i/o` vs ``Synchronous i/o` ##
+
+## `Asynchronous i/o` / `Non-blocking i/o` vs ``Synchronous i/o` ##
 ======================================================================
 `Asynchronous` / `Non-blocking i/o`
 ------------------------------------
@@ -120,8 +116,6 @@ Immediate Service: Quickly responds to client requests.
 Handles High Load: Effectively manages bursty applications.
 Scalability: Supports large-scale operations efficiently.
 Optimal for Large Data: Best suited for transferring large datasets.
-
-The main thread is the js engine running
 
 `Synchronous i/o`
 ------------------
@@ -168,19 +162,22 @@ Auto completion :- Pressing the tab key can autocomplete the names of functions 
 
 
 
+
 ## `global` ##
 ==============
 One of the superpowers of Node.js is its ability to work seamlessly with the V8 engine, making development faster and more efficient.
 
-In Node.js, the this keyword in the global space refers to an empty object.
-In contrast, in a browser, the this keyword in the global space points to the window object.
+In Node.js, the `this` keyword in the global space refers to an empty object.
+in a browser, the `this` keyword in the global space points to the window object.
 In the browser, the global object can be accessed using multiple keywords:
 
 `window`
 `this`
 `self` (used in Web Workers)
 `frames`
-To standardize how the global object is accessed across different runtimes (Node.js, browsers, and Web Workers), the OpenJS Foundation introduced globalThis in 2020. This provides a consistent way to reference the global object, regardless of the runtime environment.
+
+To standardize how the global object is accessed across different runtimes (Node.js, browsers, and Web Workers), the OpenJS Foundation introduced `globalThis` in 2020. This provides a consistent way to reference the global object, regardless of the runtime environment.
+
 
 
 
@@ -202,6 +199,7 @@ When a Node.js module is executed, it is wrapped in a function like this interna
 Data Privacy: Keeps module internals hidden and secure.
 Modularity: Encourages clean, reusable, and maintainable code.
 No Global Pollution: Prevents accidental overwriting of global variables or functions.
+
 
 
 
@@ -336,7 +334,6 @@ the main advantage of this method is that we can encapsulate the modules and the
 ## `LIBUV` ##
 ==============
 It is a cross platform  open source library written in c , handles asynchronous non blocking  operations in node js using thread pool and event loop
-js - synchronous ans single threaded language
 
 +-----------node.js-----------+
 | +-----------+   +---------+ |
@@ -470,7 +467,7 @@ After execution, the execution context is removed from the call stack.
 
 `Callback queue`
 ----------------
-So when the js v8 engine that is main thread will offloads the synchronous task to the libuv, it will register that task and register that tasks callback, and it will store the callback and keep inside in the callback queue. so like this all the asynchronous functions callbacks are keeping inside this callback queue
+So when the js v8 engine that is main thread will offloads the synchronous task to the libuv, it will register that task and give to callback, and it will store the callback and keep inside in the callback queue. so like this all the asynchronous functions callbacks are keeping inside this callback queue
 
 - For the proccess.nextTick and promise.callback funcitions it will have a priority queue like process.nextTick callback queue and process.callback callback queue
 - and for the each pahse function it will have their own callback queues
@@ -512,7 +509,7 @@ So in this there are four phases timer, poll, check and close and when the event
   ## 2. idle, prepare :- only used internaly.
 `poll` phase is for `i/o` callbacks like file reading/ writing, incoming connection, data, fs,crypto,https,util
 `check` phase for the `setImmediate` callback
-`close` phase for the `socket` callbacks  like .on("close");
+`close` phase for the `socket` callbacks like .on("close");
 
 and this is the priority order of tasks in libuv
 
@@ -557,7 +554,7 @@ The epoll mechanism in Linux internally uses a red-black tree and a linked list 
 
 ## `Server creation` ##
 =======================
-The node core module http is used to create a server and this createServer is a property of http. And the createServer function have a function and that function have two objects request and response
+The node core module `http` is used to create a server and this `createServer` is a property of http. And the createServer function have a function and that function have two objects request and response
 
 in production we dont use this native module, we will use express framework built on top of nodejs.
 
@@ -573,7 +570,7 @@ server.listen(7777);
 
 ## `HTTP Response` ##
 ======================
-Status line - http verion , status code , status message
+Status line - http verion, status code, status message
 Header - Additional information send by the server to client	
 Response body - Actual data send by the server to client
 
@@ -597,7 +594,7 @@ The res.end() method is part of the Response Object in Node.js (not specific to 
 
 ## `HTTP Request` ##
 ======================
-Request line - Method , URI , http version
+Request line - http version, Method, URI
 Header - Additonal information that send by the client to server
 Request body - Data send by the client to server
 
@@ -689,7 +686,7 @@ Use Case: For optional parameters or filters.
 ## `Route handler` ##
 ========================
 A Route Handler is the server-side code (typically a function) that processes an incoming HTTP request and generates an appropriate response.
-if we not sen any response back like example `res.send()` the request handler will be like a loop sendning request
+if we not send any response back like example `res.send()` the request handler will be like a loop sending request
 
 `How It Works`
 It receives an HTTP request (from the client), analyzes it, and decides what to do with it.
@@ -722,7 +719,7 @@ app.use("/",(req,res)=>{
 
 `How to Ensure Other Handlers Work`
 ------------------------------------
-If you want other handlers to respond appropriately, make sure to
+If we want other handlers to respond appropriately, make sure to
 Place more specific handlers before generic ones.
 
 ```js
@@ -741,7 +738,7 @@ In this case
 `Route hanlder with multiple callback and next`
 -------------------------------------------------
 - In this the next function is called for trigger the next callback function
-- here we have two response but only the first callback functions response will workd and we will get an error because `The server can only send a single response to a single url then if we try to send a second response it will throw an error`
+- here we have two response but only the first callback functions response will work and we will get an error because `The server can only send a single response to a single url then if we try to send a second response it will throw an error`
 ` Here the control will go to the next function after executing the first one but the second callback functions console will only work
 - If there are multiple callback functions, we can wrap those callbacks inside an array, or we can wrap a specific set of callback functions.
 ```js
@@ -818,9 +815,7 @@ express.urlencoded
 5. express.json()
 ---------------------
 - This middleware is used to parse incoming requests with JSON payloads. 
-- Threquest suppose contains a JSON body it is not readable by the server so the express middleware `express.json` is used to parse JSON body and convert it in to a javascript object.
-
-express.json() is for JSON data
+- The request suppose contains a JSON body it is not readable by the server so the express middleware `express.json` is used to parse JSON body and convert it in to a javascript object.
 
 6. express.urlencoded()
 --------------------------
@@ -873,7 +868,7 @@ Server
 CORS
 -----
 Cross origin resource sharing
-CORS stands for Cross-Origin Resource Sharing. It is a security feature implemented by web browsers to control how web pages in one domain can request and interact with resources hosted on another domain.
+CORS is a security feature implemented by web browsers to control how web pages in one domain can request and interact with resources hosted on another domain.
 
 first preflight request from client to server
 then a option acknowledgment from server to client
@@ -883,16 +878,6 @@ The preflight request is an OPTIONS request that includes information about the 
 write head
 ----------
 writeHead is a method provided by the http module, which is used to send an HTTP response header to the client.
-
-Parameter
----------
-A parameter is a variable that is used in the declaration of a function or method.
-Parameters are part of the function's signature and act as local variables within the function's scope.
-
-Argument
---------
-An argument is the actual value that is passed to a function or method when it is invoked or called.
-They are the values that the function uses when it executes.
 
 Cookie
 ------
@@ -1151,11 +1136,13 @@ path.resolve('folder', 'subfolder', 'file.txt');
 
 API
 ---
-a set of rules and tools that allows different software applications to communicate with each other.
+API (Application Programming Interface) refers to a set of defined endpoints, functions, or methods exposed by a server to allow interaction with its resources or services.
 
-APIs enable the integration of different software systems by providing a standardized way for them to interact.
+APIs in Node.js are typically implemented using frameworks like Express but can also be created using the core http module. They enable communication between the server and clients (e.g., web browsers, mobile apps, or other servers) using protocols like HTTP/HTTPS.
 
 Examples :- Web api , library api , OS api
+
+
 
 HTTP
 ----
@@ -1309,15 +1296,11 @@ Router chaining
 ---------------
 to sequentially process incoming HTTP requests through a series of middleware functions.
 
-
-
-
-
 Event emitter , streams, pipes, buffers
 
 ## `setImmediate (Node.js only)` ##
 =====================================
-Definition: Executes a specified function immediately after the current event loop phase. It’s faster than setTimeout(fn, 0) but still waits for I/O operations in the event loop.
+Executes a specified function immediately after the current event loop phase. It’s faster than setTimeout(fn, 0) but still waits for I/O operations in the event loop.
 Use Case: Running a task as soon as the current event loop finishes (micro-task level timing).
 
 ## Example
@@ -1332,3 +1315,15 @@ setImmediate(() => {
 console.log("After setImmediate");
 
 ```
+
+What is Concurrency in Node.js?
+================================
+Concurrency in Node.js refers to its ability to manage multiple tasks simultaneously without waiting for one task to finish before starting another. Even though Node.js is single-threaded, it can handle numerous tasks concurrently using its event-driven, non-blocking I/O model.
+
+What is HTTP OPTIONS?
+========================
+The HTTP OPTIONS method is used to describe the communication options available for a target resource on a web server. It helps a client (like a browser or an application) understand which HTTP methods (e.g., GET, POST, DELETE) are supported by the server for a specific URL or resource.
+
+What is Router Chaining in Node.js?
+====================================
+Router chaining in Node.js refers to defining and handling multiple routes in sequence using a router object. This is commonly used in frameworks like Express.js to create modular, organized, and reusable route handlers.

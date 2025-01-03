@@ -576,7 +576,7 @@ A: The `/dist` stands for distributable. The /dist folder contains the minimized
 Parcel's default directory for your output is named dist . The --dist-dir public tag defines the output folder for your production files and is named public to avoid confusion with the dist default directory.
 
 ## `Logical Bundling` -> Good for Performance
--------------------------------------------
+--------------------------------------------------
 Logical bundling refers to bundling the code by organizing it into different bundles, each containing a **single, full feature**.  
 
 ## Key Benefits:
