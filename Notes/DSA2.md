@@ -25,7 +25,7 @@ Can grow or shrink dynamically as needed.
 -----------------------------
 Call Stack: Used in recursion and function calls.
 Expression Evaluation Stack: Used for evaluating postfix expressions.
-Undo/Redo Stack: Used in text editors or software with undo functionality.
+Undo/Redo Stack: Used in text editors or software with undo/redo functionality.
 
 
 
@@ -36,6 +36,7 @@ Undo/Redo Stack: Used in text editors or software with undo functionality.
 A queue is a linear data structure that follows the FIFO principle (First In, First Out). The first element added to the queue is the first one to be removed. Operations in a queue occur at two ends:
 
 Enqueue: Add an element at the rear (end) of the queue.
+dequeue: Delete an element from the front.
 
 `Simple Queue`
 ----------------
@@ -72,7 +73,7 @@ Ensures thread safety for enqueue and dequeue operations.
 ====================
 `Definition`
 -------------
-Bubble sort is a simple comparison-based sorting algorithm. It works by repeatedly stepping through the array to be sorted, comparing each pair of adjacent items and swapping them if they are in the wrong order. The pass through the array is repeated until the array is sorted.
+Bubble Sort is a simple comparison-based sorting algorithm also known as sinking sort. It works by repeatedly iterating through the array to be sorted, comparing each pair of adjacent elements, and swapping them if they are in the wrong order. This process is repeated for multiple passes through the array until the entire array is sorted.
 
 `Advantages`
 -------------
@@ -119,7 +120,6 @@ Small Data Sets
 Simple Checks
 Simple databse management
 Stability Required Sorts
-
 
 
 
