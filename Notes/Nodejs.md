@@ -1327,3 +1327,10 @@ The HTTP OPTIONS method is used to describe the communication options available 
 What is Router Chaining in Node.js?
 ====================================
 Router chaining in Node.js refers to defining and handling multiple routes in sequence using a router object. This is commonly used in frameworks like Express.js to create modular, organized, and reusable route handlers.
+
+
+
+res.cookies
+--------------
+httpOnly : true -> Prevent XSS, XSS -> cross site scripting
+sameSite : "strict" -> Prevent CSRF attacks Cross Site  request forgery attacks.

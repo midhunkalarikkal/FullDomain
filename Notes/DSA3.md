@@ -1,5 +1,5 @@
-1 . Tree
-========
+## `Tree` ##
+==============
 A tree is a hierarchical and non linear datastructure that consist of nodes  connected by edges
 
 In linear datastructure the time required to search is propositional to the size of the data set
@@ -14,8 +14,8 @@ Every node except the root has exactly one parent, and each node can have zero o
 
 There is a unique path from the root to any other node.
 
-Terminology
------------
+`Terminology`
+---------------
 Parent: A node that has one or more children.
 
 Child: A node that has a parent.
@@ -44,10 +44,10 @@ Edge: A connection between two nodes.
 
 Subtree: A tree consisting of a node and its descendants.
 
-Types of Trees Based on Nodes
------------------------------
-1 . Binary Tree
----------------
+`Types of Trees Based on Nodes`
+---------------------------------
+1 . `Binary Tree`
+-------------------
 A binary tree is a tree data structure in which each node has at most two children, referred to as the left child and the right child.
 
 Properties
@@ -82,8 +82,8 @@ Space complexity
 o(1) - for the  insertion and deletion
 o(h) - for all traversal where h is the  height of the tree
 
-2 . Ternary Tree
-----------------
+2 . `Ternary Tree`
+--------------------
 A ternary tree is a tree data structure in which each node has at most three children.
 
 Properties
@@ -124,8 +124,8 @@ Space Complexity
 o(1) for insertion deletion and search
 o(n) for all traversal
 
-3 . K-ary Tree
--------------
+3 . `K-ary Tree`
+-----------------
 A k-ary tree is a tree in which each node has at most k children. When k=2, it is a binary tree; when k=3, it is a ternary tree, and so on.
 
 Properties
@@ -140,20 +140,28 @@ The maximum number of nodes in a k-ary tree of height h is ((k^h+1) - 1) / k - 1
 
 Complexity same as ternary tree
 
-Predecessor
------------
+
+
+
+
+## `Predecessor` ##
+====================
 Case 1: Node has a left subtree: The predecessor is the rightmost (or the maximum) node in the left subtree.
 
 Case 2: Node has no left subtree: The predecessor is one of its ancestors. You move up the tree until you find a node that is the right child of its parent; that parent is the predecessor.
 
-Successor
----------
+## `Successor` ##
+==================
 Case 1: Node has a right subtree: The successor is the leftmost (or the minimum) node in the right subtree.
 
 Case 2: Node has no right subtree: The successor is one of its ancestors. You move up the tree until you find a node that is the left child of its parent; that parent is the successor.
 
-4 . Threaded Binary Tree
-------------------------
+
+
+
+
+## `Threaded Binary Tree` ##
+============================
 A threaded binary tree is a binary tree variant where null pointers (used for leaf nodes) are replaced with pointers to in-order predecessor and successor nodes. This helps in making in-order traversal faster and reduces memory wastage by using stack and queue.
 
 Types
@@ -165,8 +173,12 @@ Time complexity
 ---------------
 Insertion Deletion Search and all traversals - all cases - o(n)
 
-Types of Trees Based on Structure
----------------------------------
+
+
+
+
+## `Types of Trees Based on Structure` ##
+==========================================
 1 . Complete binary Tree
 -------------------------
 A complete binary tree is a binary tree in which all levels, except possibly the last, are fully filled, and all nodes are as far left as possible.
@@ -200,13 +212,12 @@ A perfect tree (or perfect binary tree) is a binary tree in which all internal n
    / \ / \ / \
   H  I J  K L  M
 
-Additional Types of Trees Based on Structure
--------------------------------------------------
-1 . Degenerate Tree
+
+4 . Degenerate Tree
 -------------------
 A degenerate tree (or pathological tree) is a tree where each parent node has only one child. This type of tree essentially resembles a linked list, as it has N nodes and 𝑁 − 1 edges, forming a single path from the root to the last node.
 
-Left-Skewed Tree
+5 . Left-Skewed Tree
 ------------------------
 A left-skewed tree is a degenerate tree where every node has only a left child.
 Operations such as search, insert, and delete have linear time complexity, O(N).
@@ -219,7 +230,7 @@ C
 /
 D
 
-Right-Skewed Tree
+6 . Right-Skewed Tree
 -------------------------
 A right-skewed tree is a degenerate tree where every node has only a right child.
 Operations such as search, insert, and delete have linear time complexity, O(N).
@@ -232,18 +243,22 @@ A
      \
       D
 
-2 . Binary Search Tree (BST)
-==========================
+
+
+
+
+## `Binary Search Tree (BST)` ##
+================================
 A Binary Search Tree (BST) is a type of binary tree that maintains a specific order property, making it efficient for searching, insertion, and deletion operations.
 
 To validate whether a given binary tree is a Binary Search Tree (BST), you need to ensure that for each node
---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 The left subtree of a node contains only nodes with values less than the node's value.
 The right subtree of a node contains only nodes with values greater than the node's value.
 Both the left and right subtrees must also be binary search trees.
 
-Time complexity
----------------
+`Time complexity`
+-------------------
 Insertion
 ---------
 Balanced bst - o(log n)
@@ -267,24 +282,8 @@ Space complexity
 ----------------
 o(n) - This includes space for the n nodes in the tree, where each node has a value and pointers to left and right children.
 
-2 . 1 . Binary Search Tree (BST) vs Binary Tree (BT)
---------------------------------------------------------
-Binary Search Tree (BST)
-----------------------------
-Definition :-  A BST is a binary tree with an additional property that for each node, the value of all nodes in the left subtree is less than the node's value, and the value of all nodes in the right subtree is greater than the node's value.
-
-Order Property :-  Maintains the order property which allows efficient searching, insertion, and deletion operations.
-
-Efficiency :-  Average-case time complexity for search, insertion, and deletion operations is O(log n). In the worst case (unbalanced), these operations can degrade to O(n).
-
-Binary Tree (BT)
----------------------
-Definition :-  A BT is a tree data structure in which each node has at most two children, known as the left child and the right child.
-Order Property :-  Does not maintain any specific order property.
-Efficiency :-  Time complexity for search, insertion, and deletion is generally O(n) since there is no inherent order to the elements.
-
-2 . 2 . Uses or Applications of BST
------------------------------------
+`Uses or Applications of BST`
+------------------------------
 Searching: Efficient searching due to its ordered structure.
 
 Dynamic Set Operations: Used in sets and maps to perform dynamic set operations like insertion, deletion, and lookup efficiently.
@@ -297,18 +296,8 @@ Network Routing: Efficiently finding and updating routes in networking.
 
 File Systems: Organizing files and directories in hierarchical file systems
 
-Balanced vs Unbalanced Tree
----------------------------
-Balanced Tree
--------------
-A tree is balanced if the height difference between the left and right subtrees of any node is at most one.
-
-Unbalanced Tree
---------------
-A tree where the height difference between the left and right subtrees of some nodes is greater than one.
-
-Properties of BST
------------------
+`Properties of BST`
+-----------------------
 Binary Tree Structure: Each node has at most two children.
 
 Order Property: For each node:
@@ -319,10 +308,10 @@ Unique Path: There is a unique path from the root to any other node in the tree.
 
 No Duplicates: Typically, BSTs do not contain duplicate values. If duplicates are allowed, a specific convention is followed (e.g., duplicates go to the right).
 
-2 . 5 . Operations on Binary Search Tree (BST)
+`Operations on Binary Search Tree (BST)`
 ------------------------------------------
-Inserting
----------
+1 . Inserting
+---------------
 Inserting a node in a BST involves placing it in the correct position to maintain the order property.
 
 Algorithm for Inserting
@@ -337,21 +326,21 @@ Repeat until you find an empty spot (null position).
 
 Insert the new node at that position.
 
-Deletion
----------
+2 . Deletion
+---------------
 Node to be deleted has no children (leaf node): Simply remove the node.
 
 Node to be deleted has one child: Replace the node with its child.
 
 Node to be deleted has two children: Find the in-order successor (smallest node in the right subtree) or in-order predecessor (largest node in the left subtree), replace the node's value with the successor/predecessor's value, and delete the successor/predecessor.
 
-2 . 6 . Traversal
+3 . Traversal
 -----------------
 Traversal refers to visiting all the nodes in the BST in a specific order. There are two main types: Depth-First Search (DFS) and Breadth-First Search (BFS).
 
-2 . 6 . 1 . Depth-First Search (DFS) Traversals
+3 . 1 `Depth-First Search (DFS) Traversals`
 --------------------------------------------
-2 . 6 . 1 . 1 . InOrder Traversal (Left, Root, Right)
+3 . 1 . 1 InOrder Traversal (Left, Root, Right)
 -------------------------------------------------
 Visit the left subtree.
 Visit the root node.
@@ -367,7 +356,7 @@ K-th Smallest/Largest Element :-  By keeping a counter during traversal, you can
 
 Merging BSTs :-  To merge two BSTs, you can first perform an InOrder traversal on both trees to get sorted arrays and then merge the arrays into a new BST.
 
-2 . 6 . 1 . 2 . PreOrder Traversal (Root, Left, Right)
+3 . 1 . 2 PreOrder Traversal (Root, Left, Right)
 --------------------------------------------------
 Visit the root node.
 Visit the left subtree.
@@ -386,7 +375,7 @@ Serialization/Deserialization :-  PreOrder traversal is used to serialize the tr
 
 Directory Structure: Used to list directory contents where the root directory is processed before subdirectories.
 
-2 . 6 . 1 . 3 .PostOrder Traversal (Left, Right, Root)
+3 . 1 . 3 PostOrder Traversal (Left, Right, Root)
 --------------------------------------------------
 Visit the left subtree.
 Visit the right subtree.
@@ -403,7 +392,7 @@ Expression Trees :-  Used to evaluate expressions in postfix notation (Reverse P
 
 Dependency Resolution :-  Useful in scenarios where dependencies must be resolved before the parent task, such as build systems and task scheduling.
 
-2 . 6 . 2 . Breadth-First Search (BFS) Traversal
+3 . 2 `Breadth-First Search (BFS) Traversal`
 ----------------------------------------------
 Level Order Traversal
 
@@ -434,93 +423,131 @@ Completeness Check: BFS verifies if a tree is complete.
 
 Maximum Values: BFS finds the largest value at each tree level.
 
-2 . 7 . AVL Tree
-----------------
-A self-balancing binary search tree where the difference in heights of left and right subtrees of any node is at most one. This property ensures efficient search, insertion, and deletion operations.
 
-2 . 8 . Red-Black Tree
+
+
+
+
+## `Binary Search Tree (BST) vs Binary Tree (BT)` ##
+======================================================
+Binary Search Tree (BST)
+----------------------------
+Definition :-  A BST is a binary tree with an additional property that for each node, the value of all nodes in the left subtree is less than the node's value, and the value of all nodes in the right subtree is greater than the node's value.
+
+Order Property :-  Maintains the order property which allows efficient searching, insertion, and deletion operations.
+
+Efficiency :-  Average-case time complexity for search, insertion, and deletion operations is O(log n). In the worst case (unbalanced), these operations can degrade to O(n).
+
+Binary Tree (BT)
 ---------------------
-A self-balancing binary search tree where each node has an extra bit of information, stored as a color attribute. 
-Each node is either red or black.  The root of the tree is always black.  Red nodes cannot have red children. Balancing is done by rotaions and recolouring.
+Definition :-  A BT is a tree data structure in which each node has at most two children, known as the left child and the right child.
+Order Property :-  Does not maintain any specific order property.
+Efficiency :-  Time complexity for search, insertion, and deletion is generally O(n) since there is no inherent order to the elements.
 
-use cases - Linux , kernel , java collection framework
 
-2 . 9 . Prefix Tree (Trie)
---------------------------
-A tree-like data structure used for efficient retrieval of keys and their associated values. Each node represents a possible prefix of keys, and the paths from the root to leaves represent complete keys.
 
-2 . 10 . M-way Search Tree
-------------------------
-A generalized form of a binary search tree that allows for more than two children per node. The exact number of children is specified by the order 'M' of the tree.
 
-2 . 11 . B-Tree
----------------
-A self-balancing tree data structure that keeps data sorted and allows insertion searches, deletions in logarithmic time. It is designed to work on secondary storage devices like hard disks.
 
-2 . 12 . B+ Tree
-----------------
-A variant of the B-tree data structure where all keys and records are stored in leaf nodes, and internal nodes only store keys to guide the search. This structure is optimized for indexing and database systems.
 
-Spaly tree
-----------
-A Splay Tree is a self-adjusting binary search tree with the unique property that recently accessed elements are quick to access again. It achieves this by performing a series of tree rotations, known as splaying, to move the accessed element to the root of the tree.
 
-2 . 13 . Merkle Tree
----------------------
-A tree-like data structure in which each leaf node is labeled with the hash of a data block, and each non-leaf node is labeled with the hash of the concatenation of the labels of its child nodes. It is used for efficient data integrity verification.
-
-2 . 14 . Red-Black Tree vs AVL Tree
------------------------------------
-Both are self-balancing binary search trees, but AVL trees are more strictly balanced, leading to faster search operations but potentially slower insertion and deletion due to more frequent rebalancing. Red-black trees are less strictly balanced, offering a balance between search efficiency and insertion/deletion performance.
-
-Certainly! Here are the names:
-
-Balanced BSTs
+## `Balanced vs Unbalanced Tree` ##
+====================================
+`Balanced Tree`
 -------------
+A tree is balanced if the height difference between the left and right subtrees of any node is at most one.
+
+`Balanced trees`
+-----------------
 1. AVL Tree
 2. Red-Black Tree
 3. Splay Tree
 4. B-Tree
 5. B+ Tree
 
-Unbalanced BSTs
----------------
+`Unbalanced Tree`
+--------------
+A tree where the height difference between the left and right subtrees of some nodes is greater than one.
+
+`Unbalanced trees`
+-------------------
 1. Standard Binary Search Tree
 2. Degenerate Tree
 3. Skewed Tree
 
-3 . Heap
----------
+1 . `AVL Tree`
+----------------
+A self-balancing binary search tree where the difference in heights of left and right subtrees of any node is at most one. This property ensures efficient search, insertion, and deletion operations.
+
+2 . `Red-Black Tree`
+---------------------
+A self-balancing binary search tree where each node has an extra bit of information, stored as a color attribute. 
+Each node is either red or black.  The root of the tree is always black.  Red nodes cannot have red children. Balancing is done by rotaions and recolouring.
+
+use cases - Linux , kernel , java collection framework
+
+3 . `Prefix Tree (Trie)`
+--------------------------
+A tree-like data structure used for efficient retrieval of keys and their associated values. Each node represents a possible prefix of keys, and the paths from the root to leaves represent complete keys.
+
+4 . `M-way Search Tree`
+------------------------
+A generalized form of a binary search tree that allows for more than two children per node. The exact number of children is specified by the order 'M' of the tree.
+
+5 . `B-Tree`
+---------------
+A self-balancing tree data structure that keeps data sorted and allows insertion searches, deletions in logarithmic time. It is designed to work on secondary storage devices like hard disks.
+
+6 . `B+ Tree`
+----------------
+A variant of the B-tree data structure where all keys and records are stored in leaf nodes, and internal nodes only store keys to guide the search. This structure is optimized for indexing and database systems.
+
+7 . `Spaly tree`
+----------------
+A Splay Tree is a self-adjusting binary search tree with the unique property that recently accessed elements are quick to access again. It achieves this by performing a series of tree rotations, known as splaying, to move the accessed element to the root of the tree.
+
+8 . `Merkle Tree`
+---------------------
+A tree-like data structure in which each leaf node is labeled with the hash of a data block, and each non-leaf node is labeled with the hash of the concatenation of the labels of its child nodes. It is used for efficient data integrity verification.
+
+`Red-Black Tree vs AVL Tree`
+-----------------------------------
+Both are self-balancing binary search trees, but AVL trees are more strictly balanced, leading to faster search operations but potentially slower insertion and deletion due to more frequent rebalancing. Red-black trees are less strictly balanced, offering a balance between search efficiency and insertion/deletion performance.
+
+
+
+
+
+## `Heap` ##
+==============
 A heap is a specialized tree-based data structure that satisfies the heap property. This property states that in a max heap, for any given node N, the value of N is greater than or equal to the values of its children. In a min heap, the value of N is less than or equal to the values of its children. Heaps are commonly implemented using arrays.
 
-Advantages of Heaps
-------------------
+Memory Allocation :  Dynamic, for objects and data needing longer life.
+Structure :  Flexible, less structured.
+Speed :  Slower access.
+Size :  Larger, but limited by system memory.
+Scope and Lifetime :  Persists until explicitly freed, manually or garbage-collected.
+
+`Advantages of Heaps`
+----------------------
 Efficient Priority Queue Operations
-
 Balanced Tree Structure
-
 Heap Sort
 
-Disadvantages of Heaps
----------------------
+`Disadvantages of Heaps`
+-------------------------
 Not Suitable for Searching
-
 Complex Implementation
-
 Limited Use Cases
 
-Applications of Heaps
---------------------
+`Applications of Heaps`
+------------------------
 Priority Queues
-
 Heap Sort
-
 Graph Algorithms
-
 Scheduling Systems
 
-Time Complexity
---------------
+`Time Complexity`
+------------------
 Insertion: 
 O(logn) – Inserting an element into a heap requires maintaining the heap property, which may involve percolating the element up the tree.
 Deletion (usually of the root): 
@@ -532,20 +559,32 @@ O(n) – Converting an array into a heap.
 Heap Sort: 
 O(nlogn) – Sorting an array using the heap data structure.
 
-Min Heap
--------
+`Min Heap`
+-----------
 A min heap is a binary heap where the value of each parent node is less than or equal to the values of its children. The smallest element is always at the root of the heap.
 
-Max Heap
--------
+`Min-Heap applications`
+-------------------------
+Priority Queue
+Dijkstra's Shortest Path Algorithm
+Huffman Coding
+
+`Max Heap`
+-----------
 A max heap is a binary heap where the value of each parent node is greater than or equal to the values of its children. The largest element is always at the root of the heap.
 
-Heapify
--------
+`Max-Heap applications`
+------------------------
+Priority Queue
+Heap Sort
+Finding the k-th Largest Element
+
+`Heapify`
+-----------
 Heapify is the process of converting a binary tree into a heap (either min heap or max heap). There are two primary approaches to heapifying a binary tree
 
-Bottom-Up Heapify ( HeapifyDown )
----------------------------------
+`Bottom-Up Heapify ( HeapifyDown )`
+-------------------------------------
 Bottom-Up Heapify starts from the last non-leaf node and works its way up to the root.
 
 For each node, it ensures the subtree rooted at that node satisfies the heap property.
@@ -554,8 +593,8 @@ This approach is efficient because it works on smaller sub-trees first, ensuring
 
 The time complexity of Bottom-Up Heapify is O(n), where n is the number of elements in the heap.
 
-Top-Down Heapify ( HeapifyUp )
-------------------------------
+`Top-Down Heapify ( HeapifyUp )`
+----------------------------------
 Top-Down Heapify starts from the root and works its way down the tree.
 
 As it proceeds, it ensures that the heap property is maintained by comparing the current node with its children and swapping if necessary.
@@ -564,19 +603,56 @@ This approach is typically used when inserting an element into an already heapif
 
 The time complexity of Top-Down Heapify is O(logn), which occurs during insertion or deletion operations.
 
-4 . Trie
-========
+## `Heap Sort` ##
+====================
+Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure to sort elements. The algorithm can be divided into two main phases:
+
+Building a Heap: The algorithm first converts the input array into a heap structure. For ascending order sorting, a max heap is used, where the largest element is at the root. For descending order sorting, a min heap is used, where the smallest element is at the root.
+
+Sorting the Elements: The algorithm repeatedly extracts the maximum (or minimum) element from the heap and places it at the end of the array. After each extraction, the heap property is restored. This process continues until all elements have been removed from the heap and placed in the sorted order.
+
+`Advantages`
+----------------
+Efficient Time Complexity :  O(n log n) in both average and worst cases.
+In-Place Sorting :  Requires no additional storage 
+No Worst-Case Scenarios :  Guarantees performance even in the worst-case scenario.
+Works Well with Large Datasets :  Suitable for large amounts of data.
+Supports Priority Queue Operations :  Useful for implementing priority queues and similar data 
+
+`Heap Sort Real-World Applications`
+-------------------------------------
+Priority Queues
+Task Scheduling Systems
+Graph Algorithms (e.g., Dijkstra's Algorithm)
+Event-Driven Simulation
+Median Maintenance
+
+`Complexity`
+-----------------
+Time Complexity
+---------------
+Building the Heap : O(n)
+Sorting the Array :  O(n log n)
+
+Space Complexity
+---------------
+In-Place Sorting :  O(1) (excluding the space used for the input array)
+
+
+
+
+
+## `Trie` ##
+==============
 A Trie is a specialized tree-like data structure that is used primarily for storing strings. Each node in a Trie represents a single character of a string, and by traversing the tree from the root to a leaf node, one can spell out a complete word.
 
-4 . 1 Advantages of Trie
+`Advantages of Trie`
 ----------------------
 Efficient Search
-
 Prefix Matching
-
 Space Efficiency for Similar Prefixes
 
-4 . 2  Disadvantages of Trie
+`Disadvantages of Trie`
 -------------------------
 Space Complexity: Despite being space-efficient for common prefixes, Tries can still consume a lot of memory, especially if the dataset contains many unique strings with few common prefixes.
 
@@ -584,7 +660,7 @@ Complex Implementation: Tries are more complex to implement compared to simpler 
 
 Slower for Non-Prefix Queries: Tries are not as efficient as hash tables for queries that do not involve prefixes.
 
-4 . 3   Time and Space Complexity
+`Time and Space Complexity`
 -----------------------------
 Insertion :-
 Time Complexity: O(m), where m is the length of the string being inserted.
@@ -601,42 +677,46 @@ Space Complexity: O(1) additional space.
 Space Complexity :- 
  The overall space complexity for a Trie is O(ALPHABET_SIZE * m * n) in the worst case, where ALPHABET_SIZE is the number of possible characters, m is the average length of the strings, and n is the number of strings.
 
-Suffix Trie
------------
+`Suffix Trie`
+---------------
 A suffix trie is a specific type of trie (prefix tree) used for storing all the suffixes of a given string. Each path from the root to a leaf node in the suffix trie represents a suffix of the string. This data structure is particularly useful for tasks like substring search, pattern matching, and text compression.
 
-Prefix Trie (Standard Trie)
--------------------------
-A prefix trie (often just called a trie) is a tree-like data structure that stores a dynamic set of strings, where each node represents a single character of a string. This structure is used primarily for efficient retrieval of a string's prefix.
-
-Suffix Trie Applications
------------------------
+`Suffix Trie Applications`
+---------------------------
 Substring search
 Finding longest repeated substrings
 Bioinformatics (DNA sequence analysis)
 
-Prefix Trie (Standard Trie) Applications
---------------------------------------
+`Prefix Trie (Standard Trie)`
+-----------------------------
+A prefix trie (often just called a trie) is a tree-like data structure that stores a dynamic set of strings, where each node represents a single character of a string. This structure is used primarily for efficient retrieval of a string's prefix.
+
+`Prefix Trie (Standard Trie) Applications`
+--------------------------------------------
 Autocomplete systems
 Spell checkers
 IP routing (longest prefix matching)
 
-5 . Graph
-==========
+
+
+
+
+## `Graph` ##
+==============
 A graph is a data structure consisting of a set of vertices (or nodes) and a set of edges that connect pairs of vertices. Graphs can be used to model a wide range of problems, such as social networks, transportation systems, and dependency structures.
 
 Trees are a specific type of GRAPH dasastructure
 
-5 . 1 Vertex and Edge
+`Vertex and Edge`
 --------------------
 Vertex (Node): A vertex is a fundamental unit of a graph, representing a point where edges meet.
 
 Edge: An edge is a connection between two vertices. It can be directed or undirected, weighted or unweighted, depending on the type of graph.
 
-5 . 2 Graph Representations
+`Graph Representations`
 --------------------------
-Adjacency List
---------------
+1 . `Adjacency List`
+--------------------
 An adjacency list represents a graph as an array or a list of lists, where each list corresponds to a vertex and contains a list of adjacent vertices.
 
 Space Complexity: O(V + E), where V is the number of vertices and E is the number of edges.
@@ -651,8 +731,8 @@ Advantages: Space-efficient for sparse graphs, easy to iterate over neighbors.
 
 Disadvantages: Not as efficient for dense graphs or direct edge lookups.
 
-Adjacency Matrix
-----------------
+2 . `Adjacency Matrix`
+----------------------
 An adjacency matrix is a 2D array of size V x V, where the cell at row i and column j indicates the presence (and possibly the weight) of an edge between vertex i and vertex j.
 
 Space Complexity: O(V^2).
@@ -668,14 +748,14 @@ Advantages: Fast edge lookup, good for dense graphs.
 
 Disadvantages: Can be space-inefficient for sparse graphs.
 
-5 . 3 Types of Graphs
+`Types of Graphs`
 --------------------
 Unidirectional (Directed Graph)
-------------------------------
+----------------------------------
 A directed graph (or digraph) is a graph where edges have a direction, meaning they go from one vertex to another specific vertex.
 
 Bidirectional (Undirected Graph)
-------------------------------
+----------------------------------
 An undirected graph is a graph where edges have no direction, meaning the connection between vertices is mutual.
 
 Cyclic Graph
@@ -687,18 +767,18 @@ Disconnected Graph
 A disconnected graph is a graph where not all vertices are connected by edges. The graph consists of two or more disconnected subgraphs.
 
 Weighted Graph
--------------
+-----------------
 A weighted graph assigns a weight (or cost) to each edge, often representing distance, cost, or capacity.
 
 Unweighted Graph
-----------------
+--------------------
 An unweighted graph treats all edges as having equal weight, typically used when only connectivity matters.
 
 Bipartite Graph
----------------
+-------------------
 a graph whose vertices (or nodes) can be divided into two disjoint sets X and Y such that every edge connects a vertex in X to one in Y.
 
-5 . 4 Graph Traversal
+`Graph Traversal`
 ---------------------
 Breadth-First Search (BFS)
 ------------------------
@@ -714,23 +794,19 @@ DFS is a graph traversal algorithm that explores as far along a branch as possib
 Time Complexity: O(V + E)
 Space Complexity: O(V) (for recursion stack or an explicit stack)
 
-5 . 5 Advantages of Graphs
+`Advantages of Graphs`
 -------------------------
 Flexible Data Representation
-
 Support for Complex Relationships
-
 Rich Set of Algorithms
 
-5 . 6   Disadvantages of Graphs
+`Disadvantages of Graphs`
 ---------------------------
 Complexity
-
 Space Requirements
-
 Performance Overheads
 
-5 . 7 Complexity
+`Complexity`
 ------------------
 Adjacency List
 --------------
@@ -750,7 +826,7 @@ Graph Traversal
 BFS/DFS Time Complexity: O(V + E)
 Space Complexity: O(V)
 
-5 . 8 Adjacency matrix vs Adjacency list
+`Adjacency matrix vs Adjacency list`
 ----------------------------------------
 With an adjacency list we only need to store the values for the edges that exist withadjacency matrix. you store values irrespective of whether an edge  exist or not. Storage wise an adjacency list is way more efficient
 
@@ -758,10 +834,10 @@ With adjacency list inserting and finding adjacent nodes is constant time comple
 
 An adajcency list allows you to store additional values with an edge such as a weight of the edge. with adjacency  matrix such information would have to be stored externally	
 
-Applications
-------------------
+## `Applications` ##
+=====================
 1. Binary Tree
-------------
+----------------
 Expression Trees
 Hierarchical Data Storage (e.g., file systems)
 Routing Algorithms
@@ -769,7 +845,7 @@ Decision Trees
 Morse Code Representation
 
 2. Binary Search Tree (BST)
-------------------------
+----------------------------
 Databases
 Autocomplete Systems
 Symbol Tables in Compilers
@@ -777,7 +853,7 @@ Version Control Systems
 Implementing Sets and Maps
 
 3. Heap
-------
+----------
 Priority Queues
 Scheduling Algorithms (e.g., CPU scheduling)
 Graph Algorithms (e.g., Dijkstra’s algorithm)
@@ -785,7 +861,7 @@ Memory Management (e.g., garbage collection)
 Event Simulation Systems
 
 4. Heap Sort
-----------
+--------------
 External Sorting (when data is too large for memory)
 Load Balancing
 Embedded Systems
@@ -793,7 +869,7 @@ Disk Scheduling Algorithms
 Real-Time Systems
 
 5. Trie
-------
+----------
 Autocomplete Systems
 Spell Checkers
 IP Routing (longest prefix matching)
@@ -801,64 +877,9 @@ DNA Sequence Matching
 Keyword Matching in Search Engines
 
 6. Graph
--------
+-----------
 Social Networks
 Transportation Networks (e.g., roads, railways)
 Internet (routing and web page linking)
 Electrical Circuits
 Game Maps (pathfinding and connectivity)
-
-10 Heap
---------
-Memory Allocation :  Dynamic, for objects and data needing longer life.
-Structure :  Flexible, less structured.
-Speed :  Slower access.
-Size :  Larger, but limited by system memory.
-Scope and Lifetime :  Persists until explicitly freed, manually or garbage-collected.
-
-11 Min-Heap
------------
-Priority Queue
-Dijkstra's Shortest Path Algorithm
-Huffman Coding
-
-12 Max-Heap Uses
----------------
-Priority Queue
-Heap Sort
-Finding the k-th Largest Element
-
-Heap Sort
-----------
-Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure to sort elements. The algorithm can be divided into two main phases:
-
-Building a Heap: The algorithm first converts the input array into a heap structure. For ascending order sorting, a max heap is used, where the largest element is at the root. For descending order sorting, a min heap is used, where the smallest element is at the root.
-
-Sorting the Elements: The algorithm repeatedly extracts the maximum (or minimum) element from the heap and places it at the end of the array. After each extraction, the heap property is restored. This process continues until all elements have been removed from the heap and placed in the sorted order.
-
-Advantages
-----------
-Efficient Time Complexity :  O(n log n) in both average and worst cases.
-In-Place Sorting :  Requires no additional storage 
-No Worst-Case Scenarios :  Guarantees performance even in the worst-case scenario.
-Works Well with Large Datasets :  Suitable for large amounts of data.
-Supports Priority Queue Operations :  Useful for implementing priority queues and similar data 
-
-Heap Sort Real-World Applications
--------------------------------
-Priority Queues
-Task Scheduling Systems
-Graph Algorithms (e.g., Dijkstra's Algorithm)
-Event-Driven Simulation
-Median Maintenance
-
-Complexity
------------
-Time Complexity
----------------
-Building the Heap : O(n)
-Sorting the Array :  O(n log n)
-
-Space Complexity
----------------
-In-Place Sorting :  O(1) (excluding the space used for the input array)

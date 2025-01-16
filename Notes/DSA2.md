@@ -2,6 +2,8 @@
 ===============
 A stack is a linear data structure that follows the LIFO principle (Last In, First Out). The last element added to the stack is the first one to be removed. Operations in a stack occur only at one end, called the top.
 
+Underflow happens when we try to pop an item from an empty stack. Overflow happens when we try to push more items on a stack than it can hold.
+
 `Operations`
 --------------
 Push: Add an element to the top of the stack.
@@ -124,27 +126,21 @@ Stability Required Sorts
 
 
 
-02 . Selection sort
-====================
-
-Definition
+## `Selection sort` ##
+=======================
+`Definition`
 ------------
 Selection sort is a simple comparison-based sorting algorithm. It works by repeatedly selecting the smallest (or largest) element from the unsorted portion of the array and swapping it with the first unsorted element, effectively growing the sorted portion of the array from left to right.
 
-Advantages
+`Advantages`
 -----------
 Simple to Implement: Easy to understand and implement.
 In-Place: Does not require additional storage space.
 Useful for Small Data Sets: Performs well with small arrays.
+It has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.
 
-Disadvantages
+`Complexity`
 -------------
-Inefficient for Large Data Sets: Time complexity of O(n²) makes it impractical for large datasets.
-Not Adaptive: Does not take advantage of the existing order in the array.
-Unstable: Does not preserve the relative order of equal elements.
-
-Complexity
------------
 Time Complexity :-
 Best Case: O(n²)
 Average Case: O(n²)
@@ -152,45 +148,44 @@ Worst Case: O(n²)
 
 Space Complexity :-  O(1) 
 
-Bestcase , Averagecase and Worstcase scenario is same as bubble sort
+`Disadvantages`
+----------------
+Inefficient for Large Data Sets: Time complexity of O(n²) makes it impractical for large datasets.
+Not Adaptive: Does not take advantage of the existing order in the array.
+Unstable: Does not preserve the relative order of equal elements.
 
-Applications of Selection Sort
-----------------------------
+`Applications of Selection Sort`
+--------------------------------
 Embedded Systems Programming
 Small Data Sets in Educational Tools
 Basic Sorting Tasks in Simple Applications
 Memory-Constrained Environments
 Simulations and Prototyping
 
-Insertion sort
-==============
 
-Definition
-----------
+
+
+
+## `Insertion sort` ##
+======================
+`Definition`
+--------------
 Insertion sort is a simple and intuitive comparison-based sorting algorithm. It builds the final sorted array one element at a time by repeatedly taking the next unsorted element and inserting it into the correct position within the sorted portion of the array.
 
-Steps
------
-1 . Start with the second element (since a single-element array is trivially sorted).
-2 . Compare the current element with the elements in the sorted portion of the array.
-3 . Shift elements in the sorted portion to the right to make space for the current element if needed.
-4 . Insert the current element into the correct position.
-5 . Repeat until all elements are sorted.
-
-Advantages
-----------
+`Advantages`
+--------------
 Simple to Implement: Easy to understand and implement.
 Efficient for Small Data Sets: Performs well with small arrays.
 Stable: Preserves the relative order of equal elements.
 Adaptive: Efficient for nearly sorted arrays, with a time complexity approaching O(n).
 
-Disadvantages
--------------
+`Disadvantages`
+-----------------
 Inefficient for Large Data Sets: Time complexity of O(n²) makes it impractical for large datasets.
 Quadratic Time Complexity: On average and in the worst case, it requires quadratic time to sort the array.
 
-Complexity
-----------
+`Complexity`
+--------------
 Time Complexity :-
 	Best Case: O(n) when the array is already sorted.
 	Average Case: O(n²)
@@ -199,161 +194,109 @@ Time Complexity :-
 Space Complexity :- 
 	 O(1) as it is an in-place sorting algorithm.
 
-Applications of Insertion sort
-==============================
+`Applications of Insertion sort`
+--------------------------------
 Small arrays in libraries
 Online sorting
 Database indexing
 GUI Application
 Adaptive algorithms
 
-04 . Quick Sort
-===============
 
-Definition
------------
+
+
+
+## `Quick Sort` ##
+===================
+`Definition`
+---------------
 Quick sort is an efficient, comparison-based, divide-and-conquer sorting algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
 
-Complexity
-----------
+`Complexity`
+--------------
 Time Complexity :-
 Best Case :-  O(n log n)
 Average Case :-  O(n log n)
 Worst Case :-  O(n²)
 Space Complexity :-  O(log n) (due to the recursion stack)
 
-Best Case Scenario
------------------
+`Best Case Scenario`
+---------------------
 In the best case, the pivot divides the array into two equal halves at each step, leading to a balanced tree of partitions. The time complexity for this case is O(n log n).
 
-Average Case Scenario
---------------------
+`Average Case Scenario`
+------------------------
 In the average case, the pivot generally divides the array into reasonably balanced partitions. The time complexity for this case is O(n log n).
 
-Worst Case Scenario
-------------------
+`Worst Case Scenario`
+----------------------
 The worst-case time complexity is O(n^2). This occurs when the pivot choice results in highly unbalanced partitions. For example, if the array is already sorted or nearly sorted, and the last element is always chosen as the pivot, the array is divided into one large subarray and one empty subarray, leading to O(n^2) complexity.
 
 the worst-case scenario for quick sort arises when the pivot is consistently chosen poorly, such as always selecting the smallest or largest element in the array. In this situation, Quick Sort may require O(n^2) comparisons and swaps to complete the sorting process, which could be more efficient. For example, this worst-case scenario can occur when sorting an already sorted array or an array with many duplicate elements.
 
-Advantages
-----------
+`Advantages`
+--------------
 Efficient: Average time complexity is O(n log n), making it one of the fastest sorting algorithms.
 In-Place Sorting: Requires minimal additional memory (O(log n) due to recursion).
 Parallelizable: Can be easily parallelized as different parts of the array can be sorted independently.
 
-Disadvantages
--------------
+`Disadvantages`
+-----------------
 Worst-Case Complexity: Can degrade to O(n²) if the pivot selection is poor.
 Recursive: Recursive calls can lead to a stack overflow if the recursion depth is too large.
 unstable: Does not preserve the relative order of equal elements.
 
-Applictions of quick sort
-=========================
+`Applictions of quick sort`
+-----------------------------
 General purpose sorting
 Indexing large dataset
 Sorting data for dynamic web content
 File systems
 Database query processing
 
-05 . Merge Sort
-===============
 
-Definition
-----------
+
+
+
+## `Merge Sort` ##
+===================
+`Definition`
+--------------
 Merge sort is an efficient, stable, comparison-based, divide-and-conquer sorting algorithm. It works by dividing the array into smaller sub-arrays, sorting those sub-arrays, and then merging them back together to form a sorted array.
 
-Complexity
-----------
+`Complexity`
+--------------
 Time Complexity :-
 Best Case :-  O(n log n)
 Average Case :-  O(n log n)
 Worst Case :-  O(n log n)
 Space Complexity :-  O(n) (requires additional space proportional to the size of the array)
 
-Advantages
-----------
+`Advantages`
+--------------
 Consistent Performance: Guarantees O(n log n) time complexity.
 Stable: Preserves the relative order of equal elements.
 Parallelizable: Can be easily parallelized since each half can be processed independently.
 
-Disadvantages
--------------
+`Disadvantages`
+-----------------
 Space Complexity: Requires additional space proportional to the size of the array.
 Not In-Place: Uses extra memory for the temporary arrays.
 
-Applications of Merge sort
-==========================
+`Applications of Merge sort`
+------------------------------
 Large dataset
 Used for sorting that doesnt fit for memory
 When stable sorting need
 Parallel computing
 Complex datastructures
 
-07 . In place sorting algorithm
-================================
-An in-place sorting algorithm is one that sorts the elements of an array using a constant amount of extra space.
 
-Benifits
---------
-Space efficiency
-Performance
 
-Non in plce sorting algorithm example :- merge sort
 
-08 . Tabulation
-===============
-Tabulation is a bottom-up dynamic programming technique where you solve subproblems first and use their solutions to build up solutions to larger problems. It uses an iterative approach and typically involves filling up a table (often an array or matrix) with the solutions to subproblems, starting from the smallest subproblems and working up to the original problem.
 
-09 . Sliding window
+## `Hash table` ##
 ===================
-The sliding window technique is used to efficiently solve problems involving subarrays or substrings by maintaining a window (a contiguous range of elements) that slides over the array or string. This method reduces the number of computations by reusing results from previous windows and adjusting the window's boundaries as needed.
-
-10 . Memoization
-================
-Memoization is a technique used to improve the performance of recursive algorithms by storing the results of subproblems in a data structure (like a hash map or array) so that they can be reused when the same subproblem occurs again. Its a top down approach
-
-11 . Rehashing
-===============
-rehashing is a technique used in the management of hash tables. A hash table is a data structure that maps keys to values using a hash function. When the hash table becomes too full or the performance of hash operations degrades, rehashing is performed to improve efficiency. 
-
- During rehashing, the hash table is resized (usually increased in size), and all existing keys are reinserted into the new hash table using a new hash function or a recalculation of the hash values.
-
-12 . (A) Open addressing
-====================
-Quadratic probing
-------------------
-Quadratic probing is a collision resolution technique used in hash tables to handle situations where two or more keys hash to the same index in the table. The algorithm uses a quafratic function to calculate next slot to check
-
-Linear probing
---------------
-If a collision occure the algorithm checks the next slot in a sequencial manner unitl an empty slot is found
-
-Double hashing
---------------
-Double hashing involves using a secondary hash function to calculate the step size for probing
-
-12 . (B) Separate chaining
-===========================
-Uses linked lists attached to each slot to keep a list of all elements that hash to the same value.
-
-13 . Load factor
-===============
-In the context of hash tables, the load factor is a metric that indicates the ratio of the number of elements stored in the hash table to the total number of slots available.
-
-Load Factor(α)= n / m
-​
-Where:
-n = Number of elements (keys) currently in the hash table.
-m = Number of slots (buckets) in the hash table.
-
-When the load factor exceeds the chosen threshold, the hash table is resized. This usually involves:
-
-Doubling the Size: The size of the hash table is typically doubled (or increased by another factor).
-Rehashing: All existing elements are rehashed and inserted into the new, larger table.
-
-14 . Hash table
-===============
 Hash tables are a lower-level data structure that directly handles the storage and retrieval of key-value pairs using a hash function.
 
 The hash function maps keys to indices in an array where the values are stored.
@@ -364,35 +307,47 @@ Javascript  object is a special implementation of hash table datastructure. Howe
 
 Hash tables are designed to have constant time complexity for insertion, deletion, and lookup operations
 
-How do we go form using a string as an index to number as an index ?
+How do we go from using a string as an index to number as an index ?
 A hashing function accepts the string key. Convert it to a hash code using a defined logic and then maps it into a numeric index that is within in the bounds of the array
 
 How hashtable achieving constant time complexity ?
 A hash table achieves average-case constant time complexity 𝑂(1) for insertion, deletion, and lookup operations by using a hash function to distribute keys uniformly across an array
 
-How Hash Tables Work?
-Hash Function
+`How Hash Tables Work?`
+-----------------------
+1. Hash Function
 ------------------
 A hash function takes an input (key) and returns an index in an array where the corresponding value should be stored.
 A good hash function distributes keys uniformly across the array to minimize collisions.
 
-Indexing
------------
+2. Indexing
+---------------
 The output of the hash function is used as an index to insert, find, or delete an element in the array.
 
-Handling Collisions
+3. Handling Collisions
 -------------------------
 Collisions occur when the hash function maps multiple keys to the same index. 
 
 There are several methods to handle collisions:
 -------------------------------------------------------
-Chaining: Each array index points to a linked list of entries that hash to the same index.
+`Seperate Chaining` : Each array index points to a linked list of entries that hash to the same index.
 
-Open Addressing: All elements are stored within the array itself, and upon a collision, the algorithm searches for the next available slot.
+`Open Addressing` : All elements are stored within the array itself, and upon a collision, the algorithm searches for the next available slot.
 
+1. Quadratic probing
+----------------------
+Quadratic probing is a collision resolution technique used in hash tables to handle situations where two or more keys hash to the same index in the table. The algorithm uses a quafratic function to calculate next slot to check
 
-Time Complexity
---------------
+2. Linear probing
+------------------
+If a collision occure the algorithm checks the next slot in a sequencial manner until an empty slot is found
+
+3. Double hashing
+------------------
+Double hashing involves using a secondary hash function to calculate the step size for probing
+
+`Time Complexity`
+------------------
 Best Case
 ---------
   Insertion :- O(1)
@@ -411,67 +366,78 @@ Worst Case
   Deletion :- O(n)
   Lookup :- O(n)
 
-Space Complexity
-----------------
+`Space Complexity`
+--------------------
 Space Complexity :-  O(n)
 
-15 . Applications
-=================
+`Rehashing`
+------------
+Rehashing is a technique used in the management of hash tables. A hash table is a data structure that maps keys to values using a hash function. When the hash table becomes too full or the performance of hash operations degrades, rehashing is performed to improve efficiency. 
 
-Applications of Stack
---------------------
+During rehashing, the hash table is resized (usually increased in size), and all existing keys are reinserted into the new hash table using a new hash function or a recalculation of the hash values.
+
+`Load factor`
+----------------
+In the context of hash tables, the load factor is a metric that indicates the ratio of the number of elements stored in the hash table to the total number of slots available.
+
+Load Factor(α)= n / m
+​
+Where:
+n = Number of elements (keys) currently in the hash table.
+m = Number of slots (buckets) in the hash table.
+
+When the load factor exceeds the chosen threshold, the hash table is resized. This usually involves:
+
+Doubling the Size: The size of the hash table is typically doubled (or increased by another factor).
+Rehashing: All existing elements are rehashed and inserted into the new, larger table.
+
+
+
+
+
+
+## `Applications` ##
+=====================
+
+`Applications of Stack`
+------------------------
 Expression Evaluation
 Syntax Parsing
 Undo Mechanisms
 Call Stack Management
 Depth-First Search (DFS)
 
-Applications of Queue
---------------------
+`Applications of Queue`
+------------------------
 Printer Spooling
 Task Scheduling
 Breadth-First Search (BFS)
 Multi-Threading and Resource Management
 
-Applications of Hash Table
-------------------------
+`Applications of Hash Table`
+----------------------------
 Database Indexing
 Caches
 Symbol Tables in Compilers
 Associative Arrays
 Fast Data Retrieval Systems
 
-Stability
-=========
-Stability in a sorting algorithm means that if two elements have the same value, their relative order will remain the same before and after sorting. In other words, equal elements keep their original order relative to each other in the sorted output.
 
-Stable Sorts 
------------
-Bubble Sort
-Insertion Sort
-Merge Sort
 
-Unstable Sorts
---------------
-Selection Sort
-Quick Sort
 
-Stack
-======
-Underflow happens when we try to pop an item from an empty stack. Overflow happens when we try to push more items on a stack than it can hold.
 
-Better sort
-===========
-Array
------
+## `Better sort` ##
+===================
+`Array`
+---------
 1 . QuickSort
 Generally the fastest sorting algorithm for large datasets due to its average-case time complexity of O(nlogn) and good cache performance.
 
 2 . Merge sort
 Stable sort with a guaranteed O(nlogn) time complexity in all cases (best, average, and worst).
 
-Linked list
------------
+`Linked list`
+---------------
 1 . Merge sort
 Mergesort is particularly well-suited for linked lists. It can be implemented with O(1) extra space and maintains the O(nlogn) time complexity. The splitting and merging operations are more efficient with linked lists compared to arrays because they can be done in place without additional memory.
 
@@ -488,21 +454,75 @@ Almost Sorted Linked List: Insertion Sort.
 Least Sorted Linked List: Mergesort.
 Doubly Linked List: Similar to singly linked lists; use Insertion Sort for small/almost sorted data and Mergesort for large/least sorted data.
 
-Large data set
-==============
-Array
-------
+
+
+
+
+## `Large data set` ##
+==========================
+`Array`
+----------
 quick sort - o(n log n) in place algorithm
 
 If stability required we can choose merge sort also with complexity o(n log n)
 
-Linked list 
------------
+`Linked list `
+---------------
 merge sort - due to its efficient merging process and sequential access nature. and o(n log n)
 
-Small data set 
-==============
-Array
------
+
+
+
+
+## `Small data set ` ##
+==========================
+`Array`
+-----------
 Insertion sort
 Selection sort
+
+`Linked list`
+-------------
+Insertion sort
+
+
+
+
+
+## `Stability` ##
+=================
+Stability in a sorting algorithm means that if two elements have the same value, their relative order will remain the same before and after sorting. In other words, equal elements keep their original order relative to each other in the sorted output.
+
+Stable Sorts 
+-----------
+Bubble Sort
+Insertion Sort
+Merge Sort
+
+Unstable Sorts
+--------------
+Selection Sort
+Quick Sort
+
+## `In place sorting algorithm` ##
+====================================
+An in-place sorting algorithm is one that sorts the elements of an array using a constant amount of extra space.
+
+Benifits
+--------
+Space efficiency
+Performance
+
+Non in plce sorting algorithm example :- merge sort
+
+## `Tabulation` ##
+===================
+Tabulation is a bottom-up dynamic programming technique where you solve subproblems first and use their solutions to build up solutions to larger problems. It uses an iterative approach and typically involves filling up a table (often an array or matrix) with the solutions to subproblems, starting from the smallest subproblems and working up to the original problem.
+
+## `Sliding window` ##
+=======================
+The sliding window technique is used to efficiently solve problems involving subarrays or substrings by maintaining a window (a contiguous range of elements) that slides over the array or string. This method reduces the number of computations by reusing results from previous windows and adjusting the window's boundaries as needed.
+
+## `Memoization` ##
+====================
+Memoization is a technique used to improve the performance of recursive algorithms by storing the results of subproblems in a data structure (like a hash map or array) so that they can be reused when the same subproblem occurs again. Its a top down approach
