@@ -458,51 +458,24 @@ Doubly Linked List: Similar to singly linked lists; use Insertion Sort for small
 
 
 
-## `Large data set` ##
-==========================
-`Array`
-----------
-quick sort - o(n log n) in place algorithm
-
-If stability required we can choose merge sort also with complexity o(n log n)
-
-`Linked list `
----------------
-merge sort - due to its efficient merging process and sequential access nature. and o(n log n)
-
-
-
-
-
-## `Small data set ` ##
-==========================
-`Array`
------------
-Insertion sort
-Selection sort
-
-`Linked list`
--------------
-Insertion sort
-
-
-
-
-
 ## `Stability` ##
 =================
 Stability in a sorting algorithm means that if two elements have the same value, their relative order will remain the same before and after sorting. In other words, equal elements keep their original order relative to each other in the sorted output.
 
 Stable Sorts 
------------
+---------------
 Bubble Sort
 Insertion Sort
 Merge Sort
 
 Unstable Sorts
---------------
+------------------
 Selection Sort
 Quick Sort
+
+
+
+
 
 ## `In place sorting algorithm` ##
 ====================================
@@ -514,6 +487,10 @@ Space efficiency
 Performance
 
 Non in plce sorting algorithm example :- merge sort
+
+
+
+
 
 ## `Tabulation` ##
 ===================

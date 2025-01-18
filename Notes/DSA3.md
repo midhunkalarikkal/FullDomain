@@ -1,48 +1,29 @@
 ## `Tree` ##
 ==============
-A tree is a hierarchical and non linear datastructure that consist of nodes  connected by edges
-
-In linear datastructure the time required to search is propositional to the size of the data set
-
-Trees non linear nature allows quicker and easier access to the data
-
-A tree will not contain loops or cycle
-
-There is exactly one root node in a tree.
-
-Every node except the root has exactly one parent, and each node can have zero or more children.
-
-There is a unique path from the root to any other node.
+- A tree is a hierarchical and non linear datastructure that consist of nodes  connected by edges
+- In linear datastructure the time required to search is propositional to the size of the data set
+- Like Trees non linear nature allows quicker and easier access to the data
+- A tree will not contain loops or cycle
+- There is exactly one root node in a tree.
+- Every node except the root has exactly one parent node, and each node can have zero or more children nodes.
+- There is a unique path from the root to any other node.
 
 `Terminology`
 ---------------
-Parent: A node that has one or more children.
-
-Child: A node that has a parent.
-
-Root: The topmost node in a tree. It has no parent.
-
-Leaf: A node with no children.
-
-Sibling: Nodes that share the same parent.
-
-Ancestor: A node that is a parent, grandparent, etc., of another node.
-
-Descendent: A node that is a child, grandchild, etc., of another node.
-
-Path: A sequence of nodes and edges connecting a node with a descendant.
-
-Distance: The number of edges on the path between two nodes.
-
-Degree: The number of children of a node.
-
-Depth: The number of edges from the root to the node.
-
-Height: The number of edges from the node to the deepest leaf.
-
-Edge: A connection between two nodes.
-
-Subtree: A tree consisting of a node and its descendants.
+- Parent: A node that has one or more children.
+- Child: A node that has a parent.
+- Root: The topmost node in a tree. It has no parent.
+- Leaf: A node with no children.
+- Sibling: Nodes that share the same parent.
+- Ancestor: A node that is a parent, grandparent, etc., of another node.
+- Descendent: A node that is a child, grandchild, etc., of another node.
+- Path: A sequence of nodes and edges connecting a node with a descendant.
+- Distance: The number of edges on the path between two nodes.
+- Degree: The number of children of a node.
+- Depth: The number of edges from the root to the node.
+- Height: The number of edges from the node to the deepest leaf.
+- Edge: A connection between two nodes.
+- Subtree: A tree consisting of a node and its descendants.
 
 `Types of Trees Based on Nodes`
 ---------------------------------
@@ -146,15 +127,27 @@ Complexity same as ternary tree
 
 ## `Predecessor` ##
 ====================
-Case 1: Node has a left subtree: The predecessor is the rightmost (or the maximum) node in the left subtree.
+The predecessor of a node in a binary tree is the node that comes immediately before the given node in an in-order traversal of the tree.
 
-Case 2: Node has no left subtree: The predecessor is one of its ancestors. You move up the tree until you find a node that is the right child of its parent; that parent is the predecessor.
+`How to find the predecessor ?`
+------------------------------------
+1 . If the node has a left child:
+The predecessor is the rightmost node in the left subtree of the given node.
+
+2 . If the node does not have a left child:
+Move up the tree to the nearest ancestor for which the current node lies in its right subtree; that ancestor is the predecessor.
 
 ## `Successor` ##
 ==================
-Case 1: Node has a right subtree: The successor is the leftmost (or the minimum) node in the right subtree.
+The successor of a node in a binary tree is the node that comes immediately after the given node in an in-order traversal of the tree.
 
-Case 2: Node has no right subtree: The successor is one of its ancestors. You move up the tree until you find a node that is the left child of its parent; that parent is the successor.
+`How to Find the Successor ?`
+------------------------------------------
+1 . If the node has a right child:
+The successor is the leftmost node (or the minimum node) in the right subtree of the given node.
+
+2 . If the node does not have a right child:
+Move up the tree to the nearest ancestor for which the current node lies in its left subtree; that ancestor is the successor.
 
 
 
@@ -220,7 +213,7 @@ A degenerate tree (or pathological tree) is a tree where each parent node has on
 5 . Left-Skewed Tree
 ------------------------
 A left-skewed tree is a degenerate tree where every node has only a left child.
-Operations such as search, insert, and delete have linear time complexity, O(N).
+Operations such as search, insert, and delete have linear time complexity, O(n).
 
     A
    /
@@ -233,7 +226,7 @@ D
 6 . Right-Skewed Tree
 -------------------------
 A right-skewed tree is a degenerate tree where every node has only a right child.
-Operations such as search, insert, and delete have linear time complexity, O(N).
+Operations such as search, insert, and delete have linear time complexity, O(n).
 
 A
  \
@@ -284,17 +277,12 @@ o(n) - This includes space for the n nodes in the tree, where each node has a va
 
 `Uses or Applications of BST`
 ------------------------------
-Searching: Efficient searching due to its ordered structure.
-
-Dynamic Set Operations: Used in sets and maps to perform dynamic set operations like insertion, deletion, and lookup efficiently.
-
-Databases: Implementing indexes in databases to allow fast retrieval of data.
-
-Computer Graphics: Used in applications like ray tracing and nearest neighbor searches.
-
-Network Routing: Efficiently finding and updating routes in networking.
-
-File Systems: Organizing files and directories in hierarchical file systems
+- Searching: Efficient searching due to its ordered structure.
+- Dynamic Set Operations: Used in sets and maps to perform dynamic set operations like insertion, deletion, and lookup efficiently.
+- Databases: Implementing indexes in databases to allow fast retrieval of data.
+- Computer Graphics: Used in applications like ray tracing and nearest neighbor searches.
+- Network Routing: Efficiently finding and updating routes in networking.
+- File Systems: Organizing files and directories in hierarchical file systems
 
 `Properties of BST`
 -----------------------
@@ -316,23 +304,17 @@ Inserting a node in a BST involves placing it in the correct position to maintai
 
 Algorithm for Inserting
 ----------------------
-Start at the root.
-
-Compare the value to be inserted with the value of the current node.
-
-If the value is less than the current node's value, move to the left child. If greater, move to the right child.
-
-Repeat until you find an empty spot (null position).
-
-Insert the new node at that position.
+- Start at the root.
+- Compare the value to be inserted with the value of the current node.
+- If the value is less than the current node's value, move to the left child. If greater, move to the right child.
+- Repeat until you find an empty spot (null position).
+- Insert the new node at that position.
 
 2 . Deletion
 ---------------
-Node to be deleted has no children (leaf node): Simply remove the node.
-
-Node to be deleted has one child: Replace the node with its child.
-
-Node to be deleted has two children: Find the in-order successor (smallest node in the right subtree) or in-order predecessor (largest node in the left subtree), replace the node's value with the successor/predecessor's value, and delete the successor/predecessor.
+- Node to be deleted has no children (leaf node): Simply remove the node.
+- Node to be deleted has one child: Replace the node with its child.
+- Node to be deleted has two children: Find the in-order successor (smallest node in the right subtree) or in-order predecessor (largest node in the left subtree), replace the node's value with the successor/predecessor's value, and delete the successor/predecessor.
 
 3 . Traversal
 -----------------
@@ -352,9 +334,9 @@ Applications
 ------------
 Printing Elements in Sorted Order :-  Useful for retrieving data from a BST in sorted order.
 
-K-th Smallest/Largest Element :-  By keeping a counter during traversal, you can find the k-th smallest or largest element.
+K-th Smallest/Largest Element :-  By keeping a counter during traversal, we can find the k-th smallest or largest element.
 
-Merging BSTs :-  To merge two BSTs, you can first perform an InOrder traversal on both trees to get sorted arrays and then merge the arrays into a new BST.
+Merging BSTs :-  To merge two BSTs, we can first perform an InOrder traversal on both trees to get sorted arrays and then merge the arrays into a new BST.
 
 3 . 1 . 2 PreOrder Traversal (Root, Left, Right)
 --------------------------------------------------
@@ -404,25 +386,19 @@ Algorithm
 Create a queue
 Enqueue the root node
 As long as node exist in the queue
-	Dequeue the node form the front
+	Dequeue the node form the queue
 	read the nodes value
 	Enqueue the node's left child if exist
 	Enqueue the node's right child if exist
 
 Uses
 ----
-Level Order Traversal: BFS traverses trees level by level.
-
-Shortest Path: BFS finds the shortest path in unweighted trees.
-
-Minimum Depth: BFS calculates the shortest path to a leaf node.
-
-Serialization/Deserialization: BFS converts trees to/from strings or lists.
-
-Completeness Check: BFS verifies if a tree is complete.
-
-Maximum Values: BFS finds the largest value at each tree level.
-
+- Level Order Traversal: BFS traverses trees level by level.
+- Shortest Path: BFS finds the shortest path in unweighted trees.
+- Minimum Depth: BFS calculates the shortest path to a leaf node.
+- Serialization/Deserialization: BFS converts trees to from strings or lists.
+- Completeness Check: BFS verifies if a tree is complete.
+- Maximum Values: BFS finds the largest value at each tree level.
 
 
 
@@ -448,13 +424,13 @@ Efficiency :-  Time complexity for search, insertion, and deletion is generally 
 
 
 
-
-
-## `Balanced vs Unbalanced Tree` ##
-====================================
+## `Extra trees` ##
+==============================
 `Balanced Tree`
--------------
+----------------
 A tree is balanced if the height difference between the left and right subtrees of any node is at most one.
+
+depth = height of left subtree - hwight of right subtree
 
 `Balanced trees`
 -----------------
@@ -489,6 +465,16 @@ use cases - Linux , kernel , java collection framework
 --------------------------
 A tree-like data structure used for efficient retrieval of keys and their associated values. Each node represents a possible prefix of keys, and the paths from the root to leaves represent complete keys.
 
+   (root)
+       /   \
+      c     b
+     / \     \
+    a   a     a
+   /     \      \
+  t       r       t
+          |
+          e
+
 4 . `M-way Search Tree`
 ------------------------
 A generalized form of a binary search tree that allows for more than two children per node. The exact number of children is specified by the order 'M' of the tree.
@@ -507,11 +493,25 @@ A Splay Tree is a self-adjusting binary search tree with the unique property tha
 
 8 . `Merkle Tree`
 ---------------------
-A tree-like data structure in which each leaf node is labeled with the hash of a data block, and each non-leaf node is labeled with the hash of the concatenation of the labels of its child nodes. It is used for efficient data integrity verification.
+A Merkle Tree is a hierarchical data structure used to verify the integrity and consistency of data efficiently. In a Merkle Tree, each leaf node contains the hash of a data block, and each non-leaf node contains the hash of the concatenation of its child nodes. The tree culminates in a single hash at the top, known as the Merkle
 
-`Red-Black Tree vs AVL Tree`
------------------------------------
-Both are self-balancing binary search trees, but AVL trees are more strictly balanced, leading to faster search operations but potentially slower insertion and deletion due to more frequent rebalancing. Red-black trees are less strictly balanced, offering a balance between search efficiency and insertion/deletion performance.
+9 . `Suffix tree`
+-------------------
+A tree-like data structure used for efficient retrieval of all possible suffixes of a string. Each node represents a possible suffix of the string, and the paths from the root to the leaves represent complete suffixes. It is widely used in string processing tasks like substring search, pattern matching, and finding the longest repeated substring.
+
+  (root)
+        |
+        b → banana
+        |
+        a → anana
+        |
+        n → nana
+        |
+        a → ana
+        |
+        n → na
+        |
+        a → a
 
 
 
