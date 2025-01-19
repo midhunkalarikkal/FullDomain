@@ -587,9 +587,9 @@ Heapify is the process of converting a binary tree into a heap (either min heap 
 -------------------------------------
 Bottom-Up Heapify starts from the last non-leaf node and works its way up to the root.
 
-For each node, it ensures the subtree rooted at that node satisfies the heap property.
+For each node, the method ensures that the subtree rooted at that node satisfies the heap property.
 
-This approach is efficient because it works on smaller sub-trees first, ensuring that when a node higher up is adjusted, its sub-trees are already heaps.
+This approach is efficient because it starts from the lowest levels of the tree, fixing smaller subtrees first.
 
 The time complexity of Bottom-Up Heapify is O(n), where n is the number of elements in the heap.
 
@@ -602,6 +602,10 @@ As it proceeds, it ensures that the heap property is maintained by comparing the
 This approach is typically used when inserting an element into an already heapified structure.
 
 The time complexity of Top-Down Heapify is O(logn), which occurs during insertion or deletion operations.
+
+
+
+
 
 ## `Heap Sort` ##
 ====================
@@ -789,7 +793,7 @@ Space Complexity: O(V)
 
 Depth-First Search (DFS)
 ----------------------
-DFS is a graph traversal algorithm that explores as far along a branch as possible before backtracking. It uses a stack (or recursion) to keep track of the path.
+Depth-First Search (DFS) is a graph traversal algorithm that explores as deeply as possible along each branch before backtracking. It uses a stack (either explicitly or through recursion) to keep track of the nodes to be visited next and the current traversal path.
 
 Time Complexity: O(V + E)
 Space Complexity: O(V) (for recursion stack or an explicit stack)
@@ -833,6 +837,10 @@ With an adjacency list we only need to store the values for the edges that exist
 With adjacency list inserting and finding adjacent nodes is constant time complexity where as with adjacency matrix, it is linear time complexity
 
 An adajcency list allows you to store additional values with an edge such as a weight of the edge. with adjacency  matrix such information would have to be stored externally	
+
+
+
+
 
 ## `Applications` ##
 =====================
