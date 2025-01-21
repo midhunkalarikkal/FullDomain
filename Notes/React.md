@@ -5,7 +5,7 @@
 
 ###  Why is `React known as React` ###
 ==========================================
-A: And it's called `React` because it `reacts`. It was developed by Facebook (a site that CONSTANTLY updates their data) to improve the user interface development and more effectively change (REACT to) what the user sees when they're doing things like mouse clicking, submitting and typing.
+It's called `React` because it `reacts`. It was developed by Facebook (a site that CONSTANTLY updates their data) to improve the user interface development and more effectively change (REACT to) what the user sees when they're doing things like mouse clicking, submitting and typing.
 
 
 
@@ -13,11 +13,9 @@ A: And it's called `React` because it `reacts`. It was developed by Facebook (a 
 
 ### `FRAMEWORK`  ###
 ========================
-A: A framework is a set of pre-written code that provides a structure for developing software applications. A library, on the other hand, is a collection of pre-written code that can be used to perform specific tasks.
-
-Frameworks are more opinionated than libraries, meaning they require you to follow specific patterns and conventions.
-
-It often calls your code at certain points (called **Inversion of Control**), meaning the framework has more control over how your application is organized and executed.
+- A framework is a set of pre-written code that provides a structure for developing software applications.
+- Frameworks are more structured than libraries, meaning they require developers to follow specific patterns and rules.
+- It often calls our code at certain points (called **Inversion of Control**), meaning the framework has more control over how our application is organized and executed.
 
 **Examples:** Angular, Django, Ruby
 
@@ -27,11 +25,9 @@ It often calls your code at certain points (called **Inversion of Control**), me
 
 ### `LIBRARY` ###
 ======================
-A library is a collection of pre-written code, functions, or utilities that helps developers perform common tasks more efficiently.
-
-Libraries are tools you can call upon whenever you need them in your code. They give you control over when and how to use them.
-
-A `library` is a collection of packages that perform specific operations whereas a `framework` contains the basic flow and architecture of an application. The major difference between them is the complexity. Libraries contain a number of methods that a developer can just call whenever they write code. React js is library and Angular is Framework.
+- A library is a collection of pre-written code, functions, or utilities that helps developers perform common tasks more efficiently.
+- Libraries are tools we can call upon whenever we need them in our code. They give us control over when and how to use them.
+- A `library` is a collection of packages that perform specific operations whereas a `framework` contains the basic flow and architecture of an application. The major difference between them is the complexity. Libraries contain a number of methods that a developer can just call whenever they write code. React js is library and Angular is Framework.
 
 **Examples:** React, Lodash, jQuery
 
@@ -41,13 +37,13 @@ A `library` is a collection of packages that perform specific operations whereas
 
 ### `CDN LINKS FOR REACT` ###
 ==================================
-"Using React via CDN is not an ideal approach for larger applications because multiple network calls may occur, which can impact performance. Additionally, you'll need to manually update the URL whenever a new version of React is released."
+"Using React via CDN is not an ideal approach for larger applications because multiple network calls may occur, which can impact performance. Additionally, we'll need to manually update the URL whenever a new version of React is released."
 
 ### How CDN Links for React Work ###
-CDNs host popular libraries like React. When you include a React CDN link in your HTML file, the React JavaScript files (either the development or production version) are fetched from the CDN's global servers.
+CDNs host popular libraries like React. When we include a React CDN link in our HTML file, the React JavaScript files (either the development or production version) are fetched from the CDN's global servers.
 
 ### Loading React via URL ###
-You include the CDN links in the `<script>` tag in your HTML file, and the browser fetches the library from the closest CDN server, improving load time.
+we include the CDN links in the `<script>` tag in our HTML file, and the browser fetches the library from the closest CDN server, improving load time.
 
 
 
@@ -62,6 +58,8 @@ You include the CDN links in the `<script>` tag in your HTML file, and the brows
 - `react.development.js` or `react.production.min.js`: This is the React library.
 - `react-dom.development.js` or `react-dom.production.min.js`: This is ReactDOM, which is responsible for rendering React components into the DOM.
 
+`ReactDOM` is a package in React that helps render React components to the web page. It connects React with the DOM (Document Object Model), which represents the structure of an HTML page. ReactDOM takes the React components we build and efficiently updates the web page to match the changes in the components. It is mainly used for rendering React apps in web browsers.
+
 ## Development vs Production
 -----------------------------
 - **Development version** (`development.js`): Includes helpful warnings and detailed error messages for developers.
@@ -73,6 +71,8 @@ You include the CDN links in the `<script>` tag in your HTML file, and the brows
 ------------------------------------------------------
 The `crossorigin` attribute sets the mode of the request to an HTTP CORS Request.
 The purpose of crossorigin attribute is used to share the resources from one domain to another domain. Basically, it is used to handle the CORS request. It is used to handle the CORS request that checks whether it is safe to allow for sharing the resources from other domains.
+
+CORS is a security feature implemented by web browsers to restrict web pages from making requests to a domain different from the one that served the web page.
 
 ## Avoiding Local Setup
 ------------------------
@@ -90,11 +90,6 @@ The purpose of crossorigin attribute is used to share the resources from one dom
 - **No Local Development Environment**: You miss out on tools like React DevTools, which work better with local setups.
 - **Version Management**: You must manually update the CDN link when new React versions are released.
 - **Limited Flexibility**: No control over additional configurations, build processes, or optimizations that can be done with tools like Webpack or Parcel.
-
-## Crossorigin in Link
-------------------------
-- Cross-origin requests refer to accessing resources (scripts, images, etc.) from a different domain or protocol than the current webpage.
-- CORS (Cross-Origin Resource Sharing) ensures that these resources are accessed safely across different origins.
 
 
 
@@ -116,7 +111,6 @@ The purpose of crossorigin attribute is used to share the resources from one dom
 - **Performance**: Updating the Virtual DOM is faster because it minimizes direct interactions with the Actual DOM.
 - **Changes**: When changes occur, React updates the Virtual DOM first, compares it with the previous version, and calculates the minimum number of changes needed before updating the Actual DOM.
 - **Manipulation**: The Virtual DOM allows for efficient batch updates, leading to better performance in rendering and re-rendering UI components.
-
 
 
 
@@ -164,7 +158,6 @@ The purpose of crossorigin attribute is used to share the resources from one dom
 
 ### `Static vs Dynamic` Rendering ###
 =====================================
-
 ## Static Rendering
 --------------------
 - **Definition:** Static rendering involves generating the HTML of a web page at build time. This means that the content is fixed and does not change based on user interaction or data fetching after the page is loaded.
@@ -185,24 +178,13 @@ The purpose of crossorigin attribute is used to share the resources from one dom
 
 
 
-### `ISR` (Incremental Static Regeneration) and `SPA` (Single Page Application) ###
-=================================================================================
-
-## ISR (Incremental Static Regeneration)
------------------------------------------
+### `ISR` (Incremental Static Regeneration) ###
+==================================================
 - **Definition:** ISR is a feature used in frameworks like Next.js that allows you to update static content incrementally without needing to rebuild the entire site. This means you can regenerate specific pages after deployment based on user requests or at defined intervals.
 - **Characteristics:**
   - Combines the benefits of static and dynamic rendering.
   - Enables faster page loads while keeping content fresh.
   - Pages can be statically generated and updated on demand, making it ideal for sites with frequently changing data.
-
-## SPA (Single Page Application)
----------------------------------
-- **Definition:** An SPA is a web application that loads a single HTML page and dynamically updates content as the user interacts with the app. Instead of loading new pages from the server, SPAs fetch data and render updates using JavaScript.
-- **Characteristics:**
-  - Provides a smoother and faster user experience, similar to desktop applications.
-  - Only the necessary components are updated, minimizing server requests.
-  - Routing and state management are often handled on the client side, which can lead to complexities in managing application state.
 
 
 
@@ -287,23 +269,14 @@ With **React Fiber**, React introduced **Incremental Rendering**, which breaks d
 
 ### ADVANTAGES OF `REACT` ###
 ==================================
-
 ## Component-Based Architecture
 --------------------------------
-- React enables you to build encapsulated components that manage their own state, making the code modular, reusable, and easier to maintain.
-
 ## Virtual DOM for Performance
 ------------------------------
-- The Virtual DOM efficiently updates only the changed parts of the actual DOM, resulting in faster UI updates and better overall performance.
-
 ## JSX for Readability
 -----------------------
-- JSX combines HTML and JavaScript, making it easy to write and understand the structure of components, leading to more intuitive code.
-
 ## One-Way Data Binding
 ------------------------
-- Unidirectional data flow ensures predictable state management, making it easier to debug and understand how data moves through the application.
-
 ## Rich Ecosystem
 -----------------
 - React has a large community with many libraries, tools, and frameworks (like Next.js) that enhance its functionality, speeding up development.
@@ -326,26 +299,17 @@ With **React Fiber**, React introduced **Incremental Rendering**, which breaks d
 
 ### DISADVANTAGES OF `REACT` ###
 =====================================
-
 ## Rapidly Changing
 --------------------
-- React is frequently updated, which is good for features but may require constant learning and adaptation.
-
 ## Learning Curve
 -------------------
-- Although React is simple at its core, concepts like JSX, props, state, and Hooks can be challenging for beginners to grasp.
-
 ## JSX Syntax
 --------------
-- Some developers find the combination of HTML and JavaScript in JSX confusing, especially those with a non-JavaScript background.
-
+## Poor Documentation of External Libraries
+---------------------------------------------
 ## Not a Full Framework
 ------------------------
 - React is a library, not a full framework, so you need additional libraries for routing, form handling, and global state management (e.g., React Router, Redux).
-
-## Poor Documentation of External Libraries
----------------------------------------------
-- While React itself has good documentation, many third-party libraries often lack proper documentation, leading to longer research times.
 
 ## SEO Challenges (without SSR)
 --------------------------------
@@ -387,7 +351,7 @@ The `ReactDOM.render()` method is responsible for rendering React elements into 
 
 ### `NPX` ###
 ===================
-A: `npx` stands for `Node Package eXecute`. It is simply an `npm` package runner. It allows developers to execute any Javascript Package available on the npm registry without even installing it. npx is installed automatically with npm version 5.2.
+A: `npx` stands for `Node Package eXecute`. It is simply a `npm` package runner. It allows developers to execute any Javascript Package available on the npm registry without even installing it. npx is installed automatically with npm version 5.2.
 
 Example: npx parcel index.html
 
@@ -437,7 +401,7 @@ Here are all the reasons why you shouldn't commit it: The node_modules folder ha
 
 ### `PACKAGE.JSON` ###
 ============================
-`package.json` is a configuration file that provides key details about your project, including its metadata, dependencies, and scripts for tasks like building or testing. It helps npm manage package installations and tracks the setup for your project.
+`package.json` is a configuration file that provides key details about our project, including its metadata, dependencies, and scripts for tasks like building or testing. It helps npm manage package installations and tracks the setup for our project.
 
 ## What is `browserlists` in package.json
 ------------------------------------------
@@ -471,7 +435,7 @@ A: Browserslist defines and shares the list of target browsers between various f
 ### `GITIGNORE` ###
 ==========================
 - `/node_modules` should always be included in `.gitignore` to avoid unnecessary files being tracked in your Git repository.
-- Files like `package.json` and `package-lock.json` should **not** be ignored, as they are critical for managing the project’s dependencies and ensuring consistency across environments.
+- Files like `package.json` and `package-lock.json` should be ignored, as they are critical for managing the project’s dependencies and ensuring consistency across environments.
 - The general rule: Don't push files that can be regenerated (like `node_modules`) to Git; use `.gitignore` for them.
 
 
@@ -480,7 +444,7 @@ A: Browserslist defines and shares the list of target browsers between various f
 
 ### `BUNDLERS` ###
 =======================
-Bundlers are tools that combine all the files and dependencies in your project into a single (or a few smaller) bundle(s). This improves loading performance by reducing the number of HTTP requests and minimizing file sizes through:
+Bundlers are tools that combine all the files and dependencies in our project into a single (or a few smaller) bundle(s). This improves loading performance by reducing the number of HTTP requests and minimizing file sizes
 - **Minification** (removing unnecessary characters or whitespace).
 - **Code splitting** (splitting the code into chunks to load them as needed).
 
@@ -494,7 +458,7 @@ Example: **Create React App** uses Webpack as its default bundler.
 
 ### `DEPENDENCIES` ###
 ============================
-Dependencies are external libraries or packages that your project requires for specific features. There are two types:
+Dependencies are external libraries or packages that our project requires for specific features. There are two types:
 - **Dev dependencies**: Needed only during development (e.g., testing, build tools).
 - **Regular dependencies**: Needed in production (e.g., the main library or framework).
 
@@ -509,10 +473,10 @@ Symbols in dependency versions:
 
 ### `PARCEL` ###
 =================
-A: `Parcel` and `webpack` are the bundlers used mostly for `JavaScript` or `Typescript` code that helps you to `minify, clean, and make your code compact` so that it becomes easier to send a request or receive the response from the server when it usually takes you to transfer multiple files without using any bundler for loading the page of your application. Both of these bundlers substantially reduce the time it takes for the transfer of data and files to the server from the application. Along with that both bundlers parcel and webpack remove the unnecessary comments, new lines, any kind of block delimiters, and white spaces while the functionality of the code remains unchanged.
+`Parcel` and `webpack` are the bundlers used mostly for `JavaScript` or `Typescript` code that helps you to `minify, clean, and make our code compact` so that it becomes easier to send a request or receive the response from the server when it usually takes us to transfer multiple files without using any bundler for loading the page of our application. Both of these bundlers substantially reduce the time it takes for the transfer of data and files to the server from the application. Along with that both bundlers parcel and webpack remove the unnecessary comments, new lines, any kind of block delimiters, and white spaces while the functionality of the code remains unchanged.
 
 Use of `Parcel/Webpack`:
-Module bundlers are the way to organize and combine many files of JavaScript code into one file. A JavaScript bundler can be used when your project becomes too large for a single file or when you're working with libraries that have multiple dependencies.
+Module bundlers are the way to organize and combine many files of JavaScript code into one file. A JavaScript bundler can be used when our project becomes too large for a single file or when we are working with libraries that have multiple dependencies.
 
 Here is the refined version with duplicates removed and a concise, organized structure:
 
@@ -531,12 +495,6 @@ Here is the refined version with duplicates removed and a concise, organized str
 - **Consistent Hashing**: Ensures unique and stable file names across builds.  
 - **Diagnostic & Error Handling**: Provides meaningful errors and diagnostics.  
 - **Separate Dev and Prod Bundles**: Optimizes the build differently for development and production environments.  
-
-This version removes redundancy while maintaining clarity and professionalism.
-
-For a **production build**, you can run: npx parcel build index.html
-
-During production builds, the `dist` folder will contain optimized files, and you can remove the `main` property from `package.json` to avoid errors related to the entry point.
 
 ## installation commands
 -------------------------
@@ -567,13 +525,13 @@ When transpiled, JSX is transformed into a `React.createElement` function, which
 
 ## What is `.parcel-cache` folder
 ---------------------------------
-A: `cache folder` (or `.parcel-cache in parcel v2`) stores information about your project when parcel builds it, so that when it rebuilds, it doesn't have to re-parse and re-analyze everything from scratch. It's a key reason why parcel can be so fast in development mode.
+A: `cache folder` (or `.parcel-cache in parcel v2`) stores information about our project when parcel builds it, so that when it rebuilds, it doesn't have to re-parse and re-analyze everything from scratch. It's a key reason why parcel can be so fast in development mode.
 
 ## What is the `dist` folder
 -----------------------------
-A: The `/dist` stands for distributable. The /dist folder contains the minimized version of the source code. The code present in the /dist folder is actually the code which is used on production web applications.
+A: The `/dist` stands for distributable. The /dist folder contains the minimized version of the source code. The code present in the /dist folder is actually the code which is used on production of web applications.
 
-Parcel's default directory for your output is named dist . The --dist-dir public tag defines the output folder for your production files and is named public to avoid confusion with the dist default directory.
+Parcel's default directory for our output is named dist . The --dist-dir public tag defines the output folder for your production files and is named public to avoid confusion with the dist default directory.
 
 ## `Logical Bundling` -> Good for Performance
 --------------------------------------------------
@@ -621,17 +579,20 @@ Examples include user interactions (like button clicks) or data changes.
 React calls the render function to generate a virtual DOM based on the component's current state and props.
 This phase doesn't interact with the real DOM—only virtual DOM trees are prepared.
 
-## 3. Committing
-------------------
+## 3. Reconciliation
+--------------------------
 The virtual DOM is compared to the real DOM (using reconciliation) to determine the minimal set of changes.
+
+## 4. Committing
+------------------
 React updates the real DOM based on the diff, ensuring only necessary elements are modified.
 
-## 4. Rerendering
+## 5. Rerendering
 -------------------
 If state or props change again, React triggers another render to reflect the updated data.
 This can happen multiple times if components depend on frequently changing data.
 
-## 5. Batching Updates
+## 6. Batching Updates
 -----------------------
 React batches multiple state or prop updates to avoid unnecessary renders.
 This improves performance by combining several changes into a single render cycle instead of rendering for every update individually.
@@ -668,8 +629,6 @@ const eg = <h1> Hello world </h1>
 
 ## `Rules` of JSX  
 ----------------
-JSX (JavaScript XML) is a syntax extension in React that allows writing HTML-like code within JavaScript. While it looks similar to HTML, JSX follows some specific rules.
-
 1. **Every JSX Element Must Have One Parent Element:** 
 --------------------------------------------------------
    - All JSX must be wrapped inside a single parent element, such as a `<div>` or `<React.Fragment>`.  
@@ -701,7 +660,7 @@ JSX (JavaScript XML) is a syntax extension in React that allows writing HTML-lik
 
 4. **JavaScript Expressions inside JSX:**  
 ------------------------------------------
-   - You can embed JavaScript expressions inside JSX using curly braces `{}`.
+   - We can embed JavaScript expressions inside JSX using curly braces `{}`.
 
    - **Example:**  
      ```jsx
@@ -802,7 +761,7 @@ When using curly braces in JSX, you can embed JavaScript expressions. However, J
 
 ## Conditional Rendering
 -------------------------
-React can dynamically render components based on route parameters or user input. For example, if a user visits /product/42, the app will display details for product ID 42.
+Conditional rendering in React means displaying different components or content based on a condition.
 
 ## `<> </>` in React (Fragment Syntax)
 ---------------------------------------
@@ -824,19 +783,17 @@ return (
 
 ## `Key` Property in Jsx element
 --------------------------------
-Whenever we are looping and making data dynamic we need to set a key property to the JSX element like key = {value}
+- Whenever we are looping and making data dynamic we need to set a key property to the JSX element like key = {value}
 
 So these keys are very important for the app optimization 
 
-Suppose if a new data came to the array we are looping , and if there is not unique key for the elements , The react will rerender all the elements again because react dont knwo which is the newly added data so this will make our app more complex in loading
+Suppose if a new data came to the array we are looping , and if there is not unique key for the elements , The react will rerender all the elements again because react dont know which is the newly added data so this will make our app more complex in loading
 
 So keeping a unique key for the element will help the react to identify the newly added data and then the react will only render that data
 
 NOTE THAT :- never use the index of the looping as the unique key
 
 A: A `key` is a special attribute you need to include when creating lists of elements in React. Keys are used in React to identify which items in the list are changed, updated, or deleted. In other words, we can say that keys are unique Identifier used to give an identity to the elements in the lists.
-Keys should be given to the elements within the array to give the elements a stable identity.
-
 
 
 
@@ -864,8 +821,6 @@ The DOM represents the HTML document as a tree, with the document object as the 
 
 ## Component-Based Structure
 -----------------------------
-React allows developers to break down the UI into small, self-contained components. These components can be reused multiple times in different places, helping to reduce code duplication.
-
 ## Props for Customization
 --------------------------
 Props allow components to be reusable with different data inputs, enabling developers to pass dynamic content to a single component without rewriting it. This promotes flexibility while maintaining a modular structure.
@@ -884,32 +839,23 @@ React hooks like `useState`, `useEffect`, and `useReducer` promote the reuse of 
 
 ## Component Libraries
 ----------------------
-You can create libraries of reusable components, such as buttons, forms, or modals, and use them across multiple projects. Libraries like **Material-UI** or **Bootstrap** provide reusable UI components for rapid development.
+We can create libraries of reusable components, such as buttons, forms, or modals, and use them across multiple projects. Libraries like **Material-UI** or **Bootstrap** provide reusable UI components for rapid development.
 
 
 
 
 ### `Synthetic Events` ###  
-========================  
-Synthetic Events in React are objects that wrap native browser events to provide a consistent API across all browsers. React’s synthetic event system ensures that event handling works uniformly across different platforms.
+============================
+- In React, when you use event handlers like onClick, onChange, or onSubmit, React doesn’t directly use the browser's native events.
+- Instead, React uses a Synthetic Event, which is a wrapper around the browser’s native event.
+- Why? This ensures that events behave the same way across all browsers (cross-browser consistency).
 
-1. **What are Synthetic Events?**  
-----------------------------------
-   - Synthetic events are React’s cross-browser wrapper around native events.
-   - These events behave identically across all browsers, providing a consistent interface.
-
-2. **How Synthetic Events Work:**  
-----------------------------------
-   - React creates a synthetic event object that mimics the original native event.
-   - The synthetic event gets automatically pooled (reused) to improve performance. This means the event object is cleared and reused after the callback finishes executing.
-   - If you need to access the event asynchronously, call `event.persist()` to prevent React from reusing it.
-
-3. **Event Handling in React:**  
+1. **Event Handling in React:**  
 -------------------------------
    - Event handlers in React are added using camelCase syntax (e.g., `onClick` instead of `onclick`).
    - React follows the virtual DOM pattern, meaning event handlers are attached at the root of the DOM, not directly on individual nodes.
 
-4. **Examples of Synthetic Events:**
+2. **Examples of Synthetic Events:**
 ----------------------------------------
 
    - **onClick:** Handles button clicks.
@@ -929,37 +875,38 @@ Synthetic Events in React are objects that wrap native browser events to provide
      </form>
      ```
 
-5. **Event Pooling:**  
+3. **Event Pooling:**  
 ---------------------
-   - React reuses the synthetic event object to improve performance. This means the event’s properties become unavailable after the event handler is executed.  
+   - Event pooling is a performance optimization technique used by React.
+   - React reuses the same synthetic event object for multiple events instead of creating a new object each time an event occurs.
+   - Once the event handler finishes executing, React clears the event object’s properties (like event.type, event.target, etc.), making them unavailable for future use.
+
+    `Why event.persist()?`
+    - If you need to access the event's properties asynchronously (e.g., inside a setTimeout or a promise), the event's data    might already be cleared due to pooling.
+    - Calling event.persist() tells React not to reuse or clear the event object, so its properties remain available.
+
    - **Example of Persisting an Event:**
      ```jsx
      function handleClick(event) {
-       event.persist(); // Prevents the event from being reused
-       setTimeout(() => console.log(event.type), 1000);
-     }
+        event.persist(); // Prevents React from clearing the event
+        console.log(event.type); // Logs "click"
 
-     <button onClick={handleClick}>Click Me</button>
+        setTimeout(() => {
+          console.log(event.type); // Logs "click" because persist keeps the event data
+        }, 1000);
+      }
+
+      export default function App() {
+        return <button onClick={handleClick}>Click Me</button>;
+      }
+
      ```
 
-6. **Supported Synthetic Events in React:**  
-----------------------------------------------
-   React supports many types of synthetic events, such as:
-
-   - **Mouse Events:** `onClick`, `onDoubleClick`, `onMouseEnter`, `onMouseLeave`
-   - **Keyboard Events:** `onKeyDown`, `onKeyUp`, `onKeyPress`
-   - **Form Events:** `onChange`, `onSubmit`, `onInput`
-   - **Focus Events:** `onFocus`, `onBlur`
-   - **Touch Events:** `onTouchStart`, `onTouchEnd`
-   - **Clipboard Events:** `onCopy`, `onPaste`
-
-7. **Advantages of Synthetic Events:**  
+4. **Advantages of Synthetic Events:**  
 ---------------------------------------
    - **Cross-browser Compatibility:** Provides uniform behavior across different browsers.
    - **Performance:** Uses event delegation by attaching handlers to the root, reducing the need for multiple listeners.
    - **Abstraction:** Makes handling events simpler by wrapping the native browser events.
-
-Synthetic events are an essential part of React, ensuring seamless event handling with optimized performance and consistency.
 
 
 
@@ -981,7 +928,7 @@ Memoization is an optimization technique used to improve the performance of appl
 
 3. **Memoization in React:**  
 ------------------------------
-   React provides built-in tools for memoization to optimize rendering and avoid unnecessary re-renders.
+   React provides built-in features for memoization to optimize rendering and avoid unnecessary re-renders.
 
    - **React.memo:**  
      - A higher-order component (HOC) that memoizes a functional component, preventing unnecessary re-renders if the props don’t change.
@@ -1004,98 +951,19 @@ Memoization is an optimization technique used to improve the performance of appl
    - **Callback Functions Passed as Props:** Use `useCallback` to ensure that child components don’t re-render unnecessarily.
    - **Rendering Pure Components:** Use `React.memo` to memoize components that rely only on props, avoiding re-renders unless the props change.
 
-6. **Drawbacks of Memoization:**  
----------------------------------
-   - **Memory Consumption:** Cached data can accumulate over time, increasing memory usage.
-   - **Overhead:** If not used carefully, memoization can add unnecessary complexity, leading to premature optimization.
-   - **Limited Benefit for Lightweight Functions:** Memoization might not significantly improve performance for simple functions.
-
-
-
-
-   
-### `ES6` New Methods ###
-==============================
-## Arrow Function
-------------------
-Arrow functions provide a shorter syntax for writing functions and automatically bind the context (`this`) to the enclosing scope.
-
-## Map
-------
-`map()` is a method that creates a new array by applying a function to each element of an existing array.
-
-## Destructuring
------------------
-Destructuring allows you to unpack values from arrays or properties from objects into distinct variables, simplifying assignments.
-
-## Filter
-----------
-`filter()` is a method that creates a new array containing only the elements that pass a specified test.
-
-## Reduce
-----------
-`reduce()` executes a reducer function on each element of the array, resulting in a single output value (e.g., sum, product, etc.).
-
-## Import / Export
--------------------
-ES6 introduced modules, allowing developers to organize and reuse code across files using `import` and `export`.
-
-## Default Export/Import
--------------------------
-Each file/module can have only one default export.
-When importing, you can use any name for the imported module.
-Default exports are often used for the primary function/class of a module.
-
-## Named Export/Import
-----------------------
-Multiple named exports can exist in a single module.
-When importing, you must use the exact names of the exported entities, unless you use aliases.
-Named exports are great for exporting multiple utilities or constants.
-
-
-
-
-### `Pure Functions` ###  
-=======================  
-A pure function is a function that adheres to two key principles:
-
-1. **Deterministic:**  
-   - For a given set of inputs, a pure function always produces the same output. This means the function’s behavior is predictable and does not depend on any external state or data.
-  
-2. **No Side Effects:**  
-   - Pure functions do not cause any observable changes in the application’s state or interact with the outside world (like modifying global variables, changing object properties, or performing I/O operations).
-  
-#### Example of a Pure Function:  
-```javascript
-function add(a, b) {
-    return a + b; // Always returns the same result for the same inputs
-}
-```
-
 
 
 
 
 ### `Strict Mode` ###
-===================
+==========================
 Strict Mode is a feature in JavaScript that helps identify and catch common programming errors, as well as enforce a stricter set of rules for JavaScript code. It can be enabled in both JavaScript files and within React components.
 
-Key Features of Strict Mode:
-Eliminates Silent Errors:
-
-Throws errors for silent mistakes (like assigning values to undeclared variables) that would otherwise fail silently.
-Disallows Duplicate Parameter Names:
-
-Prevents the use of duplicate parameter names in functions, which can lead to confusion.
-Prevents this from Being Implicitly Global:
-
-In strict mode, this inside a function that’s called as a function (not as a method of an object) is undefined, preventing accidental global variable creation.
-Disallows with Statement:
-
-The with statement is not allowed in strict mode, which can lead to code that is hard to understand and maintain.
-Changes to Certain Global Variables:
-
-Some global variables (like eval and arguments) are restricted in strict mode.
+- Catches Silent Errors: Throws errors for mistakes that would otherwise fail silently.
+- No Duplicate Parameters: Disallows duplicate function parameter names.
+- Restricted this: this in functions defaults to undefined, avoiding accidental global variables.
+- No with Statement: Prevents use of with, making code clearer.
+- Restricts Globals: Limits changes to eval and arguments.
 
 **Example**
 -----------
@@ -1163,19 +1031,27 @@ class MyComponent extends React.Component {
 }
 ```
 
-A super constructor is a special constructor in the class hierarchy of object-oriented programming languages. It refers to the constructor of the parent class that is being extended in the current class. The purpose of using the super constructor with a props argument is to inherit the properties of the parent class and also pass in additional properties as arguments to the child class.
+`Purpose of super()`
+The super() function calls the constructor of the parent class (React.Component), ensuring the parent class is properly initialized.
 
-The main reason for passing props parameter to super() call is to access this.props in your child constructors.
+`Why Pass props to super(props)`
+Passing props to super() in the construcotr makes this.props available in class.
+Without super(props), this.props inside the constructor will be undefined.
 
-When you extend the React.Component class, you must call the parent class's constructor using super(). If you're planning to access props inside the constructor, you need to pass props to super()
+`Using props Directly`
+Even without passing props to super(), you can still use the props parameter directly in the constructor.
+However, this.props won’t work unless you pass props to super().
 
-if we pass props inside super we can call this.props inside constructor other it will be undefined but we can use props alone without this keyword
-
-Whenever the class component loads or mounted, the constructor is called and then render function is called then the componentDidMount function is called
+`Key Takeaway`
+Use super(props) if you want to access this.props inside the constructor. Otherwise, rely on the props parameter directly.
 
 # componentDidMount()
 ----------------------
-The componentDidMount lifecycle method is primarily used for making API calls. In React, the typical lifecycle of a component is to load the component, render it, and then make API calls to fetch data.
+The componentDidMount lifecycle method is primarily used for making API calls. In React, the typical lifecycle of a class  component is to load the component, render it, and then make API calls to fetch data.
+
+call construcot
+call render
+call compoenentDidMount
 
 This method is called after the initial render, allowing you to fetch data and update the component's state with the fetched data, which will subsequently trigger a re-render of the component.
 
@@ -1183,7 +1059,7 @@ In functional components, this can be achieved using the useEffect hook, which a
 
 # componentDidUpdate()
 -----------------------
-The componentDidUpdate lifecycle method is invoked after every re-render of the component, which occurs when either props or state change.
+The componentDidUpdate lifecycle method is invoked after every re-render of the class component, which occurs when either props or state change.
 
 This method receives prevProps and prevState as arguments, enabling you to compare them with the current props and state to determine if specific updates are necessary. This is particularly useful for optimizing component performance and avoiding unnecessary operations.
 
@@ -1195,15 +1071,28 @@ For example, if you start a setInterval in componentDidMount, it will continue t
 
 # Lifecycle of parent child class component
 --------------------------------------------
+  - parent compoenent
+    - Child-one compoenent
+    - Child-two compoenent
+    
 parent constructor
 parent render
-child constructor
-child render
-child componentDidMount
+child-one constructor
+child-one render
+child-two constructor
+child-two render
+child-one componentDidMount
+child-two componentDidMount
 parent componentDidMount 
 
 First the parent class constructor and render function will call and then if there is any child class its constructor and then its render will call and then the child class componentDidMount will call and then parents componentDidMount will call
 
+
+
+
+
+## `Life CYcle Methods Phases` ##
+========================================
 # Render phase
 ----------------
 Constructor Calling: When a component is instantiated, the constructor is called. This is where you can initialize state and bind methods.
@@ -1212,10 +1101,16 @@ Rendering: After the constructor, the render method is invoked. This method retu
 
 # Commit phase
 ----------------
-React Updates DOM: After the Render phase, React compares the Virtual DOM with the actual DOM (this process is known as reconciliation) and identifies changes.
+React Updates DOM: After the Render phase, React compares the Virtual DOM with the previos virtual DOM (this process is known as reconciliation) and identifies changes.
 
 componentDidMount: Once the changes are determined, React updates the actual DOM to reflect the new state of the component. After this update, the componentDidMount lifecycle method is called, which is often used for side effects, such as fetching data or setting up subscriptions.
 
+
+
+
+
+## `Three Phases of Life Cycle` ##
+=======================================
 # Mounting
 -----------
 Constructor Called: The component's constructor is invoked, where initial state and bindings can be set up.
