@@ -35,16 +35,11 @@ JIT Compilation means that V8 doesn't compile the entire code upfront. Instead, 
 
 ## `Advantages of JavaScript` ##
 ==================================
-
-Versatility: Used for both client and server-side development.
-
-Asynchronous Programming: Supports non-blocking code for responsive applications.
-
-Rich Ecosystem: Abundance of libraries and frameworks for efficient development.
-
-Dynamic Typing: Flexible handling of variable types simplifies coding.
-
-Community Support: Large and active developer community for shared knowledge.
+- Versatility: Used for both client and server-side development.
+- Asynchronous Programming: Supports non-blocking code for responsive applications.
+- Rich Ecosystem: Abundance of libraries and frameworks for efficient development.
+- Dynamic Typing: Flexible handling of variable types simplifies coding.
+- Community Support: Large and active developer community for shared knowledge.
 
 
 
@@ -52,16 +47,11 @@ Community Support: Large and active developer community for shared knowledge.
 
 ## `Disadvantages of JavaScript` ##
 ====================================
-
-Browser Compatibility: Inconsistencies in how browsers interpret JavaScript.
-
-Security Concerns: Vulnerable to issues like Cross-Site Scripting (XSS) attacks.
-
-Single Threaded: Limited to one operation at a time, potentially causing bottlenecks.
-
-Callback Hell: Nested callbacks can lead to complex and hard-to-read code.
-
-Lack of Strong Typing: Dynamic typing can result in runtime errors, requiring thorough testing.
+- Browser Compatibility: Inconsistencies in how browsers interpret JavaScript.
+- Security Concerns: Vulnerable to issues like Cross-Site Scripting (XSS) attacks.
+- Single Threaded: Limited to one operation at a time, potentially causing bottlenecks.
+- Callback Hell: Nested callbacks can lead to complex and hard-to-read code.
+- Lack of Strong Typing: Dynamic typing can result in runtime errors, requiring thorough testing.
 
 
 
@@ -282,7 +272,8 @@ example : setTimeout(function(){ conole.log("Javascript") },1000)
 ----------------------------
 ```js
 var b = function xyz(){
-console.log("xyz called")
+console.log("xyz called");
+xyz();
 }
 ```
 
@@ -325,7 +316,7 @@ Advantages are encapsulation and isolation
 Wrapping the function in parentheses () makes it an expression rather than a declaration.
 Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
 
-`Generator`
+`Generator function`
 --------------
 Generators are a type of iterable in JavaScript that allow pausing and resuming the execution of a function. They are defined using the function* syntax, and they use the yield keyword to produce values one at a time. A generator function returns an iterator which can be used to traverse the yielded values.
 
@@ -339,7 +330,7 @@ Can be used with for...of loops or manually using the iterator's next() method.
 ------------------------
 In JavaScript, functions are first-class citizens, which means they can be 
 assigned to variable
-Passed as arguments
+Passed as argument
 Returned from other function
 Stored in datastructure
 

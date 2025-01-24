@@ -1272,6 +1272,16 @@ function Greeting(props) {
 
 // Usage
 <Greeting name="Midhun" />
+
+// Default props
+const Greeting = ({ name }) => {
+  return <h1>Hello, {name}!</h1>;
+};
+
+// Set default props
+Greeting.defaultProps = {
+  name: "Guest",
+};
 ```
 
 
@@ -1298,7 +1308,7 @@ function DisplayNumber({ number }) {
 
 ### `Forwarding` Props ###
 ===========================
-When a parent component needs to pass props through an intermediate component to a deeper child, prop forwarding is used.
+Prop forwarding occurs when an intermediate component takes in props from a parent and directly passes them down to its child component, usually without modification. This is useful for components that act as "wrappers" or intermediaries.
 
 **Example**
 -----------
@@ -1413,54 +1423,6 @@ export default ExampleComponent;
 ```
 
 
-
-
-
-### `Life Cycle` ###
-=========================
-React component lifecycle methods allow you to control what happens at specific stages of a component's life. Class components in React use lifecycle methods to manage component behavior during its creation, updating, and destruction phases.
-
-## Mounting Phase
------------------
-The lifecycle methods during the mounting phase are invoked when a component is created and added to the DOM.
-
-### `constructor(props)`
-This is the very first method called in the lifecycle. It is used for initializing state or binding event handlers.
-
-### `static getDerivedStateFromProps(props, state)`
-This is a rarely used method that allows the component to update its internal state based on changes in props.
-
-### `render()`
-This is the only required lifecycle method in a class component. It returns the JSX that defines the component's UI. It is called every time the component is re-rendered.
-
-### `componentDidMount()`
-Called immediately after the component is inserted into the DOM. This is a good place to perform side effects like fetching data, setting up subscriptions, or interacting with the DOM.
-
-## Updating Phase
-------------------
-The updating phase happens whenever the component's state or props change, causing it to re-render.
-
-### `static getDerivedStateFromProps(props, state)`
-As mentioned earlier, it is called before rendering during both mounting and updating. It can update the component's state in response to prop changes.
-
-### `shouldComponentUpdate(nextProps, nextState)`
-This method determines whether a re-render is necessary. If it returns false, React skips the rendering and updating process.
-
-### `render()`
-Called whenever the component is re-rendered. It returns the JSX structure of the component.
-
-### `getSnapshotBeforeUpdate(prevProps, prevState)`
-This method is invoked right before the DOM is updated. It allows you to capture information (e.g., scroll position) before the DOM changes. The value returned from this method is passed as a parameter to `componentDidUpdate()`.
-
-### `componentDidUpdate(prevProps, prevState, snapshot)`
-This method is called after the component's updates are flushed to the DOM.
-
-## Unmounting Phase
---------------------
-This phase occurs when the component is removed from the DOM.
-
-### `componentWillUnmount()`
-This method is invoked just before the component is removed from the DOM. It is commonly used to clean up resources like event listeners, timers, or network requests.
 
 
 ### `DYNAMIC ROUTING` ###
@@ -1682,10 +1644,7 @@ So if we are using useEffect inside a component when we render the compoenent wi
 
 Usage: You can specify when the effect should run by providing a dependency array.
 
-Two arguments one us a callback function and another is the dependency array
-the dependency array is not mandatory
-
-If no dependency array is not assigned, useEffect is called every render
+If no dependency array is assigned, useEffect is called on every render
 If the dependency array is an empty array, useEffect is called on inital (just once)
 If the dependency array have value like eg: a stateVariable, the useEffect is called whenever the stateVariable updated
 
@@ -1709,9 +1668,15 @@ function DataFetcher() {
 
 ## 3. `useRef`
 ---------------
-Purpose: useRef is a hook that allows you to create a mutable object which holds a .current property. This is often used to directly access a DOM element or to hold a mutable value that does not cause re-renders.
+useRef is a React hook that allows you to create a mutable object with a .current property. This is often used to:
 
-Usage: You can store a reference to a DOM element or keep track of a value without triggering a re-render.
+Access a DOM element directly.
+Hold a value that doesn't cause re-renders when changed.
+
+No Re-renders: Changing ref.current does not trigger re-renders, making it suitable for performance optimization.
+Direct DOM Access: Helps you interact directly with DOM elements (e.g., focusing an input field).
+Preserves Value Across Renders: Keeps a mutable value that persists across re-renders without reinitialization.
+Simpler for Non-Display Logic: Perfect for use cases where the value is not directly rendered in the UI.
 
 ```js
 import React, { useRef } from 'react';
@@ -1734,60 +1699,89 @@ function TextInput() {
 
 # 3.1 `forwardRef`
 ------------------
-forwardRef is a React function that lets you pass a ref from a parent component to a child component. This is useful when you need to access a child component's DOM element or imperative methods directly from the parent.
+forwardRef is a React function that lets you pass a ref from a parent component to a child component, allowing the parent to directly access the child’s DOM element or methods.
 
 # When to use forwardRef?
 -------------------------
-When you want to expose a child’s DOM element to the parent.
-Useful for handling native DOM manipulations like focusing input fields.
+Access Child DOM: When the parent needs to directly manipulate a child’s DOM element (e.g., focusing an input).
+Native DOM Manipulation: For scenarios like scrolling, focusing, or measuring an element.
 
 **Example**
 -----------
 ```js
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
-const InputComponent = forwardRef((props, ref) => (
-  <input ref={ref} {...props} />
-));
+// Child component using forwardRef
+const InputField = forwardRef((props, ref) => {
+  return <input type="text" ref={ref} {...props} />;
+});
 
-export default InputComponent;
+// Parent component
+function App() {
+  const inputRef = useRef();
+
+  const focusInput = () => {
+    inputRef.current.focus(); // Focus the input field directly
+  };
+
+  return (
+    <div>
+      <InputField ref={inputRef} placeholder="Type here..." />
+      <button onClick={focusInput}>Focus Input</button>
+    </div>
+  );
+}
+
+export default App;
 ```
 
 # 3.2 `useImperativeHandle`
 --------------------------
-useImperativeHandle allows you to customize the instance value (or methods) exposed when a parent accesses the child’s ref. It works alongside forwardRef.
+It customizes what is exposed via the ref to a parent component. Instead of exposing the entire DOM element of the child compoenent, you can limit access to only specific methods or properties.
 
-# When to use useImperativeHandle?
-----------------------------------
-When you want to expose only specific functionalities to the parent (instead of the whole DOM).
-It provides a way to limit or control what gets exposed via the ref.
+Use Case: It is used when you need to provide custom behavior or control for a child component to the parent while keeping the implementation encapsulated.
 
 **Example**
 ------------
 ```js
 import React, { useImperativeHandle, forwardRef, useRef } from 'react';
 
-const InputComponent = forwardRef((props, ref) => {
+// Child component with useImperativeHandle
+const CustomInput = forwardRef((props, ref) => {
   const inputRef = useRef();
 
   useImperativeHandle(ref, () => ({
-    focus: () => inputRef.current.focus(),
+    focus: () => inputRef.current.focus(), // Only expose the focus method
+    clear: () => (inputRef.current.value = ""), // Expose a clear method
   }));
 
   return <input ref={inputRef} {...props} />;
 });
 
-export default InputComponent;
+// Parent component
+function App() {
+  const inputRef = useRef();
+
+  const handleFocus = () => inputRef.current.focus();
+  const handleClear = () => inputRef.current.clear();
+
+  return (
+    <div>
+      <CustomInput ref={inputRef} placeholder="Type here..." />
+      <button onClick={handleFocus}>Focus</button>
+      <button onClick={handleClear}>Clear</button>
+    </div>
+  );
+}
+
+export default App;
+
 ```
 
 # 3.3 `flushSync`
 --------------------
-flushSync forces React to flush state updates synchronously, ensuring that the DOM updates immediately. This is useful when you need to guarantee a visual update (e.g., animations or measurements) before continuing with other tasks.
-
-# When to use flushSync?
--------------------------
-In cases where React’s batching mechanism delays updates, but you need an immediate DOM change.
-It’s useful for smooth animations or UI consistency when multiple state updates happen at once.
+- flushSync forces React to apply state updates synchronously, ensuring that the DOM is updated immediately.
+- When you need an immediate visual update, such as for animations or measurements, before proceeding with other tasks.
 
 **Example**
 -----------
@@ -1834,7 +1828,7 @@ const Component = () => {
 
 ## 5. `usePaarams`
 -------------------
-useParams is a hook provided by React Router that allows you to access the dynamic parameters of the current route. This is particularly useful for extracting values from the URL, such as IDs or slugs.
+useParams is a hook provided by React Router dom that allows you to access the dynamic parameters of the current route. This is particularly useful for extracting values from the URL, such as IDs or slugs.
 
 You typically use useParams inside a functional component to retrieve the parameters defined in your route configuration.
 
@@ -1863,13 +1857,7 @@ export default UserComponent;
 
 ## 6. `useLayoutEffect`
 ------------------------
-Runs synchronously after the DOM updates but before the browser paints the screen.
-Blocks rendering until the effect completes, ensuring DOM updates are applied before the browser paints.
-
-**Suitable for:**
-Measurements (e.g., getting element dimensions).
-Synchronous DOM mutations that need to be immediately reflected.
-Preventing visual flicker caused by rapid updates.
+useLayoutEffect runs synchronously after the DOM updates but before the browser paints the screen. It blocks the rendering process until the effect completes, ensuring that DOM updates are applied before the browser performs any visual painting.
 
 **Example**
 ------------
@@ -1920,7 +1908,7 @@ Its a hook that is used for state management, alternative to useState
 useState is built using useReducer
 
 useReducer have two parameter one is reducer function and another is initial value
-the reducer function will two parameters currentState and action and it returns a newState
+the reducer function will have two parameters currentState and action and it returns a newState
 useReducer returns a pair of values newState and dispatch
 
 ## 10. `useContext`
@@ -1935,6 +1923,7 @@ React.memo is a higher-order component (HOC) in React that optimizes functional 
 When you wrap a component with React.memo, React will compare the new props with the previous ones.
 If the props are the same, React skips rendering that component.
 If the props are different, the component will re-render as usual.
+
 
 
 
@@ -2039,10 +2028,14 @@ export default App;
 
 ### `Shadow` DOM ###
 ====================
-The **Shadow DOM** is a web standard that allows developers to encapsulate a section of the DOM and its styles. It creates a separate, isolated DOM tree within an element, preventing the styles and scripts inside the shadow DOM from affecting the main DOM or other parts of the page. This isolation ensures that the internal structure is hidden from the global document styling and scripting, making it useful for creating reusable and maintainable web components.
+A browser feature that allows developers to encapsulate the DOM and CSS of a component. This means the styles and structure of a component are isolated from the rest of the page.
 
-- **Use Case**: Shadow DOM is commonly used in frameworks like Web Components to encapsulate custom elements and their styles.
-- **Example**: A `video` element in HTML uses the shadow DOM to manage its built-in controls.
+Purpose: Encapsulation and style scoping for custom elements or components.
+
+Key Features:
+Isolates styles and DOM structure.
+Prevents CSS from leaking in or out of the shadow boundary.
+Used in Web Components.
 
 
 ### Actual DOM ###
@@ -2059,8 +2052,8 @@ The **Virtual DOM** is a lightweight, in-memory representation of the actual DOM
 
 
 
-### `Lazy Loading` / On-Demand Loading / Dynamic Import  
-=======================================================
+### `Lazy Loading` / On-Demand Loading / Dynamic Import  ##
+==============================================================
 Lazy loading means **splitting the components** into separate bundles that load only when needed. When the application initially loads, only the required bundles are sent, and other components are loaded **on-demand** when the user navigates to them.
 
 #### Benefits:
@@ -2082,29 +2075,16 @@ This approach ensures smooth **lazy loading** and avoids disrupting the user exp
 
 
 
-### `Hiegher order component`
-=============================
-Its a function takes a component and returns a component
-
-### Controlled and Uncontrolled component
-=========================================
-
-### `Lifting state up`
-=======================
-
-### `Props drilling`
-======================
-
-### `React context`
-=====================
+## `React context` ##
+==============================
 It is used to avoid props drilling
 we can make an context file and import it in any module
 
 so in functional component for using the context react is giving a hook that is useContext and we can pass the specifi context we have created to that useContext hook and  extract the data inside the context
 
-But in class component we can also import the context but there is no hook inside class component so that react is giving a power that **.consumer** so we can use this  like as an component with adding this to the name of context that we have created <Context.Consumer> </Context.Consumer>  inside this component we can use a curly brace and inside it we can use a call back function and this call back function will take the data as a parameter and we can use this parameter to take the values inside the context 
+But in class component we can also import the context but there is no hook inside class component so that react is giving a power that **.Consumer** so we can use this  like as an component with adding this to the name of context that we have created <Context.Consumer> </Context.Consumer>  inside this component we can use a curly brace and inside it we can use a call back function and this call back function will take the data as a parameter and we can use this parameter to take the values inside the context 
 
-we can use ContextName.provide component ofr wrapping up other component  and can pass value prop inside it for updating the content fileds , can wrpa the whole app or can wrap a single component and also we can use for wrap our whole app with a updated data and inside the app we can use it again for wrapping another component and pass a different updated data
+we can use ContextName.provide component for wrapping up other component  and can pass value prop inside it for updating the content fileds , can wrap the whole app or can wrap a single component and also we can use for wrap our whole app with a updated data and inside the app we can use it again for wrapping another component and pass a different updated data
 
 ### `Redux`
 ============
@@ -2126,7 +2106,7 @@ We cant directly edit the slice inside the redux store for that we need to do so
 
 Example scenario
 ----------------
-If we need to modify ccart that is writing
+If we need to modify cart that is writing
 when we click the button
 
 1. we need to **dispatch** an **Action**
@@ -2163,23 +2143,81 @@ Reading the data from cart slice
 **Important**
 In the older version of redux that is **vanila redux** we should **not mutate** the state, instead of this we need to make a copy of the state and modify that copy of the state and return the copy of the state
 
-Now we are using the **redux toolkit** which is the new version in this we have toe **mutate** the state directly in the reducers each action of the slices andd behind the scenes redux toolkit is using a library called **Immer** this library is doing the same thing which is in the vanila redux for us. Instead of mutation the state we can also return a new state.
+Now we are using the **redux toolkit** which is the new version in this we have toe **mutate** the state directly in the reducers each action of the slices and behind the scenes redux toolkit is using a library called **Immer** this library is doing the same thing which is in the vanila redux for us. Instead of mutation the state we can also return a new state.
 
-In vanila redux we need to usea **middlewares and thungs** but in the redux toolkit we have **RTK Query**
+In vanila redux we need to use a **middlewares and thungs** but in the redux toolkit we have **RTK Query**
 
 `Redux principles`
 ------------------
+1. Single Source of Truth
+- The entire application state is stored in a single JavaScript object called the store.
+- This ensures consistency and makes it easier to debug or inspect the app state.
+
+2. State is Read-Only
+- You cannot directly modify the state; you must dispatch an action to make changes.
+- Actions are plain objects describing what happened, not how to update the state.
+
+3. Changes are Made with Pure Reducers
+- A reducer is a pure function that takes the current state and an action as input, then returns a new state.
+- Reducers must not mutate the state but instead return a copy with the necessary updates.
+
+4. Unidirectional Data Flow
+- State flows in one direction:
+- Action → Reducer → New State → UI Update
+- This makes the data flow predictable and easy to debug.
+
+5. Centralized Logic
+- All state and logic are managed centrally in the store, making the application easier to maintain and scale.
 
 
 
 
-## React `Strictmode`
-=====================
-This is wrapping up our whole app and this will rerender our component for chcking the inconsistency in our component
-Thats why we see while consoling any data it will print twice
-This twice checking behaviour is only occure in the development mode, but in the build mode it will occur once.
 
+### `Controlled and Uncontrolled component` ##
+=======================================================
 
+`Controlled Component`
+- The form element's value is controlled by React state.
+- The component renders based on the state and updates the state using event handlers.
 
+```js
+import React, { useState } from 'react';
 
+function ControlledInput() {
+  const [value, setValue] = useState("");
 
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  );
+}
+```
+
+`Uncontrolled Component`
+- The form element's value is managed by the DOM itself, not React state.
+- You use a ref to access the value.
+
+```js
+import React, { useRef } from 'react';
+
+function UncontrolledInput() {
+  const inputRef = useRef();
+
+  const handleClick = () => {
+    console.log(inputRef.current.value);
+  };
+
+  return (
+    <>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleClick}>Get Value</button>
+    </>
+  );
+}
+```
+
+Controlled: React manages the value via state.
+Uncontrolled: The DOM manages the value via refs.

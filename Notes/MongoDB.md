@@ -62,7 +62,6 @@ extensibility means supports user defined functions, data types and operators an
 - Scales horizontally by adding servers.
 - Follows BASE properties (Basically Available, Soft state, Eventually consistent).
 - Great for real-time analysis, big data, and social media apps.
-- Examples: MongoDB, Cassandra, Redis.
 - Supports various models, like Document, Key-Value, Column-Family, and Graph.
 
 `Non sql db's`
@@ -94,7 +93,7 @@ Then the 10gen company later renamed to mongoDB inc.
 
 `Collection`
 ------------
-- In MongoDB, a collection is a grouping of MongoDB documents. 
+- In MongoDB, a collection is a group of MongoDB documents. 
 - It is the equivalent of an table in a relational database. 
 - Collections are used to store and organize documents, which are BSON (Binary JSON) format data structures.
 
@@ -117,8 +116,7 @@ Then the 10gen company later renamed to mongoDB inc.
 3. Atomic updates
 4. Improved query performance
 5. Schema flexibility
-6. `Denormalization` -> process of intentionally adding redundancy to a database by 
-   storing related data together in a single place.
+6. `Denormalization` -> Denormalization is the process of intentionally adding redundancy to a database by storing related data together in a single table or place. 
 7. Easier `serialization` and `deserialization`
    `serialisation` -> Converting a programming language's object (like a JavaScript object) into a format that can be stored in MongoDB (like BSON, a binary JSON format).
 
@@ -128,12 +126,11 @@ Then the 10gen company later renamed to mongoDB inc.
 - Views allow you to define complex data transformations, filtering, and aggregation logic .
 
 ```json
-
 db.createView(
   "electronicsView",       // Name of the view
   "products",              // Source collection
-  [
-    { $match: { category: "Electronics" } }  // Query to filter data
+  [ 
+    { $match: { category: "Electronics" } }  // Query to filter data 
   ]
 );
 
@@ -144,7 +141,7 @@ db.electronicsView.find();
 -------
 - A query is a request for specific information or data from a database.
 - It is used to retrieve, filter, and manipulate data based on specific criteria.
-- Queries enable communication with a Database Management System (DBMS).
+- Queries enable communication in between databse and Database Management System (DBMS).
 - The purpose is to extract desired data efficiently.
 
 `fields`
@@ -199,7 +196,7 @@ a namespace refers to the combination of the database name and the collection na
 `Schema`
 -----------
 - A schema is a blueprint or structure that defines the organization and format of data in a database. 
-- It specifies how data is organized, what types of data can be stored, and the relationships between different data   elements.
+- It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
 - Any key that is not present in the schema and we are passsing it to update that document, it will not make that field.
 - We can add properties to a field to control the value of that field and this method is called `data sanitizing`.
 
@@ -288,8 +285,8 @@ The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON
 1. With scope
 ```js
 {
+   $scope : { x : 5, y : 10},
    $code : "function() {return x+y}",
-   $scope : { x : 5, y : 10}
 }
 ```
 2. Without scope
@@ -403,11 +400,13 @@ eg : db.cm.find().addOption(DBQuery.Option.tailable)
 ==========================
 Create databse - use db;
 
+Delete databse - db.dropDatabse;
+
 Create Collection - db.createCollection("collection_name")
 
 show collection - show collections
 
-remane collection - db.oldcollectionname.renamecollection("newcollection")
+remane collection - db.oldCollectionName.renameCollection("newCollectionName")
 
 `countDocuments()` - return the number of documents
 ```js
@@ -657,7 +656,7 @@ db.collectionName.find( { age : { $gt : 20 } } );
 db.collectionName.find( { age : { $gte : 20 } } );
 ```
 
-`$lt` - less than , ~$lte~ - less than or equal
+`$lt` - less than , `$lte` - less than or equal
 ```js
 db.collectionName.find( { agr : { $lt : 20 } } );
 db.collectionName.find( { agr : { $lte : 20 } } );
@@ -720,7 +719,7 @@ db.collectionName.updateOne( { _id : 26 },{ $set : { name : "Midhun" } },{ upser
 
 `$exists` - used to check for the existence of a field within a document. If the field exist the query will return the document
 ```js
-db.collectionName.find({ anem : { $exists : true } } );
+db.collectionName.find({ name : { $exists : true } } );
 ```
 
 `$currentDate` - used to set the value of a field to the current date and time or to a timestamp.
@@ -767,17 +766,24 @@ db.collectionName.find({
 db.collectionName.find( { age : { $nin : [1,2,3,4] } } );
 ```
 
-`$all` - used to query for documents where a specific field contains an array that includes all of the specified values.
+`$all` - used to query for documents where a specific field contains an array as value that includes all of the specified values.
 ```js
 db.collectionName.find( { hobbies : { $all : ['reading','cycling','coding'] } } );
 ```
 
-`$elemMatch` - used to match documents containing an array field, where at least one object in the array satisfies all the specified query conditions.
+`$elemMatch` - used to match documents containing an array field with objects, where at least one object in the array satisfies all the specified query conditions.
 ```js
-db.collectionName.find({
-  roles: {
-    $elemMatch: { level: { $gt: 3 } }
-  }
+{
+  "_id": 1,
+  "scores": [{ "subject": "math", "score": 90 }, { "subject": "english", "score": 80 }]
+},
+{
+  "_id": 2,
+  "scores": [{ "subject": "math", "score": 70 }, { "subject": "english", "score": 85 }]
+}
+
+db.collection.find({
+  scores: { $elemMatch: { subject: "math", score: { $gt: 85 } } }
 });
 ```
 
@@ -849,7 +855,6 @@ db.collection.find().skip(num);
 
 
 
-
 ## `Unary Operators` ##
 =======================
 Unary operators are operators that are applied to a single operand or value
@@ -870,7 +875,7 @@ Aggregation operations process multiple documents and return computed results
 
 An aggregation pipeline consists of one or more stages that process documents
 
-db.collectionName.aggregate(pipeline,options)a
+db.collectionName.aggregate(pipeline,options)
 pipeline = Array of operations
 
 1. How does it work ? 
@@ -924,7 +929,11 @@ db.collection.aggregate( [ { $sort : {age : -1 } } , { $skip : 5 } ] );
 
 `$count` - Count the documents that returns the stages.
 ```js
-db.collection.aggregate( [ { $sort : {age : -1 } } , { $skip : 5 } ] );
+db.collection.aggregate([
+  { $sort: { age: -1 } },
+  { $skip: 5 },
+  { $count: "totalDocuments" }
+]);
 ```
 
 `$unwind` - used to deconstruct arrays within documents, creating separate documents for each element in the array.
@@ -993,13 +1002,28 @@ db.collectionName.aggregate([{ $collStats: { storageStats: {} } }]);
 
 `$sample` - Randomly selects a specified number of documents from the input.
 ```js
-db.users.aggregate([{ $sample: { size: 3 } }]);
+db.collectionName.aggregate([{ $sample: { size: 3 } }]);
 ```
 
 `$merge` - Writes the result of the aggregation pipeline to a collection, merging the data with an existing collection.
-
-
-
+```js
+db.sales.aggregate([
+  {
+    $group: {
+      _id: "$region",
+      totalSales: { $sum: "$amount" }
+    }
+  },
+  {
+    $merge: {
+      into: "regional_sales",  // Target collection to merge into
+      on: "_id",              // Field to match documents (default is "_id")
+      whenMatched: "merge",   // Action when a match is found ("merge", "replace", "keepExisting", etc.)
+      whenNotMatched: "insert" // Action when no match is found ("insert", "discard", etc.)
+    }
+  }
+]);
+```
 
 
 
@@ -1019,9 +1043,10 @@ db.users.aggregate([{ $sample: { size: 3 } }]);
  eg : db.orders.aggregate([{$group: {_id: {name: "$name",size: "$size"},minDate: { $min: "$date" }}}])
 
 `$addToset` - used to add values to an array field without duplicates.
- eg : db.users.aggregate([{$unwind: "$tags" },{$group: {_id: null,uniqueTags: { $addToSet: "$tags" } }}])
-
-
+ eg : db.users.updateOne(
+  { _id: 1 }, 
+  { $addToSet: { skills: "JavaScript" } }
+);
 
 
 
@@ -1035,7 +1060,7 @@ Sharding is a method for distributing data across multiple servers to ensure hor
 
 `Config Servers`: Config servers store metadata about the sharded cluster, including the distribution of data across shards and the shard key ranges.
 
-`Query Router (mongos)`: The query router is an interface between the application and the sharded cluster. It directs queries to the appropriate shard and aggregates the results.
+`Query Router (mongoos)`: The query router is an interface between the application and the sharded cluster. It directs queries to the appropriate shard and aggregates the results.
 
 `sharded cluster`: A group of shard servers, along with config servers and at least one query router (mongos), is collectively referred to as a sharded cluster in MongoDB.
 
