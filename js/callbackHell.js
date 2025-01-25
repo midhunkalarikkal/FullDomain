@@ -1,6 +1,6 @@
 const cart = ["one", "two", "three"];
 
-function createCart(Cart,callback){
+function createCart(cart,callback){
     setTimeout(() => {
         console.log("Cart created", cart);
         callback();

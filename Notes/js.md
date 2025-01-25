@@ -555,14 +555,13 @@ Encapsulation
 Information hiding
 Private variables and functions
 Currying
-Functions like once
 memoization
 callbacks
+Functions like once
 maintaining state in asynchronous code
 setTimeouts
 Iterators
 event handler
-
 
 `Data encapsulation Example`
 --------------------------------
@@ -675,7 +674,7 @@ const z = 20;
 
 `Function` vs `Arrow Function`
 -------------------------------
-In the execution context in the first phase the function get its whole code thats why  it is accessible before the function definition
+In the execution context in the first phase the function get its whole code thats why it is accessible before the function definition
 
 Function declarations are fully hoisted, meaning they are moved to the top of their containing scope and can be called before their declaration.
 
@@ -782,7 +781,7 @@ The three functions call(), apply(), and bind() are often referred to as "functi
 `Call()`   
 ---------
 `function borrowing`
-The call method is used to invoke a function immediately with a specified this context and arguments passed individually by seperated by commas..
+The call method is used to invoke a function immediately with a specified this context and arguments passed individually by seperated by commas.
 ```js
 const person = { name: 'John' };
 
@@ -1286,7 +1285,7 @@ console.log(arr2) // [1,2,3,4]
 
 10. `Slice`
 ===========
-that returns a shallow copy of a portion of an array. It does not modify the original array but instead creates a new array containing the elements from the specified start index to the specified end index (excluding the end index).
+That returns a shallow copy of a portion of an array. It does not modify the original array but instead creates a new array containing the elements from the specified start index to the specified end index (excluding the end index).
 
 ```js
 var newArray = array.slice(startIndex, endIndex);
@@ -1328,7 +1327,7 @@ console.log(newarr);  //  [3,4]
 
 11. `Splice`
 =============
-that is used for adding or removing elements from an array. It directly modifies the original array and returns an array containing the removed elements.
+That splice method is used for adding or removing elements from an array. It directly modifies the original array and returns an array containing the removed elements.
 ```js
 var removedElements = array.splice(startIndex, deleteCount, item1, item2, ...);  // item1 , item2 is the adding elements
 ```
@@ -1660,7 +1659,7 @@ setTimeout(() => {
 
 ```
 
-`Whatif the time is 0 seconds`
+`What if the time is 0 seconds`
 ------------------------------
 When the delay for setTimeout or setInterval is set to 0 seconds, the callback function is not executed immediately. Instead:
 
@@ -1749,6 +1748,9 @@ Promise.allSettled is another method in JavaScript for handling multiple promise
 ----------------
  this method takes an iterable of promises and returns a new promise. This new promise settles (fulfills or rejects) as soon as one of the promises in the iterable settles, regardless of whether the other promises have settled.
 
+ Returns the result of the first settled promise (resolved or rejected).
+ Rejects immediately if the first settled promise is rejected.
+
  Uses are -: Timeout , race conditions , Load balancing , Parallel request , Real time updates
 
 `Then`
@@ -1765,6 +1767,10 @@ The catch method is a shorthand for handling only the rejection of a promise. It
 
 `Promise.any(iterable)`
 -------------------------
+The Promise.any() method takes an iterable of promises and returns a single promise that resolves as soon as any of the input promises is fulfilled. If none of the promises are fulfilled (all are rejected), it rejects with an AggregateError, which contains all the rejection reasons.
+
+Returns the result of the first fulfilled promise (ignores rejected promises).
+Rejects only if all promises are rejected, with an AggregateError.
 
 
 
@@ -1869,11 +1875,11 @@ If the call stack is empty, the event loop takes the first callback from the que
 
 ## `Operators` ##
 ===================
-## `Destructuring`
+`Destructuring`
 ========================
 Destructuring in JavaScript is a feature that allows you to unpack values from arrays or properties from objects into distinct variables. It simplifies extracting data from complex structures.
 
-## `Ternary Operator`
+`Ternary Operator`
 ====================
 The ternary operator, also known as the conditional operator, is a concise way to write conditional statements in JavaScript. It is a shorthand form of the if...else statement.
 ```js
@@ -1882,7 +1888,7 @@ const message = age >= 18 ? 'You are an adult' : 'You are a minor';
 console.log(message);
 ```
 
-## `Rest Operator`
+`Rest Operator`
 ====================
 ```js
 const fruits = ['apple', 'banana', 'cherry', 'mango'];
@@ -1895,7 +1901,7 @@ console.log(secondFruit);// Output: banana
 console.log(restFruits); // Output: ['cherry', 'mango']
 ```
 
-## `Arithmetic Operators`
+`Arithmetic Operators`
 =============================
 + (Addition)
 - (Subtraction)
@@ -1906,7 +1912,7 @@ console.log(restFruits); // Output: ['cherry', 'mango']
 ++ (Increment)
 -- (Decrement)
 
-## `Comparison Operators`
+`Comparison Operators`
 ==========================
 == (Equal to)
 === (Strict equal to)
@@ -1976,7 +1982,7 @@ console.log(user.profile?.phone); // undefined (phone doesn't exist, no error)
 
 ## `Nullish Coalescing Operator (??)`
 =======================================
-The nullish coalescing operator (??) helps us provide a default value when the left-hand side is null or undefined. It’s like a more precise version of || (logical OR), but it only works with null or undefined, not other "falsy" values like 0, false, or an empty string ('').
+The nullish coalescing operator (??) helps us to provide a default value when the left-hand side is null or undefined. It’s like a more precise version of || (logical OR), but it only works with null or undefined, not other "falsy" values like 0, false, or an empty string ('').
 
 ```js
 const value1 = null;
@@ -2017,17 +2023,16 @@ console.log(name);  // Output: Alice, because the outer variable is still in sco
 ===========================
 Illegal shadowing in JavaScript occurs when a variable in a scope is declared using the same name as a variable from an outer scope, but the declaration is done in a way that violates the rules of variable scoping, especially with let, const, and class.
 ```js
-let name = "Alice";
-let name = "Bob";  // Error: Identifier 'name' has already been declared
+let userName = "Bob"; // Declared with `let`
 
-function greet() {
-  const name = "Alice";
-
-  function greet() {  // Error: Function 'greet' has already been declared
-    console.log("Hello");
-  }
+function greetOuter() {
+  var userName = "Alice"; // Error: Illegal shadowing of `userName`
+  console.log(userName);
 }
+
+greetOuter();
 ```
+JavaScript doesn’t allow a var declaration to shadow a let or const variable in the same or outer scope.
 
 
 
@@ -2073,7 +2078,7 @@ Private members can only be accessed within the class they are defined in. In Ja
 Protected members are intended to be accessible only within the class and its subclasses. JavaScript does not natively support protected, but it can be simulated by convention (using an underscore _) or by extending the class.
 
 `Static`
-Static members belong to the class itself, rather than to instances of the class. Static methods or properties are accessed directly from the class, not an instance.
+Static members belong to the class itself, rather than to instances of the class. Static methods or properties are accessed directly from the class, not by an instance.
 
 
 

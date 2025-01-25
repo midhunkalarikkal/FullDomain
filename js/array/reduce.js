@@ -97,3 +97,18 @@ const resultOne = users.reduce((acc,cv) => {
 },{})
 
 console.log(resultOne)
+
+
+let nums = [1,2,3,4,5];
+function average(nums){
+    let count = nums.length;
+    let total = 0;
+    for(let i = 0; i < nums.length; i++){
+        total += nums[i]
+    }
+    return total / count;
+}
+console.log(average(nums));
+
+const avg = nums.reduce((acc,cv) => acc+cv,0) / nums.length;
+console.log(avg);

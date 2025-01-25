@@ -11,7 +11,8 @@ function async2(data){
     return new Promise((resolve,reject) => {
         setTimeout(()=>{
             console.log("async 2 processing.");
-            resolve(data + " -> processed by async 2");
+            // resolve(data + " -> processed by async 2");
+            reject("Promise 2 rejected");
         },1000)
     })
 }

@@ -224,7 +224,6 @@ Non-contiguous memory allocation allows data to be stored in separate, non-adjac
 
 ## `Types of Memory Allocation` ##
 ===================================
-
 `Static Memory Allocation`
 ----------------------------
 Memory is allocated at compile time.
