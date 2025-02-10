@@ -31,7 +31,6 @@ Is a javascript testing framework
 jsdom
 ======
 
-
 Mock calls
 ==========
 
@@ -86,3 +85,41 @@ npm install --save-dev jest-environment-jsdom
     Header.test.ts
     Header.spec.js
     Header.spec.ts
+
+8. Install @babel/preset-react library - to make jsx testcases and include in our babel config
+9. Install @testing-library/jest-dom
+
+we can use `it` as a alias for `test` method;
+
+
+testing example
+```js
+import { render, screen } from "@testing-library/react"
+import Contact from "../Pages/About/Contact"
+import "@testing-library/jest-dom"
+
+test("description of test",()=>{
+    render(<Component />);
+
+    const sample = screen.getByRole("heading");
+
+    expect(sample).toBeInTheDocument();
+})
+
+test("Should load 2 input boxes in contact componenrt",() => {
+    render(<Contact/>)
+
+    const inputBoxes = screen.getAllByRole("textbox");
+
+    expect(inputBoxes).toBeInTheDocument();
+
+    expect(inputBoxes.length).toBe(2);
+})
+```
+
+We can also use the describe method to group multiple test cases
+```js
+describe("description",()=>{
+    // Mutliple test cases
+})
+```

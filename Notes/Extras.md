@@ -360,3 +360,78 @@ For a big project split in to small small projects that handles only one single 
 `Maintainance` - easy
 `Rewamps` - easy
 `Debugging` - tough
+
+
+
+
+
+
+Netflix updations
+------------------
+navbar list username to actual username
+password conditions info in password field 
+User profile icon move to constant file
+
+Yoututbe
+---------
+Requirement clarification
+--------------------------
+Features
+Tech Stack
+	Redux
+	Tailwind CSS
+	React Router Dom
+	Bundler
+	Test - React Testing Tools
+
+
+hw
+====
+rreportwebvitals
+React.strincMode
+
+
+Tailwind css
+============
+npm i -D tailwindcss
+npx tailwindcss init
+
+
+inside the app.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Redux
+======
+npm i @reduxjs/toolkit
+npm i react-redux
+
+Routing
+========
+npm i react-router-dom
+
+createBrowserRouter
+RouterProvider
+Outlet for the children inside the createBrowserRouter
+
+
+useSearchParams
+
+
+
+Search
+-------
+Youtube search api
+debouncing
+caching
+
+
+Web socket
+-----------
+Web socket is a two way connection, it created a handshare between the ui and server, so that can send data by directional, there is no regular interval,
+Iniital connection will take time, and also can send data whenever we want to send
+
+Long polling / Api polling
+---------------------------
+In this the data connection is unidirectional and there will be a interval for checking the data, the data direction is from server to ui
