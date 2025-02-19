@@ -3,6 +3,9 @@
 A: `Emmet` is the essential toolkit for web-developers. It allows you to `type shortcuts` that are then expanded into full pieces of code for writing `HTML and CSS`, based on an abbreviation structure most developers already use that expands into full-fledged HTML markup and CSS rules.
 
 
+
+
+
 ### What is `CDN`? Why do we use it ###
 ============================================
 A: A `content delivery network (CDN)` refers to a geographically distributed group of servers that work together to provide fast delivery of Internet content.
@@ -33,7 +36,6 @@ Faster website performance can positively impact SEO rankings, as search engines
 ## Global Reach
 With servers distributed across different regions, a CDN allows businesses to serve global users more effectively.
 
-
 ### `DISADVANTAGES OF CDN` ###
 ==================================
 ## Cost  
@@ -61,20 +63,6 @@ While CDNs excel with static content, dynamic content (like real-time data or pe
 
 
 
-
-
-
-
-## Code Splitting with Dynamic Import
---------------------------------------
-You can use dynamic routing along with code-splitting techniques to load only the necessary components for each route dynamically.
-
-const ProductPage = React.lazy(() => import('./ProductPage'));
-
-
-
-
-
 ### What are `async and differ` attributes in `<script>` tag ###
 ======================================================================
 A: `Async` - The async attribute is a `boolean attribute`. The script is downloaded in `parallel(in the background)` to parsing the page, and `executed as soon` as it is available (do not block HTML DOM construction during downloading process) and don’t wait for anything.
@@ -93,6 +81,9 @@ A: `Async` - The async attribute is a `boolean attribute`. The script is downloa
 ```js
 <script defer src="demo_defer.js"></script>
 ```
+
+
+
 
 
 ### Role of `type` attribute in script tag? What options can I use there
@@ -130,6 +121,7 @@ A: The `type` attribute specifies the type of the script. The type attribute ide
 
 
 
+
 ### Config driven UI ###
 =========================
 A config-driven UI (User Interface) is a design approach where the layout, appearance, and behavior of the user interface are determined by configuration data rather than hard-coded components. This allows for greater flexibility and adaptability in the UI, enabling changes based on various factors such as user roles, locations, or application states.
@@ -147,34 +139,9 @@ Location-Based Rendering: The UI can adapt based on user locations or preference
 
 
 
-### Monolith Architecture ###
-==============================
-In **Monolith Architecture**, the entire application is built as a single, unified unit. All components (like user interface, business logic, and data access) are interconnected and managed in a single codebase.
 
-- **Tightly Coupled**: All parts of the system are tightly connected, making the entire system dependent on each component.
-- **Deployment**: The application is deployed as a single unit. If any part of the application is updated, the entire application needs to be redeployed.
-- **Scalability**: Scaling a monolith often requires scaling the entire application, even if only one part needs more resources.
-
----
-
-### Microservice Architecture ###
-=================================
-**Microservice Architecture** is an architectural style where an application is composed of small, loosely coupled services. Each service is responsible for a specific functionality and operates independently.
-
-### Key Principles:
-- **Separation of Concerns**: Each microservice is responsible for a distinct functionality and operates independently of the others.
-- **Single Responsibility Principle**: Each microservice should focus on one specific task or business function, improving modularity and allowing easier updates.
-
-### Deployment:
-- Microservices are typically deployed independently and run on different ports or servers.
-- Each service can be scaled independently, offering more flexibility and efficient use of resources.
-
-
-
-
-### Rendering Approach ###
+### `Rendering Approach` ###
 ===========================
-
 ## 1st Approach
 ---------------
 - **Page loads** → API request is sent → Render the page with the API response.
@@ -185,8 +152,6 @@ In **Monolith Architecture**, the entire application is built as a single, unifi
   
 ### Cons:
 - Slower initial load time, as the page waits for the API response before rendering.
-
----
 
 ## 2nd Approach
 ---------------
@@ -202,9 +167,9 @@ In **Monolith Architecture**, the entire application is built as a single, unifi
 
 
 
-### Routing in Web Applications
-===============================
 
+### `Routing in Web Applications` ###
+========================================
 Routing is how users navigate between different pages or components in a web application. There are two main types of routing: **client-side routing** and **server-side routing**.
 
 ## Client-Side Routing
@@ -230,33 +195,6 @@ Routing is how users navigate between different pages or components in a web app
 
 
 
-
-## `Single Responsibility Principle (SRP)` ##
-==============================================
-The **Single Responsibility Principle (SRP)** is one of the five SOLID principles of object-oriented design. It states:
-
-**A class or component should have only one reason to change.**
-
-#### What it means:
-- Each class, function, or module should focus on a single responsibility or task.
-- If a class or function handles multiple responsibilities, it becomes harder to maintain and update.
-
-#### Benefits:
-- **Easier maintenance**: Changes in one area won’t affect unrelated functionality.
-- **Improved readability**: Code is more organized and easier to understand.
-- **Better reusability**: Components are focused and can be reused more easily.
-
-#### Example:
-If a component is responsible for both **fetching data** and **rendering UI**, it violates SRP. Instead, split the logic:
-- One function handles **data fetching**.
-- Another function or component manages **UI rendering**.
-
-The Single Responsibility Principle helps keep code **clean**, **modular**, and **scalable**.
-
-
-
-
-
 ## `Linting Process` ##
 ========================
 **Linting** is the process of analyzing code to identify potential errors, style violations, or code that doesn't follow best practices. 
@@ -269,7 +207,9 @@ The Single Responsibility Principle helps keep code **clean**, **modular**, and 
 
 Linting is often integrated with code editors or during the build process to ensure clean and error-free code.
 
----
+
+
+
 
 ## `Chunking / Code Splitting / Dynamic Bundling` ##
 =====================================================
@@ -284,30 +224,88 @@ These strategies improve the **performance** of web applications by **reducing i
 
 
 
-## `onClick function` ##
-=========================
 
-onClick = {handleAddItem}
---------------------------
+
+
+### `onClick function in three types` ###
+===========================================
+# 1. `onClick = {handleAddItem}`
+--------------------------------
 This version passes the function reference to the onClick handler without invoking it immediately.
 handleAddItem will only be executed when the button is clicked.
 Use this when the function does not require parameters.
 
-onClick = {handleAddItem(item)}
---------------------------------
+# 2. `onClick = {handleAddItem(item)}`
+---------------------------------------
 This version immediately invokes the handleAddItem function as soon as the component renders, not when the button is clicked.
 The function runs during the rendering phase, which is usually unintended in an event handler.
 This may lead to unexpected behavior.
 
-onClick = {() => handleAddItem(item)}
--------------------------------------
+# 3. `onClick = {() => handleAddItem(item)}`
+--------------------------------------------
 This version passes an arrow function that calls handleAddItem with the item argument when the button is clicked. 
 The function is not invoked immediately.
 It will only be called when the button is clicked.
 
 
-## `Waterfall model` ##
-========================
+
+
+### `Web socket` ###
+======================
+Web socket is a two way connection, it created a handshare between the ui and server, so that can send data by directional, there is no regular interval,
+Iniital connection will take time, and also can send data whenever we want to send
+
+
+
+
+
+### `Long polling / Api polling` ###
+=========================================
+In this the data connection is unidirectional and there will be a interval for checking the data, the data direction is from server to ui
+
+like the data is updating in cric bus
+
+like if we need to update data on each interval we can use api polling
+
+Youtube is using API POLLING for the live chat
+
+
+
+
+
+### `SOLID PRINCIPLES` ###
+================================
+The SOLID principles are five design principles that help developers create maintainable, scalable, and flexible software. They were introduced by Robert C. Martin (Uncle Bob) and are widely used in Object-Oriented Programming (OOP).
+
+1️⃣ Single Responsibility Principle (SRP)
+📌 A class should have only one reason to change.
+Each class should only do one job to keep it focused and easy to maintain.
+
+2️⃣ Open/Closed Principle (OCP)
+📌 Software entities (classes, functions, modules) should be open for extension but closed for modification.
+Instead of modifying existing code, we should extend it to add new features.
+
+3️⃣ Liskov Substitution Principle (LSP)
+📌 Subclasses should be substitutable for their base classes.
+A derived class should work without breaking the functionality of the parent class.
+
+4️⃣ Interface Segregation Principle (ISP)
+📌 A class should not be forced to implement interfaces it does not use.
+Instead of one large interface, split it into smaller, more specific ones.
+
+5️⃣ Dependency Inversion Principle (DIP)
+📌 High-level modules should not depend on low-level modules. Both should depend on abstractions.
+Instead of directly using concrete implementations, use interfaces or abstractions to make the code more flexible.
+
+
+
+
+
+### `MODELS` ###
+==================
+
+# 1.  `Waterfall` model
+-------------------------------
 Requirements
     Design
         Development
@@ -323,10 +321,20 @@ Requirements
 `Maintainance`:- Repeat these stages like the way
 
 
-## `Monolith` vs `Microservice` ##
-==================================
-## `Monolith` ##
-=================
+
+
+
+### `PATTERNS / ARCHITECHTURES` ###
+====================================
+
+# 1. `Monolith` Architecture
+--------------------------------
+In **Monolith Architecture**, the entire application is built as a single, unified unit. All components (like user interface, business logic, and data access) are interconnected and managed in a single codebase.
+
+- **Tightly Coupled**: All parts of the system are tightly connected, making the entire system dependent on each component.
+- **Deployment**: The application is deployed as a single unit. If any part of the application is updated, the entire application needs to be redeployed.
+- **Scalability**: Scaling a monolith often requires scaling the entire application, even if only one part needs more resources.
+
 One big repo for the whole project and all the services are in that and so many developers are working on that single big project
 
 `Dev speed` - slower
@@ -343,8 +351,19 @@ One big repo for the whole project and all the services are in that and so many 
 `Rewamps` - tough
 `Debugging` - slightly easier
 
-## `Microservice` ##
-====================
+
+# 2. `Microservice` Architecture
+----------------------------------
+**Microservice Architecture** is an architectural style where an application is composed of small, loosely coupled services. Each service is responsible for a specific functionality and operates independently.
+
+### Key Principles:
+- **Separation of Concerns**: Each microservice is responsible for a distinct functionality and operates independently of the others.
+- **Single Responsibility Principle**: Each microservice should focus on one specific task or business function, improving modularity and allowing easier updates.
+
+### Deployment:
+- Microservices are typically deployed independently and run on different ports or servers.
+- Each service can be scaled independently, offering more flexibility and efficient use of resources.
+
 For a big project split in to small small projects that handles only one single job and then connecting these services to work together.
 
 `Dev speed` - faster
@@ -362,76 +381,50 @@ For a big project split in to small small projects that handles only one single 
 `Debugging` - tough
 
 
-
-
-
-
-Netflix updations
-------------------
-navbar list username to actual username
-password conditions info in password field 
-User profile icon move to constant file
-
-Yoututbe
----------
-Requirement clarification
+# 3. `Clean` Architechture
 --------------------------
-Features
-Tech Stack
-	Redux
-	Tailwind CSS
-	React Router Dom
-	Bundler
-	Test - React Testing Tools
+Clean Architecture is a way of organizing code so that core business logic is independent of external systems like databases, UI, or frameworks.
+
+Think of it like a layered onion:
+
+1️⃣ Core Business Rules (Entities) – The heart of the system, defining core logic and rules.
+2️⃣ Application Logic (Use Cases) – What the app does (e.g., "process order," "apply discount").
+3️⃣ Interface Adapters – Bridges between business logic and external systems (e.g., controllers, API handlers).
+4️⃣ External Systems – Things like databases, UI, and frameworks (React, MongoDB, etc.).
+
+🛠 Key Idea: The inner layers don’t depend on the outer layers. This makes the system more scalable, maintainable, and testable.
+
+layers are : -
+
+`Domain layer` 
+The core layer of the application that contains the business logic, entities, and business rules
+Also known as the entities layer, it governs the core concepts and behavior of the domain
+
+`Application layer`
+Contains application-specific logic that controls the flow of data to and from business entities 
+Orchestrates how the domain objects are used to perform specific tasks 
+Handles interactions with external systems through interfaces defined in the domain layer 
+
+`Infrastructure layer`
+Contains the implementation of the infrastructure and services that the other layers depend on 
+The Repository design pattern is a crucial design pattern in this layer 
+
+`Presentation layer `
+Contains the user interface or web API
 
 
-hw
-====
-rreportwebvitals
-React.strincMode
+# 4. `Unit Of Work`
+---------------------
+The Unit of Work (UoW) pattern is a design pattern used to manage transactions and maintain consistency when working with multiple operations in a database. It ensures that all changes (like inserts, updates, and deletes) are applied as a single transaction.
 
+ Why Use Unit of Work?
+✅ Prevents inconsistent data – Ensures all database operations are committed together.
+✅ Reduces database calls – Groups multiple operations into a single transaction.
+✅ Simplifies rollback handling – If one operation fails, all changes can be undone.
+✅ Improves performance – Minimizes the number of database commits.
 
-Tailwind css
-============
-npm i -D tailwindcss
-npx tailwindcss init
-
-
-inside the app.css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-Redux
-======
-npm i @reduxjs/toolkit
-npm i react-redux
-
-Routing
-========
-npm i react-router-dom
-
-createBrowserRouter
-RouterProvider
-Outlet for the children inside the createBrowserRouter
-
-
-useSearchParams
-
-
-
-Search
--------
-Youtube search api
-debouncing
-caching
-
-
-Web socket
------------
-Web socket is a two way connection, it created a handshare between the ui and server, so that can send data by directional, there is no regular interval,
-Iniital connection will take time, and also can send data whenever we want to send
-
-Long polling / Api polling
----------------------------
-In this the data connection is unidirectional and there will be a interval for checking the data, the data direction is from server to ui
+🔹 How It Works?
+1️⃣ Begins a transaction
+2️⃣ Tracks changes (insert, update, delete)
+3️⃣ Commits all changes together if everything is successful
+4️⃣ Rolls back if any error occurs

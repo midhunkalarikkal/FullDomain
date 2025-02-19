@@ -2071,6 +2071,10 @@ Lazy loading means **splitting the components** into separate bundles that load 
 
 This approach ensures smooth **lazy loading** and avoids disrupting the user experience.
 
+```js
+const ProductPage = React.lazy(() => import('./ProductPage'));
+```
+
 
 
 
