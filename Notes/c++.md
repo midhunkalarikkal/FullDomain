@@ -2,6 +2,14 @@
 ===========
 C++ is a general-purpose, high-performance programming language. It was developed by Bjarne Stroustrup at Bell Labs starting in 1979. C++ is an extension of the C programming language, adding features such as classes, objects, and exceptions.
 
+# `Versions`
+=============
+C++ 03 2003 value int
+C++ 11 2011 Lambda, null pointer, Rvalue reference
+C++ 14 2014 generalised lambdas, variable template
+C++ 17 2017 fold expressions
+C++ 20 2020 Ranges library, Coroutines, Modules
+
 # `Including libraries`
 ========================
 In C++, we use the #include directive to include libraries or header files into our program. For example, to include the standard input/output library, we write:
@@ -47,6 +55,10 @@ double z;
 char c;
 bool b;
 ```
+
+# `Statement`
+=============
+Its a single line of instruction which is terminated by a semicolumn
 
 # `Control structures`
 ======================
