@@ -2,7 +2,80 @@
 ===========
 C++ is a general-purpose, high-performance programming language. It was developed by Bjarne Stroustrup at Bell Labs starting in 1979. C++ is an extension of the C programming language, adding features such as classes, objects, and exceptions.
 
- <!-- Get the colour and assignment -->
+compile : g++ filename.cpp -o filename
+execute : .\filename
+
+<!-- 00:00:00 - 00:02:05  - Intro
+00:02:05 - 00:05:07  - Welcome to C++ course
+00:05:07 - 00:12:09  - Prerequisite and tools
+00:12:09 - 00:21:59  - Understand the entry Point
+00:21:59 - 00:29:17  - Compare the 2 Hello World
+00:29:17 - 00:35:51  - Version history and official docs
+00:35:51 - 00:44:31  - Return type and comments
+00:44:31 - 00:50:57  - Redefine program in C++
+00:50:57 - 00:55:22  - What is namespace in C++
+00:55:22 - 01:00:18  - First iteration of program
+01:00:18 - 01:08:10  - Can I name that
+01:08:10 - 01:17:32  - Get the colour and assignment
+01:17:32 - 01:28:13  - Your first intro to pointers
+01:28:13 - 01:34:38  - Reference is the actual tough thing in C++
+01:34:38 - 01:46:04  - C++ arrays are different with pointers
+01:46:04 - 01:57:27  - A formal intro to integers
+01:57:27 - 02:09:46  - Conditional and ternary
+02:09:46 - 02:17:36  - Conditional as switch
+02:17:36 - 02:32:46  - While and do-while loop
+02:32:46 - 02:44:10  - For and range-based loop
+02:44:10 - 02:58:04  - Loop with pointers and shortcuts
+02:58:04 - 03:06:35  - Always use float with caution
+03:06:35 - 03:17:00  - Why always divide by zero with try-catch
+03:17:00 - 03:25:10  - Sneak peek to functions in C++
+03:25:10 - 03:39:36  - Linkers qualifiers prefix and postfix
+03:39:36 - 03:46:40  - Basics of operations
+03:46:40 - 03:54:19  - Logical AND, OR, and NOT
+03:54:19 - 04:01:18  - Bitwise operation in C++
+04:01:18 - 04:09:49  - Memory leak in C++
+04:09:49 - 04:21:36  - Get started with structs in C++
+04:21:36 - 04:28:39  - Enums and preprocessors
+04:28:39 - 04:36:17  - A challenge to strongly typed language
+04:36:17 - 04:51:43  - Heap and stack memory
+04:51:43 - 05:06:28  - Detailed intro to functions
+05:06:28 - 05:17:18  - How to create header file in C++
+05:17:18 - 05:21:39  - Your first intro to templates
+05:21:39 - 05:28:39  - What are functional pointers
+05:28:39 - 05:34:36  - nullptr saves the day
+05:34:36 - 05:44:09  - Factorial and recursion are close friends
+05:44:09 - 05:58:52  - Let's talk about MACROS
+05:58:52 - 06:08:59  - Variadic templates and recursion
+06:08:59 - 06:16:07  - A design example
+06:16:07 - 06:23:52  - Get started with classes and objects
+06:23:52 - 06:33:21  - Getters and setters for a data member
+06:33:21 - 06:41:43  - Method separation and const-qualified methods
+06:41:43 - 07:07:49  - Constructor, destructor, and rule of 3
+07:07:49 - 07:10:28  - Disable the constructor
+07:10:28 - 07:25:35  - THIS is not easy in C++
+07:25:35 - 07:31:27  - Inheritance in my favorite
+07:31:27 - 07:45:01  - Base class, derived class, and overriding
+07:45:01 - 07:49:29  - Friend keyword comes with caution
+07:49:29 - 07:52:34  - Multiple inheritance
+07:52:34 - 07:59:35  - Polymorphism and virtual
+07:59:35 - 08:04:10  - What are smart pointers
+08:04:10 - 08:13:06  - Unique pointers and issues
+08:13:06 - 08:16:54  - Shared pointers in smart pointers
+08:16:54 - 08:20:24  - Weak pointers in smart pointers
+08:20:24 - 08:32:48  - Move semantics, Lvalue, and Rvalue
+08:32:48 - 08:48:13  - Vectors - Dynamic array
+08:48:13 - 08:56:49  - Lambda - a small hello
+08:56:49 - 09:04:47  - Create, rename, and delete files
+09:04:47 - 09:13:39  - Reading and writing into files and MODES
+09:13:39 - 09:23:30  - Introduction to STL
+09:23:30 - 09:31:07  - Main components in STL
+09:31:07 - 09:38:02  - Functions in STL
+09:38:02 - 09:46:05  - Sort algorithm in STL
+09:46:05 - 09:50:23  - Search algorithm in STL
+09:50:23 - 09:57:01  - Partition and stable partition in STL
+09:57:01 - 10:06:18  - Revisiting vectors in STL
+10:06:18 - 10:24:25  - List in STL
+10:24:25 - End of List -->
 
 # `How C++ works`
 =================
@@ -137,4 +210,20 @@ ReturnType functionName(ParameterType1 parameter1, ParameterType2 parameter2) {
     // ...
     return returnValue;
 }
+```
+
+# `Pointer`
+===========
+A pointer is a variable that stores the memory address of another variable.
+
+```cpp
+int *myPointer; // declaring a pointer
+
+int x = 14; //initialization of varibale x
+myPointer = &x; // now we are storing the memory address of x to the myPointer
+
+int y;
+y = *myPointer; // dereferencing
+                // *myPointer means that go to that memory address , and get the value stored in that memory address
+                // no the y will hold the same value of x
 ```
