@@ -86,6 +86,17 @@ Steps inside the v8 engine
 
 `The whole process of interpreter and compiler is called Just in time compiler`
 
+Javascript is neighther a interpreter language nor compiler language, but it uses both of them inside v8 engine.
+The compilation process inside the v8 engine is said to be the `JIT Compilation` that menas just in time compilation.
+
+## `JIT (Just in time)` ##
+============================
+Just-In-Time (JIT) Compilation: JavaScript is traditionally an interpreted language, meaning code is executed directly without a compilation step. However, modern JavaScript engines like V8 use JIT compilation to improve performance.
+
+`Ignition` interpreter and `turbofan` compiler
+
+JIT Compilation means that V8 doesn't compile the entire code upfront. Instead, it compiles JavaScript code just in time — as it runs. It first runs the code and collects runtime data. If it detects that certain parts of the code are used frequently, it compiles those parts into machine code for faster execution.
+
 `deoptimization`
 ----------------
 However, there are cases where the optimized machine code becomes invalid. This can happen if the assumptions made during optimization are violated. For instance, if a function is optimized for adding two numbers (e.g., integers) and later encounters inputs that are strings or characters, the optimized code might no longer be valid.

@@ -7,27 +7,12 @@ A `dynamic language` means we can define variables, objects, and functions witho
 `Interpreted` means that the code is read and executed line by line by an interpreter, without the need for pre-compiling it into machine code.
 
 `Synchronous`
-JavaScript executes code line by line, in order. It waits for one task to complete before moving to the next.
+JavaScript executes code line by line, in  an order. It waits for one task to complete before moving to the next.
 
 `Single-Threaded`
 JavaScript has only one main thread to execute code, meaning it can handle one task at a time.
 
 An `event-driven` language means the flow of the program is determined by events, such as user actions (clicks, key presses), system messages, or other triggers. Instead of executing code sequentially, it waits for an event to occur and then runs the corresponding code (called an event handler).
-
-Javascript is neighther a interpreter language nor compiler language, but it uses both of them inside v8 engine.
-The compilation process inside the v8 engine is said to be the `JIT Compilation` that menas just in time compilation.
-
-
-
-
-
-## `JIT (Just in time)` ##
-============================
-Just-In-Time (JIT) Compilation: JavaScript is traditionally an interpreted language, meaning code is executed directly without a compilation step. However, modern JavaScript engines like V8 use JIT compilation to improve performance.
-
-`Ignition` interpreter and `turbofan` compiler
-
-JIT Compilation means that V8 doesn't compile the entire code upfront. Instead, it compiles JavaScript code just in time — as it runs. It first runs the code and collects runtime data. If it detects that certain parts of the code are used frequently, it compiles those parts into machine code for faster execution.
 
 
 
@@ -37,7 +22,7 @@ JIT Compilation means that V8 doesn't compile the entire code upfront. Instead, 
 ==================================
 - Versatility: Used for both client and server-side development.
 - Asynchronous Programming: Supports non-blocking code for responsive applications.
-- Rich Ecosystem: Abundance of libraries and frameworks for efficient development.
+- Rich Ecosystem: Lots of libraries and frameworks for efficient development.
 - Dynamic Typing: Flexible handling of variable types simplifies coding.
 - Community Support: Large and active developer community for shared knowledge.
 
@@ -71,13 +56,13 @@ The code is executed one line at a time.
 This component is also known as the Thread of Execution.
 
 
-When executing a program its first phase is memory creation
+`When executing a program its first phase is memory creation`
 
 In this phase inside the memory component for variales is assigned to undefined and the functions are stored with the functions whole code
 
-The second phase is code execution phase
+`The second phase is code execution phase`
 
-In this phase the variables will asiign with thier actual value in the program
+In this phase the variables will assign with thier actual value in the program
 
 For the function in main memory component it will create a new execution context in the code component when the function is invoked and in the code component there will be a memory and code component its self
 
@@ -99,19 +84,41 @@ lexical environment means -> where is the code physically appear
 
 ## `Primitive data` ##
 ======================
-Number
-String
-Boolean
-`Null` - A value that explicitly represents "nothing" or an empty value.
+1. `Number` : 
+The Number type in JavaScript is used to represent both integers and floating-point numbers. it can only store up to 64 bit.
+
+`Number 64 bit structure`
+Sign bit - ( 1 bit ) Determines the whether the number is positive or negative, 0 or 1.
+Exponent - ( 11 bits ) Scales the number by raising 2 to a power.
+Fraction - ( 52 bits ) Represents the significant digits ( precision ) of a number.
+
+2. `BigInt` : 
+BigInt is a primitive data type introduced in ES2020 that allows you to work with integers of arbitrary length
+Does NOT have a fixed number of bits.
+Is arbitrary-precision, meaning it uses as many bits as needed to store the number.
+It’s like a huge array of bits under the hood — dynamic length.
+
+3. `String`
+It is a sequence of Unicode characters, enclosed in:
+Single quotes '...' or
+Double quotes "...", or
+Backticks `...` (for template literals)
+Strings are made up of UTF-16 code units.
+Each character is typically 16 bits (2 bytes).
+JavaScript strings are immutable — once created, they cannot be changed (modifying creates a new string).
+
+4. `Boolean`
+
+5. `Null` - A value that explicitly represents "nothing" or an empty value.
 ```js
 let y = null; // y is explicitly set to "no value"
 ```
 
-`Undefined` - A variable or property that has been declared but not given a value yet
+6. `Undefined` - A variable or property that has been declared but not given a value yet
 ```js
 let x; // x is undefined
 ```
-`Symbol` -  unique and immutable data type that is often used as an identifier for object properties.
+7. `Symbol` -  It is used to create unique identifiers for object properties. introduced in ES6, To avoid property name collisions.
 ```js
 const sym2 = Symbol('example');  // Symbol with a description
 const sym3 = Symbol('example');  // Another Symbol with the same description
@@ -124,16 +131,178 @@ console.log(sym2 === sym3);      // false (they are unique)
 
 ## `Non primitive data` ##
 ===========================
-Object
-Array
-Function
-Date
-Regex
-`Map` - A Map is a collection of key-value pairs where keys can be of any data type.
-`Weak map` - A WeakMap is a collection of key-value pairs where keys must be an objects, and the keys are weakly referenced.
-`set` - Set is a built-in object that allows you to store unique values of any type.
-`Weak set` - A WeakSet is a built-in object in JavaScript that can only store unique objects.
-Error
+1. `Object`
+
+2. `Array`
+
+3. `Function`
+
+4. `Date`
+
+5. `Regex`
+A Regular Expression is a pattern used to match character combinations in strings. In JavaScript, it is used with methods like .test() and .match().
+
+
+`🔤 Character Classes / Shorthand Tokens`
+
+| Token | Description                        | Example | Matches         |
+| ----- | ---------------------------------- | ------- | --------------- |
+| `\d`  | Digit (0–9)                        | `/\d/`  | `"A1"` → `1`    |
+| `\D`  | Non-digit                          | `/\D/`  | `"A1"` → `A`    |
+| `\w`  | Word character (a–z, A–Z, 0–9, \_) | `/\w/`  | `"abc"` → `a`   |
+| `\W`  | Non-word character                 | `/\W/`  | `"@"` → `@`     |
+| `\s`  | Whitespace (space, tab, newline)   | `/\s/`  | `"a b"` → space |
+| `\S`  | Non-whitespace                     | `/\S/`  | `"a b"` → `a`   |
+| `.`   | Any character except newline       | `/./`   | `"abc"` → `a`   |
+
+
+`🧱 Anchors`
+
+| Anchor | Description         | Example      | Matches            |
+| ------ | ------------------- | ------------ | ------------------ |
+| `^`    | Start of string     | `/^a/`       | `"abc"` → `a`      |
+| `$`    | End of string       | `/c$/`       | `"abc"` → `c`      |
+| `\b`   | Word boundary       | `/\bword\b/` | `"word!"` → `word` |
+| `\B`   | Not a word boundary | `/\Bend/`    | `"bend"` → `end`   |
+
+by using `\b` the word should start or end with and vice versa for `\B`
+
+Start of string
+Space
+Punctuation (e.g., ., ,, !, @, etc.)
+Any non-word character
+
+
+`Flags`
+
+| Flag | Name        | Description                          | Example                | Matches      |
+| ---- | ----------- | ------------------------------------ | ---------------------- | ------------ |
+| `g`  | Global      | Match all occurrences                | `"abcabc".match(/a/g)` | `["a", "a"]` |
+| `i`  | Ignore case | Case-insensitive match               | `/abc/i.test("ABC")`   | `true`       |
+| `m`  | Multiline   | `^` and `$` match start/end of lines | `/^a/m.test("x\na")`   | `true`       |
+
+
+`🔁 Quantifiers`
+
+| Quantifier | Description           | Example    | Matches            |
+| ---------- | --------------------- | ---------- | ------------------ |
+| `*`        | 0 or more times       | `/a*/`     | `"aaa"` → `aaa`    |
+| `+`        | 1 or more times       | `/a+/`     | `"aaa"` → `aaa`    |
+| `?`        | 0 or 1 time           | `/a?/`     | `"aa"` → `a`       |
+| `{n}`      | Exactly n times       | `/a{2}/`   | `"aa"` → `aa`      |
+| `{n,}`     | At least n times      | `/a{2,}/`  | `"aaa"` → `aaa`    |
+| `{n,m}`    | Between n and m times | `/a{2,4}/` | `"aaaaa"` → `aaaa` |
+
+
+`🧰 Groups & Alternation`
+
+| Syntax    | Description         | Example     | Matches         |                      |
+| --------- | ------------------- | ----------- | --------------- | -------------------- |
+| `(abc)`   | Capturing group     | `/(abc)/`   | `"abc"` → `abc` |                      |
+
+Capturing group It matches AND remembers what it matched. This is useful when:
+You want to reuse it later (like in replacements).
+You want to extract a part of the string.
+
+```js
+const result = "helloabcworld".match(/(abc)/);
+console.log(result[1]); // "abc"
+// ✅ It found abc, and stored it in result[1].
+// You can also use this in replacements:
+"abcabc".replace(/(abc)/, "[$1]"); 
+// output: "[abc]abc"
+```
+
+| `(?:abc)` | Non-capturing group | `/(?:abc)/` | `"abc"` → `abc` |      
+
+Non-capturing group It matches the pattern but doesn’t store it. It's useful when:
+You just want to group parts for structure or logic.
+You don’t need to remember or use that part again.      
+
+```js
+const result = "helloabcworld".match(/(?:abc)/);
+console.log(result[1]); // undefined
+// ❌ It found abc, but didn’t store it in result[1].
+// Used commonly for things like:
+const result = "abcabcabc".match(/(?:abc){2}/);
+console.log(result[0]); // "abcabc"
+```
+
+| `a\|b`    | Alternation (OR)    | \`/a        | b/\`            | `"apple"` or `"bat"` |
+
+It matches either the left or the right side of the pipe |.
+
+```js
+const result = "bat".match(/a|b/);
+console.log(result[0]); // "b" → first match found
+const result = "apple".match(/a|b/);
+console.log(result[0]); // "a"
+```
+
+
+`🔍 Lookaheads & Lookbehinds (ES2018+)`
+
+| Type                | Syntax    | Description                           | Example                    | Matches |
+| ------------------- | --------- | ------------------------------------- | -------------------------- | ------- |
+| Positive Lookahead  | `x(?=y)`  | Match `x` only if followed by `y`     | `/\d(?=px)/` on `"2px"`    | `2`     |
+| Negative Lookahead  | `x(?!y)`  | Match `x` only if not followed by `y` | `/\d(?!px)/` on `"2em"`    | `2`     |
+| Positive Lookbehind | `(?<=y)x` | Match `x` only if preceded by `y`     | `/(?<=\$)\d+/` on `"$100"` | `100`   |
+| Negative Lookbehind | `(?<!y)x` | Match `x` only if not preceded by `y` | `/(?<!\$)\d+/` on `"100"`  | `100`   |
+
+
+6. `Map`
+A Map is a collection of key-value pairs, where:
+Keys can be of any data type such as String, Number, Boolean, Object, Array, Function, Symbol
+it is Faster for frequent additions and the insertion order is preserved
+Methods are
+  set(key, value)
+  get(key)
+  has(key)
+  delete(kay)
+  clear()
+  size : Returns number of entries
+
+7. `Weak map`
+A WeakMap is a collection of key-value pairs, where:
+Keys must be objects only (not primitive values).
+The keys are held weakly — meaning if there are no other references to the key object, it can be garbage-collected automatically.
+Prevents memory leaks by allowing garbage collection of unused object keys.
+Useful for storing private data related to DOM nodes or objects.
+It does not preserve insertion order and is not iterable.
+Methods are
+  set(key, value)
+  get(key)
+  has(key)
+  delete(key)
+
+8. `set`
+A Set is a collection of unique values, where:
+Each value must be distinct (no duplicates allowed).
+Values can be of any data type such as: String, Number, Boolean, Object, Array, Function, Symbol.
+Insertion order is preserved.
+and it is iteratable.
+Automatically removes duplicates.
+Great for checking existence (has) and storing unique items.
+Methods are 
+  add(value)
+  has(value)
+  delete(value)
+  clear()
+  size – Returns number of unique entries
+
+9. `Weak set`
+A WeakSet is a collection of unique objects, where:
+Values must be objects only (not primitives).
+Objects are held weakly, allowing garbage collection if there are no other references.
+It is not iterable and does not preserve insertion order.
+Cannot contain duplicate objects.
+Used to store temporary or private data tied to objects.
+methods are
+  add(value)
+  has(value)
+  delete(value)
+
+10. `Error`
 
 
 
@@ -151,9 +320,7 @@ The lexical environment of Global execution context will point to null , because
 
 `Scope chain`
 -------------
-Chain of the lexical environment and its lexical environment of parent
-
-If the js engine does not find any variable in the local memory it will move to the lexical scope , this continue until it find the value or null
+The scope chain is the series of lexical environments used to resolve variable identifiers. When a variable is not found in the current (local) scope, the JavaScript engine looks up the outer (parent) lexical environments one by one, forming a chain — until it finds the variable or reaches the global scope.
 
 
 `Block scope`
@@ -234,7 +401,6 @@ function a(){
 console.log("a called")
 }
 ```
-
 This is a function statement , in hoisted phase it will get the result because it is a  normal function
 
 `Funtion expression`
@@ -244,7 +410,6 @@ var b = function(){
 console.log("b called")
 }
 ```
-
 This is a function expression , in the hoisting phase it will get undefined because js engine treat it as a variable so that it wont be accessible before its definition
 
 
@@ -279,7 +444,7 @@ xyz();
 
 This is named function expression , which is nothing but a normal function statement is assinged to a variable
 
-But we cant invoke ths function using xyz() like this in outside , it will cause an reference error
+But we cant invoke the function using xyz() like this in outside , it will cause an reference error
 
 So the xyz() is acting as a varibale of that function it is used to call that function inside that function itself
 
