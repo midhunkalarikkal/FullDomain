@@ -1,9 +1,10 @@
-var printFullName = function(greeting, home){
-    console.log(`${greeting}` + this.fname + " " + this.lname + `${home}`);
-}
+var sample = function(a,b) {
+    console.log(`${a} ${b} ${this.c}`);
+};
 
-const obj = { fname : "Midhun", lname : "Kalarikkal"};
+const obj = {
+    c : "SDE",
+};
 
-const result = printFullName.bind(obj,"hi "," kalarikkal");
-
-result();
+const result = sample.bind(obj);
+result(1,2);

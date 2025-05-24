@@ -1,10 +1,10 @@
 const arr = [1,2,3,4,5,6,7,8,9,10];
 
 // Find sum
-const resultSum = arr.reduce((acc,cv,ci,arr) => {
+const sum = arr.reduce((acc,cv,ci,arr) => {
     return acc + cv
-},0)
-console.log("Sum : ",resultSum);
+},0);
+console.log("sum : ",aum)
 
 //  Find max
 function findMax(arr){

@@ -1,7 +1,10 @@
-var printFullName = function(greeting, home){
-    console.log(`${greeting}` + this.fname + " " + this.lname + `${home}`);
+var sample = function(a,b) {
+    console.log(`${a} ${b} ${this.c} ${this.d}`)
 }
 
-const obj = { fname : "Midhun", lname : "Kalarikkal"};
+const obj = {
+    c : "Midhun",
+    d : "You are In"
+}
 
-printFullName.call(obj,["hi "," kalarikkal"]);
+sample.apply(obj,[1,2]);

@@ -1,7 +1,9 @@
-var printFullName = function(greeting, home){
-    console.log(`${greeting}` + this.fname + " " + this.lname + `${home}`);
+var simple = function(a, b) {
+    console.log(`${a} ${b} ${this.c}`)
 }
 
-const obj = { fname : "Midhun", lname : "Kalarikkal"};
+const obj = {
+    c: "Paniker"
+}
 
-printFullName.call(obj,"hi "," kalarikkal");
+simple.call(obj,"Midhun", "K")

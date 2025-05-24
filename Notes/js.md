@@ -2,6 +2,11 @@
 ===================
 JavaScript is a high-level, dynamic, interpreted programming language primarily used for adding interactivity and dynamic behavior to web pages. It is a single-threaded, synchronous, and event-driven language that supports both functional and object-oriented programming paradigms. JavaScript runs in the browser and server environments (like Node.js) using engines such as V8, which execute its code.
 
+V8 → Chrome, Opera, Edge (new)
+SpiderMonkey → Firefox
+JavaScriptCore / Nitro → Safari
+Chakra → Old Microsoft Edge (non-Chromium)
+
 A `dynamic language` means we can define variables, objects, and functions without specifying their types beforehand. The type of a variable can change at runtime.
 
 `Interpreted` means that the code is read and executed line by line by an interpreter, without the need for pre-compiling it into machine code.
@@ -310,8 +315,15 @@ methods are
 
 ## `Window` ##
 ===============
-Window is a global object is created along with the execution context
-Whatever we write in the global space it will attached to the window
+Window is a global object is created along with the global execution context
+Any variable or function declared in the global scope using var becomes a property of the window object.
+```js
+var a = 10;
+console.log(window.a) this is what is  console.log(a);
+```
+`this` in the global context also refers to the window object.
+and we can call the window object by using `this` keyword
+`var` is function scoped,`let` and `const` are block-scoped and not hoisted to window:
 
 `Scope`
 ----------
@@ -468,21 +480,21 @@ Immediately Invoked Function Expression, is a JavaScript function that is define
 
 It creates a new scope , avoid polluting global scope
 
-Uses are :- Encapsulation , Data privacy , Avoiding Hoisting Issues , Creating modules
+Uses are :- Encapsulation , Data privacy , Avoiding Hoisting Issues , Creating modules, avoid global scope pollution
 
-Inside an Immediately Invoked Function Expression (IIFE) in non-strict mode:
-In a browser environment, this refers to the global object, which is window.
-In Node.js, this refers to the global object, which is global.
+Inside an Immediately Invoked Function Expression (IIFE) in `non-strict mode`:
+1. In a browser environment, `this` keyword refers to the global object, which is window.
+2. In Node.js, `this` keyword refers to the global object, which is global.
 
-If the IIFE is running in strict mode ('use strict';), the value of this inside the IIFE will be undefined.
+If the IIFE is running in `strict mode` ('use strict';), the value of `this` keyword refers to `undefined`.
 
 Advantages are encapsulation and isolation
 
-Wrapping the function in parentheses () makes it an expression rather than a declaration.
+`Wrapping the function in parentheses () makes it an expression rather than a declaration.`
 Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
 
 `Generator function`
---------------
+---------------------
 Generators are a type of iterable in JavaScript that allow pausing and resuming the execution of a function. They are defined using the function* syntax, and they use the yield keyword to produce values one at a time. A generator function returns an iterator which can be used to traverse the yielded values.
 
 Key Features :-
@@ -569,7 +581,7 @@ it modifies the external state (result variable) as a side effect.
 
 `Default parameters`
 ---------------------
-Default parameters in JavaScript allow you to assign default values to function parameters. If a parameter is not provided when the function is called, the default value will be used.
+Default parameters in JavaScript allow you to assign default values to function parameters. If a parameter is not provided when the function invokation, the default value will be used.
 
 
 
@@ -635,7 +647,6 @@ Once parsed into an object in JavaScript, it can be manipulated. Otherwise, JSON
 JavaScript Object:
 ```js
 const obj = { name: "Midhun", age: 25 };
-
 '{"name": "Midhun", "age": 25}'
 ```
 
@@ -649,7 +660,11 @@ Memoization is a technique used in programming to optimize the performance of fu
 
 ## `Prototype` ##
 ==================
-In JavaScript, prototype refers to an internal property of an object that allows the object to inherit properties and methods from another object. Every object in JavaScript has a prototype (except for null, which has no prototype).
+In JavaScript, prototype refers to an internal property of an object that allows the object to inherit properties and methods from another object. 
+
+Every object in JavaScript has a prototype (except for null, which has no prototype).
+
+Whatever we create in the program like varibale or function or object, the js engine will automatically attach an object to the user created objects, user created objects means, everything like the varibales, functions or objects, so the attaching objects is `__proto__`, and this attachment is giving the power of prototype calling with the objects created by the user with `.`
 
 `Prototype Chain`
 ------------------
@@ -657,50 +672,12 @@ The prototype chain is a series of objects linked together by their prototypes. 
 
 The prototype chain allows for inheritance in JavaScript: an object can inherit properties and methods from another object.
 
+for example if we take an arr as an array then :
+
 arr.__proto__     is an object
 arr.__proto__.__proto__      is an object.prototype
 arr.__proto__.__proto__.__proto__      is an  object.prototype.prototype == null
 
-`Object creation`
--------------------
-```js
-function Dog(name) {
-  this.name = name;
-}
-
-Dog.prototype.bark = function() {
-  console.log(`${this.name} says Woof!`);
-};
-
-const myDog = new Dog('Buddy');
-myDog.bark(); // Outputs: Buddy says Woof!
-```
-
-`Inheritance`
---------------
-```js
-function Animal(voice) {
-  this.voice = voice;
-}
-
-Animal.prototype.makeSound = function() {
-  console.log(`Animal makes a ${this.voice} sound`);
-};
-
-function Cat(name) {
-  this.name = name;
-}
-
-Cat.prototype = Object.create(Animal.prototype);
-Cat.prototype.constructor = Cat;
-
-const myCat = new Cat('Whiskers');
-myCat.makeSound(); // Outputs: Animal makes a undefined sound
-```
-
-`Prototype` vs `Prototype Chain`
--------------------------------
-The prototype is an object's direct reference, while the prototype chain is the series of prototypes leading to the root object, often Object.prototype.
 
 
 
@@ -708,11 +685,11 @@ The prototype is an object's direct reference, while the prototype chain is the 
 
 ## `Closure` ##
 ================
-A closure is defined as a function is binded with its lexical environment
+When a function "remembers" the variables from its lexical scope, even after the outer function has finished execution.
 
-Closure is a common use case of lexical scope, where an inner function retains access to the variables of its outer function even after the outer function has finished execution.
+it is because the the function is binded with its local memory and the lexical environment of its parents memory
 
-Function bind together with its lexical environment creates a closure
+`Function bind together with its lexical environment creates a closure`
 
 `Uses`
 ------
@@ -774,10 +751,15 @@ console.log(person.getAge()); // Outputs: 1
 
 `Closure disadvantages`
 ------------------------------
-Memory leaks
-Debugging complexity
-Performance issue
-overhead of variables
+1. Memory leaks
+    Closures keep variables in memory, even after the outer function is done.
+    If not managed well, they can prevent garbage collection, leading to memory leaks.
+2. Debugging complexity
+    Debugging variables from outer scopes (especially in tools like DevTools) can be tricky because they're not directly visible unless you understand the closure.
+    Nested closures can lead to complex, hard-to-follow code.
+3. Performance issue
+4. unexpected behaviour in loops
+    Closures inside loops can capture references instead of values, causing confusing results.
 
 
 
@@ -814,7 +796,7 @@ The time from the hoisting to the time when the let or conts get assinged or ini
 
 Whenever we are accessing a variable in Temporal Dead Zone it gives us the Reference error
 
-The Temporal Dead Zone (TDZ) is a period during the execution of a program where a variable exists but cannot be accessed due to its uncompleted initialization. This occurs with variables declared using let and const before their declaration.
+The Temporal Dead Zone (TDZ) is the time between the creation of a let or const variable in memory and its actual initialization in the code.
 
 Variables declared with var are hoisted to the top of their scope and initialized with undefined. On the other hand, variables declared with let and const are also hoisted but are not initialized until their declaration. This leads to the TDZ concept.
 
@@ -873,9 +855,9 @@ In the arrow function in case of let or const instead of var the error will be r
 ## `This keyword` ##
 =====================
 
-1 . in global scope the this keyword is “window”
+1 . in global scope the `this` keyword is “window”
 
-2 . inside a normal function the this keyword is “undefined” in strict mode and window in non strict mode
+2 . inside a normal function the `this` keyword is “undefined” in strict mode and window in non strict mode
 
 	2 . 1 . this is because the this substitution or if the value of this keyword is  undefined or null this keyword will be replaced by javascipt with global object only in non strict mode
 
@@ -929,7 +911,7 @@ In event handlers, `this` typically refers to the element that triggered the eve
 
 `Arrow Functions`
 ------------------
-Arrow functions do not have their own this. They inherit this from the enclosing scope. In other words, they do not have the concept of dynamic this.
+Arrow functions do not have their own `this`. They inherit this from the enclosing scope. In other words, they do not have the concept of dynamic this.
 ```js
 const myFunction = () => {
   console.log(this); // 'this' is determined by the surrounding scope
@@ -1060,15 +1042,19 @@ console.log(str2.concat(str1))
 
 `substring`
 ------------
-Used to extract a portion of a string based on a specified start and end indices
+Extracts characters between start and end (excluding end).
+If start > end, it swaps them.
+Negative values are treated as 0.
 ```js
 var str = "Midhun k paniker"
-console.log(str.substr(9,13)) // pani  here end indices is ignored
+console.log(str.substring(9,13)) // pani  here end indices is ignored
 ```
 
 `substr`
 ---------
-Used to extract a substring from a string using the start indices and the desired length
+Extracts characters starting from start, for the given length.
+start can be negative, which counts from the end.
+Deprecated but still works in most environments.
 ```js
 var str4 = "Midhun k paniker"
 console.log("Substr :",str4.substr(3,10))
@@ -1401,7 +1387,7 @@ console.log(arr)
 
 8. `Shift`
 ============
-that removes the first element from an array and returns that element. It also shifts all remaining elements to a lower index, effectively reducing the length of the array by 1. If the array is empty, shift() returns undefined. The shift() method modifies the original array.
+That removes the first element from an array and returns that element. It also shifts all remaining elements to a lower index, effectively reducing the length of the array by 1. If the array is empty, shift() returns undefined. The shift() method modifies the original array.
 
 var shiftedElement = array.shift();
 
