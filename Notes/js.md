@@ -1770,7 +1770,7 @@ The structure is known as pyramid of doom
 
 `Solution for callbackhell`
 ----------------------------
-Use promises and async await
+Use promises or async await
 
 
 
@@ -1825,7 +1825,7 @@ Once the call stack is empty (all synchronous tasks have finished), the browser�
 
 ## `Currying` ##
 ======================
-Currying is a functional programming technique in which a function is transformed into a sequence of partially applied functions, each taking a single argument. The result is a chain of functions, each taking a single argument, until the final function in the chain produces the desired result.
+Currying is a functional programming technique in which a function is transformed into a sequence of partially applied functions, each taking a single argument. The result is a chain of functions until the final function in the chain produces the desired result.
 
 ```js
 function add(x){
@@ -1889,7 +1889,13 @@ Promise chaining in JavaScript is a technique where you chain multiple asynchron
 
 `Promise.all`
 --------------
-Promise.all is a method in JavaScript that takes an iterable (e.g., an array) of promises as input and returns a single promise. This new promise fulfills with an array of results when all the input promises have been fulfilled, or it rejects with the reason of the first promise that rejects.
+Promise.all() takes an iterable (usually an array) of promises and returns a single Promise that:
+  Resolves when all the input promises are fulfilled.
+  The resolved value is an array of results in the same order as the input.
+
+  Rejects immediately if any one of the input promises is rejected.
+  It will reject with the reason of the first promise that rejects.
+  Other promises continue running, but their results are ignored.
 
 `Promise.allSettled`
 ---------------------
@@ -1897,16 +1903,29 @@ Promise.allSettled is another method in JavaScript for handling multiple promise
 
 `Promise.race`
 ----------------
- this method takes an iterable of promises and returns a new promise. This new promise settles (fulfills or rejects) as soon as one of the promises in the iterable settles, regardless of whether the other promises have settled.
+ This method takes an iterable of promises and returns a new promise. This new promise settles (fulfills or rejects) as soon as one of the promises in the iterable settles, regardless of whether the other promises have settled.
 
  Returns the result of the first settled promise (resolved or rejected).
  Rejects immediately if the first settled promise is rejected.
 
  Uses are -: Timeout , race conditions , Load balancing , Parallel request , Real time updates
 
+ `Promise.any(iterable)`
+-------------------------
+Promise.any() takes an iterable of promises and returns a single promise that:
+
+  Resolves as soon as the first promise resolves (ignores any rejections).
+  Rejects only if all promises are rejected, and it throws an AggregateError containing all rejection reasons.
+
 `Then`
 --------
 The then method is used to handle the fulfillment of a promise.
+The then() method has two optional parameters:
+```js
+promise.then(onFulfilled, onRejected)
+```
+onFulfilled → called if the promise is resolved.
+onRejected → called if the promise is rejected.
 
 `Finally`
 -----------
@@ -1916,12 +1935,6 @@ The finally method is used to specify a function to be executed when the promise
 ---------
 The catch method is a shorthand for handling only the rejection of a promise. It is equivalent to using then(undefined, onRejected).
 
-`Promise.any(iterable)`
--------------------------
-The Promise.any() method takes an iterable of promises and returns a single promise that resolves as soon as any of the input promises is fulfilled. If none of the promises are fulfilled (all are rejected), it rejects with an AggregateError, which contains all the rejection reasons.
-
-Returns the result of the first fulfilled promise (ignores rejected promises).
-Rejects only if all promises are rejected, with an AggregateError.
 
 
 
@@ -1936,7 +1949,11 @@ async and await are keywords in JavaScript that simplify the handling of asynchr
 
 ## `Observable` ##
 ====================
-An Observable is a design pattern in JavaScript used to manage asynchronous data streams. It allows you to work with data that can change over time, such as user inputs, server responses, or other events. Unlike promises, Observables can emit multiple values over time, and subscribers can react to each emitted value.
+Observable is a concept introduced in Reactive Programming, and it became widely known in JavaScript through the RxJS (Reactive Extensions for JavaScript) library.
+
+An Observable is a design pattern in JavaScript used to manage asynchronous data streams. It allows you to work with data that can change over time, such as user inputs, server responses, or other events. 
+
+Unlike promises, Observables can emit multiple values over time, and subscribers can react to each emitted value.
 
 
 
@@ -1944,7 +1961,12 @@ An Observable is a design pattern in JavaScript used to manage asynchronous data
 
 ## `DOM` ##
 ==============
-The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a document as a tree of objects, where each object corresponds to a part of the document, such as elements, attributes, or text. The DOM allows developers to manipulate the structure, style, and content of a webpage dynamically.
+Document Object Model
+The DOM is an API (Application Programming Interface) for HTML and XML documents.
+Represents the document as a hierarchical tree of nodes (objects).
+Each node corresponds to a part of the document (element, attribute, text, etc.).
+Developers can add, remove, or change elements and content using JavaScript.
+The DOM allows real-time updates to the page without needing a reload.
 
 `Nodes`
 Nodes are the building blocks of the DOM.
@@ -2020,6 +2042,21 @@ The event loop is a crucial part of JavaScript's concurrency model, responsible 
 The event loop constantly checks the callback queue for completed asynchronous operations.
 If the call stack is empty, the event loop takes the first callback from the queue and pushes it to the call stack for execution.
 
+the browser JavaScript engine (like V8 in Chrome) does not have a traditional thread pool like Node.js.
+Instead, the browser uses Web APIs (provided by the browser, not the JavaScript engine) to handle asynchronous tasks such as:
+
+setTimeout, setInterval
+
+fetch, XMLHttpRequest
+
+DOM events
+
+Web Workers
+
+WebSockets
+
+These are handled outside the JS engine in the browser environment, and then callbacks are queued in the callback queue or microtask queue.
+
 
 
 
@@ -2093,6 +2130,8 @@ console.log(restFruits); // Output: ['cherry', 'mango']
 `<< (Left shift)` -> The left shift operator shifts bits to the left by the specified number of positions, filling with zeros on the right.
 
 `>> (Right shift)` -> The signed right shift operator shifts bits to the right by the specified number of positions, preserving the sign (leftmost bit).
+
+  Shifts bits to the right, preserving the sign (fills left with 0 if positive, 1 if negative).
 
 `>>> (Zero fill right shift)` -> The unsigned right shift operator shifts bits to the right, filling zeros from the left. The sign bit is not preserved, treating the number as unsigned.
 
@@ -2197,9 +2236,13 @@ Classes in JavaScript provide a more structured and intuitive way to work with o
 -----------------
 Static methods are methods that are called on the class itself, rather than on instances of the class.
 
+Belong to the class itself, not to the instances.
+You cannot call them using an instance like sample.add().
+You must call them using the class name, like One.add().
+
 `Super keyword`
 ----------------
-In a derived class constructor, super() keyword is used to call the constructor of the parent class. This is necessary when the child class has its own constructor, and you want to ensure that the initialization code in the parent class's constructor is also executed.
+In a derived class constructor, super() keyword is used to call the constructor of the parent class. This is necessary when the child class has its own constructor, and we want to ensure that the initialization code in the parent class's constructor is also executed.
 
 it is used inside the child class's constructor
 it is also used in the child class's method to invoke the parent class method
@@ -2211,11 +2254,11 @@ When using super in a method, it must be used before this is used in the method.
 
 `Encapsulation`
 ---------------
-Encapsulation means combining data variables and methods into one unit, such as a class or object. It also hides unnecessary details and only shows the important parts, making the object easier to use and safer.
+Encapsulation means combining or bundling data variables and methods into one unit, such as a class or object. It also hides unnecessary details and only shows the important parts, making the object easier to use and safer.
 
 `Abstraction`
 -----------------
-Abstraction is the process of hiding the complex reality and showing only the necessary parts of an object or function. It helps reduce complexity by focusing only on the relevant details and ignoring unnecessary ones. Abstraction is often implemented using classes, functions, or modules in
+Abstraction is the process of hiding the complex reality and showing only the necessary parts of an object or function. It helps reduce complexity by focusing only on the relevant details and ignoring unnecessary ones. Abstraction is often implemented using classes, functions, or modules.
 
 `Access Modifiers`
 --------------------
@@ -2241,7 +2284,7 @@ An iterator is an object that provides a standardized way to access the elements
 
 the iterator protocol, which consists of two main methods: next and symbol.iterator
 
-The next method return an object with two propertiex  value and done
+The next method return an object with two properties : value and done
 value is the current element in the collection
 done is the boolean value representing whether the iteration is complete or not
 
@@ -2281,6 +2324,20 @@ in the case of objects if we are reassigning the object with new key value pair 
 
 
 
+## `Microtask Queue` ##
+========================
+This queue holds microtasks that have higher priority than macrotasks.
+
+Promises (e.g., .then() or .catch())
+MutationObserver
+queueMicrotask()
+
+Microtasks are executed immediately after the current execution context and before the message queue (macrotasks).
+
+
+
+
+
 ## `Message Queue (Macrotask Queue)` ##
 ===========================================
 This queue holds macrotasks (regular tasks) that are ready to be executed.
@@ -2296,31 +2353,18 @@ These tasks are executed after the micro tasks are completed.
 
 
 
-## `Microtask Queue` ##
-========================
-This queue holds microtasks that have higher priority than macrotasks.
-
-Promises (e.g., .then() or .catch())
-MutationObserver
-queueMicrotask()
-
-Microtasks are executed immediately after the current execution context and before the message queue (macrotasks).
-
-
-
-
-
 ## `Tasks` ##
 =================
-`Macro tasks`
---------------
-Macrotasks are tasks with lower priority that are executed asynchronously after the microtask queue has been emptied.
-setTimeout , setInterval , eventListener , i/o op
 
 `Micro tasks`
 ----------------
 Microtasks are tasks with higher priority that are executed asynchronously as soon as the current execution context is emptied and before the event loop advances to the next macrotask.
 promises , Mutation obeserver , callbacks
+
+`Macro tasks`
+--------------
+Macrotasks are tasks with lower priority that are executed asynchronously after the microtask queue has been emptied.
+setTimeout , setInterval , eventListener , i/o op
 
 
 
@@ -2401,6 +2445,41 @@ console.log(sessionStorage.getItem('sessionData')); // 'active'
 sessionStorage.removeItem('sessionData');
 ```
 
+`Cookies`
+--------------
+
+`Persistance`
+Cookies can persist beyond the browser session if an expiration date is set.
+Without an expiration date, the cookie is deleted when the browser is closed (session cookie).
+With an expiration date, cookies can persist for days, months, or even years.
+
+`Scope`
+Cookies are sent to the server with every HTTP request, which makes them useful for server-side session tracking.
+They are accessible within the same domain (and optionally specific paths within the domain).
+Can be made inaccessible to JavaScript (using the HttpOnly flag).
+
+`Storage Limit`
+Each cookie is limited to around 4 KB in size.
+Browsers typically allow about 20 cookies per domain (limits can vary slightly between browsers).
+
+`Expires`
+Set using the expires or max-age attribute.
+If no expiration is set, cookies are deleted when the browser is closed (session cookie).
+
+`Use Cases`
+Storing authentication tokens, user preferences, tracking IDs, and small bits of information that need to be sent to the server.
+Useful for both client-side and server-side operations.
+
+```js
+// Set a cookie that expires in 1 day
+document.cookie = "username=Midhun; max-age=" + 60 * 60 * 24;
+
+// Read cookies
+console.log(document.cookie); // 'username=Midhun'
+
+// Delete a cookie by setting its expiration to the past
+document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+```
 
 
 
@@ -2416,40 +2495,53 @@ for importing :- import {add} from "./filename"
 
 1. `ES6 Modules`
 -------------------
-ES6 introduced a native module system, allowing developers to split code into separate files and import/export functionalities between them.
+Introduced in ES6 (2015) and now standard in modern browsers and Node.js.
+Uses import and export.
+Supports tree-shaking (removes unused code in bundlers like Webpack).
+Modules are lexically scoped.
+Strict mode is always enabled.
 
-import and export statements are used.
-Modules are lexically scoped, meaning the variables or functions inside them are scoped to the module.
-Strict mode is automatically enabled.
+```js
+// math.js
+export function add(a, b) { return a + b; }
 
-2. `CommonJS Modules`
+// main.js
+import { add } from './math.js';
+```
+
+2. `CommonJS Modules CJS`
 -----------------------
-CommonJS is the module system used primarily in Node.js. It uses require to import modules and module.exports to export functionality.
+Primary format used in Node.js (especially before v13).
+Uses require() to import and module.exports to export.
+Synchronous loading (not suitable for browser without bundlers).
 
-require for importing.
-module.exports for exporting.
-Synchronous loading (not suitable for browsers without bundlers like Webpack or Browserify).
+```js
+// math.js
+module.exports = {
+  add: (a, b) => a + b
+};
 
-3. `UMD Modules`
----------------------
-UMD is a module format designed to work in both browser and Node.js environments. It is a combination of the best parts of AMD, CommonJS, and Global definitions.
+// main.js
+const math = require('./math');
+```
 
-It works in both Node.js and the browser.
-Uses define or module.exports depending on the environment.
+3. `UMD Modules -> Universal Module Definition`
+-----------------------------------------------
+Designed to work in all environments: AMD, CommonJS, and browser globals.
+Useful for publishing libraries that work everywhere.
+Rarely used in modern app development.
 
-4. `AMD Modules`
---------------------
-AMD is a module format used primarily for browser environments. It defines modules asynchronously, making it suitable for applications that need to load modules in parallel (e.g., using the RequireJS library). 
+4. `AMD Modules -> Asynchronous Module Definition`
+--------------------------------------------------------
+Used in browsers to load modules asynchronously.
+Common in older apps with RequireJS.
+Largely replaced by ES6 Modules.
 
-Modules are loaded asynchronously.
-Uses the define function to define modules.
-
-5. `SystemJS Modules`
----------------------
-SystemJS is a module loader that supports loading ES6, CommonJS, and AMD modules, allowing you to use multiple module formats in the same application.
-
-Compatible with multiple module formats.
-Can be used in both client-side and server-side applications.
+5. `SystemJS Modules -> (Meta/Loader Polyfill) ❄️ (Rarely Used Today)`
+------------------------------------------------------------------------------
+A dynamic module loader that supports ES6, AMD, CommonJS.
+Used in advanced scenarios or when combining multiple module systems.
+Mostly seen in legacy apps or special environments like JSPM or older Angular versions.
 
 
 
@@ -2457,7 +2549,7 @@ Can be used in both client-side and server-side applications.
 
 ## `Event deligation` ##
 =========================
-Event delegation is a JavaScript programming pattern where a single event listener is attached to a common ancestor element of multiple child elements. Instead of attaching individual event listeners to each child element, you delegate the responsibility of handling events to a higher-level ancestor. When an event occurs on a child element, it bubbles up to the ancestor where a single event listener can respond to it.
+Event delegation is a JavaScript programming pattern where a single event listener is attached to a common ancestor element of multiple child elements. Instead of attaching individual event listeners to each child element, we delegate the responsibility of handling events to a higher-level ancestor. When an event occurs on a child element, it bubbles up to the ancestor where a single event listener can respond to it.
 
 
 
@@ -2493,11 +2585,13 @@ Polyfills are code snippets or scripts that implement modern functionality in ol
 
 ## `use strict` ##
 =====================
-use strict is a directive in JavaScript that enforces a stricter set of rules on our code. It helps us write cleaner and less error-prone code by catching common mistakes and preventing the use of unsafe features.
+use strict is a directive in JavaScript that enforces a stricter set of rules on our code. It helps us to write cleaner and less error-prone code by catching common mistakes and preventing the use of unsafe features.
 
 Helps in catching silent errors early.
 Encourages better coding practices.
 Improves performance by enabling optimizations in JavaScript engines.
+
+
 
 
 
@@ -2528,6 +2622,45 @@ The JSON.parse() method is used to parse a JSON string and convert it into a Jav
 `Json stringify`
 ------------------
 The JSON.stringify() method is used to convert a JavaScript object into a JSON-formatted string. It takes an object as its first argument and an optional replacer function and space parameter.
+
+`value`: The JavaScript value (usually an object or array) to convert.
+
+`replacer` (optional):
+Can be a function or array.
+If a function, it's called for each key-value pair and can modify or filter values.
+If an array, it specifies a list of properties to include in the JSON string.
+
+space (optional):
+Adds indentation, white space, and line breaks to the output string for readability.
+Can be a number (number of spaces) or a string (e.g., '\t' for tabs).
+
+```js
+JSON.stringify(value, replacer, space);
+
+// jus using the replacer array
+const obj = { name: "Midhun", age: 20, place: "Ktpm" };
+const json = JSON.stringify(obj, ["name", "place"]);
+console.log(json); // '{"name":"Midhun","place":"Ktpm"}'
+
+// using both replacer and space
+const user = {
+  name: "Midhun",
+  age: 20,
+  password: "secret",
+  place: "Ktpm"
+};
+
+// Replacer function: exclude "password"
+const replacer = (key, value) => {
+  if (key === "password") return undefined;
+  return value;
+};
+
+// Space: indent with 4 spaces
+const jsonString = JSON.stringify(user, replacer, 4);
+
+console.log(jsonString);
+```
 
 `break`
 --------

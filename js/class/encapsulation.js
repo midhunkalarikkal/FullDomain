@@ -1,6 +1,7 @@
 class Person{
     #name;
     #age;
+    place = "ktpm";
     constructor(name, age){
         this.#name = name;
         this.#age = age;
@@ -24,3 +25,4 @@ const p1 = new Person("Midhun",20);
 p1.getDetails();
 p1.setDetails("Jithin",15);
 p1.getDetails();
+console.log(p1.place)

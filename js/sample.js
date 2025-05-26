@@ -1,4 +1,5 @@
-let arr = [2, 4, 6];
-for(let [index,value] of arr.entries()) {
-    console.log(index + " "+ value)
+if(!Array.prototype.includes) {
+    Array.prototype.includes = function (value) {
+        return this.indexOf(value) !== -1;
+    }
 }

@@ -1,7 +1,7 @@
 function async1(data){
     return new Promise((resolve,reject) => {
         setTimeout(() => {
-            console.log("async 1 data rpocessing.");
+            console.log("async 1 data pocessing.");
             resolve(data + " -> processed by async 1.")
         },1000)
     })
@@ -9,7 +9,7 @@ function async1(data){
 function async2(data){
     return new Promise((resolve,reject) => {
         setTimeout(() => {
-            console.log("async 2 data rpocessing.");
+            console.log("async 2 data pocessing.");
             resolve(data + " -> processed by async 2.")
         },1000)
     })
@@ -17,7 +17,7 @@ function async2(data){
 function async3(data){
     return new Promise((resolve,reject) => {
         setTimeout(() => {
-            console.log("async 3 data rpocessing.");
+            console.log("async 3 data pocessing.");
             resolve(data + " -> processed by async 3.")
         },1000)
     })

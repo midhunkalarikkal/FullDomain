@@ -13,8 +13,10 @@ const obj = { name : "Midhun" };
 const obj2 = { place : "kochi" };
 
 function updateObj(a, b){
-    b = { pin : 3};
-    console.log(b);
+    // b = { pin : 3};
+    b.place = "bnglr"
+    b.pincode = 123456
+    // console.log(b);
     a.age = 10;
     return a;
 }
