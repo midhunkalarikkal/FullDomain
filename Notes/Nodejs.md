@@ -1377,7 +1377,7 @@ console.log('End');
 `Origin module` -> The origin module in Node.js represents the starting point or root directory of the application.
 It provides information about the current working directory of the Node.js process.
 
-`Authentication` -> Authentication is the process of verifying the identity of a user or entity trying to access a system or resource.
+`Authentication` -> Authentication is the process of verifying the identity of a user or  an entity trying to access a system or resource.
 
 `Authorization` -> Authorization is the process of determining what actions or resources a user or entity is allowed to access within a system.
 
@@ -1398,11 +1398,38 @@ app.use((req, res, next) => {
 ```js
 app.set('appName', 'My Express App');
 ```
-`Router chaining` -> Allows you to handle HTTP requests step-by-step using multiple middleware functions.
+
+
+
+
+
+## `Router chaining` ##
+=========================
+Router chaining allows you to chain multiple HTTP method handlers using router.route() method
+
+```js
+router.route('/user')
+  .get((req, res) => {
+    res.send('GET request to /user');
+  })
+  .post((req, res) => {
+    res.send('POST request to /user');
+  })
+  .put((req, res) => {
+    res.send('PUT request to /user');
+  })
+  .delete((req, res) => {
+    res.send('DELETE request to /user');
+  });
+```
+
+
+
+
 
 ## `setImmediate (Node.js only)` ##
 =====================================
-The setTimeout function is used to schedule a task to execute after a specified delay (in milliseconds) and executes after only the i/o functions like after the poll phase of the event loop.
+The setImmediate function is used to schedule a task to execute after a specified delay (in milliseconds) and executes after only the i/o functions like after the poll phase of the event loop.
 
 ## Example
 ===========
@@ -1452,6 +1479,13 @@ app.get('/data', (req, res) => {
 
 `Event Pooling` -> A technique used to efficiently reuse event objects in memory instead of creating new ones for every event. Used to optimize performance in event-driven systems.
 
+
+
+
+
+## `Axios` ##
+==============
+
 `Axios` -> A promise-based HTTP client for the browser and Node.js. Used to make HTTP requests. mostly used in the frontend and also can use in backend for api calling.
  ```js
  import axios from 'axios';
@@ -1466,6 +1500,10 @@ axios.interceptors.request.use((config) => {
   config.headers.Authorization = 'Bearer token';
   return config;
 });
+axios.interceptors.response.use((config) => {
+  config.headers.Authorization = 'Bearer token';
+  return config;
+});
 ```
 
 `Axios CancelToken` -> A feature to cancel an ongoing Axios request. Used to avoid processing unnecessary or outdated requests, like when navigating between pages.
@@ -1476,6 +1514,20 @@ const source = CancelToken.source();
 axios.get('/api/data', { cancelToken: source.token });
 source.cancel('Request canceled!');
 ```
+Use case :-
+Search Autocomplete (Live Search)
+  When a user types quickly, old API requests should be canceled to prevent outdated results.
+Navigation Changes
+  If a user navigates to another page before the response comes back, cancel the request to avoid side-effects.
+Form Submissions
+  If the user submits the form multiple times, cancel the previous request and only keep the latest.
 
-`Throttling` -> A technique to limit the number of times a function is executed within a given timeframe. Used to control traffic (e.g., user input or server load).
+
+
+
+
+## `Throttling` ## 
+===================
+A technique to limit the number of times a function is executed within a given timeframe. 
+Used to control traffic (e.g., user input or server load).
  
