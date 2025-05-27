@@ -1,5 +1,7 @@
 ## `JAVASCRIPT` ##
 ===================
+Created by `Brendan Ech` in 1995
+
 JavaScript is a high-level, dynamic, interpreted programming language primarily used for adding interactivity and dynamic behavior to web pages. It is a single-threaded, synchronous, and event-driven language that supports both functional and object-oriented programming paradigms. JavaScript runs in the browser and server environments (like Node.js) using engines such as V8, which execute its code.
 
 V8 → Chrome, Opera, Edge (new)

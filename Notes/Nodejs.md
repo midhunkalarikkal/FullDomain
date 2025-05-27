@@ -1,6 +1,6 @@
 ## `Node.js` ##
 ================
-- Node.js is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. 
+- Node.js is a `cross-platform`, `open-source` JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. 
 - Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside of a web browser.
 
 installing using `nvm` is a node version manager
@@ -66,7 +66,7 @@ v8 for chrome
 spider monkey for firefox
 chakra for edge
 
-js code ---->  c++ code ------> machine code --------> assembly code ---------> binary
+js code ---->  c++ code ------> assembly code --------> machine code ---------> binary
 
 
 Steps inside the v8 engine
@@ -166,7 +166,7 @@ Read, Evaluate, Print, Loop
 Quickest way of runnig nodejs code
 A REPL is an interactive programming environment that allows users to enter and execute code one line at a time.
 
-type node in command line for activate repl
+type `node` in command line for activate repl
 special comands :- .help , .break , .clear
 Auto completion :- Pressing the tab key can autocomplete the names of functions , varialbles and modules
 
@@ -195,7 +195,9 @@ To standardize how the global object is accessed across different runtimes (Node
 
 ## `Module` ##
 ==============
-In Node.js, each module is wrapped in a function when executed.This is an IIFE function. This design ensures that the variables and functions defined inside the module are private to that module and not accessible from other modules unless explicitly exported.
+In Node.js, each module is wrapped in a function when executed.This is an IIFE function. 
+
+This IIFE function makes the variables and functions private to the scope of the module itself and not accessible from other modules unless explicitly exported.
 
 When a Node.js module is executed, it is wrapped in a function like this internally
 
@@ -225,7 +227,7 @@ the protection will help to reuse the variable and function names in another mod
 
 We need to export the variables and function from a module import it in the another module for using it.
 
-Whenever the require function will call it will wrap the module inside a IIFE function and then pass it to the v8 engine.
+Whenever the require function will call a module it will wrap the module inside an IIFE function and then pass it to the v8 engine.
 
 `Five steps for require('/path') to work`
 -----------------------------------------
@@ -260,12 +262,30 @@ module.exports = {variable, function}
 
 ## `CommonJs module (cjs)` common js module system ##
 ==========================================================
-Older way, synchronous and the code is running in non strict mode
-in non strict mode we can declare variables without var, let or const
-while importing a module it is not necessary to specify the .js extension for the importing file in common js module
+`Older Module System`
+Used primarily in Node.js before ES6 modules were introduced.
 
-the moduel.exports is an empty object by default
-By default the module is common js module
+`Synchronous Loading`
+Modules are loaded synchronously, making it suitable for server-side but not ideal for the browser without bundlers.
+
+`Non-strict Mode by Default`
+Runs in non-strict mode, so:
+We can accidentally declare variables without var, let, or const.
+
+`File Extension Not Required`
+When importing, .js extension is optional:
+```js
+const user = require('./user'); // no .js needed
+```
+
+`module.exports Defaults to Empty Object`
+module.exports starts as an empty object, and we attach our exports to it:
+```js
+module.exports.name = 'Midhun';
+```
+
+`Default in Node.js`
+If no module system is specified in package.json, Node.js treats files as CommonJS by default.
 
 ```js
 module.exports = sum; // Single export
@@ -286,41 +306,64 @@ object.Multiply
 
 ## `ES modules (mjs)` es module system ##
 ===============================================
-Newer way asynchronous and the code running in strict mode
-in strict mode we cant decalre variable without var, let or const
-while importing a module we need to specify the .js file extension of the file in es modules
+`Newer, Modern Module System`
+Introduced in ES6, now widely supported in browsers and Node.js (with configuration).
 
-For making the module ES module we need to specify the module in the package.json
+`Asynchronous Loading`
+ES Modules are loaded asynchronously, making them suitable for both client-side and server-side.
 
+`Strict Mode by Default`
+All ES Modules run in strict mode, so:
+You cannot declare variables without var, let, or const.
+
+`File Extension is Required`
+When importing, you must include the .js extension:
+```js
+import { sum } from './utils.js';
+```
+
+`Enable ESM in Node.js`
+In Node.js, set the type to module in package.json:
 ```js
 {
   "type" : "module"
 }
 ```
-and for exporting we can use the export keyword directly with variables and functions
 
-`named export`
+`Exporting in ES Modules`
+
+Named Export – export individual items:
 ```js
- export function sum(a,b){
-  console.log("Sum is : ",a+b);
- }
+export function sum(a, b) {
+  console.log("Sum is:", a + b);
+}
 ```
-and for importing we need to use the import keyword
-
-`named import`
+Default Export – export one main item:
 ```js
-import {sum} from './path';
-```
-
-`default export`
-```js
-export default  { function, variable }
+const utils = { sum, multiply };
+export default utils;
 ```
 
-`default import`
+`Importing in ES Modules`
+
+Named Import:
 ```js
-import defaultFunc from './module.js';
+import { sum } from './utils.js';
 ```
+Default Import:
+```js
+import utils from './utils.js';
+```
+
+`Core Difference: Named Export vs Default Export`
+
+| Feature                           | **Named Export**                                           | **Default Export**                                                    |
+| --------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Name Binding**                  | Must use **exact same name** as exported                   | Can use **any name** while importing                                  |
+| **Number of Exports per File**    | Can export **multiple named items**                        | Only **one default export** per file                                  |
+| **Auto-import (in some editors)** | Suggests exact names                                       | May import with a generic name                                        |
+| **Use Case**                      | Best when exporting **multiple things** (utils, constants) | Best when exporting **one main thing** (React component, class, etc.) |
+
 
 
 
@@ -341,12 +384,10 @@ the main advantage of this method is that we can encapsulate the modules and the
 ==============
 It is a cross platform  open source library written in c , handles asynchronous non blocking  operations in node js using thread pool and event loop
 
-+-----------node.js-----------+
-| +-----------+   +---------+ |
-| | V8 Engine |   |  libuv  | |
-| +-----------+   +---------+ |
-|  https fs crypto etc..      |
-+-----------------------------+
++------------------------------+
+|            Node.js           |
+|  (libuv + V8 + bindings)     |
++------------------------------+
 
 `Synchronous means`
   JavaScript executes code line by line in the order it appears.
@@ -373,7 +414,7 @@ It is a cross platform  open source library written in c , handles asynchronous 
 - So js engine works only in synchronous format, and the node js need to gain access to file, db, web, timers and etc.... and these are controlled by OS itself So here we need a `super power` to make the js engine asynchronous and make access to these things here the `LIBUV` comes 
 
 - So whatever asynchronous task the js engine need to do it will offload those tasks to the LIBUV and the LIBUV will make it possible
-- libuv is a multi-platform C library that provides support for asynchronous I/O based on event loops. It is written in c.
+- libuv is a cross-platform C library that provides support for asynchronous I/O based on event loops.
 - libuv is a dependency inside the nodejs like v8
 
 ## Example
@@ -415,14 +456,17 @@ console.log(c);
 The variables a and b, along with their primitive values (100 and 200), are stored in the stack because they are simple, fixed-size data types.
 
 `HTTP Request (https.get)`
-When the JavaScript engine encounters the asynchronous fetch request using https.get, it offloads this task to libuv (the underlying library for handling async I/O in Node.js).
-libuv registers the HTTP request with its callback function (let’s call it Callback A) and continues executing other code. The Callback A is saved in the Node.js Event Loop queue, waiting for the request to complete.
+When the JavaScript engine encounters the asynchronous fetch request using https.get, it offloads this task to libuv 
+
+libuv registers the HTTP request with its callback function (let’s call it Callback A) and continues executing other code.
+
+The callback (Callback A) from the https.get (which internally uses libuv for I/O) is queued in the macrotask queue (also called the callback queue or task queue) once the I/O operation completes.
 
 `setTimeout`
-The setTimeout function is also handed off to libuv with its delay timer of 5000 milliseconds. The callback (let’s call it Callback B) is registered in libuv, which will move it to the Event Loop queue once the timer completes.
+"The setTimeout callback (Callback B) is registered in libuv with the timer, and once the 5000ms delay elapses, libuv moves Callback B to the macrotask queue (part of the Event Loop), waiting to be executed."
 
 `File Read (fs.readFile)`
-The file-reading operation is offloaded to libuv, and its associated callback (let’s call it Callback C) is registered. Once the file is read, the data is passed back to the Event Loop.
+The file-reading operation is offloaded to libuv, and its associated callback (Callback C) is registered. Once the file is read, libuv places Callback C into the macrotask queue.
 
 `If we use readFileSync it will block the main thread`
 
@@ -438,10 +482,13 @@ The variable c is assigned the value of result, and this assignment is stored in
 The value of c (stored in the stack) is printed to the console.
 
 `Asynchronous Callbacks`
-When the file read or HTTP fetch operation is completed:
-The Event Loop moves the corresponding callback (Callback A, Callback B, or Callback C) into the call stack.
-A new execution context is created for that callback, and the code within the callback is executed.
-After execution, the execution context is removed from the call stack.
+libuv finishes the async task (like fs.readFile or https.get) and pushes the corresponding callback (Callback A, Callback B, or Callback C) into the macrotask queue.
+The Event Loop continuously checks if the call stack is empty. Once it is:
+It removes one callback at a time from the macrotask queue.
+For each callback, it creates a new Execution Context and pushes it onto the Call Stack.
+Inside this new execution context:
+The code of the callback function runs.
+After execution is complete, the execution context is popped off the call stack.
 
 `Inside Libuv`
 --------------
@@ -470,9 +517,16 @@ After execution, the execution context is removed from the call stack.
 |  +-----------------------+  |
 +-----------------------------+
 
+| Queue/Type       | Description                         | Owner        |
+| ---------------- | ----------------------------------- | ------------ |
+| Macro Task Queue | setTimeout, I/O, setImmediate, etc. | libuv        |
+| Microtask Queue  | Promises, `queueMicrotask`          | V8           |
+| Next Tick Queue  | process.nextTick (Node.js-specific) | Node.js Core |
+
+
 `Callback queue`
 ----------------
-So when the js v8 engine that is main thread will offloads the synchronous task to the libuv.
+So when the js v8 engine that is main thread will offloads the asynchronous task to the libuv.
 
 libuv assigns these tasks to either:
 Thread Pool: For heavy I/O operations (e.g., file reading, database queries).
@@ -539,7 +593,7 @@ One full cycle of the event loop is known as one `tick`
 - Thread pool is a container of threads inside the libuv to run asynchronous code without blocking the main thread
 - By default the thread pool have 4 threads
 - This thead pool is known as uv_thread_pool
-- whenever an asynchronous callback comes to  libuv it will offload to thread pool and thread ppol will use a freely unoccupied thread to handle that callback and then this thread will communicate to the os for like example file system, web searching,DNS lookups, crypto tasks etc...
+- whenever an asynchronous callback comes to  libuv it will offload to thread pool and thread pool will use a freely unoccupied thread to handle that callback and then this thread will communicate to the os for like example file system, web searching,DNS lookups, crypto tasks etc...
 - so when more than 4 asynchronous code comes to thread pool the fifth asynchronus code need to wait for to gain a freely unoccupied thread to run.
 - we can also update the thread pool size using
 ```js
@@ -561,13 +615,19 @@ Epoll is a scalable I/O event notification system at the kernel level.
 It can handle multiple socket descriptors at once efficiently.
 
 `Epoll and Libuv`
-Epoll communicates with libuv, which monitors I/O events in its poll phase.
-When an event occurs, libuv sends a callback to the event loop.
-The event loop processes it, and the code runs using the V8 engine.
-The epoll mechanism in Linux internally uses a red-black tree and a linked list as its primary data structures to manage and monitor file descriptors
+epoll is a scalable I/O event notification mechanism used by Linux.
+libuv uses epoll (on Linux) in its poll phase to efficiently monitor file descriptors for I/O readiness.
+When an I/O event is detected (e.g., socket ready to read), epoll notifies libuv.
+libuv then queues the corresponding callback.
+The Node.js Event Loop picks up the callback and pushes it to the call stack for execution.
+The code is then executed by the V8 JavaScript engine.
+Internally, epoll uses a red-black tree to manage registered file descriptors and a linked list to track ready events.
 
 `Like epoll in linux in windows it have i/o completion port iocp`
-                        
+
+
+
+
 
 ## `Server creation` ##
 =======================
@@ -619,7 +679,7 @@ The res.end() method is part of the Response Object in Node.js (not specific to 
 ----------------
 res.locals is a temporary storage object in Express that is specific to a single HTTP request. It is available throughout the lifecycle of the request and is cleared once the response is sent.
 
-It is often used in middleware to store data that you want to pass to templates (like EJS or Pug or Handlebars) or make available to the next middleware or route handler.
+It is often used in middleware to store data that we want to pass to templates (like EJS or Pug or Handlebars) or make available to the next middleware or route handler.
 
 `res.json()` -> Sends a JSON response to the client.
 `res.status()`-> Sets the HTTP status code for the response.
@@ -667,10 +727,10 @@ URL: /user/123/john → Matched. userId = 123, name = john.
 URL: /user/456/jane → Matched. userId = 456, name = jane.
 URL: /user/123 → Not matched.
 
-
 `req.params`
 --------------
-Path parameters are segments of a URL path that are used to pass data to the server as part of the URL's path. They are typically used to identify a specific resource or endpoint.
+Path parameters are segments of a URL path that are used to pass data to the server as part of the URL's path.
+They are typically used to identify a specific resource or endpoint.
 
 Extracts route parameters defined by :placeholder in the URL path.
 
@@ -688,7 +748,8 @@ Use Case: For mandatory dynamic parts of the URL.
 
 `req.query`
 -------------
-Query parameters are appended to the end of a URL after a question mark (?) and are used to send additional data to the server. They consist of key-value pairs separated by ampersands (&). Query parameters are typically used for filtering, sorting, or specifying additional options.
+Query parameters are appended to the end of a URL after a question mark (?) and are used to send additional data to the server. They consist of key-value pairs separated by ampersands (&).
+Query parameters are typically used for filtering, sorting, or specifying additional options.
 
 Extracts query string parameters from the URL, which appear after ?.
 
@@ -713,7 +774,7 @@ A Route Handler is the server-side code (typically a function) that processes an
 if we not send any response back like example `res.send()` the request handler will be like a loop sending request
 
 `How It Works`
-It receives an HTTP request (from the client), analyzes it, and decides what to do with it.
+It receives a HTTP request (from the client), analyzes it, and decides what to do with it.
 It can read the request's URI, headers, query parameters, route parameters, or body to take appropriate actions.
 It sends back a response to the client.
 
@@ -731,10 +792,10 @@ app.use((req,res)=>{
 
 `Explicit Path-Specific Handler`
 ---------------------------------
-In Express, a route defined with / acts as a catch-all (or a default handler) for any path, because / matches every route as a prefix.
+In Express, a route defined with `/` acts as a catch-all (or a default handler) for any path, because `/` matches every route as a prefix.
 
-If this is the first handler in your server and you define more specific route handlers later (e.g., /about, /contact), they won’t execute.
-This happens because the / path matches any route that begins with /, which includes all other routes.
+If this is the first handler in our server and we define more specific route handlers later (e.g., /about, /contact), they won’t execute.
+This happens because the `/` path matches any route that begins with `/`, which includes all other routes.
 ```js
 app.use("/",(req,res)=>{
     res.send('Hello from dashboard');
@@ -765,26 +826,31 @@ In this case
 - here we have two response but only the first callback functions response will work and we will get an error because `The server can only send a single response to a single url then if we try to send a second response it will throw an error`
 ` Here the control will go to the next function after executing the first one but the second callback functions console will only work
 - If there are multiple callback functions, we can wrap those callbacks inside an array, or we can wrap a specific set of callback functions.
+
+`but in this the first route handler is sending the response with res.write it will also run the res.send method from the second route handler`
+
 ```js
 app.get('/user',(err,req,res,next) => {
     console.log("First callback");
     res.send("Response from first callback");
     next();
 },(err,req,res) => {
-    console.log("Second callback");
+    console.log("Second callback");  // console will work but after this we will get an error
     res.send("Response from second callback");
 })
 ```
 or
 ```js
-app.get('/user',(err,req,res,next) => {
+app.get('/user',
+  (req, res, next) => {
     console.log("First callback");
     next();
-})
-app.get('/user',(err,req,res,next) => {
-    console.log("First callback");
-    res.send("Response from first callback");
-})
+  },
+  (req, res) => {
+    console.log("Second callback");
+    res.send("Response from second callback");
+  }
+);
 ```
 
 `So why there is this mutiple route handler code, the answer is middlewares`
@@ -799,7 +865,7 @@ If a request route comes to express js it will execute the code from top to bott
 
 ## `Middlewares` ##
 =====================
-In Express.js, a middleware is a function that executes during the lifecycle of a request to the server. Middleware functions have access to the request (req), response (res), and the next middleware in the application’s request-response cycle.
+In Express.js, a middleware is a function that executes during the request-response cycle. Middleware functions have access to the request (req), response (res), and the next() function, which passes control to the next middleware or route handler. They are used to perform operations such as logging, authentication, parsing request bodies, handling errors, or modifying requests and responses before they reach the final route handler.
 ```js
 app.use((req, res, next) => {
     // Middleware logic
@@ -814,9 +880,23 @@ app.use((req, res, next) => {
 That are bound to the entire application and are executed on every incoming request
 Example :- Body parsing middleware
 
+```js
+// Body parsing middleware (application-level)
+app.use(express.json()); // To parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // To parse URL-encoded form data
+```
+
 2. Router level middleware
 -----------------------------
  bound to a specific router instance using router.use().
+
+ ```js
+ // Router-level middleware
+userRouter.use((req, res, next) => {
+  console.log('Router middleware called for /users');
+  next(); // Move to next middleware or route
+});
+ ```
 
 3. Error handling middleware
 -------------------------------
@@ -846,14 +926,18 @@ This middleware is used to parse incoming requests with URL-encoded payloads, ty
 express.urlencoded() is for URL-encoded form data.
 
 
+
+
+
 ## `Dynamic routing` ##
 ==========================
-dynamic routing in Node.js allows you to handle different kinds of requests by capturing and using values from the URL. 
-
+Dynamic routing refers to defining routes where part of the URL is a variable, allowing you to handle requests for multiple resources using a single route handler.
+```js
 app.get('/profile/:username', (req, res) => {
   const username = req.params.username;
   res.send(`User Profile for ${username}`);
 });
+```
 
 
 
@@ -887,8 +971,8 @@ Server
 
 
 
-CORS
------
+## `CORS` ##
+==============
 Cross origin resource sharing
 CORS is a security feature implemented by web browsers to control how web pages in one domain can request and interact with resources hosted on another domain.
 
@@ -897,71 +981,92 @@ then a option acknowledgment from server to client
 
 The preflight request is an OPTIONS request that includes information about the actual request the browser wants to make.
 
-Cookie
-------
-Cookies are small pieces of data stored on the client-side
-They are primarily used for tracking user information, session management, and storing user preferences.
-Cookies are sent from the server and stored on the client side.
-They are included in the HTTP headers of requests and responses.
-Cookies are limited in size and have an expiration time 
 
-Session
--------
-A session is a mechanism used to store data about a user or client during their interaction with a server. It helps track user information across multiple requests within a specific time frame.
 
-Sessions can be stored in different places depending on how we configure our application. By default, sessions are server-side data, but the session ID is typically stored client-side in a cookie to identify the session on subsequent requests.
 
-express-session
----------------
-This middleware manages sessions in Express.js applications.
 
-secret
-------
-A session secret is a cryptographic key used to sign and verify the session ID stored in the cookie. It ensures that the session ID cookie hasn't been tampered with by malicious users.
+## `Cookie` ##
+================
+- Cookies are small pieces of data stored on the client-side
+- managed by `cookie-parser`
+- They are primarily used for tracking user information, session management, and storing - user preferences.
+- Cookies are sent from the server and stored on the client side.
+- They are included in the HTTP headers of requests and responses.
+- Cookies do not have an expiration time by default unless we explicitly set it using the expires or maxAge field.
+- If no expiration time is set, the cookie is considered a session cookie and will be deleted when the browser or tab is closed.
+- Cookies are limited in size to 4kb.
+- Most browsers limit a site to around 20–50 cookies.
 
-resave
-------
-When set to true, it forces the session to be saved back to the session store, even if the session data was not modified during the request.
 
-saveuninitialized
------------------
-A session is "uninitialized" if it is new and no data has been added to it yet.
-When saveUninitialized is true ->
-Even if the session is empty (has no data), it will still be saved in the session store
 
-Cache
------
+
+
+## `Session` ##
+==================
+- A session is a way to store user-specific data on the server between multiple requests from the same client.
+- Managed using libraries like `express-session`
+- It helps in maintaining state in stateless HTTP protocol (e.g., tracking logged-in users).
+- Session data is stored on the server, while the session ID is stored on the client (usually in a cookie).
+- On every request, the client sends the session ID, allowing the server to fetch the corresponding session data.
+- Sessions can store any kind of user-related information — like login status, cart contents, preferences, etc.
+- By default, sessions are stored in server memory, but in production they are usually stored in databases (Redis, MongoDB, etc.) for scalability and persistence.
+- Sessions have an expiration time and can be configured to expire after a period of inactivity.
+- Sessions are more secure than cookies alone, as sensitive data is not exposed to the client.
+```js
+app.use(session(
+  {
+  secret: 'your-secret-key',           // used to sign the session ID cookie
+  resave: false,                       // don't save session if unmodified
+  saveUninitialized: true,            // save new sessions that are uninitialized
+  cookie: { maxAge: 60000 }           // session expires after 1 minute (in ms)
+},
+rolling: true // Resets the cookie maxAge on every request (i.e., tracks inactivity)
+));
+```
+- The `secret` A session secret is a cryptographic key used to sign and verify the session ID stored in the cookie. It ensures that the session ID cookie hasn't been tampered with by malicious users.
+- The `resave`, if it is `false` If the session was not changed during the request, do not save it again to the session store.
+- The `saveUninitialized`,  A new session will not be saved to the session store unless something is added to req.session
+
+
+
+
+
+## `Cache` ##
+==============
 Caching is a mechanism used to store copies of resources (like web pages, images, or stylesheets) on either the client side or intermediary servers (such as proxies or content delivery networks) to reduce latency and server load.
-Cache's have a various size and the lifespan is depends upon the cache control headers
 
-client side
-server side
-application
-cdn
-object
-database
+- Cache's have a various size and the lifespan is depends upon the cache control headers
+- Types are :- client side, server side, application, proxy, cdn, object, database
 
-Core modules
-------------
+
+
+
+
+## `Modules` ##
+================
+`Core modules`
+---------------
 These are modules that come pre-installed with Node.js and are part of its core. They are tightly integrated into Node.js and do not require installation.
 Examples: fs, path, http, os, url
 
-External modules
-----------------
+`External modules`
+-------------------
 External modules are third party modules that we can install using npm
 
-CLI
----
-A CLI (Command Line Interface) is a text-based tool where we can type commands to interact with our computer or software. In Node.js, you can use the CLI to run scripts, start server applications, and perform tasks directly in the terminal or console.
+## `CLI` ##
+==============
+A CLI (Command Line Interface) is a text-based tool where we can type commands to interact with our computer or software. In Node.js, we can use the CLI to run scripts, start server applications, and perform tasks directly in the terminal or console.
+Used for:
 
-Global
-------
-------
-Global variables
+- Running full programs.
+- Managing packages.
+- Interacting with tools like Git, Node.js, etc.
+
+
 
 global
 ------
-Any variable or function declared without the var, let, or const keyword becomes a property of the global object.
+If we declare a variable or function without var, let, or const, and not in strict mode, it becomes a property of the global object.
 
 `_dirname` -> is a global variable that Represents the absolute directory path of the current module.
 `_filename` -> is a global variable that Represents the absolute file path of the current module.
@@ -971,6 +1076,7 @@ Any variable or function declared without the var, let, or const keyword becomes
 `global` -> Represents the global object in Node.js, similar to window in browsers.
 `buffer` -> Used to handle binary data.
 `Process` -> It is a global object that provides information about the current Node.js process.
+
 
 
 
@@ -1048,6 +1154,10 @@ fs.writeFile('example.txt', 'Hello, World!', 'utf-8', (error) => {
 });
 ```
 
+
+
+
+
 ## `Util` ##
 =============
 Util is a module that provides utility functions
@@ -1097,6 +1207,10 @@ const readFile = util.promisify(fs.readFile);
 })();
 ```
 
+
+
+
+
 ## `Event` ##
 ====================
 The events module in Node.js provides an EventEmitter class, which helps us handle events and event listeners.
@@ -1120,6 +1234,10 @@ myEmitter.on('myEvent', (arg1, arg2) => {
 myEmitter.emit('myEvent', 'First Argument', 'Second Argument');
 ```
 
+
+
+
+
 ## `Path` ##
 ===================
 join
@@ -1141,8 +1259,12 @@ The resolve() method resolves a sequence of path segments into an absolute path 
 
 path.resolve('folder', 'subfolder', 'file.txt');
 
-API
----
+
+
+
+
+## `API` ##
+=============
 An API (Application Programming Interface) is a way for one system to interact with another by using a set of defined rules. It allows clients (like web browsers or mobile apps) to communicate with a server to access its data or services.
 
 In Node.js, APIs are often created using frameworks like Express or the core http module.
@@ -1150,8 +1272,12 @@ APIs use protocols like HTTP/HTTPS to send and receive data.
 
 Examples are  :- Web api, library api, os api
 
-HTTP
-----
+
+
+
+
+## `HTTP` ##
+================
 A protocol used for communication between web browsers and servers over the Internet.
 It defines how messages are formatted and transmitted and the actions that web servers and browsers should take in response to various commands.
 Mthods :- Get ,  post , put , delete , patch 
