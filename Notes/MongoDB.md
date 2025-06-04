@@ -41,9 +41,9 @@ Software that interacts with end users, applications and the databse itself to c
 - Ideal for structured data, like banking apps or applications with complex relationships.
 - Examples: MySQL, PostgreSQL, Oracle.
 
-If the db folows codds 12 rule [0 - 12] then the db becomes a relational db
+If the db follows codds 12 rule [0 - 12] then the db becomes a relational db
 
-mysql [ and maxDB, mariaDB also ] is developed by micahel videnium
+mysql [ maxDB, mariaDB also ] is developed by micahel videnium
 postgresql is developed by michael stonebreaker
 
 `mysql vs postgresql`
@@ -184,7 +184,7 @@ Primary key - In MongoDB, each document (record) has a special field called "_id
 -----------------
 Secondary key - In MongoDB, secondary keys are implemented using indexes.
 
-`__v verssion`
+`__v version`
 ----------------
  __v field is a special property automatically added by Mongoose.
  When multiple operations try to update the same document simultaneously, Mongoose uses the __v field to detect conflicting modifications.
@@ -224,7 +224,7 @@ userSchema.methods.generateJWT = async function() {
 ```js
 userSchema.pre("save",function(){
    const schmea = this; // Here this is pointing the Schema;
-})
+});
 ```
 - Validate function in schema is used to velidate  specific value
 ```js
@@ -543,7 +543,7 @@ db.collectionName.updateMany(
   }
 );
 ```
-`replaceOne()` - eplaces a single document that matches the filter. Does not return the replaced document.
+`replaceOne()` - replaces a single document that matches the filter. Does not return the replaced document.
 ```js
 db.collectionName.replaceOne(
   { _id: 2 },
@@ -570,7 +570,7 @@ db.collectionName.deleteMany({ age: { $gte: 25 } });
 
 `createIndex()` - Create an index for one or more field it improves querying
 ```js
-db.collectionName.createIndex({ email : 1});
+db.collectionName.createIndex({ email : 1 });
 ```
 `createIndexes()` - It allow us to create multiple indexes on a single operation
 ```js
@@ -609,7 +609,7 @@ db.collectionName.mapReduce(
 );
 ```
 
-`remove()` - Deleting document from a collection that satisfiying the condition
+`remove()` - `deprecated` Deleting document from a collection that satisfiying the condition 
 ```js
 db.collectionName.remove( { _id : 2 } );  // remove the document which satisfies the condition
 db.collectionName.remove({}); // remove all documents
@@ -638,7 +638,7 @@ db.collectionName.bulkWrite(bulkInsertOperations);
 ```js
 db.collectionName.aggregate( [
 	{ $match : { price : {$gte : 15} } },
-	{$out : "highvalueProduct"}
+	{ $out : "highvalueProduct" }
 ])
  // If the condition is satisfied, then it will return a new collection with name "highvalueProduct"
  ```
@@ -909,7 +909,7 @@ db.collectionName.aggregate([{ $match: { age: { $gte: 25 } } }]);
 
 `$group` - Groups documents by a specified identifier
 ```js
-db.collectionName.aggregate( [ { $group : { _id : "isActive"}}]);
+db.collectionName.aggregate( [ { $group : { _id : "$isActive" }}]);
 ```
 
 `$sort` - sort the docuements
@@ -919,7 +919,7 @@ db.collectionName.aggregate( [ { $sort : { age : -1 } } ] );
 
 `$limit` - Restricts the number of documents passing through the pipeline.
 ```js
-db.collectionName.aggregate( [ { $sort : { age : -1 } },{ $limit : 1} ] );
+db.collectionName.aggregate( [ { $sort : { age : -1 } },{ $limit : 1 } ] );
 ```
 
 `$skip` - Skips a specified number of documents and passes the remaining ones.
@@ -947,8 +947,8 @@ db.collection.aggregate([
  db.collectionName.aggregation([{
   $lookup: {
     from: "targetedCollectionName",        // The target collection to join
-    localField: "fieldInThisCollection",  // Field from the current collection
-    foreignField: "fieldInTheTargetedCollection", // Field from the target collection
+    localField: "fieldFromOurCurrentCollection",  // Field from the current collection
+    foreignField: "fieldFrom fromOurTargetedCollection", // Field from the target collection
     as: "outputArray"             // The name of the array to store the matched results
   }
 }]);
@@ -964,7 +964,7 @@ db.collection.aggregate([
 db.collectionName.aggregate([
   {
     $facet: {
-      activeUsers: [{ $match: { isActive: true } }, { $count: "count" }],
+      activeUsers: [{ $match: { isActive: true } }, { $count:"count" }],
       averageAge: [{ $group: { _id: null, avgAge: { $avg: "$age" } } }]
     }
   }
@@ -1129,7 +1129,7 @@ A single MongoDB instance running without replication or sharding. It does not i
 
 ## `Journaling` ##
 =====================
- "journaling" refers to a technique used to ensure the durability and consistency of data in the face of system failures or crashes. Journaling is particularly important for databases like MongoDB to maintain data integrity and recover from unexpected events.
+ "journaling" refers to a technique used to ensure the durability and consistency of data in the face of system failures or crashes. 
 
 `Journaling Working`
 ---------------------
@@ -1310,8 +1310,7 @@ Scatter-gather is a query process where MongoDB sends a query to all shards and 
 
 ## `Covered query` ##
 =======================
-A query where all the fields in the query are covered by an index, and the index itself provides all the data 
-needed to fulfill the query. 
+A query where all the fields in the query are covered by an index, and the index itself provides all the data needed to fulfill the query. 
 
 ## `Connection mongoDB to using nodejs` ##
 ===========================================

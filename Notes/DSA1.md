@@ -25,9 +25,9 @@ Stacks: LIFO (Last In, First Out) structure where elements are added and removed
 
 Queues: FIFO (First In, First Out) structure where elements are added at the back and removed from the front.
 
-Trees: Hierarchical structure with a root element and child elements forming a tree-like pattern.
+Trees: Hierarchical data structure with a root element and child elements forming a tree-like pattern.
 
-Graphs: A set of nodes connected by edges.
+Graphs: A set of vertexes connected by edges.
 
 Hash Tables: Key-value pairs for efficient data retrieval.
 
@@ -49,18 +49,18 @@ Abstraction: Simplifies complex data relationships and operations.
 `Advantages`
 -------------
 Efficient Data Management
-Optimized Performance
+Efficient Memory Management
 Improved Code Organization
+Optimized Performance
 Scalability
-Memory Management
 
 `Disadvantages`
 ----------------
 Complexity
+Development Time
 Memory Overhead
 Performance Trade-offs
 Rigid Structure
-Development Time
 
 
 
@@ -72,26 +72,93 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 
 `Characteristics of Algorithms`
 ---------------------------------
-Well-Defined: Clear and unambiguous steps.
-Input: Zero or more inputs are provided.
-Output: Produces at least one output.
-Finiteness: Terminates after a finite number of steps.
-Feasibility: Steps are simple enough to be executed with available resources.
+- Well-Defined steps.
+- Zero or more inputs are provided.
+- Produces at least one output.
+- Terminates after a finite number of steps.
+- Steps are simple enough to be executed with available resources.
 
-`Types of Algorithms`
------------------------
-Search Algorithms: Finding elements within data structures (e.g., Binary Search).
+`Importance of Algorithms`
+----------------------------
+- Efficiency: Optimizes performance and resource usage.
+- Problem-Solving: Provides methods to tackle complex problems.
+- Predictability: Helps in estimating the performance of solutions.
+- Optimization: Improves existing solutions by refining steps and operations.
 
-Sort Algorithms: Ordering elements (e.g., Quick Sort, Merge Sort).
 
-Graph Algorithms: Working with graph structures (e.g., Dijkstra's Algorithm, A* Search).
 
-Dynamic Programming: Breaking down problems into simpler subproblems (e.g., Fibonacci Sequence).
 
-Divide and Conquer: Dividing a problem into smaller subproblems, solving them independently, and combining results (e.g., Merge Sort).
 
-Greedy Algorithms: Making the locally optimal choice at each stage (e.g., Kruskal’s Algorithm).
+## `Types of Algorithms` ##
+===========================
+1. Brute Force Algorithms  
+- Brute Force is a straightforward problem-solving approach that tries all possible solutions to find the correct one, without using any optimization or shortcuts. Simple to implement but often inefficient (especially for large inputs).
+- Examples: Linear Search, Trial Division (Prime check), Generate all subsets  
 
+2. Searching Algorithms  
+- Used to find a specific value or element from a collection or dataset.  
+- Examples: Linear Search, Binary Search, Interpolation Search  
+
+3. Sorting Algorithms  
+- Arrange data in a specific order (ascending or descending), often to prepare for searching or analysis.  
+- Examples: Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort, Heap Sort  
+
+4. Recursion  
+- A technique where a function calls itself to solve sub-problems.  
+- Examples: Factorial, Fibonacci, Tree Traversal, Tower of Hanoi  
+
+5. Divide and Conquer  
+- Break the problem into smaller sub-problems, solve them independently, and combine results.  
+- Examples: Merge Sort, Quick Sort, Binary Search, Closest Pair of Points  
+
+6. Greedy Algorithms  
+- A class of algorithms that make locally optimal choices at each step with the hope of finding a global optimum solution.
+- At every step of the algorithm, we make a choice that looks the best at the moment. To make the choice, we sometimes sort the array so that we can always get the next optimal choice quickly. We sometimes also use a priority queue to get the next optimal item.
+- After making a choice, we check for constraints (if there are any) and keep picking until we find the solution.
+- Examples: Activity Selection, Fractional Knapsack, Kruskal’s MST, Prim’s MST, Huffman Coding  
+
+7. Backtracking  
+- Builds the solution step-by-step and abandons a path (backtracks) when it doesn’t satisfy constraints.  
+- Examples: N-Queens, Sudoku Solver, Rat in a Maze, Subset Sum, Permutations  
+
+8. Dynamic Programming (DP)  
+- Solve complex problems by breaking them into overlapping sub-problems and storing solutions.  
+- Examples: Fibonacci (Memoization), 0/1 Knapsack, LCS, Edit Distance, Coin Change, Matrix Chain Multiplication  
+
+9. Bit Manipulation  
+- Operate on binary representations of numbers to optimize time and space.  
+- Examples: Check power of 2, Count set bits, XOR operations, Find unique element, Swap without temp  
+
+10. Graph Algorithms  
+- Used for problems involving nodes and edges — relationships, paths, connectivity.  
+- Examples: BFS, DFS, Dijkstra’s Algorithm, Bellman-Ford, Topological Sort, Kruskal’s and Prim’s  
+
+11. String Algorithms  
+- Used for pattern matching, string manipulation, and compression.  
+- Examples: KMP, Rabin-Karp, Z-Algorithm, Longest Palindromic Substring, Trie  
+
+12. Randomized Algorithms  
+- Use random input or choices during execution to achieve simplicity or better performance.  
+- Examples: Randomized Quick Sort, Monte Carlo Method, Reservoir Sampling, Miller-Rabin  
+
+13. Hashing Algorithms  
+- Convert data into a fixed-size hash to allow fast lookup, insert, and delete.  
+- Examples: Hash Maps, Hash Tables, Collision Handling, Anagram Grouping  
+
+14. Geometry Algorithms  
+- Used in problems involving 2D/3D space, shapes, and coordinates.  
+- Examples: Convex Hull, Closest Pair of Points, Line Intersection, Area of Polygon  
+
+15. Machine Learning Algorithms  
+- Used for predictions, classifications, and clustering based on data patterns.  
+- Examples: Linear Regression, Decision Trees, K-Means Clustering, Naive Bayes, Neural Networks  
+
+
+
+
+
+## `Searching` ##
+==================
 `Linear search`
 -----------------
 Iterates through each element in an array sequentially
@@ -102,13 +169,6 @@ Linear search works efficiently on both sorted and unsorted array
 -----------------
 Requires the array to be sorted. It repeatedly divides the search interval in half by comparing the middle element with the target value. Depending on the comparison, it eliminates half of the remaining elements from consideration.
 Binary search operates with a time complexity of O(log n)
-
-`Importance of Algorithms`
-----------------------------
-Efficiency: Optimizes performance and resource usage.
-Problem-Solving: Provides methods to tackle complex problems.
-Predictability: Helps in estimating the performance of solutions.
-Optimization: Improves existing solutions by refining steps and operations.
 
 
 
@@ -138,7 +198,7 @@ Memory Usage :- Recursive solutions often use more memory due to the additional 
 
 
 
-## `Iterative vs Recursion` ##
+## `Iterative` vs `Recursion` ##
 ================================
 `Definition`
 --------------
@@ -199,7 +259,7 @@ The Bottom-Up Approach in dynamic programming involves solving smaller subproble
 ============================
 Memory allocation is the process of reserving a portion of memory within a computer program for storing data and instructions.
 
-`Bit vs Byte`
+`Bit` vs `Byte`
 ---------------
 Bit :-
  The smallest unit of data in a computer, representing a binary value of 0 or 1.
@@ -239,7 +299,7 @@ Provides flexibility to allocate and deallocate memory as needed.
 
 
 
-## `Heap vs. Stack Memory` ##
+## `Heap` vs `Stack Memory` ##
 ==============================
 `Heap Memory`
 --------------
@@ -300,20 +360,6 @@ Smart Pointers: Using smart pointers in languages like C++ (e.g., std::shared_pt
 Garbage Collection: Using languages with automatic garbage collection (e.g., Java, Python) which handle memory deallocation automatically.
 
 Regular Testing: Regularly running tests to check for memory leaks during development.
-
-
-
-
-
-## `Garbage collection` ##
-============================
-`Mark Phase`
--------------
-The garbage collector identifies all objects that are still reachable or in use by traversing from the "roots" (like global variables and function scopes). These objects are marked as active.
-
-`Sweep Phase`
---------------
-After marking, the garbage collector scans through the memory and removes objects that were not marked, freeing up space for future use.
 
 
 
@@ -708,7 +754,7 @@ Difficulties with Reverse Traversal (in singly linked lists)
 
 
 
-## `Array vs Set` ##
+## `Array` vs `Set` ##
 ======================
 `Array`
 -------
@@ -730,7 +776,7 @@ Common Methods: add, delete, has, clear.
 
 
 
-## `Object vs Map` ##
+## `Object` vs `Map` ##
 =======================
 `Object`
 -------

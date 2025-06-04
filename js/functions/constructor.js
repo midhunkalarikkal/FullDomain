@@ -1,11 +1,12 @@
-function print(a){
-    console.log(a)
-}
-
-function Animal(name){
+function Person (name, age) {
     this.name = name;
-    print(name);
+    this.age = age;
+
+    this.fullname = function () {
+        console.log(`${this.name}`)
+    }
 }
 
-
-const one = new Animal("lion");
+const userOne = new Person("Tom", 22);
+console.log(userOne)
+userOne.fullname();

@@ -478,6 +478,10 @@ Immediately Invoked Function Expression, is a JavaScript function that is define
 (function(x){
 	code
 })()
+
+(() => {
+  console.log("IIFE arrow function");
+})()
 ```
 
 It creates a new scope , avoid polluting global scope
@@ -559,15 +563,6 @@ const functionsArray = [
 console.log(functionsArray[0](3)); // 4
 ```
 
-`Contructor function`
-----------------------
-```js
-function Dog(name) {
-  this.name = name;
-}
-```
-it uses new keyword to create its instance
-
 `Factory function`
 -------------------
 Factory function is a function in javascript it returns an object
@@ -584,6 +579,23 @@ it modifies the external state (result variable) as a side effect.
 `Default parameters`
 ---------------------
 Default parameters in JavaScript allow you to assign default values to function parameters. If a parameter is not provided when the function invokation, the default value will be used.
+
+# `Contructor or constructor function`
+---------------------------------------
+A constructor is a special function used to create and initialize objects.
+
+When called with the new keyword, it sets up a new object with properties and methods defined inside the constructor.
+```js
+function Dog(name) {
+  this.name = name;
+}
+```
+it uses new keyword to create its instance
+
+`type of constructor`
+Default constructor :- normal constrcutor function without any parameters
+Parameterized constructor : - constructor function with parameter
+Constructor in ES6 class syntax :-In ES6 classes, the constructor keyword is mandatory to define the constructor method.
 
 
 
@@ -956,9 +968,9 @@ greet.apply(person, ['Hello', 'How are you?']); // Outputs: Hello, How are you?,
 
 `Bind()`
 --------
-The bind method is similar to the call method in that both are used to explicitly set the value of this for a function.
-bind does not immediately invoke the function. Instead, it returns a new copy of the function
-
+- The bind method is similar to the call method in that both are used to explicitly set the value of this for a function.
+- bind does not immediately invoke the function. Instead, it returns a new copy of the function
+- It returns a new function with this permanently bound to the object you pass.You can optionally pass arguments, just like call().
 ```js
 function greet(message) {
   console.log(`${message}, ${this.name}`);
@@ -968,7 +980,28 @@ const person = { name: 'John' };
 
 const greetJohn = greet.bind(person);
 greetJohn('Hi'); // Outputs: Hi, John
+
+const object1 = {
+    name: "Midhun",
+    question: "How Are You ?",
+    greet: function() {
+        return `Hi ${this.name} ${this.question}`;
+    }
+};
+
+const object2 = {
+    name: "Tom",
+    question: "Where are you?",
+};
+
+const bindResult = object1.greet.bind(object2);
+console.log(bindResult());
 ```
+
+- if the function is an arrow function the `this` will be undefined because ther is not this for the arrow function
+- they inherit this from the parent scope where they are defined (i.e., outside object1).
+- So this.name and this.question refer to the global scope (or undefined in strict mode), not object1.
+
 
 
 
@@ -1846,11 +1879,24 @@ console.log(add(1)(2)(3)) // 6
 
 ## `Promises` ##
 ====================
-A Promise is an object representing the eventual completion or failure of an asynchronous operation and its resulting value. It allows you to write more readable and manageable asynchronous code compared to traditional callback-based approaches.
+- A Promise is an object representing the eventual completion or failure of an asynchronous operation and its resulting value. 
+- It allows you to write more readable and manageable asynchronous code compared to traditional callback-based approaches.
 
+`parameters`
+resolve: a function you call when the async task succeeds
+reject: a function you call when the async task fails
+
+`states`
 Pending: The initial state; the promise is neither fulfilled nor rejected.
 Resolved: The operation completed successfully, and the promise has a resulting value.
 Rejected: The operation failed, and the promise has a reason for the failure.
+
+It returns a Promise object. we can use :
+.then() — to handle success
+.catch() — to handle error
+.finally() — to run after either success or failure
+
+Or use async await with try catch blocks
 
 `Creating a promise`
 ---------------------
@@ -1887,13 +1933,13 @@ State Management: Promises clearly define states (pending, resolved, rejected), 
 
 `Promise chaining`
 -------------------
-Promise chaining in JavaScript is a technique where you chain multiple asynchronous operations using promises to make the code more readable and maintainable. Each .then() or .catch() block returns a new promise, allowing subsequent asynchronous operations to be executed in a sequence
+Promise chaining in JavaScript is a technique where you chain multiple asynchronous operations using promises to make the code more readable and maintainable. Each .then() or .catch() block returns a new promise
 
 `Promise.all`
 --------------
 Promise.all() takes an iterable (usually an array) of promises and returns a single Promise that:
-  Resolves when all the input promises are fulfilled.
-  The resolved value is an array of results in the same order as the input.
+  Resolves when all the input promises are resolved.
+  If all the input promises resolve, returns a single promise, that single Promise resolves to an array of input promises results (in the same order).
 
   Rejects immediately if any one of the input promises is rejected.
   It will reject with the reason of the first promise that rejects.
@@ -1916,7 +1962,7 @@ Promise.allSettled is another method in JavaScript for handling multiple promise
 -------------------------
 Promise.any() takes an iterable of promises and returns a single promise that:
 
-  Resolves as soon as the first promise resolves (ignores any rejections).
+  Resolves as soon as the any first promise resolves (ignores any rejections).
   Rejects only if all promises are rejected, and it throws an AggregateError containing all rejection reasons.
 
 `Then`
@@ -2671,3 +2717,133 @@ The break statement is used to exit a loop or a switch statement immediately, re
 `continue`
 ----------
 The continue statement is used to skip the current iteration of a loop and proceed with the next iteration.
+
+## `Exceptions` ##
+=====================
+An exception is an error that occurs during the execution of a program and disrupts the normal flow of code.
+
+`Types of Errors in JavaScript:`
+
+`Syntax Error` – Mistakes in the structure of the code
+E.g.: Missing parentheses, unexpected tokens
+
+`Runtime Error (Exception)` – Errors that occur during code execution
+E.g.: Accessing undefined variables, null references
+
+`Logical Error` – Code runs, but gives incorrect output (not technically an exception)
+
+`How to Handle Exceptions`
+JavaScript provides try...catch...finally blocks to handle exceptions.
+```js
+try {
+  // Code that might throw an error
+} catch (error) {
+  // Code that runs if there’s an error
+} finally {
+  // Optional: runs always, error or not
+}
+```
+
+`When an exception is thrown`, JavaScript creates an Error object containing:
+
+name (type of error)
+message (details of the error)
+stack (where the error occurred)
+
+`we can create and throw custom errors using the throw keyword.`
+
+
+
+
+
+## `typeof vs instanceof` ##
+===============================
+`typeif`
+typeof returns a string indicating the type of a given operand.
+It works best for primitive types and functions.
+
+`instanceof`
+instanceof tests whether the prototype chain of an object includes the prototype of a constructor function.
+Checks wether the object is an instanceof constructor function
+
+You want to check if an object was created from a specific constructor
+You want to validate class instances (obj instanceof MyClass)
+```js
+object instanceof ConstructorFunction;
+
+function Person(name) {
+  this.name = name;
+}
+const user = new Person("Midhun");
+
+console.log(user instanceof Person); // true
+console.log(user instanceof Object); // true
+```
+
+
+
+
+
+## `jwt` ##
+=============
+- JWT (JSON Web Token) is an open standard (RFC 7519) used to securely transmit information between two parties (typically client and server) as a JSON object.
+This information can be verified and trusted because it's digitally signed.
+- Size of the data is maximum 8kb, Recommended 1kb to 3kb
+- JWTs are commonly used for authentication and authorization in web applications.
+
+`JWT Structure`
+xxxxx.yyyyy.zzzzz
+ ↑      ↑      ↑
+Header  Payload Signature
+
+1. `Header`
+The header typically consists of two parts
+Base64-encoded to form the first part of the JWT.
+```js
+{
+  "alg": "HS256",       // algorithm used (e.g., HMAC SHA256)
+  "typ": "JWT"          // token type
+}
+```
+2. `Payload`
+The payload contains the actual data or claims. Claims are statements about an entity (usually the user) and additional metadata.
+```js
+{
+  "sub": "1234567890",  // Id
+  "name": "Midhun",
+  "role": "admin",
+  "iat": 1717000000,  // issued at (timestamp)
+  "exp": 1717003600  // expires at (timestamp)
+}
+```
+3. `Signature`
+This part is used to verify that the token was not changed.
+If the token is modified, the signature won't match, and the token will be rejected.
+```js
+HMACSHA256(
+  base64UrlEncode(header) + "." + base64UrlEncode(payload),
+  secret
+)
+```
+
+## Examples ##
+
+`JWT Sign`
+```js
+const jwt = require('jsonwebtoken');
+
+const payload = { userId: 123 };
+const secret = 'yourSecretKey';
+const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+
+console.log("Token:", token);
+```
+
+```js
+try {
+  const decoded = jwt.verify(token, secret);
+  console.log("Decoded Payload:", decoded);
+} catch (err) {
+  console.error("Invalid token:", err.message);
+}
+```

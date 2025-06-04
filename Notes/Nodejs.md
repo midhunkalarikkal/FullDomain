@@ -104,6 +104,68 @@ However, there are cases where the optimized machine code becomes invalid. This 
 When such a mismatch occurs, de-optimization happens. The V8 engine discards the optimized hot code and falls back to the original bytecode, which is executed by the Ignition Interpreter. The engine can then adapt to the new input type, ensuring correct execution while trading off some performance.
 
 
+## `Core Components of Node.js Architecture` ##
+=====================================================
+`Single Thread`
+Node.js uses a single main thread for processing requests.
+This is different from multi-threaded architectures (like Java or PHP).
+
+`Event Loop`
+It’s the heart of Node.js.
+It listens for and handles incoming requests (events) asynchronously.
+
+`Event Queue`
+Stores the incoming requests (I/O tasks, API calls, etc.) that are waiting to be processed.
+
+`Worker Threads / Thread Pool (via libuv)`
+Node.js internally uses a thread pool (4 threads by default via libuv) to handle heavy asynchronous tasks (like file I/O, DNS lookups, cryptographic functions).
+
+`Callback Queue`
+Once an operation is done (e.g., file read), its callback is pushed here and eventually executed in the main thread.
+
+`V8 Engine`
+Node.js is built on Google Chrome’s V8 engine which compiles JavaScript to machine code.
+
+`libuv`
+A C library that provides Node.js the ability to perform asynchronous I/O operations.
+
+
+
+
+## `Design Patterns ` ##
+==========================
+- Design patterns in Node.js are proven solutions to common software design problems. They are structured approaches to solving challenges in coding, organization, architecture, and maintainability — especially for the larger applications.
+
+They are not specific to Node.js, but many are commonly used within Node.js apps because of its event-driven, asynchronous nature.
+
+`Use Cases`
+Makes our code scalable, readable, and reusable
+Encourages best practices and standardization
+Helps with maintaining, extending, and testing code easily
+Reduces bugs and technical debt
+
+`Common Design Patterns `
+---------------------------------
+1. Module Pattern (most widely used in Node.js)
+    Uses require() and module.exports to encapsulate functionality
+    Promotes separation of concerns
+
+2. Singleton Pattern
+    Ensures only one instance of a class/module exists.
+
+3. Factory Pattern
+    Creates objects without exposing the logic to the client.
+    Useful when multiple types of objects share a common interface.
+
+4. Observer Pattern
+    Used heavily in event-driven apps.
+    Node’s EventEmitter is a built-in example.
+
+5. Middleware Pattern (used in Express)
+    Chains functions to handle requests/responses
+    Each middleware can modify the req, res, or pass control
+    
+
 
 
 
@@ -587,6 +649,9 @@ and this is the priority order of tasks in libuv
 So if the callback queue in the libuv is empty and the call stack is empty in the v8 engine the event loop will wait at the poll phase so this is called `Semi infinite loop`.
 
 One full cycle of the event loop is known as one `tick`
+
+`Scenario`
+if there is a process.nextTick the event loop is in the poll phase and it is having multiple I/O callbacks in the poll pahse -> After this single callback finishes, Node will pause the Poll queue, drain the process.nextTick() queue, and then go back to continue with the remaining callbacks in the Poll phase.
 
 `Thread pool`
 -------------
