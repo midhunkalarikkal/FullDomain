@@ -1,18 +1,2 @@
-var isPalindrome = function(x) {
-    if(x < 0 || ( x % 10 === 0 && x > 0 )) return false;
-
-    let reversed = 0;
-
-    while(x > reversed) {
-        reversed = reversed * 10 + x % 10;
-        x = Math.floor(x / 10);
-        console.log("x : ",x);
-    }
-
-    console.log(reversed);
-    console.log(reversed / 10);
-
-    return x === reversed || x === Math.floor(reversed / 10);
-};
-
-isPalindrome(121)
+const arr = [1,2,3,4,5,6];
+console.log(arr.at(-1))

@@ -1329,26 +1329,42 @@ componentDidMount: Once the changes are determined, React updates the actual DOM
 
 
 
+## ` What is a Lifecycle Method` ##
+=====================================
+Lifecycle methods are special functions in class components that run at specific stages of a component's life — like when it's created, updated, or removed.
 
-## `Three Phases of Life Cycle` ##
-===================================
-`Mounting`
------------
-Constructor Called: The component's constructor is invoked, where initial state and bindings can be set up.
-Render Component with Dummy Data: The render method is called, and the component is rendered with initial or dummy data.
-Update the Actual DOM with Dummy Data: React updates the actual DOM to reflect the rendered output.
-componentDidMount: After the DOM updates, the componentDidMount lifecycle method is called, allowing for side effects like API calls or subscriptions.
+`Component Lifecycle Phases and Lifecycle Methods List`
+1. Mounting :- when the component is being created and added to the DOM
+- constructor()
+    Initializes state and binds methods.
+- static getDerivedStateFromProps()
+    Syncs state with props before rendering (rarely used).
+- render()
+    Returns JSX to render the UI.
+- componentDidMount()
+    Called after the component is mounted; good for API calls, DOM manipulation.
 
-`Updating`
------------
-State Update: Within the componentDidMount, if this.setState is called (possibly due to an API fetch), it triggers a re-render.
-Render with API Data: The component re-renders, now displaying the fetched API data.
-Update the DOM with API Data: React updates the actual DOM to reflect the new data.
-componentDidUpdate Called: After the DOM updates, the componentDidUpdate lifecycle method is invoked, allowing for further side effects or logic based on the updated props or state.
+2. Updating :- when the component is being re-rendered due to changes
+- static getDerivedStateFromProps()
+    Runs again if props change, to sync state.
+- shouldComponentUpdate()
+    Allows us to prevent unnecessary re-renders by returning false.
+- render()
+    Re-renders the component UI.
+- getSnapshotBeforeUpdate()
+    Captures some information from the DOM before it changes (e.g., scroll position).
+- componentDidUpdate()
+    Runs after the component updates; good for API calls based on state/prop change.
 
-`Unmounting`
--------------
-componentWillUnmount: This method is called when the component is about to be removed from the DOM. It’s the ideal place to clean up resources, such as timers, subscriptions, or event listeners, to prevent memory leaks. For example, when navigating away from a component by clicking a link, componentWillUnmount is triggered.
+3. Unmounting :- when the component is being removed from the DOM
+- componentWillUnmount()
+    Cleanup tasks like clearing timers or removing listeners.
+
+`Life cycle methods in Error Handling`
+- static getDerivedStateFromError()
+    Catches errors during rendering and updates state to show fallback UI.
+- componentDidCatch()
+    Logs error information (e.g., to an error reporting service).
 
 `Why?`
 -------
@@ -1598,8 +1614,8 @@ this.setState({ count: this.state.count + 1 }); // ✅ Use setState instead.
 
 
 
-### React Functional Component Snippets: `rafce` and `tsrafce` ###
-===================================================================
+# React Functional Component Snippets: `rafce` and `tsrafce` ###
+=================================================================
 
 ## 1. `rafce` (React Arrow Function Component Export)
 -----------------------------------------------------------
@@ -1645,87 +1661,88 @@ export default ExampleComponent;
 
 
 
-### `DYNAMIC ROUTING` ###
-==============================
+## `DYNAMIC ROUTING` ##
+========================
 Dynamic routing in React.js refers to the ability to render different components or pages based on the current URL or user input. This is often achieved using React Router, which is a popular library for handling routing in React applications.
 
-## Dynamic Route Parameters
+`Dynamic Route Parameters`
 -----------------------------
-You can create routes that accept parameters, making the route dynamic. For example, `/user/:id` will match `/user/1`, `/user/2`, etc., where `:id` is a dynamic segment.
+We can create routes that accept parameters, making the route dynamic. For example, `/user/:id` will match `/user/1`, `/user/2`, etc., where `:id` is a dynamic segment.
 
 <Route path="/user/:id" component={UserComponent} />
 
-## Accessing Route Parameter
+`Accessing Route Parameter`
 -----------------------------
-You can access dynamic route parameters using the useParams hook in the component:
+We can access dynamic route parameters using the useParams hook in the component:
 
 ```js
 const { id } = useParams();
 ```
-## Nested Routes
+`Nested Routes`
 ----------------
 Dynamic routing also supports nested routes where a route can have sub-routes based on the URL.
 
-<Route path="/category/:categoryId">
-  <CategoryComponent />
-  <Route path="/category/:categoryId/product/:productId" component={ProductComponent} />
-</Route>
-
-### `Old Way Routing` (React Router v5 and below)
--------------------------------------------------
-## Router
----------
-Definition: The Router component is a high-level component that keeps the UI in sync with the URL. It uses the browser's history API to enable navigation without page reloads.
-
-Usage: You typically use the BrowserRouter or HashRouter as the Router component, depending on how you want to manage the history.
-
-## Routes
------------
-Definition: The Routes component is a container for all the Route components. It looks through its children Route elements and matches the current location to one of them. It renders the first Route that matches the location.
-
-Usage: You use Routes to group multiple Route components.
-
-## Route
---------
-Definition: The Route component is used to define a mapping between a URL path and a component. When the app's location matches the path defined in a Route, the corresponding component will render.
-
-Usage: You specify the path prop for the URL and the element prop for the component to render.
-
 ```js
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import CategoryPage from "./CategoryPage";
+import ProductPage from "./ProductPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/user/:id" element={<User />} />
+        <Route path="/" element={<HomePage />} />
+        
+        {/* Dynamic Category Route */}
+        <Route path="/category/:categoryId" element={<CategoryPage />}>
+          
+          {/* Nested Product Route */}
+          <Route path="product/:productId" element={<ProductPage />} />
+          
+        </Route>
       </Routes>
     </Router>
   );
 }
 ```
 
-## BrowserRouter
------------------------
-This component is the top-level wrapper that enables routing in your application. It uses the HTML5 history API to keep your UI in sync with the URL.
+## `Old Way Routing` (React Router v5 and below)
+-------------------------------------------------
+`BrowserRouter` ( as alias `Router`)
+----------------------------------------
+The Router component is a high-level component that keeps the UI in sync with the URL. It uses the browser's history API to enable navigation without page reloads.
+
+`Routes`
+---------
+The Routes component is a container for all the Route components. It looks through its children Route elements and matches the current location to one of them. It renders the first Route that matches the location.
+Usage: use Routes to group multiple Route components.
+
+`Route`
+--------
+The Route component is used to define a mapping between a URL path and a component. When the app's location matches the path defined in a Route, the corresponding component will render.
+
+Usage: You specify the path prop for the URL and the element prop for the component to render.
 
 ```js
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-     return (
-         <BrowserRouter>
-             {/* Your components and routes will go here */}
-         </BrowserRouter>
-     );
- }
- ```
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/user/:id" element={<User />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
 
-## Route Switching
+`Route Switching`
 -------------------
-Using Switch in React Router ensures that only the first matched route is rendered, which is useful when you have dynamic and static routes.
+Using Switch in React Router ensures that only the first matched route is rendered, which is useful when we have dynamic and static routes.
 
 <Switch>
   <Route path="/user/:id" component={UserComponent} />
@@ -1733,32 +1750,37 @@ Using Switch in React Router ensures that only the first matched route is render
 </Switch>
 
 
-### `New Routing`
------------------
-## createBrowserRouter
------------------------
+## `New Routing` ##
+===================
+`createBrowserRouter`
+----------------------
 This function is used to create a router instance that uses the HTML5 history API to manage navigation and URL changes. It allows you to define routes in a declarative manner and supports dynamic routing.
 
-## RouterProvider
-------------------
-This component provides the router context to your application. It is used to wrap your application and pass the router instance created by createBrowserRouter. This makes routing functionalities available throughout your app.
+`RouterProvider`
+----------------
+This component provides the router context to our application. It is used to wrap our application and pass the router instance created by createBrowserRouter. This makes routing functionalities available throughout our app.
 
-## Outlet
-----------
-This component acts as a placeholder for nested routes. It allows you to render child routes inside a parent route component, enabling you to build complex layouts where specific components change based on the current route.
-
-## Link
+`Outlet`
 --------
-This component is used to create navigational links to different routes in your application. It allows users to navigate without causing a full page reload, leveraging the single-page application (SPA) behavior of React Router.
+This component act as a placeholder for nested routes. It allows you to render child routes inside a parent route component, enabling you to build complex layouts where specific components change based on the current route.
 
-## NavLink
---------------
+`Link`
+-------
+This component is used to create navigational links to different routes in our application. It allows users to navigate without causing a full page reload, leveraging the single-page application (SPA) behavior of React Router.
+
+`NavLink`
+---------
 Similar to Link, but it provides additional styling capabilities for the active link.
 
 ```js
 import { NavLink } from 'react-router-dom';
 
-<NavLink to="/about" activeClassName="active">About</NavLink>
+<NavLink
+  to="/about"
+  className={({ isActive }) => (isActive ? "text-blue-500 font-bold" : "")}
+>
+  About
+</NavLink>
 ```
 
 # Example
@@ -1807,7 +1829,7 @@ function User() {
   return <h2>User ID: {id}</h2>;
 }
 
-// Create the router with dynamic routes
+// Create the router instance with dynamic routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -1827,14 +1849,14 @@ root.render(<RouterProvider router={router} />);
 ```
 
 
-### `REACT HOOKS` ##
-=========================
-React hooks are functions that let you use state and other React features in functional components. They allow you to manage state, handle side effects, and interact with the component lifecycle without writing class components.
+## `REACT HOOKS` ##
+====================
+React hooks are special functions that let us use state and other React features in functional components. They allow us to manage state, handle side effects, and interact with the component lifecycle without writing class components.
 
-## 1 . `useState`
+1 . `useState`
 ------------------
-**Purpose:** `useState` is a hook that allows you to add state to your functional components.
-**Usage:** You can define a state variable and a function to update that state.
+**Purpose:** `useState` is a hook that is used to add state to our functional components.
+**Usage:** we can define a state variable and a function to update that state.
 
 Whenever a state variable changed the react will trigger a reconcilation cycle (re-render)
 
@@ -1855,21 +1877,21 @@ function Counter() {
   );
 }
 ```
-## 2. `useEffect`
+2. `useEffect`
 ------------------
-Purpose: useEffect is a hook that lets you perform side effects in your components, such as data fetching, subscriptions, or manual DOM manipulation.
+UseEffect is a hook that lets us to perform side effects in our components, such as data fetching, subscriptions, or manual DOM manipulation.
 
 useEffect have two arguments one is a call back function and another one is the dependency array
 So if we are using useEffect inside a component when we render the compoenent will load first and then the useEffectcallback function will call
 
-Usage: You can specify when the effect should run by providing a dependency array.
+Usage: we can specify when the useEffect should run by providing a dependency array.
 
 If no dependency array is assigned, useEffect is called on every render
-If the dependency array is an empty array, useEffect is called on inital (just once)
+If the dependency array is an empty array, useEffect is called on inital render (just once)
 If the dependency array have value like eg: a stateVariable, the useEffect is called whenever the stateVariable updated
 
 Like in the class component we use componentWillUnmount there is no method in functional compoenent but we can use a
-return inside the useEffect and this returns a an arrow function inside this arrow function we can constrol the whatever we need to stop like compoenentWillUnmount
+return inside the useEffect and this returns a an arrow function inside this arrow function we can control the whatever we need to stop like compoenentWillUnmount
 ```js
 import React, { useEffect, useState } from 'react';
 
@@ -1880,21 +1902,23 @@ function DataFetcher() {
     fetch('https://api.example.com/data')
       .then(response => response.json())
       .then(data => setData(data));
+
+      return (() => clearInterval()) // unMounting
   }, []); // Empty array means it runs once after the first render
 
   return <div>{JSON.stringify(data)}</div>;
 }
 ```
 
-## 3. `useRef`
+3. `useRef`
 ---------------
-useRef is a React hook that allows you to create a mutable object with a .current property. This is often used to:
+useRef is a React hook that allows us to create a mutable object with a .current property. This is often used to:
 
 Access a DOM element directly.
 Hold a value that doesn't cause re-renders when changed.
 
 No Re-renders: Changing ref.current does not trigger re-renders, making it suitable for performance optimization.
-Direct DOM Access: Helps you interact directly with DOM elements (e.g., focusing an input field).
+Direct DOM Access: Helps us to interact directly with DOM elements (e.g., focusing an input field).
 Preserves Value Across Renders: Keeps a mutable value that persists across re-renders without reinitialization.
 Simpler for Non-Display Logic: Perfect for use cases where the value is not directly rendered in the UI.
 
@@ -1917,11 +1941,11 @@ function TextInput() {
 }
 ```
 
-# 3.1 `forwardRef`
+3. 1. `forwardRef`
 ------------------
-forwardRef is a React function that lets you pass a ref from a parent component to a child component, allowing the parent to directly access the child’s DOM element or methods.
+forwardRef is a React hook that is used to pass a ref from a parent component to a child component, allowing the parent to directly access the child’s DOM elements or methods.
 
-# When to use forwardRef?
+`When to use forwardRef?`
 -------------------------
 Access Child DOM: When the parent needs to directly manipulate a child’s DOM element (e.g., focusing an input).
 Native DOM Manipulation: For scenarios like scrolling, focusing, or measuring an element.
@@ -1938,7 +1962,7 @@ const InputField = forwardRef((props, ref) => {
 
 // Parent component
 function App() {
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   const focusInput = () => {
     inputRef.current.focus(); // Focus the input field directly
@@ -1955,11 +1979,9 @@ function App() {
 export default App;
 ```
 
-# 3.2 `useImperativeHandle`
---------------------------
-It customizes what is exposed via the ref to a parent component. Instead of exposing the entire DOM element of the child compoenent, you can limit access to only specific methods or properties.
-
-Use Case: It is used when you need to provide custom behavior or control for a child component to the parent while keeping the implementation encapsulated.
+3. 2. `useImperativeHandle`
+----------------------------
+It is used to customizes what is exposed via the ref to a parent component. Instead of exposing the entire DOM element of the child compoenent, we can limit access to only specific methods or properties.
 
 **Example**
 ------------
@@ -1971,11 +1993,11 @@ const CustomInput = forwardRef((props, ref) => {
   const inputRef = useRef();
 
   useImperativeHandle(ref, () => ({
-    focus: () => inputRef.current.focus(), // Only expose the focus method
-    clear: () => (inputRef.current.value = ""), // Expose a clear method
+    focus: () => ref.current.focus(), // Only expose the focus method
+    clear: () => ref.current.value = "", // Expose a clear method
   }));
 
-  return <input ref={inputRef} {...props} />;
+  return <input ref={ref} {...props} />;
 });
 
 // Parent component
@@ -1995,13 +2017,14 @@ function App() {
 }
 
 export default App;
-
 ```
 
-# 3.3 `flushSync`
+3. 3. `flushSync`
 --------------------
 - flushSync forces React to apply state updates synchronously, ensuring that the DOM is updated immediately.
-- When you need an immediate visual update, such as for animations or measurements, before proceeding with other tasks.
+- Process those specific state updates immediately.
+- Synchronously update the DOM based on those updates.
+- Return control to our code only after the DOM has been fully rendered with the new state.
 
 **Example**
 -----------
@@ -2023,15 +2046,15 @@ function Counter() {
 }
 ```
 
-# 3.4 How These Work with `useRef`
+3. 4. How These Work with `useRef`
 -----------------------------------
 forwardRef: Passes down a ref from the parent to a child component.
 useImperativeHandle: Controls what part of the component is exposed to the parent through the ref.
 flushSync: Ensures immediate updates to the DOM, which can be crucial when dealing with DOM elements accessed through useRef.
 
-## 4. `useRouterError`
-----------------------
-Used to show the exact error, when we use this it will give us an object with the exact error.
+4. `useRouterError`
+-------------------
+useRouterError is a React Router hook that provides access to the error that was thrown from a React Router loader or action function, or from within a React component that's part of a route hierarchy.
 
 ```js
 import { useRouterError } from 'react-router-dom';
@@ -2046,17 +2069,17 @@ const Component = () => {
 }
 ```
 
-## 5. `usePaarams`
+5. `usePaarams`
 -------------------
-useParams is a hook provided by React Router dom that allows you to access the dynamic parameters of the current route. This is particularly useful for extracting values from the URL, such as IDs or slugs.
+useParams is a hook provided by React Router dom that allows us to access the dynamic parameters of the current route. This is particularly useful for extracting values from the URL, such as IDs or slugs.
 
-You typically use useParams inside a functional component to retrieve the parameters defined in your route configuration.
+we typically use useParams inside a functional component to retrieve the parameters defined in our route configuration.
 
-Assuming you have a route defined like this:
+Assuming we have a route defined like this:
 ```js
 <Route path="/user/:id" element={<UserComponent />} />
 ```
-In your UserComponent, you can access the id parameter using useParams
+In our UserComponent, we can access the id parameter using useParams
 ```js
 import React from 'react';
 import { useParams } from 'react-router-dom';
@@ -2075,9 +2098,9 @@ const UserComponent = () => {
 export default UserComponent;
 ```
 
-## 6. `useLayoutEffect`
+6. `useLayoutEffect`
 ------------------------
-useLayoutEffect runs synchronously after the DOM updates but before the browser paints the screen. It blocks the rendering process until the effect completes, ensuring that DOM updates are applied before the browser performs any visual painting.
+useLayoutEffect is a hook provided by react that runs synchronously after the DOM updates but before the browser paints the screen. It blocks the rendering process until the effect completes, ensuring that DOM updates are applied before the browser performs any visual painting.
 
 **Example**
 ------------
@@ -2095,65 +2118,75 @@ function Example() {
 }
 ```
 
-## 7. `useMemo`
-===============
-Use memo is a react hook that lets you cache a result of a calculation between re-renders.
+7. `useMemo`
+=============
+Use memo is a react hook that lets us cache a result of an expensive calculation between re-renders.
 It ensures that a function’s return value is only recomputed if its dependencies change.
-Use useMemo only when you notice performance issues.
+Use useMemo only when we notice performance issues.
 If the dependencies are complex objects or arrays that change frequently, the memoization might not help much.
 
 ```js
-const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+const memoizedValue = useMemo(() => {
+  computeExpensiveValue(a, b)
+  ,[a, b]});
 ```
 
-## 8. `useCallback`
-====================
-useCallback is a React Hook that memoizes a function so that it is only re-created when its dependencies change. This helps prevent unnecessary re-renders, especially when passing functions as props to child components.
-
-It’s particularly useful when:
-
-A function is passed as a prop to a memoized child component.
-The function is defined inside a component and changes on every render, causing unnecessary child component updates.
+8. `useCallback`
+=================
+useCallback is a React Hook that returns a memoized version of a callback function. This means that React will only re-create the function when one of its specified dependencies changes. This optimization is primarily useful for preventing unnecessary re-renders of child components that receive functions as props, 
 
 ```js
-const memoizedCallback = useCallback(() => {
-  // Function logic here
-}, [dependencies]);
+ const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
 ```
 
 
-## 9. `useReducer`
-==================
-Its a hook that is used for state management, alternative to useState
+9. `useReducer`
+================
+- Its a react hook that is used for state management, alternative to useState
 useState is built using useReducer
+- useReducer have two parameter one is reducer function and another is initial value
+- The reducer function will have two parameters currentState and action and it returns a newState
+- useReducer returns a pair of values newState and dispatch
 
-useReducer have two parameter one is reducer function and another is initial value
-the reducer function will have two parameters currentState and action and it returns a newState
-useReducer returns a pair of values newState and dispatch
-
-## 10. `useContext`
+10. `useContext`
 ====================
-The Context API in React allows you to share state and data globally across components without the need to pass props down the component tree manually. It is useful when multiple components need access to the same data.
+- The react is providing the `createContext` method
+- The Context API in React allows us to share state and data globally across components without the need to pass props down the component tree manually. It is useful when multiple components need access to the same data.
+- We access the context inside components using the `useContext()` react hook.
 
-The useContext hook makes it easier to consume data from a context inside functional components.
+`Using Context Without a Provider`
+```js
+const UserContext = createContext({ userName: "Midhun Kalarikkal" });
+```
+If we don't use <UserContext.Provider>, then components using useContext(UserContext) will receive this default value.
 
-## `Reat.memo`
+`Using Context With a Provider`
+```js
+<UserContext.Provider value={{ userName: "Midhun Paniker" }}>
+  <App />
+</UserContext.Provider>
+```
+Now, all components inside this provider get this provided value, overriding the default.
+
+11. `Reat.memo`
 ===============
 React.memo is a higher-order component (HOC) in React that optimizes functional components by preventing unnecessary re-renders. It does this by memoizing the component—that is, it only re-renders the component if the props have changed.
 When you wrap a component with React.memo, React will compare the new props with the previous ones.
-If the props are the same, React skips rendering that component.
+If the props are the same, React skips rendering of the component.
 If the props are different, the component will re-render as usual.
 
 
 
 
 
-### `useHistory vs useNavigate` ###
-========================================
-## useHistory
------------------
-**Part of:** React Router (v5 and earlier).
-**Purpose:** Used to access the history instance, allowing you to programmatically navigate between routes.
+## `useHistory vs useNavigate` ##
+=================================
+`useHistory`
+------------
+- React Router (v5 and earlier).
+- Used to access the history instance, allowing us to programmatically navigate between routes.
 
 ```jsx
 import { useHistory } from 'react-router-dom';
@@ -2169,10 +2202,18 @@ function GoHomeButton() {
 }
 ```
 
-## useNavigate
+| Method                     | Purpose                                    |
+| -------------------------- | ------------------------------------------ |
+| `history.push("/path")`    | Navigate to a new route (adds to history)  |
+| `history.replace("/path")` | Navigate and replace current history entry |
+| `history.go(n)`            | Go forward/backward `n` steps in history   |
+| `history.goBack()`         | Go back one step                           |
+| `history.goForward()`      | Go forward one step                        |
+
+`useNavigate`
 ---------------
-Part of: Introduced in React Router (v6).
-Purpose: A replacement for useHistory. It provides a simpler API for navigating to different routes.
+- Introduced in React Router (v6).
+- A replacement for useHistory. It provides a simpler API for navigating to different routes.
 
 ```js
 import { useNavigate } from 'react-router-dom';
@@ -2187,19 +2228,25 @@ function GoHomeButton() {
   return <button onClick={goHome}>Go Home</button>;
 }
 ```
+| Equivalent to                          | What it does                               |
+| -------------------------------------- | ------------------------------------------ |
+| `navigate("/path")`                    | Same as `history.push()`                   |
+| `navigate("/path", { replace: true })` | Same as `history.replace()`                |
+| `navigate(-1)`                         | Go back one step (like `history.goBack()`) |
+| `navigate(+1)`                         | Go forward one step                        |
 
 
 
 
 
 
-### `Event Handlers` in React ###
-=======================================
+## `Event Handlers` in React ##
+================================
 Event handlers are functions that respond to specific events (like clicks, changes, etc.) triggered by the user interacting with a component. In React, these handlers are usually passed as props to the respective components.
 
-## onClick Event Handler
--------------------------
-**Usage:** The onClick event handler is used to handle click events on elements such as buttons, links, or any clickable element.
+`onClick Event Handler`
+-----------------------
+The onClick event handler is used to handle click events on elements such as buttons, links, or any clickable element.
 
 ```js
 import React from 'react';
@@ -2246,46 +2293,29 @@ export default App;
 
 
 
-### `Shadow` DOM ###
-====================
-A browser feature that allows developers to encapsulate the DOM and CSS of a component. This means the styles and structure of a component are isolated from the rest of the page.
-
-Purpose: Encapsulation and style scoping for custom elements or components.
-
-Key Features:
-Isolates styles and DOM structure.
-Prevents CSS from leaking in or out of the shadow boundary.
-Used in Web Components.
-
-
-### Actual DOM ###
+## `Shadow DOM` ##
 ==================
-The **Actual DOM** refers to the real Document Object Model (DOM), which is a tree-like structure representing the HTML elements in a web page. Any changes to the DOM result in re-rendering, which can be slow as the entire page or large parts of it need to be updated.
-
-
-### Virtual DOM ###
-====================
-The **Virtual DOM** is a lightweight, in-memory representation of the actual DOM. It exists as a JavaScript object. When the state of a component changes, React creates a new virtual DOM instead of updating the actual DOM immediately. This allows for faster operations because manipulating JavaScript objects is more efficient than working directly with the DOM.
+- The Shadow DOM is a browser feature that allows us to encapsulate a component’s HTML and CSS.
+- This means its structure and styles won’t affect the rest of the page — and the rest of the page won’t affect it either.
 
 
 
 
 
-
-### `Lazy Loading` / On-Demand Loading / Dynamic Import  ##
-==============================================================
+## `Lazy Loading` / On-Demand Loading / Dynamic Import  ##
+==========================================================
 Lazy loading means **splitting the components** into separate bundles that load only when needed. When the application initially loads, only the required bundles are sent, and other components are loaded **on-demand** when the user navigates to them.
 
-#### Benefits:
+`Benefits`
 - **Reduces the initial load** time by keeping the main bundle small.
 - **Improves performance** by loading only the necessary components dynamically.
 
-#### React’s Implementation:
+`React’s Implementation`
 - React provides a **lazy component** for this purpose. Inside the lazy component, we use a **callback with dynamic `import()`** to load the component when required.
   
 - However, because React **renders quickly**, the bundle might not load immediately, causing React to throw an **error or display a fallback page**.
 
-#### Handling Loading State with Suspense:
+`Handling Loading State with Suspense`
 - To avoid rendering errors, we use React's **`Suspense`** component to wrap lazy-loaded components.
 - The **`fallback` prop** of `Suspense` can display a loading UI (like a **shimmer effect**) while the component bundle is being fetched.
 
@@ -2293,6 +2323,10 @@ This approach ensures smooth **lazy loading** and avoids disrupting the user exp
 
 ```js
 const ProductPage = React.lazy(() => import('./ProductPage'));
+
+<Suspense fallback={<h3>Loading Product Page...</h3>}>
+  <ProductPage />
+</Suspense>
 ```
 
 
@@ -2300,18 +2334,42 @@ const ProductPage = React.lazy(() => import('./ProductPage'));
 
 
 ## `React context` ##
-==============================
+======================
 It is used to avoid props drilling
 we can make an context file and import it in any module
 
-so in functional component for using the context react is giving a hook that is useContext and we can pass the specifi context we have created to that useContext hook and  extract the data inside the context
+so in functional component for using the context react is giving a hook that is `useContext` and we can pass the specific context we have created to that useContext hook and extract the data inside the context
 
-But in class component we can also import the context but there is no hook inside class component so that react is giving a power that **.Consumer** so we can use this  like as an component with adding this to the name of context that we have created <Context.Consumer> </Context.Consumer>  inside this component we can use a curly brace and inside it we can use a call back function and this call back function will take the data as a parameter and we can use this parameter to take the values inside the context 
+Class components don’t support hooks like useContext.
+Instead, React gives us a special component: <ContextName.Consumer>.
+```js
+<MyContext.Consumer>
+  {value => (
+    <div>Hello {value.userName}</div>
+  )}
+</MyContext.Consumer>
+```
+It uses a callback function inside curly braces {}.
+That function receives the context value as a parameter.
 
-we can use ContextName.provide component for wrapping up other component  and can pass value prop inside it for updating the content fileds , can wrap the whole app or can wrap a single component and also we can use for wrap our whole app with a updated data and inside the app we can use it again for wrapping another component and pass a different updated data
+`.Provider in Class or Functional Components`
+```js
+<MyContext.Provider value={{ userName: "Midhun Kalarikkal" }}>
+  <App />
+</MyContext.Provider>
+```
+Use .Provider to wrap components that need access to shared data.
+We must pass a value prop this is the data we want to share.
+We can Wrap the entire app (for global data)
+Wrap a single component (for localized data)
+Even nest multiple providers for different values in different parts of the app
 
-### `Redux`
-============
+
+
+
+
+## `Redux` ##
+==============
 Redux is not Mandotory
 Redux is a seperate library
 
@@ -2319,7 +2377,7 @@ Redux is not only the one library for state management eg: Zustand
 Easy to debug
 Predictable state container for js application
 
-Vanila reducx and redux toolkit
+Vanila redux and redux toolkit
 
 Redux store is a big javascript object that kept in a global central place
 Any component can read and write data in redux store
@@ -2335,16 +2393,17 @@ when we click the button
 
 1. we need to **dispatch** an **Action**
 2. This action calls a **function**. This function is known as **reducer**
-3. This function modifies the cart slice
+3. This function modifies the slice data
 
 Reading the data from cart slice
 
 1. We need a **selector** to read data from the slice. This is known as **subscribing** to the store
-2. This selector will update the react component
-3. Now the component is synced with the store , whenever the store updates the react component will get that data
+2. This selector will have the access to the entire store or to a specific skice
+3. now we can destructure the store or the slice , or the data in slice and use in our component
+4. Now the component is synced with the store , whenever the store updates the react component will get that data
 	
-  Select is a hook known as useSelector
-  Whenever we are using selector to subscribing the store not subscribe the entire store make it only for the portion of store, subscribing the entire store will make performance loss
+  `useSelector` is the react-redux hook that is used to subscribe to the store
+  Whenever we are using useSelector to subscribing the store not subscribe the entire store make it only for the portion of store, subscribing the entire store will make performance loss
 
   ```js
   // subscribing the entire store
@@ -2362,150 +2421,184 @@ Reading the data from cart slice
 - Connect our store to our app
 - Slice
 - Dispatch (action)
--Selector (subscribe)
+- Selector (subscribe)
 
-**Important**
-In the older version of redux that is **vanila redux** we should **not mutate** the state, instead of this we need to make a copy of the state and modify that copy of the state and return the copy of the state
+`Vnila Redux`
+-------------
+- Vanilla Redux is the core version of Redux where we manage the state manually using:
+- reducers
+- action creator
+- store
+- middleware (optional)
+- `Important Rule` : we should never mutate the state directly.
+- `Why?` : Redux expects pure functions, and mutating state directly will cause bugs in time-travel debugging and unexpected UI behavior.
 
-Now we are using the **redux toolkit** which is the new version in this we have toe **mutate** the state directly in the reducers each action of the slices and behind the scenes redux toolkit is using a library called **Immer** this library is doing the same thing which is in the vanila redux for us. Instead of mutation the state we can also return a new state.
-
-In vanila redux we need to use a **middlewares and thungs** but in the redux toolkit we have **RTK Query**
-
-`Redux Hooks`
-----------------
-1. `useSelector`
-  Allows you to extract data from the Redux store state using a selector function.
+`How do we handle state in Vanilla Redux?`
 ```js
-import { useSelector } from 'react-redux';
+const initialState = { count: 0 };
 
-function UserProfile() {
-  const username = useSelector(state => state.user.name);
-
-  return <h1>Hello, {username}</h1>;
-}
-```
-2. `useDispatch`
-  Gives access to the dispatch function, which is used to send actions to the Redux store.
-```js
-import { useDispatch } from 'react-redux';
-import { loginUser } from './store/actions';
-
-function LoginButton() {
-  const dispatch = useDispatch();
-
-  const handleLogin = () => {
-    dispatch(loginUser({ username: "midhun", password: "1234" }));
-  };
-
-  return <button onClick={handleLogin}>Login</button>;
-}
-```
-3. `useStore`
-  Returns the Redux store itself. Useful when you want full access to the store (not just state or dispatch).
-```js
-import { useStore } from 'react-redux';
-
-function DebugStore() {
-  const store = useStore();
-  console.log(store.getState()); // Direct access
-
-  return <div>Open console to see state</div>;
-}
-```
-
-`Redux Thunk`
----------------
-Redux Thunk is a middleware that allows you to write action creators that return a function instead of an action object.
-
-That function can contain asynchronous logic, like API calls, before dispatching a final action.
-
-`without thunk`
-```js
-dispatch({ type: 'FETCH_DATA' }); // Just dispatches an action object
-```
-
-`with thunk`
-```js
-dispatch((dispatch) => {
-  // You can run async code here
-  fetch('https://api.example.com/data')
-    .then(res => res.json())
-    .then(data => dispatch({ type: 'FETCH_SUCCESS', payload: data }));
-});
-```
-
-`Redux thunk with hooks`
-```js
-// Components / User.js
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchUser } from '../actions/userActions';
-
-function User() {
-  const { user, loading, error } = useSelector(state => state.user);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  return <div>
-    <h1>{user.name}</h1>
-    <p>{user.email}</p>
-  </div>;
-}
-
-export default User;
-// Actions / userActions.js
-export const fetchUser = () => {
-  return async (dispatch) => {
-    dispatch({ type: 'FETCH_USER_REQUEST' });
-
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
-      const data = await response.json();
-
-      dispatch({ type: 'FETCH_USER_SUCCESS', payload: data });
-    } catch (error) {
-      dispatch({ type: 'FETCH_USER_FAILURE', payload: error.message });
-    }
-  };
-};
-
-// Reducer / userReducer.js
-const initialState = {
-  loading: false,
-  user: {},
-  error: ''
-};
-
-const userReducer = (state = initialState, action) => {
+function counterReducer(state = initialState, action) {
   switch (action.type) {
-    case 'FETCH_USER_REQUEST':
-      return { ...state, loading: true };
-    case 'FETCH_USER_SUCCESS':
-      return { loading: false, user: action.payload, error: '' };
-    case 'FETCH_USER_FAILURE':
-      return { loading: false, user: {}, error: action.payload };
+    case "INCREMENT":
+      return { ...state, count: state.count + 1 }; // not mutating
     default:
       return state;
   }
+}
+```
+
+`Redux Toolkit (RTK)`
+-----------------------
+- Redux Toolkit is the official, modern way to write Redux logic, introduced by the Redux team.
+- Less boilerplate
+- Includes createSlice, configureStore
+- Built-in middleware
+- Supports createAsyncThunk and RTK Query
+- Allowed to mutate the state directly inside createSlice. why because Redux Toolkit uses a internal library called Immer. Immer lets us to write mutating code but it produces a new immutable copy behind the scene.
+
+```js
+// Creating a slice
+
+import { createSlice } from "@reduxjs/toolkit";
+
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: { value: 0 },
+  reducers: {
+    increment: (state, action) => { state.value += 1 },
+    decrement: (state, action) => { state.value -= 1 },
+    reset: (state, action) => { state.value = 0 }
+  }
+});
+
+export const { increment, decrement, reset } = counterSlice.actions;
+export default counterSlice.reducer;
+
+// creating a store
+
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "../features/counterSlice";
+
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer
+  }
+});
+
+// how to subscribe to the store and dispatch an action
+
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement, reset } from "./features/counterSlice";
+
+const Counter = () => {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Count: {count}</h1>
+      <button onClick={() => dispatch(increment())}> + </button>
+      <button onClick={() => dispatch(decrement())}> - </button>
+      <button onClick={() => dispatch(reset())}> Reset </button>
+    </div>
+  );
 };
 
-export default userReducer;
+export default Counter;
+
+// Providing the store to the app 
+
+import React from "react";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import Counter from "./Counter";
+
+const App = () => (
+  <Provider store={store}>
+    <Counter />
+  </Provider>
+);
+
+export default App;
+```
+
+`Middleware in Redux`
+----------------------
+A middleware in Redux is a function that runs between dispatching an action and the reducer receiving it.
+Use Case are :- Logging, Async handling, Error catching, Analytics
+
+`Thunk (redux-thunk)`
+----------------------
+Thunk is a middleware that lets us to write action creators that return a function instead of an action object.
+Use Case :- Useful for making API calls and then dispatching actions based on the result.
+
+```js
+// productSlice.js
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+export const fetchProducts = createAsyncThunk("products/fetch", async () => {
+  const res = await fetch("https://fakestoreapi.com/products");
+  return res.json();
+});
+
+const productSlice = createSlice({
+  name: "products",
+  initialState: { data: [], status: "idle" },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => { state.status = "loading" })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      });
+      .addCase(fetchProducts.rejected, (state) => { state.status = "Rejected" })
+  }
+});
+
+export default productSlice.reducer;
+```
+
+`RTK Query`
+------------
+RTK Query is a built-in tool in Redux Toolkit that handles data fetching, caching, and re-fetching.
+Use Case :- Replace useEffect + fetch + dispatch, Automatic caching and re-fetching, API-based state management
+
+`Redux Hooks`
+----------------
+1. useSelector : - A hook to access data from the Redux store in a functional component.
+2. useDispatch : - A hook to dispatch actions to the Redux store from a component.
+3. useStore : - A hook to access the entire Redux store instance, usually used for advanced cases like debugging or custom hooks.
+```js
+const store = useStore();
+```
+4. useQuery (RTK Query) : - Hook provided by RTK Query to fetch data automatically when a component mounts.
+```js
+const { data, isLoading } = useGetProductsQuery();
+```
+5. useLazyQuery (RTK Query) : -  Same as useQuery, but it only runs when we manually call the trigger function.
+```js
+const [trigger, result] = useLazyGetProductsQuery();
+trigger(); // to run the query manually
+```
+6. useMutation (RTK Query) : - A hook used to send data or perform mutations like POST, PUT, DELETE requests.
+```js
+const [addUser] = useAddUserMutation();
+addUser(newUserData);
+```
+7. usePrefetch (RTK Query) : - A hook used to preload data before a component mounts
+```js
+const prefetch = usePrefetch("getProducts");
 ```
 
 `Redux principles`
 ------------------
 1. Single Source of Truth
-- The entire application state is stored in a single JavaScript object called the store.
-- This ensures consistency and makes it easier to debug or inspect the app state.
+- The entire application's state's are stored in a single JavaScript object called the store.
+- This ensures consistency and makes it easier to debug,
 
 2. State is Read-Only
-- You cannot directly modify the state; you must dispatch an action to make changes.
+- We cannot directly modify the state; instead must dispatch an action to make changes.
 - Actions are plain objects describing what happened, not how to update the state.
 
 3. Changes are Made with Pure Reducers
@@ -2524,11 +2617,11 @@ export default userReducer;
 
 
 
-### `Controlled and Uncontrolled component` ##
-=======================================================
+## `Controlled and Uncontrolled component` ##
+==============================================
 
 `Controlled Component`
-- The form element's value is controlled by React state.
+- The form element's value is controlled by React state variables.
 - The component renders based on the state and updates the state using event handlers.
 
 ```js
@@ -2549,7 +2642,7 @@ function ControlledInput() {
 
 `Uncontrolled Component`
 - The form element's value is managed by the DOM itself, not React state.
-- You use a ref to access the value.
+- We use a ref to access the value.
 
 ```js
 import React, { useRef } from 'react';
@@ -2570,7 +2663,7 @@ function UncontrolledInput() {
 }
 ```
 
-Controlled: React manages the value via state.
+Controlled: React manages the value via state, State drives the UI..
 Uncontrolled: The DOM manages the value via refs.
 
 
@@ -2587,7 +2680,7 @@ In lifecycle methods
 In constructors of child components
 
 `They do NOT catch:`
-Event handlers (you must use try-catch in those)
+Event handlers (we must use try-catch in those)
 Asynchronous code (e.g., setTimeout, Promises)
 Server-side rendering errors
 
