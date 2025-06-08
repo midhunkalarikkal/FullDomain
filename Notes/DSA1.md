@@ -96,7 +96,7 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 - Examples: Linear Search, Trial Division (Prime check), Generate all subsets  
 
 2. Searching Algorithms  
-- Used to find a specific value or element from a collection or dataset.  
+- Used to find a specific value or an element from a collection or dataset.  
 - Examples: Linear Search, Binary Search, Interpolation Search  
 
 3. Sorting Algorithms  
@@ -112,17 +112,18 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 - Examples: Merge Sort, Quick Sort, Binary Search, Closest Pair of Points  
 
 6. Greedy Algorithms  
-- A class of algorithms that make locally optimal choices at each step with the hope of finding a global optimum solution.
+- Always makes the locally optimal choice at each step, hoping that this will lead to the globally optimal solution.
 - At every step of the algorithm, we make a choice that looks the best at the moment. To make the choice, we sometimes sort the array so that we can always get the next optimal choice quickly. We sometimes also use a priority queue to get the next optimal item.
 - After making a choice, we check for constraints (if there are any) and keep picking until we find the solution.
 - Examples: Activity Selection, Fractional Knapsack, Kruskal’s MST, Prim’s MST, Huffman Coding  
 
 7. Backtracking  
-- Builds the solution step-by-step and abandons a path (backtracks) when it doesn’t satisfy constraints.  
+- Backtracking is a problem-solving algorithmic technique that involves finding a solution incrementally by trying different options and undoing them if they lead to a dead end. It is commonly used in situations where you need to explore multiple possibilities to solve a problem, like searching for a path in a maze or solving puzzles like Sudoku.
 - Examples: N-Queens, Sudoku Solver, Rat in a Maze, Subset Sum, Permutations  
 
 8. Dynamic Programming (DP)  
-- Solve complex problems by breaking them into overlapping sub-problems and storing solutions.  
+- Dynamic Programming (DP) is a method for solving complex problems by breaking them down into smaller overlapping subproblems,
+- solving each subproblem only once, and storing the results (usually in a table or memory) to avoid redundant computations.
 - Examples: Fibonacci (Memoization), 0/1 Knapsack, LCS, Edit Distance, Coin Change, Matrix Chain Multiplication  
 
 9. Bit Manipulation  
@@ -130,7 +131,7 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 - Examples: Check power of 2, Count set bits, XOR operations, Find unique element, Swap without temp  
 
 10. Graph Algorithms  
-- Used for problems involving nodes and edges — relationships, paths, connectivity.  
+- Used for problems involving vertex and edges like relationships, paths, connectivity.  
 - Examples: BFS, DFS, Dijkstra’s Algorithm, Bellman-Ford, Topological Sort, Kruskal’s and Prim’s  
 
 11. String Algorithms  
@@ -157,6 +158,24 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 
 
 
+## `Some IMP algorithms good to know` ##
+=========================================
+`Kruskal’s Algorithm` -	A Greedy algorithm used to find the Minimum Spanning Tree (MST) of a graph. It picks the smallest weight edge and connects components without forming cycles. Useful for network design.
+
+`Prim’s Algorithm` - Greedy algorithm to find the MST. It starts from any node and keeps adding the minimum edge connected to the tree.
+
+`Dijkstra’s Algorithm` - A Greedy algorithm used to find the shortest path from a source node to all other nodes in a weighted graph (non-negative weights).
+
+`Bellman-Ford Algorithm` - Similar to Dijkstra, but can handle negative weights. Slower but more versatile.
+
+`Floyd-Warshall Algorithm` - A dynamic programming approach used to Find the shortest paths between all pairs of nodes in a graph.
+
+`Knapsack Problem` - A Dynamic Programming approach. Given items with weights and values, maximize value without exceeding the bag capacity. Two types: 0/1 and fractional.
+
+
+
+
+
 ## `Searching` ##
 ==================
 `Linear search`
@@ -167,8 +186,15 @@ Linear search works efficiently on both sorted and unsorted array
 
 `Binary search`
 -----------------
-Requires the array to be sorted. It repeatedly divides the search interval in half by comparing the middle element with the target value. Depending on the comparison, it eliminates half of the remaining elements from consideration.
-Binary search operates with a time complexity of O(log n)
+Works only on sorted arrays (ascending or descending order).
+Divide and conquer technique.
+Repeatedly divides the search range in half.
+Compares the middle element with the target:
+    If equal → target found.
+    If target is smaller → search left half.
+    If target is larger → search right half.
+Reduces the problem size logarithmically each time.
+Time Complexity: O(log n)
 
 
 
@@ -241,7 +267,7 @@ Inherent stack management for maintaining state across function calls.
 
 ## `Dynamic Programming` ##
 ==============================
-Dynamic Programming (DP) is a method for solving complex problems by breaking them down into simpler subproblems. It is particularly useful for optimization problems where the solution can be recursively defined in terms of the solutions to smaller instances of the same problem.
+Dynamic Programming (DP) is a method for solving complex problems by breaking them down into simpler overlapping subproblems. It is particularly useful for optimization problems where the solution can be recursively defined in terms of the solutions to smaller instances of the same problem.
 
 `Memoize Approach`
 --------------------
@@ -256,15 +282,14 @@ The Bottom-Up Approach in dynamic programming involves solving smaller subproble
 
 
 ## `Memory Allocation` ##
-============================
+==========================
 Memory allocation is the process of reserving a portion of memory within a computer program for storing data and instructions.
 
 `Bit` vs `Byte`
 ---------------
-Bit :-
- The smallest unit of data in a computer, representing a binary value of 0 or 1.
-Byte :-
- A group of 8 bits, which together can represent 256 different values (from 0 to 255). Bytes are often used to encode a single character of text in a computer.
+Bit :- The smallest unit of data in a computer, representing a binary value of 0 or 1.
+Nibble :- a group of 4 bits
+Byte :- A group of 8 bits, which together can represent 256 different values (from 0 to 255). Bytes are often used to encode a single character of text in a computer.
 
 `Memory Address`
 -----------------
@@ -303,26 +328,32 @@ Provides flexibility to allocate and deallocate memory as needed.
 ==============================
 `Heap Memory`
 --------------
-Heap memory is a region of a computer's memory where dynamic memory allocation takes place. It is used for the runtime allocation of memory needed for objects and data structures.
-
-Memory is managed explicitly by the programmer.
-Larger in size, Flexibility, Life time control, Global access, Non contiguous
-slower access compared to stack memory, Memory Leak, Fragmentation
-Refernce types are stored in heap eg : array , function , object
+- Heap memory is a region of a computer's memory where dynamic memory allocation takes place. It is used for the runtime allocation of memory needed for objects and data structures.
+- Memory is managed explicitly by the programmer.
+- Larger in size, Flexibility, Life time control, Global access, Non contiguous
+- Accessing data in the heap memory is slower than in the stack because it involves pointers and dynamic allocation.
+- If dynamically allocated memory isn’t properly freed or released, it stays reserved — leading to memory leaks.
+- When memory is allocated and deallocated in small chunks, gaps (fragments) are created. This can reduce the usable continuous space, even if enough memory is free overall.
+- **Reference data types** like arrays, objects, and functions (in JS) are stored in heap memory.
+- The **reference (pointer)** to these values is stored in the stack.
 
 `Stack Memory`
 ---------------
-Used for static memory allocation.
-Automatically managed by the system.
-Limited in size, but faster access compared to heap memory.
-primitive types are stored in stack
+- Used for **static memory allocation** (like local variables and function calls).
+- **Memory allocation and deallocation** is automatically managed by the system (LIFO order).
+- **Faster access** compared to heap memory.
+- **Limited in size** (can lead to stack overflow if overused).
+- Stores:
+  - **Primitive data types** 
+  - **References (not objects)** of non-primitive types,
+  - **Function call information** (like return addresses and parameters).
 
 
 
 
 
 ## `Memory Leaks` ##
-=======================
+=====================
 A memory leak occurs when a computer program incorrectly manages memory allocations, causing memory that is no longer needed to not be released. Over time, this can lead to decreased performance.
 
 `Symptoms`
@@ -335,31 +366,22 @@ Application Crashes
 
 `Causes of Memory Leaks`
 -------------------------
-Failure to Release Memory
-
-Dangling Pointers :-
- Pointers that still reference a memory location after it has been freed.
-
-Circular References :-
- Objects referencing each other, preventing the memory manager from deallocating them even though they are no longer in use.
+- **Failure to Release Memory**
+- **Dangling Pointers** :- Pointers that still reference a memory location after it has been freed.
+- **Circular References** :- Objects referencing each other, preventing the memory manager from deallocating them even though they are no longer in use.
 
 `Detecting Memory Leaks`
 -------------------------
-Manual Code Review: Carefully reviewing the code to ensure all allocated memory is properly freed.
-
-Automated Tools: Using tools designed to detect memory leaks, such as Valgrind, Purify, or built-in debugging features in development environments.
-
-Profiling and Monitoring: Monitoring memory usage patterns to detect unusual increases in memory usage over time.
+- Manual Code Review
+- Automated Tools
+- Profiling and Monitoring
 
 `Preventing Memory Leaks`
 --------------------------
-Good Programming Practices: Ensuring every malloc or calloc call is paired with a free call.
-
-Smart Pointers: Using smart pointers in languages like C++ (e.g., std::shared_ptr, std::unique_ptr) to automate memory management.
-
-Garbage Collection: Using languages with automatic garbage collection (e.g., Java, Python) which handle memory deallocation automatically.
-
-Regular Testing: Regularly running tests to check for memory leaks during development.
+- Good Programming Practices
+- Smart Pointers in low level langyages
+- Garbage Collection
+- Regular Testing
 
 
 
@@ -373,6 +395,12 @@ Complexity analysis is the study of how the performance of an algorithm or data 
 -------------------
 Measures the amount of time an algorithm takes to complete as a function of the input size 𝑛
 
+`Space Complexity`
+------------------
+Measures the amount of memory an algorithm uses in relation to the input size 𝑛
+
+`Complexity Measures`
+-----------------------
 O(1) - Constant time.
 O(log n) -  Logarithmic time.
 O(n) -  Linear time.
@@ -381,116 +409,65 @@ O(n^2) -  Quadratic time.
 O(2^n) - Exponential time.
 O(n!) - Factorial time.
 
-`Space Complexity`
-------------------
-Measures the amount of memory an algorithm uses in relation to the input size 𝑛
-
-O(1) -  Constant space.
-O(log n) -  Logarithmic space.
-O(n) -  Linear space.
-O(n log n) -  Linearithmic space.
-O(n^2) -  Quadratic space.
-O(2^n) -  Exponential space.
-O(n!) -  Factorial space.
-
-1. `Arrays`
------------
-Access -  O(1)
-Search -  O(n)
-Insertion -  O(n) (shifting elements)
-Deletion - O(n) (shifting elements)
-
-2. `Linked Lists`
-------------------
-Singly Linked List / Doubly Linked List
-----------------------------------------
-Access -  O(n) -> Accessing an element requires traversal from the head (or tail), making it linear in complexity.
-Search -  O(n) -> Searching for a specific value requires traversal, as there is no direct indexing.
-Insertion -  O(1) (if inserting at the head) otherwise o(n)
-Deletion -  O(1) (if deleting at the head) otherwise o(n)
-
-3. `Stacks`
-------------
-Access -  O(n)
-Search -  O(n)
-Insertion -  O(1) (push operation)
-Deletion -  O(1) (pop operation)
-
-4. `Queues`
--------------
-Access -  O(n)
-Search -  O(n)
-Insertion -  O(1) (enqueue operation)
-Deletion -  O(1) (dequeue operation)
-
-5. `Hash Tables`
-------------------
-Access - O(1) (average case), O(n) (worst case, due to collisions)
-Search -  O(1) (average case), O(n) (worst case)
-Insertion -  O(1) (average case), O(n) (worst case)
-Deletion -  O(1) (average case), O(n) (worst case)
-
-6. `Trees`
------------
-Binary Search Tree (BST)
----------------------------
-Access -  O(log n) (average case), O(n) (worst case)
-Search -  O(log n) (average case), O(n) (worst case)
-Insertion -  O(log n) (average case), O(n) (worst case)
-Deletion -  O(log n) (average case), O(n) (worst case)
-
-Balanced Trees (e.g., AVL, Red-Black Tree)
----------------------------------------------
-Access -  O(log n)
-Search -  O(log n)
-Insertion -  O(log n)
-Deletion -  O(log n)
-
-7. `Heaps`
-------------
-Binary Heap
---------------
-Access -  O(n)
-Search - O(n)
-Insertion -  O(log n)
-Deletion -  O(log n) (delete min/max)
-
-8. `Graphs`
-------------
-Adjacency Matrix
-----------------
-Access: O(1)
-Search: O(v) (Check all the vertices)
-Insertion: O(1)
-Deletion: O(1)
-
-Adjacency List
---------------
-Access -  O(V)
-Search -  O(V + E) (checking all vertices and edges)
-Insertion -  O(1) (adding an edge)
-Deletion -  O(E) (removing an edge)
-
 
 
 
 
 ## `Array` ##
 =============
-An array is a collection of items stored at contiguous memory locations. The items can be of the same data type, and they are accessed using an index.
-In JavaScript, arrays are inherently heterogeneous, meaning we can store different types of data
+- An array is a collection of items stored at contiguous memory locations. Items are accessed using an index.
+- In JavaScript, arrays are not strictly typed. This means they can hold different types of data (heterogeneous), such as numbers, strings, objects, etc., in the same array.
+
+`Complexity analysis`
+---------------------
+`Access`
+    Time complexity : - O(1), Accessing an element by index is direct
+    Space complexity : - O(1), No extra space is used for access.
+`Search`
+    Time Complexity:
+        Unsorted Array: O(n) – We have to check each element.
+        Sorted Array (Binary Search): O(log n) (only if sorted and binary search is used)
+    Space Complexity: O(1), Searching doesn't require additional space.
+`Insertion`
+    Time Complexity
+        At End (e.g., push): O(1)
+        At Beginning (e.g., unshift): O(n) – all elements need to shift.
+        At Middle (e.g., splice): O(n) – depends on how many items are moved.
+    Space Complexity
+        if no resizing O(1)  
+        if new array is created during insertion (like immutably) O(n) 
+`Deletion`
+    Time Complexity
+        From End (e.g., pop): O(1)
+        From Beginning (e.g., shift): O(n) – all elements shift.
+        From Middle (e.g., splice): O(n)
+    Space Complexity: O(1) (if no new array is made)
+`Iteration`
+    Time Complexity : - O(n), Each element is visited once.
+    Space Complexity : - O(1) if no extra space is used.
+
+`Applications`
+---------------
+Used for implementing lists, matrices, tables, etc.
+Used for Image Pixels (2D Array)
+Used for Browser History
+Used for Implementing Other Data Structures like stack, queue, heap and hash
+Used in dynamic programming for storing intermediate results
 
 `Multi-Dimensional Array`
 -------------------------
-Contains more than two dimensions.
-Example (3D): [[[1,2],[3,4]], [[5,6],[7,8]]]
+A multidimensional array is an array containing one or more arrays as its elements, where each inner array can also contain arrays, forming a structure with two or more dimensions.
+Example: 
+[
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
 Used for representing spatial data, tensors in machine learning, etc.
 
 `Static Array`
 --------------
-Fixed size during its lifetime.
-Example: Arrays in C/C++ with a predefined size.
-Efficient but less flexible.
+Fixed size during its lifetime. Arrays in C/C++ with a predefined size. Efficient but less flexible.
 
 `Dynamic Array`
 -----------------
@@ -509,32 +486,31 @@ An array of arrays where each sub-array can have different lengths.
 
 `Dense array`
 ----------------
-A dense array stores all its values, including zeros, in a contiguous block of memory without explicitly storing indices for each element.
+A dense array is an array where most or all of the indices are occupied with valid elements (i.e., there are very few or no gaps or undefined values between elements).
 
 `Homogeneous Array`
 --------------------
 Stores elements of the same data type.
-Example: [1, 2, 3, 4] (all integers).
 
 `Heterogeneous Array`
 ---------------------
 Stores elements of different data types (available in languages like Python or JavaScript).
-Example: [1, "apple", true] (int, string, boolean).
 
 `Associative Array`
 --------------------
-Stores key-value pairs instead of index-based values.
-Example: Objects in JavaScript, Python dictionaries.
+An associative array (also known as a map, dictionary, or object) is a data structure that stores key–value pairs, where:
+- Each value is associated with a unique key.
+- Keys can be strings (and in some languages, other types too).
 
 `Circular Array`
 -----------------
-An array treated as if it wraps around when the end is reached.
-Example: Used in circular queues.
+A circular array is a linear data structure that uses a single, fixed-size buffer as if it were connected end-to-end.
+When the end of the array is reached, it wraps around to the beginning.
 
 `Bit Array`
 ------------
-Stores bits (0 or 1) compactly.
-Example: Used in memory-efficient data structures.
+A Bit Array is a compact array structure that stores bits (0s and 1s) instead of regular data types.
+It is memory-efficient, especially useful when you only need to represent true/false or on/off states.
 
 
 
@@ -542,11 +518,50 @@ Example: Used in memory-efficient data structures.
 
 ## `Linked List` ##
 ====================
-A linked list is a linear data structure where elements, called nodes, are connected using pointers. Each node contains two components:
+- A linked list is a linear data structure where elements, called nodes, are connected using pointers. Each node contains two components:
+- Data: The actual value stored in the node.
+- Pointer (or Link): A reference to the next node in the sequence.
+- Unlike arrays, linked lists do not store elements in contiguous memory locations. They are dynamic in size, allowing efficient insertion and deletion of elements.
+- No resizing needed like arrays.
+- Useful when frequent insertions/deletions are needed.
 
-Data: The actual value stored in the node.
-Pointer (or Link): A reference to the next node in the sequence.
-Unlike arrays, linked lists do not store elements in contiguous memory locations. They are dynamic in size, allowing efficient insertion and deletion of elements.
+`Complexity Analysis`
+---------------------
+`Access`
+  Time Complexity   : O(n) – Need to traverse to the index
+  Space Complexity  : O(1) – No extra space for access
+
+`Search`
+  Time Complexity   : O(n) – Linear search through nodes
+  Space Complexity  : O(1)
+
+`Insertion`
+  Time Complexity
+    At Beginning    : O(1) – Direct pointer update
+    At End (with tail pointer): O(1)
+    At End (without tail): O(n) – Traverse to last node
+    At Middle       : O(n) – Traverse to position
+  Space Complexity  : O(1) – No extra space allocation
+
+`Deletion`
+  Time Complexity
+    From Beginning  : O(1)
+    From End        : O(n) – Need to find previous node
+    From Middle     : O(n) – Traverse to node
+  Space Complexity  : O(1)
+
+`Iteration / Traversal`
+  Time Complexity   : O(n)
+  Space Complexity  : O(1)
+
+`Application`
+--------------
+Used for implementing stacks and queues
+Used for Browser history
+Used for slide show navigations
+Used for polynomial arithmetic
+Used for HashMap Collision Handling
+    In hash tables, linked lists are used to handle collisions via separate chaining.
 
 `Singly Linked List`
 --------------------
@@ -561,11 +576,10 @@ Unlike arrays, linked lists do not store elements in contiguous memory locations
 `Doubly Linked List`
 ----------------------
 - Each node contains
+    A pointer to the previous node.
     Data.
     A pointer to the next node.
-    A pointer to the previous node.
 - Traversal is bidirectional (both forward and backward).
-- Example: null <- [Data1] <-> [Data2] <-> [Data3] -> null
 
 `Circular Linked List`
 -----------------------
@@ -576,90 +590,27 @@ Can be:
 
 `Header Linked List`
 ---------------------
-A special node (header node) is added at the beginning of the list, often storing metadata (like size or type).
-This node does not store user data.
+A special node (header node) is added at the beginning of the llinked ist, often storing metadata (like size or type). This node does not store user data.
 
 `Multi-Linked List`
 ---------------------
-Each node can have multiple pointers.
-Used in advanced data structures like graphs, adjacency lists, and trees.
+Each node can have multiple pointers. Used in advanced data structures like graphs, adjacency lists, and trees.
 
+`Advantages of Linked List over an Array`
+-------------------------------------------
+Dynamic Size
+Efficient Insertions/Deletions
+Efficient Memory Allocation through non Contiguous Memory Allocation
+Flexibility in Data Structures Implementation (e.g., stacks, queues)
 
-
-
-
-## `Applications of different DS` ##
-=======================================
-`Array`
----------
-Used for implementing lists, matrices, tables, etc.
-Used in dynamic programming for memoization and tabulation.
-Used in sorting algorithms (e.g., quicksort, mergesort).
-Used in binary search due to random access capability.
-Used in representing sparse arrays efficiently.
-
-`Singly Linked List`
----------------------
-Used in stacks and queues.
-Used in undo functionality in applications (e.g., text editors).
-Used for implementing hash tables to handle collisions.
-Used in adjacency lists for representing graphs.
-Used in memory management systems (e.g., malloc() and free() in C).
-
-`Doubly Linked List`
----------------------
-Used for implementing advanced data structures like dequeues.
-Used in navigation systems (e.g., forward and backward buttons).
-Used for implementing LRUs (Least Recently Used) in caching.
-Used in undo/redo functionality with efficient traversal in both directions.
-Used for implementing adjacency lists for bidirectional graphs.
-
-`Stack`
----------
-Used in function call stack (recursion).
-Used in undo/redo functionality in applications.
-Used in backtracking algorithms (e.g., N-Queens problem).
-Used in expression evaluation (e.g., postfix notation).
-Used in browser history functionality (forward/backward navigation).
-
-`Queue`
----------
-Used in scheduling algorithms (e.g., CPU scheduling).
-Used in printer queues and job scheduling.
-Used in messaging systems (e.g., message queues).
-Used in implementing breadth-first search (BFS) in graphs.
-
-`Hash Tables`
---------------
-Used in implementing associative arrays and dictionaries.
-Used in symbol tables in compilers and interpreters.
-Used in implementing caches (e.g., web caches, memoization).
-Used in database indexing and retrieval systems.
-Used in implementing counting and frequency queries efficiently.
-
-`Tree`
--------
-Used in hierarchical data representation (e.g., file systems).
-Used in organizing data for efficient searching and sorting.
-Used in decision-making processes (e.g., decision trees).
-Used in representing parse trees in compilers.
-Used in representing organizational structures.
-
-`Heap`
--------
-Used in priority queues for efficient retrieval of the highest (or lowest) priority element.
-Used in implementing heap sort for sorting elements efficiently.
-Used in scheduling algorithms (e.g., job scheduling).
-Used in graph algorithms like Dijkstra's algorithm for finding shortest paths.
-Used in memory management systems (e.g., memory allocation).
-
-`Graph`
---------
-Used in social networks for representing connections between users.
-Used in maps and navigation systems for representing routes between locations.
-Used in recommendation systems for item-to-item relationships.
-Used in network protocols for routing and connectivity.
-Used in dependency management systems in software engineering.
+`Disadvantages of Linked Lists`
+---------------------------------
+Increased Memory Usage
+No Random Access
+Complexity in Implementation
+Inefficient Search Operations
+Extra Overhead for Pointers
+Difficulties with Reverse Traversal (in singly linked lists)
 
 
 
@@ -667,35 +618,29 @@ Used in dependency management systems in software engineering.
 
 ## `Asymptotic Notations` ##
 =============================
-Asymptotic notations are mathematical tools used to analyze the performance of algorithms, particularly their time complexity and space complexity.
-
-`Ranking`
-----------
-In the context of algorithm analysis, ranking refers to the classification of algorithms based on their performance, usually measured by their time and space complexities. It helps in comparing the efficiency of different algorithms.
+Asymptotic notations are mathematical tools used to analyze the performance of an algorithms, particularly their time complexity and space complexity.
 
 `Omega Notation (Ω)`
 --------------------
-Omega notation describes the lower bound of an algorithm's time or space complexity. It represents the best-case scenario, giving the minimum amount of time or space an algorithm will require as the input size grows.
+Omega (Ω) gives the best-case time complexity of an algorithm.
 
 `Theta Notation (Θ)`
 ----------------------
-Theta notation provides a tight bound on an algorithm's time or space complexity. It represents both the upper and lower bounds, giving an exact asymptotic behavior of the algorithm as the input size grows.
+Theta (Θ) gives the average-case time complexity (or sometimes "tight bound" – when best and worst cases are same).
 
 
 
 
 
 ## `Virtual Memory` ##
-=========================
-`Definition`
--------------
+=======================
 Virtual memory is a memory management technique used by computer operating systems to provide an "idealized abstraction of the storage resources that are actually available on a given machine." It creates an illusion for users of a very large (main) memory.
 
 `How it Works`
 --------------
 Logical Addressing: Virtual memory makes applications think they have more memory than what is physically available by creating a virtual layer between RAM and the memory they use.
 
-Paging: The system breaks RAM and virtual memory into small blocks called pages. If RAM is full, less-used data is moved to storage (a page file on Windows or swap space on Linux).
+Paging: The system breaks RAM and virtual memory into small blocks called pages. If RAM is full, less-used data is moved to pages.
 
 Swapping: When a program needs data that was moved to storage, the system brings it back to RAM and swaps out other data if needed. This keeps the illusion of having more memory.
 
@@ -716,39 +661,7 @@ Requires complex hardware and software management.
 
 ## `Amortized Analysis` ##
 =============================
-`Definition`
---------------
-Amortized analysis is a way to measure the average time for a sequence of operations in a data structure. It spreads the cost of expensive operations over several cheaper ones to show the overall efficiency.
-
-`How it Works`
---------------
-Instead of looking at each operation separately, it calculates the average time for a group of operations. This gives a better understanding of how an algorithm performs in the long run.
-
-
-
-
-
-## `Linked list` ##
-======================
-`Advantages of Linked List over an Array`
--------------------------------------------
-Dynamic Size
-Efficient Insertions/Deletions
-No Memory Wastage
-Ease of Reordering
-Efficient Memory Allocation
-No Need for Contiguous Memory Allocation
-Flexibility in Data Structures Implementation (e.g., stacks, queues)
-Better Utilization of Storage
-
-`Disadvantages of Linked Lists`
----------------------------------
-Increased Memory Usage
-No Random Access
-Complexity in Implementation
-Inefficient Search Operations
-Extra Overhead for Pointers
-Difficulties with Reverse Traversal (in singly linked lists)
+Amortized analysis is a way to measure the average time for a sequence of operations in a data structure.
 
 
 
@@ -767,7 +680,7 @@ Common Methods: push, pop, shift, unshift, splice.
 `Set`
 ------
 Unordered Collection: Does not maintain the order of elements.
-No Duplicates: Cannot contain duplicate elements.
+No Duplicates Allowed: Cannot contain duplicate elements.
 No Index-Based Access: Elements cannot be accessed by index.
 Dynamic Size: Grows as elements are added.
 Common Methods: add, delete, has, clear.
@@ -787,7 +700,7 @@ Limited Size: Not designed for a large number of key-value pairs.
 Common Methods: Object.keys, Object.values, Object.entries.
 
 `Map`
----
+-----
 Key-Value Pairs: Stores data in key-value pairs.
 Any Data Type for Keys: Keys can be of any data type (including objects and functions).
 No Prototype Chain: Does not inherit property from any prototype.
@@ -799,7 +712,7 @@ Common Methods: set, get, has, delete, clear, forEach.
 
 
 ## `ASCII` ##
-================
+=============
 American Standard Code for Information Interchange. A character encoding standard for electronic communication, representing text in computers.
 
 32 - Space: The space character.
@@ -818,28 +731,28 @@ Example: 97 is 'a', 98 is 'b', ..., 122 is 'z'.
 
 
 ## `UNICODE` ##
-==================
+================
 A universal character encoding standard that assigns a unique code to every character in every language.
-UTF-8   :-   A variable-width character encoding for Unicode. It can encode every character in the Unicode character set using one to four bytes.
 
+UTF-8:
+Uses 1 to 4 bytes to represent each character.
+Compatible with ASCII (first 128 characters are same as ASCII).
+Efficient for texts with mostly English characters.
+Widely used on the web, APIs, and databases.
+
+UTF-16:
+Uses 2 or 4 bytes to represent each character.
+Better for representing non-English characters like Asian scripts or emojis.
+Commonly used in systems like Windows, Java, and .NET.
 
 
 
 
 ## `How strings are stored in memory` ##
-============================================
-`In javascript two types`
+=========================================
+`In javascript`
 --------------------------
-primitive and object string
-
-`Primitive`
------------
-let str = "Hello"
-stored as a sequence of UTF-16 code units
-
-`String object`
----------------
-let strObj = new String("Hello");
+Each character in a JavaScript string is internally stored as one or two 16-bit code units (depending on the character):
 
 `In low level languages`
 ------------------------

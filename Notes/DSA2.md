@@ -1,8 +1,37 @@
 ## `Stack` ##
 ===============
-A stack is a linear data structure that follows the LIFO principle (Last In, First Out). The last element added to the stack is the first one to be removed. Operations in a stack occur only at one end, called the top.
+- A stack is a linear data structure that follows the LIFO principle (Last In, First Out).
+- The last element added to the stack is the first one to be removed. 
+- Operations in a stack occur only at one end, called the top.
+- Underflow happens when we try to pop an item from an empty stack. 
+- Overflow happens when we try to push more items to the fully loaded stack.
 
-Underflow happens when we try to pop an item from an empty stack. Overflow happens when we try to push more items on a stack than it can hold.
+`Complexity analysis`
+---------------------
+`Access`
+    Time Complexity   : O(n) – Need to traverse to access a specific element.
+    Space Complexity  : O(1) – No extra space is used for access.
+`Search`
+    Time Complexity   : O(n) – May require checking each element from top to bottom.
+    Space Complexity  : O(1) – Searching doesn’t require additional space.
+`Insertion`
+    Time Complexity   : O(1) – Push adds to the top of the stack.
+    Space Complexity  : O(1) – No extra space is used if resizing is not required.
+`Deletion`
+    Time Complexity   : O(1) – Pop removes from the top of the stack.
+    Space Complexity  : O(1) – No additional space is used.
+`Iteration`
+    Time Complexity   : O(n) – Each element is visited once.
+    Space Complexity  : O(1) – If no extra space is used during traversal.
+
+
+`Applications`
+--------------
+Used in function call stack (recursion).
+Used in undo/redo functionality in applications.
+Used in backtracking algorithms (e.g., N-Queens problem).
+Used in expression evaluation (e.g., postfix notation).
+Used in browser history functionality (forward/backward navigation).
 
 `Operations`
 --------------
@@ -14,20 +43,12 @@ Peek/Top: View the top element without removing it.
 -----------------
 `Static Stack`
 ---------------
-Implemented using arrays.
-Has a fixed size.
-Limited by predefined memory.
+Implemented using arrays. Has a fixed size. Limited by predefined memory.
 
 `Dynamic Stack`
 -----------------
 Implemented using linked lists.
 Can grow or shrink dynamically as needed.
-
-`Applications-Based Stacks`
------------------------------
-Call Stack: Used in recursion and function calls.
-Expression Evaluation Stack: Used for evaluating postfix expressions.
-Undo/Redo Stack: Used in text editors or software with undo/redo functionality.
 
 
 
@@ -35,10 +56,18 @@ Undo/Redo Stack: Used in text editors or software with undo/redo functionality.
 
 ## `Queues` ##
 ================
-A queue is a linear data structure that follows the FIFO principle (First In, First Out). The first element added to the queue is the first one to be removed. Operations in a queue occur at two ends:
+- A queue is a linear data structure that follows the FIFO principle (First In, First Out).
+- The first element added to the queue is the first one to be removed.
+- Operations in a queue occur at two ends
+- Enqueue: Add an element at the rear (end) of the queue.
+- Dequeue: Delete an element from the front.
 
-Enqueue: Add an element at the rear (end) of the queue.
-dequeue: Delete an element from the front.
+`Applications`
+--------------
+Used in scheduling algorithms (e.g., CPU scheduling).
+Used in printer queues and job scheduling.
+Used in messaging systems (e.g., message queues).
+Used in implementing breadth-first search (BFS) in graphs.
 
 `Simple Queue`
 ----------------
@@ -313,6 +342,14 @@ A hashing function accepts the string key. Convert it to a hash code using a def
 How hashtable achieving constant time complexity ?
 A hash table achieves average-case constant time complexity 𝑂(1) for insertion, deletion, and lookup operations by using a hash function to distribute keys uniformly across an array
 
+`Applications`
+--------------
+Used in implementing associative arrays and dictionaries.
+Used in symbol tables in compilers and interpreters.
+Used in implementing caches (e.g., web caches, memoization).
+Used in database indexing and retrieval systems.
+Used in implementing counting and frequency queries efficiently.
+
 `How Hash Tables Work?`
 -----------------------
 1. Hash Function
@@ -390,37 +427,6 @@ When the load factor exceeds the chosen threshold, the hash table is resized. Th
 
 Doubling the Size: The size of the hash table is typically doubled (or increased by another factor).
 Rehashing: All existing elements are rehashed and inserted into the new, larger table.
-
-
-
-
-
-
-## `Applications` ##
-=====================
-
-`Applications of Stack`
-------------------------
-Expression Evaluation
-Syntax Parsing
-Undo Mechanisms
-Call Stack Management
-Depth-First Search (DFS)
-
-`Applications of Queue`
-------------------------
-Printer Spooling
-Task Scheduling
-Breadth-First Search (BFS)
-Multi-Threading and Resource Management
-
-`Applications of Hash Table`
-----------------------------
-Database Indexing
-Caches
-Symbol Tables in Compilers
-Associative Arrays
-Fast Data Retrieval Systems
 
 
 
