@@ -1736,6 +1736,33 @@ console.log(ob);  // {name : "midhun",age : 23}
 
 
 
+## `Proxy Object` ##
+====================
+- A Proxy is an object that wraps another object and intercepts operations
+- In JavaScript, a Proxy object is used to customize or control the behavior of an object
+- Target - The target object
+- Handler - Defined which operations can be intercepted and redefined
+- Trap - Handler functions (get, set, deleteProperty, ownKeys, has, defineProperty, getOwnPropertyDescriptions)
+```js
+const person = {
+  name: "Tom"
+};
+
+const proxy = new Proxy(person, {
+  get(target, prop) {
+    return target.prop ? target[prop] : "Not found"
+  },
+  set(target, prop, value) {
+    target[prop] = value;
+    return true;
+  }
+})
+```
+
+
+
+
+
 ## `Shallow copy` ##
 ========================
 A shallow copy means we copy only the outer layer of an object. If the object has other objects inside it (nested objects), those are not fully copied. Instead, the shallow copy just points to the same nested object of the original object.

@@ -1,12 +1,11 @@
 ## `Tree` ##
 ==============
-- A tree is a hierarchical and non linear datastructure that consist of nodes  connected by edges
-- In linear datastructure the time required to search is propositional to the size of the data set
-- Like Trees non linear nature allows quicker and easier access to the data
+- A tree is a hierarchical and non linear datastructure that consist of nodes connected by edges
+- Non linear structure allows quicker and easier access to the data
 - A tree will not contain loops or cycle
 - There is exactly one root node in a tree.
-- Every node except the root has exactly one parent node, and each node can have zero or more children nodes.
-- There is a unique path from the root to any other node.
+- Every node except the root has exactly one parent node, and each node can have zero or more child nodes.
+- There is a unique path from the root node to any other node.
 
 `Terminology`
 ---------------
@@ -27,43 +26,48 @@
 
 `Types of Trees Based on Nodes`
 ---------------------------------
-1 . `Binary Tree`
+1. `Binary Tree`
 -------------------
-A binary tree is a tree data structure in which each node has at most two children, referred to as the left child and the right child.
+- A Binary Tree is a hierarchical data structure in which each node has at most two children, called the left child and the right child.
+- Maximum nodes at level ‘l’ = 2^l  
+- Maximum nodes in a binary tree of height ‘h’ = (2^(h+1)) - 1  
+- A binary tree with only left or right children is a skewed tree (degenerate).  
+- In a perfect binary tree, all internal nodes have two children and all leaves are at the same level.  
 
-Properties
-----------
-The maximum number of nodes at level l is 2^l
-The maximum number of nodes in a binary tree of height h is (2^h+1) - 1
-In a binary tree with n nodes, the minimum possible height or minimum number of levels is [log2 (n+1)]
+`Complexity Analysis of Binary Tree`
+-------------------------------------
+`Access`  
+   Time Complexity    : O(log n) – In balanced binary trees like AVL/Red-Black Trees.  
+                        O(n) – In worst-case skewed trees.  
+   Space Complexity   : O(1) – If iterative;  
+                        O(h) – If recursive (due to call stack), where h is the height.
 
-Time complexity
----------------
-Insertion
----------
-Best case - o(1) if the root is null
-Average and worst case - o(n) for the level order insertion
+`Search`  
+   Time Complexity    
+      Average Case    : O(log n) – In balanced trees.  
+      Worst Case      : O(n) – In unbalanced or skewed trees.  
+   Space Complexity   : O(1) – Iterative;  
+                        O(h) – Recursive.
 
-Deletion
---------
-Best case - o(1) if the node to delete is the root node and the tree has only one node
-Average and worst case - o(n)  because you may need to traverse all nodes to find the node to delete and the last node to replace it.
+`Insertion`  
+   Time Complexity    
+      Average Case    : O(log n) – In balanced trees.  
+      Worst Case      : O(n) – In skewed trees.  
+   Space Complexity   : O(1) – Iterative;  
+                        O(h) – Recursive.
 
-Search
-------
-Best case - o(1)
-Average and worst case - o(n)
+`Deletion`  
+   Time Complexity    
+      Average Case    : O(log n)  
+      Worst Case      : O(n)  
+   Space Complexity   : O(h) – Due to recursion stack.
 
-Traversal
----------
-in all traversal - o(n)
+`Traversal` (Inorder, Preorder, Postorder, Level Order)  
+   Time Complexity    : O(n) – Each node is visited once.  
+   Space Complexity   : O(h) – Due to recursive calls or queue for level-order.
 
-Space complexity
-----------------
-o(1) - for the  insertion and deletion
-o(h) - for all traversal where h is the  height of the tree
 
-2 . `Ternary Tree`
+2. `Ternary Tree`
 --------------------
 A ternary tree is a tree data structure in which each node has at most three children.
 

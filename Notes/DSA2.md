@@ -24,7 +24,6 @@
     Time Complexity   : O(n) – Each element is visited once.
     Space Complexity  : O(1) – If no extra space is used during traversal.
 
-
 `Applications`
 --------------
 Used in function call stack (recursion).
@@ -47,32 +46,48 @@ Implemented using arrays. Has a fixed size. Limited by predefined memory.
 
 `Dynamic Stack`
 -----------------
-Implemented using linked lists.
-Can grow or shrink dynamically as needed.
+Implemented using linked lists. Can grow or shrink dynamically as needed.
 
 
 
 
 
 ## `Queues` ##
-================
+==============
 - A queue is a linear data structure that follows the FIFO principle (First In, First Out).
 - The first element added to the queue is the first one to be removed.
 - Operations in a queue occur at two ends
 - Enqueue: Add an element at the rear (end) of the queue.
 - Dequeue: Delete an element from the front.
 
+`Complexity analysis`
+---------------------
+`Access`  
+    Time Complexity   : O(n) – Direct access by index is not typical in queue; traversal needed.  
+    Space Complexity  : O(1) – No extra space is used for access.
+`Search`  
+    Time Complexity   : O(n) – May need to check each element from front to rear.  
+    Space Complexity  : O(1) – Searching doesn’t require additional space.
+`Insertion`  
+    Time Complexity   : O(1) – Enqueue adds at the rear of the queue.  
+    Space Complexity  : O(1) – No extra space is used if resizing is not required.
+`Deletion`  
+    Time Complexity   : O(1) – Dequeue removes from the front of the queue.  
+    Space Complexity  : O(1) – No additional space is used.
+`Iteration`  
+    Time Complexity   : O(n) – Each element is visited once from front to rear.  
+    Space Complexity  : O(1) – If no extra space is used during traversal.
+
 `Applications`
 --------------
 Used in scheduling algorithms (e.g., CPU scheduling).
 Used in printer queues and job scheduling.
 Used in messaging systems (e.g., message queues).
-Used in implementing breadth-first search (BFS) in graphs.
+Used in implementing breadth-first search (BFS).
 
 `Simple Queue`
 ----------------
 Operates on the basic FIFO principle.
-Insertions occur at the rear, and deletions occur at the front.
 
 `Circular Queue`
 ----------------
@@ -88,13 +103,12 @@ Higher priority elements are dequeued before lower-priority ones.
 ------------------------------
 Insertions and deletions can occur at both ends (front and rear).
 Types:
-Input-Restricted Deque: Insertions allowed only at one end.
-Output-Restricted Deque: Deletions allowed only at one end.
+  Input-Restricted Deque: Insertions allowed only at one end.
+  Output-Restricted Deque: Deletions allowed only at one end.
 
 `Concurrent Queue`
 -------------------
-Designed for multi-threaded environments.
-Ensures thread safety for enqueue and dequeue operations.
+A Concurrent Queue is a type of queue that is designed to be safely used by multiple threads or processes at the same time, without corrupting the data.
 
 
 
@@ -102,35 +116,27 @@ Ensures thread safety for enqueue and dequeue operations.
 
 ## `Bubble sort` ##
 ====================
-`Definition`
--------------
 Bubble Sort is a simple comparison-based sorting algorithm also known as sinking sort. It works by repeatedly iterating through the array to be sorted, comparing each pair of adjacent elements, and swapping them if they are in the wrong order. This process is repeated for multiple passes through the array until the entire array is sorted.
+
+`Complexity Analysis`
+----------------------
+- Best-case Time Complexity: 𝑂(𝑛) when the array is already sorted.
+- Average-case Time Complexity: 𝑂(𝑛^2)
+- Worst-case Time Complexity: 𝑂(𝑛^2)
+- Space Complexity: 𝑂(1) because it is an in-place sorting algorithm.
 
 `Advantages`
 -------------
-Simplicity: Easy to understand and implement.
-
-No Extra Space: Requires only a single additional memory space for the temporary variable used for swapping (i.e., it is an in-place sorting algorithm).
-
-Stable: Maintains the relative order of equal elements.
+- Simplicity: Easy to implement and understand.
+- In-place sorting algorithm: Requires only a single additional memory space for the temporary variable used for swapping.
+- Stable sorting algorithm: Maintains the relative order of equal elements.
+- Adaptive algorithm
 
 `Disadvantages`
 ----------------
-Inefficiency: One of the least efficient sorting algorithms for large datasets. The number of comparisons and swaps can be significantly higher compared to other algorithms.
-
-Performance: Poor performance on average and worst-case scenarios, making it impractical for most applications.
-
-Redundant Comparisons: Even after the array becomes sorted, it continues to compare and swap elements.
-
-`Complexity`
---------------
-Best-case Time Complexity: 𝑂(𝑛) when the array is already sorted.
-
-Average-case Time Complexity: 𝑂(𝑛^2)
-
-Worst-case Time Complexity: 𝑂(𝑛^2)
-
-Space Complexity: 𝑂(1) because it is an in-place sorting algorithm.
+- Inefficiency: One of the least efficient sorting algorithms for large datasets. The number of comparisons and swaps can be significantly higher compared to other algorithms.
+- Performance: Poor performance on average and worst-case scenarios, making it impractical for most applications.
+- Redundant Comparisons: Even after the array becomes sorted, it continues to compare.
 
 `Best Case Scenario`
 --------------------
@@ -138,27 +144,24 @@ In the best case scenario, the array is already sorted. The time complexity for 
 
 `Average Case Scenario`
 -----------------------
-In the average case, the array elements are in random order. The time complexity for this case is O(n^2) because, on average, bubble sort will have to perform multiple passes through the array.
+In the average case scenario, the array elements are in random order. The time complexity for this case is O(n^2) because, on average, bubble sort will have to perform multiple passes and swaps through the array.
 
 `Worst Case Scenario`
 ---------------------
 In the worst case scenario, the array is sorted in reverse order. The time complexity for this case is O(n^2) because bubble sort will need to perform the maximum number of comparisons and swaps.
 
-`Applications of Bubble Sort`
---------------------------------
-Educational Purposes
-Small Data Sets
-Simple Checks
-Simple databse management
-Stability Required Sorts
+`Applications`
+--------------
+- Educational purposes – Ideal for teaching sorting due to simplicity and easy-to-visualize steps.
+- Very small datasets – Occasionally used in micro-controllers or small scripts where performance isn't a concern.
+- Detecting nearly sorted data – It’s adaptive and can perform well when the list is mostly sorted.
+
 
 
 
 
 ## `Selection sort` ##
 =======================
-`Definition`
-------------
 Selection sort is a simple comparison-based sorting algorithm. It works by repeatedly selecting the smallest (or largest) element from the unsorted portion of the array and swapping it with the first unsorted element, effectively growing the sorted portion of the array from left to right.
 
 `Advantages`
@@ -168,12 +171,15 @@ In-Place: Does not require additional storage space.
 Useful for Small Data Sets: Performs well with small arrays.
 It has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.
 
-`Complexity`
--------------
+`Complexity Analysis`
+---------------------
 Time Complexity :-
-Best Case: O(n²)
-Average Case: O(n²)
-Worst Case: O(n²)
+- Best Case: O(n²)
+- Average Case: O(n²)
+- Worst Case: O(n²)
+
+Selection sort always goes through the entire array to find the minimum or maximum element, even if the array is already sorted.
+So, unlike some other algorithms, there is no improvement in the best case.
 
 Space Complexity :-  O(1) 
 
@@ -185,11 +191,9 @@ Unstable: Does not preserve the relative order of equal elements.
 
 `Applications of Selection Sort`
 --------------------------------
-Embedded Systems Programming
-Small Data Sets in Educational Tools
-Basic Sorting Tasks in Simple Applications
-Memory-Constrained Environments
-Simulations and Prototyping
+- Small fixed-size lists – E.g., finding the top 5 or bottom 5 values without full sorting.
+- Memory-constrained systems – It makes fewer swaps, so it’s sometimes used when write operations are costly (like EEPROM).
+- Leaderboard updates – When inserting a new score into a sorted list of top players.
 
 
 
@@ -197,9 +201,16 @@ Simulations and Prototyping
 
 ## `Insertion sort` ##
 ======================
-`Definition`
---------------
 Insertion sort is a simple and intuitive comparison-based sorting algorithm. It builds the final sorted array one element at a time by repeatedly taking the next unsorted element and inserting it into the correct position within the sorted portion of the array.
+
+`Complexity analysis`
+----------------------
+Time Complexity :-
+	Best Case: O(n) when the array is already sorted.
+	Average Case: O(n²)
+	Worst Case: O(n²) when the array is sorted in reverse order.
+Space Complexity :- 
+	 O(1) as it is an in-place sorting algorithm.
 
 `Advantages`
 --------------
@@ -211,25 +222,13 @@ Adaptive: Efficient for nearly sorted arrays, with a time complexity approaching
 `Disadvantages`
 -----------------
 Inefficient for Large Data Sets: Time complexity of O(n²) makes it impractical for large datasets.
-Quadratic Time Complexity: On average and in the worst case, it requires quadratic time to sort the array.
-
-`Complexity`
---------------
-Time Complexity :-
-	Best Case: O(n) when the array is already sorted.
-	Average Case: O(n²)
-	Worst Case: O(n²) when the array is sorted in reverse order.
-
-Space Complexity :- 
-	 O(1) as it is an in-place sorting algorithm.
 
 `Applications of Insertion sort`
 --------------------------------
-Small arrays in libraries
-Online sorting
-Database indexing
-GUI Application
-Adaptive algorithms
+Online sorting – Sorting data as it comes in (streaming input).
+Nearly sorted lists – Very efficient (O(n)) when the list is already mostly sorted.
+Small datasets – Often used as a final pass in algorithms like Quick Sort or Merge Sort for small subarrays.
+Text editors – While typing, characters may be inserted in the right place in a sorted list.
 
 
 
@@ -237,16 +236,22 @@ Adaptive algorithms
 
 ## `Quick Sort` ##
 ===================
-`Definition`
----------------
-Quick sort is an efficient, comparison-based, divide-and-conquer sorting algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
+Quick Sort is an efficient, comparison-based, divide-and-conquer sorting algorithm.
+It works by choosing a "pivot" element and rearranging the other elements into two parts:
+  - Elements less than the pivot go to the left.
+  - Elements greater than the pivot go to the right.
+  - This process is called partitioning.
+  - After partitioning:
+    - The pivot is now in its correct sorted position.
+    - The same steps are recursively applied to the left and right parts.
+    - This continues until the entire array is sorted.
 
-`Complexity`
---------------
+`Complexity Analysis`
+------------------------
 Time Complexity :-
-Best Case :-  O(n log n)
-Average Case :-  O(n log n)
-Worst Case :-  O(n²)
+  Best Case :-  O(n log n)
+  Average Case :-  O(n log n)
+  Worst Case :-  O(n²)
 Space Complexity :-  O(log n) (due to the recursion stack)
 
 `Best Case Scenario`
@@ -277,11 +282,10 @@ unstable: Does not preserve the relative order of equal elements.
 
 `Applictions of quick sort`
 -----------------------------
-General purpose sorting
-Indexing large dataset
-Sorting data for dynamic web content
-File systems
-Database query processing
+- General-purpose sorting – Used in many language libraries (like Python’s sort() internally uses Timsort, which includes QuickSort).
+- Database systems – For in-memory sorting operations.
+- File systems – To sort directory entries or file metadata.
+- Web applications – Sorting lists or tables client-side efficiently.
 
 
 
@@ -289,16 +293,14 @@ Database query processing
 
 ## `Merge Sort` ##
 ===================
-`Definition`
---------------
 Merge sort is an efficient, stable, comparison-based, divide-and-conquer sorting algorithm. It works by dividing the array into smaller sub-arrays, sorting those sub-arrays, and then merging them back together to form a sorted array.
 
-`Complexity`
---------------
+`Complexity Analysis`
+------------------------
 Time Complexity :-
-Best Case :-  O(n log n)
-Average Case :-  O(n log n)
-Worst Case :-  O(n log n)
+ Best Case :-  O(n log n)
+ Average Case :-  O(n log n)
+ Worst Case :-  O(n log n)
 Space Complexity :-  O(n) (requires additional space proportional to the size of the array)
 
 `Advantages`
@@ -314,11 +316,10 @@ Not In-Place: Uses extra memory for the temporary arrays.
 
 `Applications of Merge sort`
 ------------------------------
-Large dataset
-Used for sorting that doesnt fit for memory
-When stable sorting need
-Parallel computing
-Complex datastructures
+- Sorting large datasets
+- Parallel processing – Can be easily divided across multiple cores or threads.
+- Linked lists – Performs better than quicksort when applied to linked lists (due to no random access requirement).
+- Stable sorting required
 
 
 
@@ -326,35 +327,72 @@ Complex datastructures
 
 ## `Hash table` ##
 ===================
-Hash tables are a lower-level data structure that directly handles the storage and retrieval of key-value pairs using a hash function.
+- Hash table is a data structure used to store key-value pairs.
+- Uses a hash function to convert keys (like strings) into numeric indices in an array.
 
-The hash function maps keys to indices in an array where the values are stored.
+`How it Works`
+1. The key (e.g., "name") is passed into a hash function.
+2. The hash function converts it to a number (hash code).
+3. That number is mapped to an index within the array.
+4. The value is stored at that index.
 
-Unlike JavaScript objects, hash tables do not have built-in methods or properties. 
+`Why Use Hash Tables?`
+- Fast lookup, insertion, and deletion on average in O(1) time.
+- Efficient storage of data where quick access by key is needed.
 
-Javascript  object is a special implementation of hash table datastructure. However object class adds its own keys. keys that you input  may conflict and  overwrite the inherited default properties
+`JavaScript Objects vs Hash Tables`
+- JavaScript objects work like hash tables internally.
+- But objects inherit keys from their prototype (can lead to conflict).
+- Hash tables are lower-level with no built-in methods or inherited keys.
 
-Hash tables are designed to have constant time complexity for insertion, deletion, and lookup operations
+`How is O(1) achieved?`
+- Good hash functions spread keys uniformly across the array.
+- Avoid too many collisions (same index for different keys).
+- Use chaining or open addressing to resolve collisions.
 
-How do we go from using a string as an index to number as an index ?
-A hashing function accepts the string key. Convert it to a hash code using a defined logic and then maps it into a numeric index that is within in the bounds of the array
-
-How hashtable achieving constant time complexity ?
-A hash table achieves average-case constant time complexity 𝑂(1) for insertion, deletion, and lookup operations by using a hash function to distribute keys uniformly across an array
+`Complexity Analysis`
+---------------------
+`Access`  
+   Time Complexity    : O(1) (average case) – Direct access using the key via hash function.  
+   Space Complexity   : O(n) – Stores n key-value pairs in an array.
+`Search`  
+   Time Complexity    
+      Average Case    : O(1) – Directly find value using the key.  
+      Worst Case      : O(n) – All keys collide and are stored in one bucket (rare).  
+   Space Complexity   : O(1)
+`Insertion`  
+   Time Complexity    
+      Average Case    : O(1) – Key is hashed and value is stored.  
+      Worst Case      : O(n) – All keys go to the same index (collision).  
+   Space Complexity   : O(1) – Unless resizing occurs.
+`Deletion`  
+   Time Complexity    
+      Average Case    : O(1)  
+      Worst Case      : O(n)  
+   Space Complexity   : O(1)
+`Resize (Rehashing)  `
+   Time Complexity    : O(n) – When the array grows to maintain performance.  
+   Space Complexity   : O(n)
+`Note`
+- With a good hash function, collisions are rare and O(1) is typical.
+- Load factor is maintained (e.g., 0.75) to ensure efficient operations.
 
 `Applications`
 --------------
-Used in implementing associative arrays and dictionaries.
-Used in symbol tables in compilers and interpreters.
-Used in implementing caches (e.g., web caches, memoization).
-Used in database indexing and retrieval systems.
-Used in implementing counting and frequency queries efficiently.
+1. Implementing maps/dictionaries.
+2. Caching (storing computed results for fast access).
+3. Indexing databases (key-based lookup).
+4. Symbol tables in compilers.
+5. Routing tables in networks.
+6. Storing user sessions in web applications.
+7. Password storage with hashing.
+8. Counting frequencies (word count, logs, analytics).
 
 `How Hash Tables Work?`
 -----------------------
 1. Hash Function
 ------------------
-A hash function takes an input (key) and returns an index in an array where the corresponding value should be stored.
+A hash function takes an input (key) and returns an hash code as an index of the array where the corresponding value should be stored.
 A good hash function distributes keys uniformly across the array to minimize collisions.
 
 2. Indexing
@@ -365,68 +403,40 @@ The output of the hash function is used as an index to insert, find, or delete a
 -------------------------
 Collisions occur when the hash function maps multiple keys to the same index. 
 
-There are several methods to handle collisions:
--------------------------------------------------------
-`Seperate Chaining` : Each array index points to a linked list of entries that hash to the same index.
+`There are several methods to handle collisions`
+-------------------------------------------------
+`Seperate Chaining` : Separate Chaining handles collisions by storing multiple elements at the same index in a linked list or similar structure.
+Each index in the hash table points to a list of key-value pairs that hash to the same index.
+```js
+Index 3 → [ (k1, v1) → (k2, v2) ]
+```
+- Easy to implement
+- Handles many collisions well
+- Requires extra space for linked lists
+- Lookup can be slower if many keys collide
 
-`Open Addressing` : All elements are stored within the array itself, and upon a collision, the algorithm searches for the next available slot.
+`Open Addressing` : Open Addressing handles collisions by finding another empty slot within the hash table array using a probing sequence (like linear or quadratic probing).
 
-1. Quadratic probing
-----------------------
-Quadratic probing is a collision resolution technique used in hash tables to handle situations where two or more keys hash to the same index in the table. The algorithm uses a quafratic function to calculate next slot to check
+  `Linear probing` - If a collision occure the algorithm checks the next slot in a sequencial manner until an empty slot is found
 
-2. Linear probing
-------------------
-If a collision occure the algorithm checks the next slot in a sequencial manner until an empty slot is found
+  `Quadratic probing` - The algorithm uses a quafratic function to calculate next slot availability
 
-3. Double hashing
-------------------
-Double hashing involves using a secondary hash function to calculate the step size for probing
-
-`Time Complexity`
-------------------
-Best Case
----------
-  Insertion :- O(1)
-  Deletion :-  O(1)
-  Lookup :- O(1)
-
-Average Case
-------------
-  Insertion :- O(1)
-  Deletion :- O(1)
-  Lookup :- O(1)
-
-Worst Case
-----------
- Insertion :- O(n)
-  Deletion :- O(n)
-  Lookup :- O(n)
-
-`Space Complexity`
---------------------
-Space Complexity :-  O(n)
+  `Double hashing` - using a secondary hash function to calculate the step size for probing
 
 `Rehashing`
 ------------
-Rehashing is a technique used in the management of hash tables. A hash table is a data structure that maps keys to values using a hash function. When the hash table becomes too full or the performance of hash operations degrades, rehashing is performed to improve efficiency. 
-
-During rehashing, the hash table is resized (usually increased in size), and all existing keys are reinserted into the new hash table using a new hash function or a recalculation of the hash values.
+When the hash table becomes too full or the performance of hash operations degrades, rehashing is performed to improve efficiency. 
+During rehashing, the hash table is resized, and all existing keys are reinserted into the new hash table using a new hash function or a recalculation of the hash values.
 
 `Load factor`
-----------------
-In the context of hash tables, the load factor is a metric that indicates the ratio of the number of elements stored in the hash table to the total number of slots available.
+-------------
+The load factor is a metric that indicates the ratio of the number of elements stored in the hash table to the total number of slots available.
 
 Load Factor(α)= n / m
-​
-Where:
 n = Number of elements (keys) currently in the hash table.
 m = Number of slots (buckets) in the hash table.
 
-When the load factor exceeds the chosen threshold, the hash table is resized. This usually involves:
-
-Doubling the Size: The size of the hash table is typically doubled (or increased by another factor).
-Rehashing: All existing elements are rehashed and inserted into the new, larger table.
+When the load factor exceeds the chosen threshold, the hash table is resized.
 
 
 
@@ -451,13 +461,17 @@ Mergesort is particularly well-suited for linked lists. It can be implemented wi
 Simple to implement and works well with small datasets or nearly sorted lists. Its best-case time complexity is O(n).
 
 Large Array: Quicksort or Mergesort.
-Small Array: Insertion Sort or Selection Sort.
-Almost Sorted Array: Insertion Sort.
-Least Sorted Array: Quicksort or Mergesort.
-Small Linked List: Insertion Sort.
 Large Linked List: Mergesort.
+
+Small Array: Insertion Sort or Selection Sort.
+Small Linked List: Insertion Sort.
+
+Almost Sorted Array: Insertion Sort.
 Almost Sorted Linked List: Insertion Sort.
+
+Least Sorted Array: Quicksort or Mergesort.
 Least Sorted Linked List: Mergesort.
+
 Doubly Linked List: Similar to singly linked lists; use Insertion Sort for small/almost sorted data and Mergesort for large/least sorted data.
 
 
@@ -492,7 +506,14 @@ Benifits
 Space efficiency
 Performance
 
-Non in plce sorting algorithm example :- merge sort
+In places Sorting algorithms
+-----------------------------
+Bubble sort
+Selection sort
+Insertion sort
+Quick sort
+
+Non - In place sorting algorithm - Merge sort
 
 
 

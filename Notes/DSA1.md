@@ -1,4 +1,3 @@
-
 ## `Data Structure` ##
 ========================
 Data structures are ways of organizing and storing data so that it can be accessed and modified efficiently.
@@ -14,22 +13,6 @@ Heirarchical or Tree based Datastructure : Binary tree , Binary search tree ,  H
 Hashing Datastructures : Hash table , Map , Weak map
 Graph based Datastructures : Graph
 Other : Set , Weakset , Priority queue
-
-`Common Data Structures`
----------------------------
-Arrays: A collection of elements identified by index or key.
-
-Linked Lists: A sequence of elements, where each element points to the next.
-
-Stacks: LIFO (Last In, First Out) structure where elements are added and removed from the top.
-
-Queues: FIFO (First In, First Out) structure where elements are added at the back and removed from the front.
-
-Trees: Hierarchical data structure with a root element and child elements forming a tree-like pattern.
-
-Graphs: A set of vertexes connected by edges.
-
-Hash Tables: Key-value pairs for efficient data retrieval.
 
 `Operations on Data Structures`
 --------------------------------
@@ -108,7 +91,7 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 - Examples: Factorial, Fibonacci, Tree Traversal, Tower of Hanoi  
 
 5. Divide and Conquer  
-- Break the problem into smaller sub-problems, solve them independently, and combine results.  
+- Break the main problem into smaller sub-problems, solve them independently, and combine results.  
 - Examples: Merge Sort, Quick Sort, Binary Search, Closest Pair of Points  
 
 6. Greedy Algorithms  
@@ -271,11 +254,11 @@ Dynamic Programming (DP) is a method for solving complex problems by breaking th
 
 `Memoize Approach`
 --------------------
-The Memoize Approach is a technique used in dynamic programming where intermediate results of subproblems are stored (usually in a table or dictionary) to avoid redundant calculations. When a function is called, it first checks if the result is already computed and stored. If so, it returns the stored result; otherwise, it computes the result, stores it, and then returns it.
+The Memoize Approach is a technique used in dynamic programming where intermediate results of subproblems are stored (usually in a table or dictionary) to avoid redundant calculations.
 
 `Bottom-Up Approach`
 ---------------------
-The Bottom-Up Approach in dynamic programming involves solving smaller subproblems first and using their solutions to build up the solution to the larger problem. This approach typically involves filling out a table in a systematic way, starting with the simplest cases and progressing to more complex cases, ensuring that all subproblem solutions are available when needed for solving the larger problem.
+The Bottom-Up Approach in dynamic programming involves solving smaller subproblems first and using their solutions to build up the solution to the larger problem.
 
 
 
@@ -285,8 +268,8 @@ The Bottom-Up Approach in dynamic programming involves solving smaller subproble
 ==========================
 Memory allocation is the process of reserving a portion of memory within a computer program for storing data and instructions.
 
-`Bit` vs `Byte`
----------------
+`Bit` vs `Nibble` vs `Byte`
+---------------------------
 Bit :- The smallest unit of data in a computer, representing a binary value of 0 or 1.
 Nibble :- a group of 4 bits
 Byte :- A group of 8 bits, which together can represent 256 different values (from 0 to 255). Bytes are often used to encode a single character of text in a computer.
@@ -393,7 +376,7 @@ Complexity analysis is the study of how the performance of an algorithm or data 
 
 `Time Complexity`
 -------------------
-Measures the amount of time an algorithm takes to complete as a function of the input size 𝑛
+Measures the amount of time an algorithm takes to complete a function of the input size 𝑛
 
 `Space Complexity`
 ------------------
@@ -541,7 +524,7 @@ It is memory-efficient, especially useful when you only need to represent true/f
     At End (with tail pointer): O(1)
     At End (without tail): O(n) – Traverse to last node
     At Middle       : O(n) – Traverse to position
-  Space Complexity  : O(1) – No extra space allocation
+  Space Complexity  : O(1) – No extra space is used
 
 `Deletion`
   Time Complexity
@@ -751,8 +734,9 @@ Commonly used in systems like Windows, Java, and .NET.
 ## `How strings are stored in memory` ##
 =========================================
 `In javascript`
---------------------------
-Each character in a JavaScript string is internally stored as one or two 16-bit code units (depending on the character):
+----------------
+JavaScript stores strings as sequences of UTF-16 code units.
+Each character in the string is represented by one or two 16-bit values.
 
 `In low level languages`
 ------------------------
