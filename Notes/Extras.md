@@ -428,3 +428,15 @@ The Unit of Work (UoW) pattern is a design pattern used to manage transactions a
 2️⃣ Tracks changes (insert, update, delete)
 3️⃣ Commits all changes together if everything is successful
 4️⃣ Rolls back if any error occurs
+
+
+
+Therafom
+Promithios
+Graphana
+
+Use redis for the multiple user slot selection
+
+uplers
+Well found
+otta.com

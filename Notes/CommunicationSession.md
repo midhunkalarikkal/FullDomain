@@ -290,3 +290,30 @@ Thanks again for your time and consideration.
 Keep stories short but rich
 Be authentic, not dramatic
 Use voice energy to bring the story to life
+
+Rohaan N Devasia
+14:13
+self-aware, honest, and growth-driven you are.
+Rohaan N Devasia
+14:14
+W A G
+Method
+Weakness
+Action taken
+Growth Mindset
+Rohaan N Devasia
+14:20
+“I care too much.”
+
+“I work too hard.”
+
+“I’m a perfectionist.”
+
+“I trust people too easily.”
+This is an area I’ve worked on a lot recently…”
+
+“At one point, it was a clear challenge for me, but…”
+
+“Here’s what I’ve done to manage it better…”
+
+“It’s still a work-in-progress, but I’ve made consistent improvements.”

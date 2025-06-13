@@ -129,6 +129,7 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 - Convert data into a fixed-size hash to allow fast lookup, insert, and delete.  
 - Examples: Hash Maps, Hash Tables, Collision Handling, Anagram Grouping  
 
+
 14. Geometry Algorithms  
 - Used in problems involving 2D/3D space, shapes, and coordinates.  
 - Examples: Convex Hull, Closest Pair of Points, Line Intersection, Area of Polygon  
@@ -145,9 +146,11 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 =========================================
 `Kruskal’s Algorithm` -	A Greedy algorithm used to find the Minimum Spanning Tree (MST) of a graph. It picks the smallest weight edge and connects components without forming cycles. Useful for network design.
 
-`Prim’s Algorithm` - Greedy algorithm to find the MST. It starts from any node and keeps adding the minimum edge connected to the tree.
+`Prim’s Algorithm` - Greedy algorithm used to find the MST. It starts from any node and keeps adding the minimum edge connected to the tree.
 
 `Dijkstra’s Algorithm` - A Greedy algorithm used to find the shortest path from a source node to all other nodes in a weighted graph (non-negative weights).
+
+`Huffman Coding` - Huffman Coding is a greedy algorithm used to compress data by assigning shorter binary codes to more frequent characters and longer codes to less frequent characters, reducing the overall size of the data.
 
 `Bellman-Ford Algorithm` - Similar to Dijkstra, but can handle negative weights. Slower but more versatile.
 
@@ -307,19 +310,8 @@ Provides flexibility to allocate and deallocate memory as needed.
 
 
 
-## `Heap` vs `Stack Memory` ##
+## `Stack` vs `Heap` Memory ##
 ==============================
-`Heap Memory`
---------------
-- Heap memory is a region of a computer's memory where dynamic memory allocation takes place. It is used for the runtime allocation of memory needed for objects and data structures.
-- Memory is managed explicitly by the programmer.
-- Larger in size, Flexibility, Life time control, Global access, Non contiguous
-- Accessing data in the heap memory is slower than in the stack because it involves pointers and dynamic allocation.
-- If dynamically allocated memory isn’t properly freed or released, it stays reserved — leading to memory leaks.
-- When memory is allocated and deallocated in small chunks, gaps (fragments) are created. This can reduce the usable continuous space, even if enough memory is free overall.
-- **Reference data types** like arrays, objects, and functions (in JS) are stored in heap memory.
-- The **reference (pointer)** to these values is stored in the stack.
-
 `Stack Memory`
 ---------------
 - Used for **static memory allocation** (like local variables and function calls).
@@ -330,6 +322,16 @@ Provides flexibility to allocate and deallocate memory as needed.
   - **Primitive data types** 
   - **References (not objects)** of non-primitive types,
   - **Function call information** (like return addresses and parameters).
+
+`Heap Memory`
+--------------
+- Heap memory is a region of a computer's memory where dynamic memory allocation takes place. It is used for the runtime allocation of memory needed for objects and data structures.
+- Memory is managed explicitly by the programmer.
+- Larger in size, Flexibility, Life time control, Global access, Non contiguous
+- Accessing data in the heap memory is slower than in the stack because it involves pointers and dynamic allocation.
+- If dynamically allocated memory isn’t properly freed or released, it stays reserved — leading to memory leaks.
+- When memory is allocated and deallocated in small chunks, gaps (fragments) are created. This can reduce the usable continuous space, even if enough memory is free overall.
+- **Reference data types** like arrays, objects, and functions (in JS) are stored in heap memory.
 
 
 
@@ -469,7 +471,7 @@ An array of arrays where each sub-array can have different lengths.
 
 `Dense array`
 ----------------
-A dense array is an array where most or all of the indices are occupied with valid elements (i.e., there are very few or no gaps or undefined values between elements).
+A dense array is an array where most or all of the indices are occupied with valid elements.
 
 `Homogeneous Array`
 --------------------
@@ -625,7 +627,7 @@ Logical Addressing: Virtual memory makes applications think they have more memor
 
 Paging: The system breaks RAM and virtual memory into small blocks called pages. If RAM is full, less-used data is moved to pages.
 
-Swapping: When a program needs data that was moved to storage, the system brings it back to RAM and swaps out other data if needed. This keeps the illusion of having more memory.
+Swapping: When a program needs data that was moved to page storage, the system brings it back to RAM and swaps out other data if needed. This keeps the illusion of having more memory.
 
 `Advantages`
 -------------
@@ -727,6 +729,7 @@ UTF-16:
 Uses 2 or 4 bytes to represent each character.
 Better for representing non-English characters like Asian scripts or emojis.
 Commonly used in systems like Windows, Java, and .NET.
+
 
 
 

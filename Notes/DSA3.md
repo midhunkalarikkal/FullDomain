@@ -32,18 +32,21 @@
 - Maximum nodes at level ‘l’ = 2^l  
 - Maximum nodes in a binary tree of height ‘h’ = (2^(h+1)) - 1  
 - A binary tree with only left or right children is a skewed tree (degenerate).  
-- In a perfect binary tree, all internal nodes have two children and all leaves are at the same level.  
+- In a perfect binary tree, all internal nodes have two children and all leaf nodes are at the same level.  
 
 `Complexity Analysis of Binary Tree`
 -------------------------------------
 `Access`  
-   Time Complexity    : O(log n) – In balanced binary trees like AVL/Red-Black Trees.  
-                        O(n) – In worst-case skewed trees.  
+   Time Complexity
+      Best Case       : O(1)
+      Average Case    : O(log n) – In balanced binary trees like AVL/Red-Black Trees.  
+      Worst Case      : O(n) – In worst-case skewed trees.  
    Space Complexity   : O(1) – If iterative;  
                         O(h) – If recursive (due to call stack), where h is the height.
 
 `Search`  
-   Time Complexity    
+   Time Complexity   
+      Best Case       : O(1)
       Average Case    : O(log n) – In balanced trees.  
       Worst Case      : O(n) – In unbalanced or skewed trees.  
    Space Complexity   : O(1) – Iterative;  
@@ -51,13 +54,15 @@
 
 `Insertion`  
    Time Complexity    
+      Best Case       : O(1)
       Average Case    : O(log n) – In balanced trees.  
       Worst Case      : O(n) – In skewed trees.  
    Space Complexity   : O(1) – Iterative;  
                         O(h) – Recursive.
 
 `Deletion`  
-   Time Complexity    
+   Time Complexity   
+      Best Case       : O(1) 
       Average Case    : O(log n)  
       Worst Case      : O(n)  
    Space Complexity   : O(h) – Due to recursion stack.
@@ -69,12 +74,9 @@
 
 2. `Ternary Tree`
 --------------------
-A ternary tree is a tree data structure in which each node has at most three children.
-
-Properties
-----------
-The maximum number of nodes at level l is 3^l
-The maximum number of nodes in a ternary tree of height h is ((3^h+1) - 1) / 2
+- A ternary tree is a tree data structure in which each node has at most three children.
+- The maximum number of nodes at level l is 3^l
+- The maximum number of nodes in a ternary tree of height h is ((3^h+1) - 1) / 2
 
         A
       / | \
@@ -82,42 +84,25 @@ The maximum number of nodes in a ternary tree of height h is ((3^h+1) - 1) / 2
     /|\    
    E F G
 
-Time Complexity
----------------
-Insertion
-----------
+`Complexity Analysis Ternary Tree`
+----------------------------------
+`Insertion`, `Deletion`, `Search`
+--------------------------------
 Best Case: O(1)
 Average Case: O(log₃ n)
 Worst Case: O(log₃ n)
+All types of traversal Time complexity - o(n)
 
-Deletion
---------
-Best Case: O(1)
-Average Case: O(log₃ n)
-Worst Case: O(log₃ n)
-
-Search
-------
-Best Case: O(1)
-Average Case: O(log₃ n)
-Worst Case: O(log₃ n)
-
-All types of traversal - o(n)
-
-Space Complexity
-----------------
+`Space Complexity`
+------------------
 o(1) for insertion deletion and search
 o(n) for all traversal
 
 3 . `K-ary Tree`
 -----------------
-A k-ary tree is a tree in which each node has at most k children. When k=2, it is a binary tree; when k=3, it is a ternary tree, and so on.
-
-Properties
-----------
-The maximum number of nodes at level l is k^l
-
-The maximum number of nodes in a k-ary tree of height h is ((k^h+1) - 1) / k - 1
+- A k-ary tree is a tree in which each node has at most k children. When k=2, it is a binary tree; when k=3, it is a ternary tree, and so on.
+- The maximum number of nodes at level l is k^l
+- The maximum number of nodes in a k-ary tree of height h is ((k^h+1) - 1) / k - 1
 
         A
     / | | \
@@ -159,16 +144,24 @@ Move up the tree to the nearest ancestor for which the current node lies in its 
 
 ## `Threaded Binary Tree` ##
 ============================
-A threaded binary tree is a binary tree variant where null pointers (used for leaf nodes) are replaced with pointers to in-order predecessor and successor nodes. This helps in making in-order traversal faster and reduces memory wastage by using stack and queue.
+A Threaded Binary Tree is a variant of a binary tree where the NULL pointers (usually found in leaf nodes) are replaced with pointers to the node’s inorder predecessor or successor.
 
-Types
------
-Single Threaded: Each node is threaded towards either the in-order predecessor or successor (but not both).
-Double Threaded: Each node is threaded towards both the in-order predecessor and successor.
+This technique offers two main advantages:
 
-Time complexity
----------------
-Insertion Deletion Search and all traversals - all cases - o(n)
+1. 🔁 **Faster In-order Traversal**  
+   - By replacing NULLs with threads, we can traverse the tree in in-order without using a stack or recursion.
+
+2. 🧠 **Reduced Memory Usage**  
+   - Since no auxiliary stack or queue is required, memory usage is more efficient.
+
+📌 Types of Threading:
+   - **Single Threaded:** Threads point either to inorder predecessor or successor.
+   - **Double Threaded:** Threads point to both inorder predecessor and successor.
+
+💡 Use Case:
+   - Efficient in-order traversal in memory-constrained environments.
+
+`Time complexity` - Insertion Deletion Search and all traversals - all cases - o(n)
 
 
 
@@ -176,10 +169,10 @@ Insertion Deletion Search and all traversals - all cases - o(n)
 
 ## `Types of Trees Based on Structure` ##
 ==========================================
-1 . Complete binary Tree
+1. Complete binary Tree
 -------------------------
-A complete binary tree is a binary tree in which all levels, except possibly the last, are fully filled, and all nodes are as far left as possible.
-The height of a complete tree with n nodes is [log2 (n+1)] - 1
+A complete binary tree in which all levels, except possibly the last, are fully filled, and all nodes are as far left as possible.
+The height of a complete binary tree with n nodes is [log2 (n+1)] - 1
 
         A
        / \
@@ -187,9 +180,9 @@ The height of a complete tree with n nodes is [log2 (n+1)] - 1
      / \  /
     D   E F
 
-2 . Full Tree
+2. Full Tree
 -------------
-A full tree (or strictly binary tree) is a binary tree in which every node other than the leaves has exactly two children.
+A full tree (or strictly binary tree) is a binary tree in which every node other than the leaf nodes has exactly two children.
 
         A
        / \
@@ -197,9 +190,9 @@ A full tree (or strictly binary tree) is a binary tree in which every node other
      / \ / \
     D  E F  G
 
-3 . Perfect Tree
+3. Perfect Tree
 ----------------
-A perfect tree (or perfect binary tree) is a binary tree in which all internal nodes have exactly two children, and all leaf nodes are at the same level.
+A perfect tree is a binary tree in which all internal nodes have exactly two children, and all leaf nodes are at the same level.
 
         A
        / \
@@ -210,24 +203,24 @@ A perfect tree (or perfect binary tree) is a binary tree in which all internal n
   H  I J  K L  M
 
 
-4 . Degenerate Tree
+4. Degenerate Tree
 -------------------
 A degenerate tree (or pathological tree) is a tree where each parent node has only one child. This type of tree essentially resembles a linked list, as it has N nodes and 𝑁 − 1 edges, forming a single path from the root to the last node.
 
-5 . Left-Skewed Tree
+5. Left-Skewed Tree
 ------------------------
 A left-skewed tree is a degenerate tree where every node has only a left child.
 Operations such as search, insert, and delete have linear time complexity, O(n).
 
-    A
+      A
+     /
+    B
    /
-  B
+  C
  /
-C
-/
 D
 
-6 . Right-Skewed Tree
+6. Right-Skewed Tree
 -------------------------
 A right-skewed tree is a degenerate tree where every node has only a right child.
 Operations such as search, insert, and delete have linear time complexity, O(n).
@@ -246,68 +239,72 @@ A
 
 ## `Binary Search Tree (BST)` ##
 ================================
-A Binary Search Tree (BST) is a type of binary tree that maintains a specific order property, making it efficient for searching, insertion, and deletion operations.
+A Binary Search Tree (BST) is a type of binary tree that maintains a specific order property, making it efficient for searching, insertion, and deletion operations. A standard BST does not allow duplicates — each node must contain a unique key
 
-To validate whether a given binary tree is a Binary Search Tree (BST), you need to ensure that for each node
+To validate whether a given binary tree is a Binary Search Tree (BST), we need to ensure that for each node
 ---------------------------------------------------------------------------------------------------------------
 The left subtree of a node contains only nodes with values less than the node's value.
 The right subtree of a node contains only nodes with values greater than the node's value.
 Both the left and right subtrees must also be binary search trees.
 
-`Time complexity`
--------------------
-Insertion
----------
-Balanced bst - o(log n)
-Unbalanced tree - o(n) , In a unbalanced bst the height can be up to n in the worst case
+`Complexity Analysis of Binary Search Tree (BST)`
+--------------------------------------------------
+`Access`  
+   Time Complexity:
+      Best Case       : O(1) – Root node access.  
+      Average Case    : O(log n) – Balanced BST.  
+      Worst Case      : O(n) – Skewed BST.  
+   Space Complexity:
+      O(1) – Iterative.  
+      O(h) – Recursive, where h is the height.
+`Search`  
+   Time Complexity:
+      Best Case       : O(1) – Found at root.  
+      Average Case    : O(log n)  
+      Worst Case      : O(n)  
+   Space Complexity:
+      O(1) – Iterative.  
+      O(h) – Recursive.
+`Insertion`  
+   Time Complexity:
+      Best Case       : O(1) – Empty tree or direct insert.  
+      Average Case    : O(log n)  
+      Worst Case      : O(n)  
+   Space Complexity:
+      O(1) – Iterative.  
+      O(h) – Recursive.
+`Deletion`  
+   Time Complexity:
+      Best Case       : O(1) – Leaf node deletion.  
+      Average Case    : O(log n)  
+      Worst Case      : O(n)  
+   Space Complexity:
+      O(h) – Due to recursion stack.
+`Traversal` (Inorder, Preorder, Postorder, Level Order)  
+   Time Complexity    : O(n) – Every node is visited.  
+   Space Complexity   : O(h) – Call stack or queue depending on method.
 
-Deletion
---------
-Balanced bst - o(log n)
-Unbalanced tree - o(n)
 
-Search
--------
-Balanced bst - o(log n)
-Unbalanced tree - o(n)
-
-Traveral
---------
-o(n)
-
-Space complexity
+`Applications`
 ----------------
-o(n) - This includes space for the n nodes in the tree, where each node has a value and pointers to left and right children.
-
-`Uses or Applications of BST`
-------------------------------
-- Searching: Efficient searching due to its ordered structure.
-- Dynamic Set Operations: Used in sets and maps to perform dynamic set operations like insertion, deletion, and lookup efficiently.
-- Databases: Implementing indexes in databases to allow fast retrieval of data.
-- Computer Graphics: Used in applications like ray tracing and nearest neighbor searches.
-- Network Routing: Efficiently finding and updating routes in networking.
-- File Systems: Organizing files and directories in hierarchical file systems
-
-`Properties of BST`
------------------------
-Binary Tree Structure: Each node has at most two children.
-
-Order Property: For each node:
-	The left subtree contains values less than the node's value.
-	The right subtree contains values greater than the node's value.
-
-Unique Path: There is a unique path from the root to any other node in the tree.
-
-No Duplicates: Typically, BSTs do not contain duplicate values. If duplicates are allowed, a specific convention is followed (e.g., duplicates go to the right).
+-BST enables efficient searching, insertion, and deletion operations — typically in `O(log n)` time for balanced trees.
+- Used in compilers and interpreters for symbol tables, where identifiers are stored and accessed dynamically.
+- Used for hierarchical data like directories and files by enabling quick lookups and insertions.
+- BSTs (especially AVL or Red-Black Trees) are used to implement ordered indexes for fast data retrieval in database systems.
+- Used in applications like ray tracing and spatial partitioning. 
+- Used for Efficient route lookups and dynamic updates in routing tables.
+- BSTs are used in Huffman coding trees for lossless data compression algorithms.
+- Used in AI decision trees, collision detection systems, and event-driven logic where sorted data needs quick updates.
+- Allocating and deallocating memory blocks efficiently using ordered structures.
 
 `Operations on Binary Search Tree (BST)`
 ------------------------------------------
-1 . Inserting
+1. Inserting
 ---------------
 Inserting a node in a BST involves placing it in the correct position to maintain the order property.
 
 Algorithm for Inserting
-----------------------
+-----------------------
 - Start at the root.
 - Compare the value to be inserted with the value of the current node.
 - If the value is less than the current node's value, move to the left child. If greater, move to the right child.
@@ -324,14 +321,10 @@ Algorithm for Inserting
 -----------------
 Traversal refers to visiting all the nodes in the BST in a specific order. There are two main types: Depth-First Search (DFS) and Breadth-First Search (BFS).
 
-3 . 1 `Depth-First Search (DFS) Traversals`
+3. 1. `Depth-First Search (DFS) Traversals`
 --------------------------------------------
-3 . 1 . 1 InOrder Traversal (Left, Root, Right)
+3. 1. 1. InOrder Traversal (Left, Root, Right)
 -------------------------------------------------
-Visit the left subtree.
-Visit the root node.
-Visit the right subtree.
-
 BST InOrder Traversal :-  When performed on a Binary Search Tree (BST), InOrder traversal visits nodes in ascending order.
 
 Applications
@@ -342,15 +335,8 @@ K-th Smallest/Largest Element :-  By keeping a counter during traversal, we can 
 
 Merging BSTs :-  To merge two BSTs, we can first perform an InOrder traversal on both trees to get sorted arrays and then merge the arrays into a new BST.
 
-3 . 1 . 2 PreOrder Traversal (Root, Left, Right)
+3. 1. 2. PreOrder Traversal (Root, Left, Right)
 --------------------------------------------------
-Visit the root node.
-Visit the left subtree.
-Visit the right subtree.
-Useful for creating a copy of the tree or for serialization of the tree.
-
-PreOrder Traversal: Visits the root first, then the left subtree, and finally the right subtree.
-
 Applications
 ------------
 Tree Copying/Cloning :-  PreOrder traversal can be used to create a copy of the tree.
@@ -361,15 +347,8 @@ Serialization/Deserialization :-  PreOrder traversal is used to serialize the tr
 
 Directory Structure: Used to list directory contents where the root directory is processed before subdirectories.
 
-3 . 1 . 3 PostOrder Traversal (Left, Right, Root)
+3. 1. 3. PostOrder Traversal (Left, Right, Root)
 --------------------------------------------------
-Visit the left subtree.
-Visit the right subtree.
-Visit the root node.
-Useful for deleting the tree or for evaluating expression trees.
-
-PostOrder Traversal: Visits the left subtree first, then the right subtree, and finally the root node.
-
 Applications
 ------------
 Deleting a Tree :-  PostOrder traversal ensures that children are processed before their parent nodes, making it useful for safely deleting trees
@@ -378,75 +357,59 @@ Expression Trees :-  Used to evaluate expressions in postfix notation (Reverse P
 
 Dependency Resolution :-  Useful in scenarios where dependencies must be resolved before the parent task, such as build systems and task scheduling.
 
-3 . 2 `Breadth-First Search (BFS) Traversal`
+3. 2 `Breadth-First Search (BFS) Traversal`
 ----------------------------------------------
 Level Order Traversal
 
 Visits nodes level by level from top to bottom.
 Uses a queue to keep track of nodes to be visited
 
-Algorithm
----------
-Create a queue
-Enqueue the root node
-As long as node exist in the queue
-	Dequeue the node form the queue
-	read the nodes value
-	Enqueue the node's left child if exist
-	Enqueue the node's right child if exist
+`Algorithm`
+------------
+- Create an empty queue
+- Enquque the root node
+- while the queue is not empty:
+   - Dequeue a node from the front of the queue
+   - Read the nodes value
+   - If the node has a left child, enqueue the left side
+   - if the node has a right child, enqueue the right child
 
-Uses
-----
-- Level Order Traversal: BFS traverses trees level by level.
-- Shortest Path: BFS finds the shortest path in unweighted trees.
-- Minimum Depth: BFS calculates the shortest path to a leaf node.
-- Serialization/Deserialization: BFS converts trees to from strings or lists.
-- Completeness Check: BFS verifies if a tree is complete.
-- Maximum Values: BFS finds the largest value at each tree level.
-
-
-
-
-
-## `Binary Search Tree (BST) vs Binary Tree (BT)` ##
-======================================================
-Binary Search Tree (BST)
-----------------------------
-Definition :-  A BST is a binary tree with an additional property that for each node, the value of all nodes in the left subtree is less than the node's value, and the value of all nodes in the right subtree is greater than the node's value.
-
-Order Property :-  Maintains the order property which allows efficient searching, insertion, and deletion operations.
-
-Efficiency :-  Average-case time complexity for search, insertion, and deletion operations is O(log n). In the worst case (unbalanced), these operations can degrade to O(n).
-
-Binary Tree (BT)
----------------------
-Definition :-  A BT is a tree data structure in which each node has at most two children, known as the left child and the right child.
-Order Property :-  Does not maintain any specific order property.
-Efficiency :-  Time complexity for search, insertion, and deletion is generally O(n) since there is no inherent order to the elements.
+`Applications`
+----------------
+- Level Order Traversal of Trees
+- Path Finding Algorithms in AI (e.g., in games)
+- Shortest Path in Unweighted Graphs
+- Web Crawlers
+- Social Networking Sites (e.g., finding shortest connection path)
+- GPS Navigation Systems
+- Peer-to-Peer Networks (e.g., BitTorrent)
+- Network Broadcasting
+- Cycle Detection in Undirected Graphs
+- Serialization/Deserialization of Trees
 
 
 
 
 
 ## `Extra trees` ##
-==============================
+====================
 `Balanced Tree`
 ----------------
-A tree is balanced if the height difference between the left and right subtrees of any node is at most one.
+A tree is a balanced tree if the height difference between the left and right subtrees of any node is at most one.
 
-depth = height of left subtree - hwight of right subtree
+depth = |height(left subtree) - height(right subtree)| ≤ 1
 
 `Balanced trees`
 -----------------
 1. AVL Tree
 2. Red-Black Tree
 3. Splay Tree
-4. B-Tree
+4. B- Tree
 5. B+ Tree
 
 `Unbalanced Tree`
---------------
-A tree where the height difference between the left and right subtrees of some nodes is greater than one.
+-----------------
+A tree is a unbalanced tree where the height difference between the left and right subtrees of some nodes is greater than 1.
 
 `Unbalanced trees`
 -------------------
@@ -454,16 +417,24 @@ A tree where the height difference between the left and right subtrees of some n
 2. Degenerate Tree
 3. Skewed Tree
 
-1 . `AVL Tree`
-----------------
-A self-balancing binary search tree where the difference in heights of left and right subtrees of any node is at most one. This property ensures efficient search, insertion, and deletion operations.
+1. `AVL Tree`
+-------------
+A self-balancing binary search tree where the difference in heights of left subtrees and right subtrees of any node is at most one (0 or 1). This property ensures efficient search, insertion, and deletion operations.
 
-2 . `Red-Black Tree`
+2. `Red-Black Tree`
 ---------------------
-A self-balancing binary search tree where each node has an extra bit of information, stored as a color attribute. 
-Each node is either red or black.  The root of the tree is always black.  Red nodes cannot have red children. Balancing is done by rotaions and recolouring.
+- A self-balancing binary search tree where each node has an extra bit of information, stored as a color attribute. 
+- Each node is either red or black.
+- The root of the tree is always black.
+- Red nodes cannot have red children.
+- Balancing is done by rotaions and recolouring.
 
 use cases - Linux , kernel , java collection framework
+
+`Use of Color (What It Helps With)`
+- Detect imbalance: If two red nodes appear in a row, it violates the rules.
+- Balance automatically: Recoloring and rotating based on the colors help keep the tree's height O(log n).
+- Ensure consistent search times: Maintains a reasonably balanced structure for efficient search, insert, and delete operations.
 
 3 . `Prefix Tree (Trie)`
 --------------------------

@@ -45,7 +45,7 @@ Peek/Top: View the top element without removing it.
 Implemented using arrays. Has a fixed size. Limited by predefined memory.
 
 `Dynamic Stack`
------------------
+---------------
 Implemented using linked lists. Can grow or shrink dynamically as needed.
 
 
@@ -91,8 +91,7 @@ Operates on the basic FIFO principle.
 
 `Circular Queue`
 ----------------
-The last position connects to the first, forming a circle.
-Prevents memory wastage by reusing empty slots.
+The last position connects to the first, forming a circle. Prevents memory wastage by reusing empty slots.
 
 `Priority Queue`
 -------------------
@@ -140,15 +139,15 @@ Bubble Sort is a simple comparison-based sorting algorithm also known as sinking
 
 `Best Case Scenario`
 --------------------
-In the best case scenario, the array is already sorted. The time complexity for this case is O(n) because the algorithm will only need to pass through the array once to verify that it is sorted.
+In the best case scenario, the array is already sorted.
 
 `Average Case Scenario`
 -----------------------
-In the average case scenario, the array elements are in random order. The time complexity for this case is O(n^2) because, on average, bubble sort will have to perform multiple passes and swaps through the array.
+In the average case scenario, the array elements are in random order.
 
 `Worst Case Scenario`
 ---------------------
-In the worst case scenario, the array is sorted in reverse order. The time complexity for this case is O(n^2) because bubble sort will need to perform the maximum number of comparisons and swaps.
+In the worst case scenario, the array is sorted in reverse order.
 
 `Applications`
 --------------
@@ -164,24 +163,24 @@ In the worst case scenario, the array is sorted in reverse order. The time compl
 =======================
 Selection sort is a simple comparison-based sorting algorithm. It works by repeatedly selecting the smallest (or largest) element from the unsorted portion of the array and swapping it with the first unsorted element, effectively growing the sorted portion of the array from left to right.
 
-`Advantages`
------------
-Simple to Implement: Easy to understand and implement.
-In-Place: Does not require additional storage space.
-Useful for Small Data Sets: Performs well with small arrays.
-It has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.
-
 `Complexity Analysis`
 ---------------------
 Time Complexity :-
 - Best Case: O(n²)
 - Average Case: O(n²)
 - Worst Case: O(n²)
-
+ 
 Selection sort always goes through the entire array to find the minimum or maximum element, even if the array is already sorted.
 So, unlike some other algorithms, there is no improvement in the best case.
 
 Space Complexity :-  O(1) 
+
+`Advantages`
+-----------
+Simple to Implement: Easy to understand and implement.
+In-Place: Does not require additional storage space.
+Useful for Small Data Sets: Performs well with small arrays.
+It has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.
 
 `Disadvantages`
 ----------------
@@ -218,6 +217,7 @@ Simple to Implement: Easy to understand and implement.
 Efficient for Small Data Sets: Performs well with small arrays.
 Stable: Preserves the relative order of equal elements.
 Adaptive: Efficient for nearly sorted arrays, with a time complexity approaching O(n).
+In place
 
 `Disadvantages`
 -----------------
@@ -225,10 +225,10 @@ Inefficient for Large Data Sets: Time complexity of O(n²) makes it impractical 
 
 `Applications of Insertion sort`
 --------------------------------
-Online sorting – Sorting data as it comes in (streaming input).
-Nearly sorted lists – Very efficient (O(n)) when the list is already mostly sorted.
-Small datasets – Often used as a final pass in algorithms like Quick Sort or Merge Sort for small subarrays.
-Text editors – While typing, characters may be inserted in the right place in a sorted list.
+- Online sorting – Sorting data as it comes in (streaming input).
+- Nearly sorted lists – Very efficient (O(n)) when the list is already mostly sorted.
+- Small datasets – Often used as a final pass in algorithms like Quick Sort or Merge Sort for small subarrays.
+- Text editors – While typing, characters may be inserted in the right place in a sorted list.
 
 
 
@@ -337,7 +337,7 @@ Not In-Place: Uses extra memory for the temporary arrays.
 4. The value is stored at that index.
 
 `Why Use Hash Tables?`
-- Fast lookup, insertion, and deletion on average in O(1) time.
+- Fast lookup, insertion, and deletion on average time complexity O(1).
 - Efficient storage of data where quick access by key is needed.
 
 `JavaScript Objects vs Hash Tables`
@@ -347,8 +347,7 @@ Not In-Place: Uses extra memory for the temporary arrays.
 
 `How is O(1) achieved?`
 - Good hash functions spread keys uniformly across the array.
-- Avoid too many collisions (same index for different keys).
-- Use chaining or open addressing to resolve collisions.
+- Avoid too many collisions (same index for different keys) by uses seperate chaining and open addressing for resolvong collitions.
 
 `Complexity Analysis`
 ---------------------
@@ -379,14 +378,14 @@ Not In-Place: Uses extra memory for the temporary arrays.
 
 `Applications`
 --------------
-1. Implementing maps/dictionaries.
-2. Caching (storing computed results for fast access).
-3. Indexing databases (key-based lookup).
-4. Symbol tables in compilers.
-5. Routing tables in networks.
-6. Storing user sessions in web applications.
-7. Password storage with hashing.
-8. Counting frequencies (word count, logs, analytics).
+- Implementing maps/dictionaries.
+- Caching (storing computed results for fast access).
+- Indexing databases (key-based lookup).
+- Symbol tables in compilers.
+- Routing tables in networks.
+- Storing user sessions in web applications.
+- Password storage with hashing.
+- Counting frequencies (word count, logs, analytics).
 
 `How Hash Tables Work?`
 -----------------------
@@ -415,7 +414,7 @@ Index 3 → [ (k1, v1) → (k2, v2) ]
 - Requires extra space for linked lists
 - Lookup can be slower if many keys collide
 
-`Open Addressing` : Open Addressing handles collisions by finding another empty slot within the hash table array using a probing sequence (like linear or quadratic probing).
+`Open Addressing` : Open Addressing handles collisions by finding another empty slot within the hash table array using a probing sequence (like linear probing or quadratic probing or double hashing).
 
   `Linear probing` - If a collision occure the algorithm checks the next slot in a sequencial manner until an empty slot is found
 
@@ -463,11 +462,10 @@ Simple to implement and works well with small datasets or nearly sorted lists. I
 Large Array: Quicksort or Mergesort.
 Large Linked List: Mergesort.
 
-Small Array: Insertion Sort or Selection Sort.
+Small Array: Selection sort or Insertion sort.
 Small Linked List: Insertion Sort.
 
-Almost Sorted Array: Insertion Sort.
-Almost Sorted Linked List: Insertion Sort.
+Almost Sorted Array or Linked List: Insertion Sort.
 
 Least Sorted Array: Quicksort or Mergesort.
 Least Sorted Linked List: Mergesort.
@@ -519,9 +517,28 @@ Non - In place sorting algorithm - Merge sort
 
 
 
+## `Adaptive Algorithms` ##
+============================
+The algorithm takes advantage of existing order in the input (i.e., performs better on nearly sorted data).
+
+Adaptive
+---------
+Bubble sort
+Insertion sort
+
+Non-Adaptive
+-------------
+Selection
+Quick sort
+merge sort
+
+
+
+
+
 ## `Tabulation` ##
 ===================
-Tabulation is a bottom-up dynamic programming technique where you solve subproblems first and use their solutions to build up solutions to larger problems. It uses an iterative approach and typically involves filling up a table (often an array or matrix) with the solutions to subproblems, starting from the smallest subproblems and working up to the original problem.
+Tabulation is a bottom-up dynamic programming technique where you solve subproblems first and use their solutions to build up solutions to larger problems. It uses an iterative approach and typically involves filling up a table (often an array or a matrix) with the solutions of subproblems, starting from the smallest subproblems and working up to the original problem.
 
 ## `Sliding window` ##
 =======================
