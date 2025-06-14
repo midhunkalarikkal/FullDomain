@@ -32,7 +32,6 @@
 - Maximum nodes at level ‘l’ = 2^l  
 - Maximum nodes in a binary tree of height ‘h’ = (2^(h+1)) - 1  
 - A binary tree with only left or right children is a skewed tree (degenerate).  
-- In a perfect binary tree, all internal nodes have two children and all leaf nodes are at the same level.  
 
 `Complexity Analysis of Binary Tree`
 -------------------------------------
@@ -100,7 +99,7 @@ o(n) for all traversal
 
 3 . `K-ary Tree`
 -----------------
-- A k-ary tree is a tree in which each node has at most k children. When k=2, it is a binary tree; when k=3, it is a ternary tree, and so on.
+- A k-ary tree is a tree in which each node has at most k children. When k=2, it is a binary tree,when k=3, it is a ternary tree, and so on.
 - The maximum number of nodes at level l is k^l
 - The maximum number of nodes in a k-ary tree of height h is ((k^h+1) - 1) / k - 1
 
@@ -287,13 +286,12 @@ Both the left and right subtrees must also be binary search trees.
 
 `Applications`
 ----------------
--BST enables efficient searching, insertion, and deletion operations — typically in `O(log n)` time for balanced trees.
+- BST enables efficient searching, insertion, and deletion operations — typically in `O(log n)` time for balanced trees.
 - Used in compilers and interpreters for symbol tables, where identifiers are stored and accessed dynamically.
 - Used for hierarchical data like directories and files by enabling quick lookups and insertions.
 - BSTs (especially AVL or Red-Black Trees) are used to implement ordered indexes for fast data retrieval in database systems.
 - Used in applications like ray tracing and spatial partitioning. 
 - Used for Efficient route lookups and dynamic updates in routing tables.
-- BSTs are used in Huffman coding trees for lossless data compression algorithms.
 - Used in AI decision trees, collision detection systems, and event-driven logic where sorted data needs quick updates.
 - Allocating and deallocating memory blocks efficiently using ordered structures.
 
@@ -395,7 +393,7 @@ Uses a queue to keep track of nodes to be visited
 ====================
 `Balanced Tree`
 ----------------
-A tree is a balanced tree if the height difference between the left and right subtrees of any node is at most one.
+A tree is a balanced tree if the height difference between the left subtress and right subtrees of any node is at most one.
 
 depth = |height(left subtree) - height(right subtree)| ≤ 1
 
@@ -409,7 +407,7 @@ depth = |height(left subtree) - height(right subtree)| ≤ 1
 
 `Unbalanced Tree`
 -----------------
-A tree is a unbalanced tree where the height difference between the left and right subtrees of some nodes is greater than 1.
+A tree is a unbalanced tree where the height difference between the left subtrees and right subtrees of some nodes is greater than 1.
 
 `Unbalanced trees`
 -------------------
@@ -431,16 +429,16 @@ A self-balancing binary search tree where the difference in heights of left subt
 
 use cases - Linux , kernel , java collection framework
 
-`Use of Color (What It Helps With)`
+`Use of Color`
 - Detect imbalance: If two red nodes appear in a row, it violates the rules.
 - Balance automatically: Recoloring and rotating based on the colors help keep the tree's height O(log n).
 - Ensure consistent search times: Maintains a reasonably balanced structure for efficient search, insert, and delete operations.
 
-3 . `Prefix Tree (Trie)`
+3. `Prefix Tree (Trie)`
 --------------------------
-A tree-like data structure used for efficient retrieval of keys and their associated values. Each node represents a possible prefix of keys, and the paths from the root to leaves represent complete keys.
+A tree-like data structure used for efficient retrieval of keys and their associated values. Each node represents a possible prefix of keys, and the paths from the root to the leaves represent complete keys.
 
-   (root)
+      (root)
        /   \
       c     b
      / \     \
@@ -450,28 +448,24 @@ A tree-like data structure used for efficient retrieval of keys and their associ
           |
           e
 
-4 . `M-way Search Tree`
+4. `M-way Search Tree`
 ------------------------
 A generalized form of a binary search tree that allows for more than two children per node. The exact number of children is specified by the order 'M' of the tree.
 
-5 . `B-Tree`
----------------
+5. `B- Tree`
+------------
 A self-balancing tree data structure that keeps data sorted and allows insertion searches, deletions in logarithmic time. It is designed to work on secondary storage devices like hard disks.
 
-6 . `B+ Tree`
-----------------
+6. `B+ Tree`
+-------------
 A variant of the B-tree data structure where all keys and records are stored in leaf nodes, and internal nodes only store keys to guide the search. This structure is optimized for indexing and database systems.
 
-7 . `Spaly tree`
+7. `Spaly tree`
 ----------------
 A Splay Tree is a self-adjusting binary search tree with the unique property that recently accessed elements are quick to access again. It achieves this by performing a series of tree rotations, known as splaying, to move the accessed element to the root of the tree.
 
-8 . `Merkle Tree`
----------------------
-A Merkle Tree is a hierarchical data structure used to verify the integrity and consistency of data efficiently. In a Merkle Tree, each leaf node contains the hash of a data block, and each non-leaf node contains the hash of the concatenation of its child nodes. The tree culminates in a single hash at the top, known as the Merkle
-
-9 . `Suffix tree`
--------------------
+8. `Suffix tree`
+----------------
 A tree-like data structure used for efficient retrieval of all possible suffixes of a string. Each node represents a possible suffix of the string, and the paths from the root to the leaves represent complete suffixes. It is widely used in string processing tasks like substring search, pattern matching, and finding the longest repeated substring.
 
   (root)
@@ -494,13 +488,16 @@ A tree-like data structure used for efficient retrieval of all possible suffixes
 
 ## `Heap` ##
 ==============
-A heap is a specialized tree-based data structure that satisfies the heap property. This property states that in a max heap, for any given node N, the value of N is greater than or equal to the values of its children. In a min heap, the value of N is less than or equal to the values of its children. Heaps are commonly implemented using arrays.
+A **Heap** is a specialized tree-based data structure that satisfies the **Heap Property**.
 
-Memory Allocation :  Dynamic, for objects and data needing longer life.
-Structure :  Flexible, less structured.
-Speed :  Slower access.
-Size :  Larger, but limited by system memory.
-Scope and Lifetime :  Persists until explicitly freed, manually or garbage-collected.
+- In a **Max Heap**: Every parent node has a value **greater than or equal to** its children.
+- In a **Min Heap**: Every parent node has a value **less than or equal to** its children.
+- It is a **complete binary tree**: All levels are completely filled except possibly the last, which is filled from left to right.
+- Heaps are commonly implemented using **arrays**.
+
+`Types of Heap`
+- **Max Heap** – Root is the largest element.
+- **Min Heap** – Root is the smallest element.
 
 `Advantages of Heaps`
 ----------------------
@@ -512,27 +509,23 @@ Heap Sort
 -------------------------
 Not Suitable for Searching
 Complex Implementation
-Limited Use Cases
 
 `Applications of Heaps`
 ------------------------
-Priority Queues
-Heap Sort
-Graph Algorithms
-Scheduling Systems
+- **Heap Sort** – Efficient sorting algorithm.
+- **Priority Queue** – Fast access to highest/lowest priority element.
+- **Dijkstra’s Algorithm** – For shortest path.
+- **Job Scheduling Algorithms** – OS-level task prioritization.
+- **Median Maintenance** – Using two heaps to maintain median in streaming data.
+- **Memory Management** – Dynamic memory allocation systems.
 
 `Time Complexity`
 ------------------
-Insertion: 
-O(logn) – Inserting an element into a heap requires maintaining the heap property, which may involve percolating the element up the tree.
-Deletion (usually of the root): 
-O(logn) – Deleting the root requires replacing it with the last element and percolating down.
-Peek (get max or min): 
-O(1) – Accessing the root element is a constant time operation.
-Heapify: 
-O(n) – Converting an array into a heap.
-Heap Sort: 
-O(nlogn) – Sorting an array using the heap data structure.
+- Insertion: O(log n) – Inserting an element into a heap requires maintaining the heap property, which may involve percolating the element up the tree.
+- Deletion (usually of the root): O(log n) – Deleting the root requires replacing it with the last element and percolating down.
+- Peek (get max or min): O(1) – Accessing the root element is a constant time operation.
+- Heapify: O(n) – Converting an array into a heap.
+- Heap Sort: O(n log n) – Sorting an array using the heap data structure.
 
 `Min Heap`
 -----------
@@ -560,23 +553,17 @@ Heapify is the process of converting a binary tree into a heap (either min heap 
 
 `Bottom-Up Heapify ( HeapifyDown )`
 -------------------------------------
-Bottom-Up Heapify starts from the last non-leaf node and works its way up to the root.
-
-For each node, the method ensures that the subtree rooted at that node satisfies the heap property.
-
-This approach is efficient because it starts from the lowest levels of the tree, fixing smaller subtrees first.
-
-The time complexity of Bottom-Up Heapify is O(n), where n is the number of elements in the heap.
+- Bottom-Up Heapify starts from the last non-leaf node and works its way up to the root.
+- For each node it will check the heap property.
+- This approach is efficient because it starts from the lowest level of the tree, fixing smaller subtrees first.
+- The time complexity of Bottom-Up Heapify is O(n), where n is the number of elements in the heap.
 
 `Top-Down Heapify ( HeapifyUp )`
 ----------------------------------
-Top-Down Heapify starts from the root and works its way down the tree.
-
-As it proceeds, it ensures that the heap property is maintained by comparing the current node with its children and swapping if necessary.
-
-This approach is typically used when inserting an element into an already heapified structure.
-
-The time complexity of Top-Down Heapify is O(logn), which occurs during insertion or deletion operations.
+- Top-Down Heapify starts from the root and works its way down the tree.
+- For each node it will check the heap property.
+- This approach is typically used when inserting an element into an already heapified structure.
+- The time complexity of Top-Down Heapify is O(logn), which occurs during insertion or deletion operations.
 
 
 
