@@ -551,19 +551,20 @@ Finding the k-th Largest Element
 -----------
 Heapify is the process of converting a binary tree into a heap (either min heap or max heap). There are two primary approaches to heapifying a binary tree
 
-`Bottom-Up Heapify ( HeapifyDown )`
--------------------------------------
+`Bottom-Up Heapify ( HeapifyDown also called sift-down or bubble-down)`
+-----------------------------------------------------------------------
 - Bottom-Up Heapify starts from the last non-leaf node and works its way up to the root.
 - For each node it will check the heap property.
 - This approach is efficient because it starts from the lowest level of the tree, fixing smaller subtrees first.
 - The time complexity of Bottom-Up Heapify is O(n), where n is the number of elements in the heap.
+- Using after deletion, typically after removing the root.
 
-`Top-Down Heapify ( HeapifyUp )`
-----------------------------------
+`Top-Down Heapify ( HeapifyUp also called sift-up or bubble-up)`
+----------------------------------------------------------------
 - Top-Down Heapify starts from the root and works its way down the tree.
 - For each node it will check the heap property.
 - This approach is typically used when inserting an element into an already heapified structure.
-- The time complexity of Top-Down Heapify is O(logn), which occurs during insertion or deletion operations.
+- The time complexity of Top-Down Heapify is O(logn).
 
 
 
@@ -580,7 +581,7 @@ Sorting the Elements: The algorithm repeatedly extracts the maximum (or minimum)
 `Advantages`
 ----------------
 Efficient Time Complexity :  O(n log n) in both average and worst cases.
-In-Place Sorting :  Requires no additional storage 
+In-Place Sorting :  Requires no additional storage +
 No Worst-Case Scenarios :  Guarantees performance even in the worst-case scenario.
 Works Well with Large Datasets :  Suitable for large amounts of data.
 Supports Priority Queue Operations :  Useful for implementing priority queues and similar data 
