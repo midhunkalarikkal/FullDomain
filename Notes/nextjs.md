@@ -406,3 +406,54 @@ Here the page.tsx will be the children of layout.tsx
 18. `Active Links`
 
     18. 1. Created a `(auth)` route group gor login register and forgot password and create a layout for the `(auth)` route group and by using usePathname hook implemented the active link
+
+19. `Params and SearchParams`
+
+    19. 1. `Params` is a promise  that resolves to an object containing the dynamic route parameters (like id)
+
+    19. 2. `SearchParams` is a promise that resolves to an object containing the query parameters(like filters and sorting)
+
+    19. 3. Created an `articles` folder and then `[articleId]` folder for trying this scenario
+
+    19. 4. in the server compoenents we can use asyn await for the params and searcParams resolving and in the client compoenents we need to use `use` hook from the react.
+
+    19. 5. While page.ts has access to both params and searchParams and the layout.tsx only has to access the params
+
+20. `Navigatin programmatically`
+
+    For eaxmple: if we place an order , we need to redirect to another page with new content
+
+    20. 1. By using `useRouter` from next/navigation and creating an instance and can push and pass the route to which we want to navigate, and also we can use redirect method from next/navigation
+
+21. `Templates`
+
+    20. 1. `Templates` are similar to layouts because they allow you to share common UI between multiple pages in your app. For example, you might have the same header or sidebar across different pages.
+
+    20. 2. However, when a user navigates between pages that use the same template, the page is treated as a completely new load.
+
+        20. 2. 1. a new template component instance is mounted
+        20. 2. 2. DOM elements are recreated
+        20. 2. 3. State is cleared
+        20. 2. 4. effects are re-synchronized
+    
+    20. 3. Can create a template by exporting a default React component from a file named template.js or template.tsx inside the route folder.
+
+    20. 4. Just like layouts, templates should accept a children prop so that the nested pages can be displayed inside the template.
+
+22. `Loading UI`
+
+    shimmer or skeleton
+
+23. `Error handling`
+
+    23. 1. It automatically wraps route segments and their nested children in a React Error Boundary
+
+    23. 2. Can create custom error UI's for specific segments using the file system hierarchy
+
+    23. 3. It isolates errors to affected segments while keeping the rest of your app functional
+
+24. `Recovering from Error`
+
+    24. 1. Adding a reset with the error props in Error Boundary and use the startTransition from react and use thereset function inside the startTransition function will give an error recovering solution
+
+    1:45

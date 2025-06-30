@@ -495,10 +495,6 @@ A **Heap** is a specialized tree-based data structure that satisfies the **Heap 
 - It is a **complete binary tree**: All levels are completely filled except possibly the last, which is filled from left to right.
 - Heaps are commonly implemented using **arrays**.
 
-`Types of Heap`
-- **Max Heap** – Root is the largest element.
-- **Min Heap** – Root is the smallest element.
-
 `Advantages of Heaps`
 ----------------------
 Efficient Priority Queue Operations
@@ -527,19 +523,11 @@ Complex Implementation
 - Heapify: O(n) – Converting an array into a heap.
 - Heap Sort: O(n log n) – Sorting an array using the heap data structure.
 
-`Min Heap`
------------
-A min heap is a binary heap where the value of each parent node is less than or equal to the values of its children. The smallest element is always at the root of the heap.
-
 `Min-Heap applications`
 -------------------------
 Priority Queue
 Dijkstra's Shortest Path Algorithm
 Huffman Coding
-
-`Max Heap`
------------
-A max heap is a binary heap where the value of each parent node is greater than or equal to the values of its children. The largest element is always at the root of the heap.
 
 `Max-Heap applications`
 ------------------------
@@ -551,7 +539,7 @@ Finding the k-th Largest Element
 -----------
 Heapify is the process of converting a binary tree into a heap (either min heap or max heap). There are two primary approaches to heapifying a binary tree
 
-`Bottom-Up Heapify ( HeapifyDown also called sift-down or bubble-down)`
+`Bottom-Up Heapify ( also called HeapifyDown, shift-down or bubble-down)`
 -----------------------------------------------------------------------
 - Bottom-Up Heapify starts from the last non-leaf node and works its way up to the root.
 - For each node it will check the heap property.
@@ -559,7 +547,7 @@ Heapify is the process of converting a binary tree into a heap (either min heap 
 - The time complexity of Bottom-Up Heapify is O(n), where n is the number of elements in the heap.
 - Using after deletion, typically after removing the root.
 
-`Top-Down Heapify ( HeapifyUp also called sift-up or bubble-up)`
+`Top-Down Heapify ( also called HeapifyUp, shift-up or bubble-up)`
 ----------------------------------------------------------------
 - Top-Down Heapify starts from the root and works its way down the tree.
 - For each node it will check the heap property.
@@ -581,7 +569,7 @@ Sorting the Elements: The algorithm repeatedly extracts the maximum (or minimum)
 `Advantages`
 ----------------
 Efficient Time Complexity :  O(n log n) in both average and worst cases.
-In-Place Sorting :  Requires no additional storage +
+In-Place Sorting :  Requires no additional storage
 No Worst-Case Scenarios :  Guarantees performance even in the worst-case scenario.
 Works Well with Large Datasets :  Suitable for large amounts of data.
 Supports Priority Queue Operations :  Useful for implementing priority queues and similar data 
@@ -599,7 +587,7 @@ Median Maintenance
 Time Complexity
 ---------------
 Building the Heap : O(n)
-Sorting the Array :  O(n log n)
+Sorting the Heap :  O(n log n)
 
 Space Complexity
 ---------------
@@ -617,7 +605,8 @@ A Trie is a specialized tree-like data structure that is used primarily for stor
 ----------------------
 Efficient Search
 Prefix Matching
-Space Efficiency for Similar Prefixes
+Suffix matching
+Space Efficiency
 
 `Disadvantages of Trie`
 -------------------------
@@ -646,23 +635,53 @@ Space Complexity :-
 
 `Suffix Trie`
 ---------------
-A suffix trie is a specific type of trie (prefix tree) used for storing all the suffixes of a given string. Each path from the root to a leaf node in the suffix trie represents a suffix of the string. This data structure is particularly useful for tasks like substring search, pattern matching, and text compression.
+A suffix trie is a compressed trie containing all the suffixes of a given string. It is used for fast 
+pattern searching within a string.
+
+ROOT
+ ├── a
+ │    └── p
+ │         └── p
+ │              └── l
+ │                   └── e
+ ├── p
+ │    └── p
+ │         └── l
+ │              └── e
+ ├── p
+ │    └── l
+ │         └── e
+ ├── l
+ │    └── e
+ └── e
 
 `Suffix Trie Applications`
 ---------------------------
-Substring search
-Finding longest repeated substrings
-Bioinformatics (DNA sequence analysis)
+Pattern matching in bioinformatics (DNA sequences)  
+Substring search (e.g., does 'ana' exist in 'banana'?)  
+Finding longest repeated substrings  
+Plagiarism detection  
+Compression algorithms (LZ-based techniques)
 
 `Prefix Trie (Standard Trie)`
 -----------------------------
-A prefix trie (often just called a trie) is a tree-like data structure that stores a dynamic set of strings, where each node represents a single character of a string. This structure is used primarily for efficient retrieval of a string's prefix.
+A prefix trie (also called a standard trie) is a tree data structure used to store a set of strings where
+each path from the root to a node represents a prefix of a word. It is optimized for prefix-based lookups.
+
+ROOT
+ └── a
+      └── p
+           └── p
+                └── l
+                     └── e
 
 `Prefix Trie (Standard Trie) Applications`
 --------------------------------------------
-Autocomplete systems
-Spell checkers
-IP routing (longest prefix matching)
+Autocomplete search (Google search bar, code editors)  
+Spell checking and suggestion  
+IP routing (longest prefix match)  
+Dictionary word lookups  
+Text prediction in messaging apps
 
 
 
@@ -670,13 +689,13 @@ IP routing (longest prefix matching)
 
 ## `Graph` ##
 ==============
-A graph is a data structure consisting of a set of vertices (or nodes) and a set of edges that connect pairs of vertices. Graphs can be used to model a wide range of problems, such as social networks, transportation systems, and dependency structures.
+A graph is a data structure consisting of a set of vertices and a set of edges that connect pairs of vertices. Graphs can be used to model a wide range of problems, such as social networks, transportation systems, and dependency structures.
 
 Trees are a specific type of GRAPH dasastructure
 
 `Vertex and Edge`
 --------------------
-Vertex (Node): A vertex is a fundamental unit of a graph, representing a point where edges meet.
+Vertex: A vertex is a fundamental unit of a graph, representing a point where edges meet.
 
 Edge: An edge is a connection between two vertices. It can be directed or undirected, weighted or unweighted, depending on the type of graph.
 
@@ -743,19 +762,19 @@ An unweighted graph treats all edges as having equal weight, typically used when
 
 Bipartite Graph
 -------------------
-a graph whose vertices (or nodes) can be divided into two disjoint sets X and Y such that every edge connects a vertex in X to one in Y.
+A graph whose vertices can be divided into two disjoint sets X and Y such that every edge connects a vertex in X to one in Y.
 
 `Graph Traversal`
 ---------------------
 Breadth-First Search (BFS)
-------------------------
+---------------------------
 BFS is a graph traversal algorithm that explores vertices level by level, starting from a source vertex and exploring all its neighbors before moving on to their neighbors.
 
 Time Complexity: O(V + E)
 Space Complexity: O(V)
 
 Depth-First Search (DFS)
-----------------------
+---------------------------
 Depth-First Search (DFS) is a graph traversal algorithm that explores as deeply as possible along each branch before backtracking. It uses a stack (either explicitly or through recursion) to keep track of the nodes to be visited next and the current traversal path.
 
 Time Complexity: O(V + E)

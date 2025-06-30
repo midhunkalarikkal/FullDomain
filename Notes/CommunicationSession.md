@@ -291,29 +291,166 @@ Keep stories short but rich
 Be authentic, not dramatic
 Use voice energy to bring the story to life
 
-Rohaan N Devasia
-14:13
-self-aware, honest, and growth-driven you are.
-Rohaan N Devasia
-14:14
-W A G
-Method
-Weakness
-Action taken
-Growth Mindset
-Rohaan N Devasia
-14:20
-“I care too much.”
+## Answering "What is your weakness?" with W A G Method
 
-“I work too hard.”
+W A G = Weakness → Action Taken → Growth Mindset
 
-“I’m a perfectionist.”
+✅ Goal: Show how self-aware, honest, and growth-driven you are  
+✅ Avoid generic or fake-sounding responses  
+✅ Focus on improvement and personal development
 
-“I trust people too easily.”
-This is an area I’ve worked on a lot recently…”
+------------------------------------------------------------
 
-“At one point, it was a clear challenge for me, but…”
+❌ Weak Responses to Avoid:
+- “I care too much”
+- “I work too hard”
+- “I’m a perfectionist”
+- “I trust people too easily”
 
-“Here’s what I’ve done to manage it better…”
+⚠️ These sound like disguised strengths. Instead, be real but thoughtful.
 
-“It’s still a work-in-progress, but I’ve made consistent improvements.”
+------------------------------------------------------------
+
+## Use this structure:
+
+1️⃣ Weakness  
+Choose something real but not a core requirement of the role.  
+Example: "I used to have difficulty delegating tasks."
+
+2️⃣ Action Taken  
+Talk about how you actively worked on it.  
+Example: "So I started using task boards and learned to trust teammates more by clearly defining roles."
+
+3️⃣ Growth Mindset  
+Show you're improving and open to learning.  
+Example:  
+- "This is an area I’ve worked on a lot recently…"  
+- "At one point, it was a clear challenge for me, but I’ve been more mindful of it since…"  
+- "Here’s what I’ve done to manage it better…"  
+- "It’s still a work in progress, but I’ve made consistent improvements."
+
+------------------------------------------------------------
+
+🎯 Summary Response Example:
+
+“I used to struggle with overcommitting because I found it hard to say no. It affected my ability to prioritize. So I started planning weekly using time-blocking, and I now assess urgency and importance before accepting new work. I’m not perfect at it yet, but I’ve made a lot of progress, and I’m continuing to improve with feedback from mentors.”
+
+------------------------------------------------------------
+
+
+## Interview Strategy: Matching the Job Description
+
+✅ I’ve read the job description carefully  
+✅ I understand what the role needs  
+✅ I match the role through real examples and relevant experience  
+
+🔁 Strategic Mirroring  
+Reflect what the company is looking for by using their keywords, tone, and expectations in your responses.
+
+🧠 Pro Tip:  
+Use keywords directly from the JD when answering interview questions. Connect your projects and skills to the actual responsibilities listed.
+
+------------------------------------------------------------
+
+## Key Clauses to Check in Offer Letter or Employment Terms
+
+1. Job Role and Responsibilities  
+   - Defines your title, department, reporting manager, and exact duties.
+
+2. Salary and Benefits  
+   - Basic Pay, HRA, Performance Incentives, PF Deductions  
+   - Non-monetary perks: Insurance, bonuses, internet reimbursement
+
+3. Working Hours  
+   - Usually 9 AM to 6 PM, Monday to Friday  
+   - May include rotational shifts or hybrid work flexibility
+
+4. Leave Policies  
+   - Annual Leave, Casual Leave, Sick Leave, Unpaid Leave  
+   - Carry-forward and encashment options explained
+
+5. Confidentiality Clause  
+   - Restricts sharing of internal details like client lists, codebase, strategy, etc.  
+   - Valid even after leaving the job
+
+6. Non-Solicitation Clause  
+   - Prevents poaching clients or convincing ex-colleagues to join a competitor or your startup  
+   - Typically valid for 1–2 years after exit
+
+7. Termination Policy  
+   - Voluntary: Notice period of 30–90 days  
+   - Involuntary: Can include misconduct, performance issues, restructuring  
+   - May include severance details
+
+------------------------------------------------------------
+
+## Statutory Employee Benefits
+
+- Gratuity: Tax-free up to ₹20 lakhs (if employed 5+ years)  
+  Formula = (Last Drawn Salary × 15 × Years of Service) / 26
+
+- Provident Fund (PF): 12% deducted from your basic salary, employer matches it  
+  Lump sum received on retirement or resignation
+
+- ESIC: For those earning < ₹21,000/month  
+  Provides medical cover, maternity benefits, disability support
+
+- Paid Leave: Typically 12–20 earned leaves annually
+
+- Maternity Leave: 26 weeks for first 2 children, 12 weeks for third
+
+- Paternity Leave: Not mandatory, but private firms may offer 5–15 days
+
+------------------------------------------------------------
+
+## Legal Work Limits and Holidays
+
+- Max Work Limit: 12 hours/day or 48 hours/week  
+- Overtime: Must be paid extra (usually 2x rate)
+
+- Mandatory National Holidays:  
+  Jan 26 (Republic Day)  
+  Aug 15 (Independence Day)  
+  Oct 2 (Gandhi Jayanti)
+
+- Other Holidays: State-specific and festival-based
+
+------------------------------------------------------------
+
+## Working Remotely for Foreign Companies
+
+- If in India for 182+ days/year → Tax Resident  
+- Must declare global income and file advance tax if needed
+
+- DTAA (Double Taxation Avoidance Agreement):  
+  Prevents tax being paid twice in both countries  
+  Use Form 67 and Tax Residency Certificate (TRC) for claiming credit
+
+------------------------------------------------------------
+
+## Handling Failure in Interviews (Fail–Learn–Change)
+
+❌ Avoid:
+- Blaming others ("My team didn’t cooperate")  
+- Denial ("I’ve never failed")  
+- Defeatist tone ("I just messed up everything")
+
+✅ Do this instead:
+- Fail: Briefly explain what went wrong  
+- Learn: Share the key insight or takeaway  
+- Change: Describe how you improved or what you do differently now
+
+Examples:
+“It didn’t go as expected, but it taught me more than any success.”  
+“It was a tough experience that shaped how I approach problems today.”  
+“I’ve become more self-aware and confident because of it.”
+
+------------------------------------------------------------
+
+> Differentiate Between:
+
+- Failure: You tried and it didn’t work  
+- Rejection: You applied, but were not selected  
+- Redirection: Something didn’t work, but led you to a better path
+
+------------------------------------------------------------
