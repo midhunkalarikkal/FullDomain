@@ -19,10 +19,10 @@ HTML (HyperText Markup Language) is the standard markup language used to create 
 `<!DOCTYPE html>`
 =================
 Declaration defines that this document is an HTML5 document
-It should be the very first thing in your HTML file, before the <html> tag.
+It should be the very first thing in HTML file, before the <html> tag.
 It helps the browser know how to display the web page using HTML5 standards.
 HTML5 uses the simple <!DOCTYPE html>. Previous versions had longer, more complex declarations.
-This declaration ensures the page is rendered correctly in standards mode, avoiding old, inconsistent rendering methods (quirks mode).
+This declaration ensures the page is rendered correctly in standars mode, avoiding old, inconsistent rendering methods.
 
 
 `<html>`
@@ -63,7 +63,7 @@ The <body> element defines the document's body, and is a container for all the v
 `favicon`
 =========
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-A favicon image is displayed to the left of the page title in the browser tab, like this
+A favicon image is displayed to the left of the page title in the browser tab
 
 
 `Introduction and History`
@@ -105,7 +105,6 @@ Integration with Other Technologies: Works seamlessly with CSS, JavaScript, and 
 Static Nature: HTML alone cannot create dynamic web applications; it requires CSS and JavaScript.
 Lack of Security: HTML does not handle data security; vulnerabilities arise without backend safeguards.
 Repetitive and Time-Consuming: Writing large-scale HTML can be tedious and repetitive.
-Browser Differences: Some features may render differently in various browsers.
 Limited Functionality: By itself, HTML cannot handle complex tasks like database interactions or server-side logic.
 
 
@@ -137,8 +136,6 @@ XML is a markup language where all documents must be marked up correctly (be "we
 
 XHTML was developed to make HTML more extensible and flexible to work with other data formats (such as XML). In addition, browsers ignore errors in HTML pages, and try to display the website even if it has some errors in the markup. So XHTML comes with a much stricter error handling.
 
-If you want to study XML, please read our XML Tutorial.
-
 
 ## `Nested HTML Elements` ##
 ============================
@@ -150,7 +147,7 @@ HTML elements can be nested (this means that elements can contain other elements
 All HTML elements can have attributes
 Attributes provide additional information about elements
 Attributes are always specified in the start tag
-Attributes usually come in name/value pairs like: name="value"
+Attributes usually come in name/value pairs
 
 
 ## `HTML Formatting Elements` ##
@@ -172,7 +169,7 @@ Formatting elements were designed to display special types of text:
 ## `HTML Quotations` ##
 =========================
 The HTML <blockquote> element defines a section that is quoted from another source.
-Browsers usually indent <blockquote> elements.
+Browsers usually indent (1 tab space and avoid quotes) for <blockquote> elements.
 The HTML <q> tag defines a short quotation.
 Browsers normally insert quotation marks around the quotation.
 
@@ -235,8 +232,9 @@ Bookmarks can be useful if a web page is very long.
 To create a bookmark - first create the bookmark, then add a link to it.
 When the link is clicked, the page will scroll down or up to the location with the bookmark.
 
-First, use the id attribute to create a bookmark:
-<h2 id="C4">Chapter 4</h2>
+<a href="#C4">Go to Chapter 4</a> creates a link that jumps to the bookmark when clicked.
+<h2 id="C4">Chapter 4</h2> creates the bookmark.
+
 
 
 ## `HTML Images` ##
@@ -322,8 +320,8 @@ The style attribute specifies the style to give the columns.
 3. Description list
 -------------------
 <dl>	Defines a description list
-<dt>	Defines a term in a description list
-<dd>	Describes the term in a description list
+<dt>	Defines a description list term
+<dd>	Defines a description list term description
  
 
 ## `HTML Block and Inline Elements` ##
