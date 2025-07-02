@@ -3,14 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HTML + CSS Examples</title>
 </head>
 
-<body>
-    <blockquote>Hi this is a normal block quote</blockquote>
-    <q>Hi this is a q quote</q>
-    <table>
+<body style="margin: 0; font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;">
+
+    <h1 style="text-align:center;">HTML + CSS Elements Examples</h1>
+
+    <!-- Blockquote and Q Tag -->
+    <h2>Blockquote and Q Example</h2>
+    <blockquote style="background:#e8e8e8; padding:10px; border-left: 5px solid #ccc;">
+        Hi, this is a normal block quote.
+    </blockquote>
+    <p><q>Hi, this is a q quote inside a paragraph.</q></p>
+
+    <!-- Table with Colgroup -->
+    <h2>Table with Colgroup</h2>
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">
         <colgroup>
             <col span="2" style="background-color: #D6EEEE">
         </colgroup>
@@ -18,92 +27,232 @@
             <tr>
                 <th>MON</th>
                 <th>TUE</th>
-                <th>TUE</th>
-                <th>TUE</th>
-            </tr>
-            <tr>
-                <th>MON</th>
-                <th>TUE</th>
+                <th>WED</th>
+                <th>THU</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>data1</td>
                 <td>data2</td>
-                <td>data2</td>
-                <td>data2</td>
+                <td>data3</td>
+                <td>data4</td>
             </tr>
             <tr>
-                <td>data1</td>
-                <td>data2</td>
-                <td>data2</td>
+                <td>data5</td>
+                <td>data6</td>
+                <td>data7</td>
+                <td>data8</td>
             </tr>
         </tbody>
     </table>
+
+    <!-- Description List -->
+    <h2>Description List Example</h2>
+    <dl>
+        <dt><strong>Data</strong></dt>
+        <dd>This is the description of the data term.</dd>
+    </dl>
+
+    <!-- Code Tag -->
+    <h2>Code Snippet Example</h2>
+    <code>
+    var name = "Midhun"; <br>
+    function printName() {<br>
+    &nbsp;&nbsp;console.log(name);<br>
+    }
+  </code>
+
+    <!-- Time Tag -->
+    <h2>Time Tag Example</h2>
+    <p>Meeting is scheduled at <time>02:00 PM</time>.</p>
+
+    <!-- Form Section -->
+    <h2>Form Elements Example</h2>
+    <form style="background: #fff; padding: 15px; border: 1px solid #ccc;">
+        <label for="cars"><strong>Select your car(s):</strong></label><br>
+        <select id="cars" name="cars" size="3" multiple>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select><br><br>
+
+        <fieldset>
+            <legend>Personalia:</legend>
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" value="John"><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" value="Doe"><br><br>
+
+            <label>Choose a browser:</label><br>
+            <input type="text" list="browsers">
+            <datalist id="browsers">
+                <option value="Edge">
+                <option value="Firefox">
+                <option value="Chrome">
+                <option value="Opera">
+                <option value="Safari">
+            </datalist>
+        </fieldset>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- Image Map -->
+    <h2>Image Map Example</h2>
+    <p>Click on different shapes in the image below:</p>
+    <img src="https://via.placeholder.com/500x300" alt="sample image" width="50%" draggable="true"
+        ondragstart="drag(event)" usemap="#image-map" />
+
+    <map name="image-map">
+        <area shape="rect" coords="34,44,270,150" href="https://example.com/rectangle" alt="Rectangle">
+        <area shape="circle" coords="350,100,50" href="https://example.com/circle" alt="Circle">
+        <area shape="poly" coords="300,200,350,250,400,200,375,150,325,150" href="https://example.com/polygon"
+            alt="Polygon">
+    </map>
+
+    <!-- Positioning Examples -->
+    <h2>CSS Position: Static</h2>
+    <div style="position: static; background: lightgray; padding: 10px;">
+        This is static. Top/left/right/bottom won't affect it.
+    </div>
+
+    <h2>CSS Position: Relative</h2>
+    <div style="position: relative; top: 20px; left: 30px; background: lightblue; padding: 10px;">
+        This is relative. Offset 20px from top and 30px from left.
+    </div>
+
+    <h2>CSS Position: Absolute</h2>
+    <div style="position: relative; height: 100px; border: 1px solid gray; margin-top: 20px;">
+        <div style="position: absolute; top: 10px; left: 10px; background: lightgreen; padding: 10px;">
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+            This is absolute inside a relative parent.
+        </div>
+    </div>
+
+    <div style="position: fixed; bottom: 10px; right: 10px; background: tomato; color: white; padding: 10px;">
+        <h2>CSS Position: Fixed</h2>
+        Fixed position. Always stays at bottom-right.
+    </div>
+
+    <h2>CSS Position: Sticky</h2>
+    <div style="position: sticky; top: 0; background: gold; padding: 10px;">
+        Sticky header. It sticks to the top when scrolling.
+    </div>
+
+    <div style="height: 1000px;">
+        <p style="padding: 20px;">Scroll to see the sticky and fixed boxes in action.</p>
+    </div>
+
+
+
+    <h2>CSS Overflow: visible</h2>
+    <div style="width: 200px; height: 100px; background: #d1e7dd; border: 1px solid #000; overflow: visible;">
+        This box has <strong>overflow: visible</strong>. The content will spill outside the box and still be visible.
+        <div style="width: 300px; background: #0d6efd; color: white;">Extra wide content outside the box.</div>
+    </div>
+    <br>
+
+    <h2>CSS Overflow: hidden</h2>
+    <div style="width: 200px; height: 100px; background: #f8d7da; border: 1px solid #000; overflow: hidden;">
+        This box has <strong>overflow: hidden</strong>. Extra content is cut off and hidden.
+        <div style="width: 300px; background: #dc3545; color: white;">You won’t see this overflow.</div>
+    </div>
+    <br>
+
+    <h2>CSS Overflow: scroll</h2>
+    <div style="width: 200px; height: 100px; background: #fff3cd; border: 1px solid #000; overflow: scroll;">
+        This box has <strong>overflow: scroll</strong>. Scrollbars always appear.
+        <div style="width: 300px; height: 150px; background: #ffc107;">Scroll to view the hidden content.</div>
+    </div>
+    <br>
+
+    <h2>CSS Overflow: auto</h2>
+    <p><img src="pineapple.jpg" alt="Pineapple" style="width:170px;height:170px;margin-left:15px;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
+        lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget,
+        auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu,
+        lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi,
+        sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui
+        eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor
+        porta. Cras ac leo purus. Mauris quis diam velit.</p>
+
+    <h2>Float: left</h2>
+    <div style="border: 1px solid #000; padding: 10px;">
+        <p><img src="../data/sample.jpg" alt="Pineapple" style="width:170px;height:170px;margin-left:15px; float:left;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
+            lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue
+            eget,
+            auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu,
+            lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum
+            nisi,
+            sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae
+            dui
+            eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor
+            porta. Cras ac leo purus. Mauris quis diam velit.</p>
+    </div>
+    <br><br><br><br>
+
+    <h2>Float: right</h2>
+    <div style="border: 1px solid #000; padding: 10px;">
+        <p><img src="../data/sample.jpg" alt="Pineapple"
+                style="width:170px;height:170px;margin-left:15px; float:right;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
+            lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue
+            eget,
+            auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu,
+            lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum
+            nisi,
+            sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae
+            dui
+            eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor
+            porta. Cras ac leo purus. Mauris quis diam velit.</p>
+    </div>
+    <br><br><br><br>
+
+    <h2>Float: none</h2>
+    <div style="border: 1px solid #000; padding: 10px;">
+        <p><img src="../data/sample.jpg" alt="Pineapple" style="width:170px;height:170px;margin-left:15px; float:none;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
+            lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue
+            eget,
+            auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu,
+            lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum
+            nisi,
+            sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae
+            dui
+            eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor
+            porta. Cras ac leo purus. Mauris quis diam velit.</p>
+    </div>
+    <br><br>
+
+    <h2>Float: inherit</h2>
+    <div style="float: right; border: 1px solid #000; padding: 10px;">
+        <p><img src="../data/sample.jpg" alt="Pineapple"
+                style="width:170px;height:170px;margin-left:15px; float:inherit;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
+            lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue
+            eget,
+            auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu,
+            lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum
+            nisi,
+            sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae
+            dui
+            eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor
+            porta. Cras ac leo purus. Mauris quis diam velit.</p>
+    </div>
+
+
+
 </body>
 
 </html>
-
-<dl>
-    <dt>Data</dt>
-    <dd>Description</dd>
-</dl>
-
-<code>
-    var name = "Midhun" <br>
-    function printName() {
-        console.log(name)
-    }
-</code>
-
-
-
-<time>
-    02:00 PM
-</time>
-
-<form>
-    <select id="cars" name="cars" size="3" multiple>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="fiat">Fiat</option>
-        <option value="audi">Audi</option>
-    </select>
-
-
-
-
-    <fieldset>
-        <legend>Personalia:</legend>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value="John"><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value="Doe"><br><br>
-        <input type="text" list="browsers" />
-
-
-        <datalist id="browsers">
-            <option value="Edge">
-            <option value="Firefox">
-            <option value="Chrome">
-            <option value="Opera">
-            <option value="Safari">
-        </datalist>
-    </fieldset>
-    <input type="submit" value="Submit">
-</form>
-
-<img src="../data/sample.jpg" alt="image" width="30%" draggable="true" ondragstart="drag(event)" usemap="#image-map" />
-
-<h2>Click on the different shapes</h2>
-
-<map name="image-map">
-  <!-- Rectangle: x1, y1, x2, y2 -->
-  <area shape="rect" coords="34,44,270,150" href="https://example.com/rectangle" alt="Rectangle">
-
-  <!-- Circle: center-x, center-y, radius -->
-  <area shape="circle" coords="350,100,50" href="https://example.com/circle" alt="Circle">
-
-  <!-- Polygon: x1,y1,x2,y2,... -->
-  <area shape="poly" coords="300,200,350,250,400,200,375,150,325,150" href="https://example.com/polygon" alt="Polygon">
-</map>

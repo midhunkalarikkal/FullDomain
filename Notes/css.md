@@ -1,7 +1,7 @@
 ## `What is CSS?` ##
 =====================
 CSS stands for Cascading Style Sheets
-CSS describes how HTML elements are to be displayed on screen, paper, or in other media
+CSS describes how HTML elements are to be displayed on screen
 CSS saves a lot of work. It can control the layout of multiple web pages all at once
 External stylesheets are stored in CSS files
 CSS (Cascading Style Sheets) was invented by Håkon Wium Lie in 1994.
@@ -39,7 +39,7 @@ To select elements with a specific class, write a period (.) character, followed
 can also specify that only specific HTML elements should be affected by a class.
 
 ```css
-p.center {
+p .center {
   text-align: center;
   color: red;
 }
@@ -59,9 +59,8 @@ The universal selector (*) selects all HTML elements on the page.
 `Grouping Selector`
 -------------------
 The grouping selector selects all the HTML elements with the same style definitions.
-Look at the following CSS code (the h1, h2, and p elements have the same style definitions)
 ```css
-h1 {
+h1, p, a {
   text-align: center;
   color: red;
 }
@@ -70,12 +69,41 @@ h1 {
 
 ## `css background attachment` ##
 =================================
-The background-attachment property specifies whether the background image should scroll or be fixed (will not scroll with the rest of the page)
+The background-attachment property defines whether a background image scrolls with the page or stays fixed.
+
+scroll: Background scrolls with the content (default).
+fixed: Background stays in place when the page is scrolled.
+local: Background scrolls with the element's content (used in scrollable containers).
 
 
 ## `order of the values` ##
 ===========================
-top right bottom left
+| Values Provided                | What it Means                                                |
+| ------------------------------ | ------------------------------------------------------------ |
+| `margin: 10px;`                | All four sides get `10px`                                    |
+| `margin: 10px 20px;`           | Top & bottom = `10px`, left & right = `20px`                 |
+| `margin: 10px 20px 30px;`      | Top = `10px`, left & right = `20px`, bottom = `30px`         |
+| `margin: 10px 20px 30px 40px;` | Top = `10px`, right = `20px`, bottom = `30px`, left = `40px` |
+
+| Property          | Description                   | Order    |
+| ----------------- | ----------------------------- | -------- |
+| `margin`          | Space outside the element     | **TRBL** |
+| `padding`         | Space inside the element      | **TRBL** |
+| `border-width`    | Width of borders on all sides | **TRBL** |
+| `border-style`    | Style of borders on all sides | **TRBL** |
+| `border-color`    | Color of borders on all sides | **TRBL** |
+| `inset` (logical) | Offset of positioned elements | **TRBL** |
+
+| Property              | Description                                         | Order / Behavior                                               |
+| --------------------- | --------------------------------------------------- | -------------------------------------------------------------- |
+| `border-radius`       | Rounds the corners of an element                    | **Top-left, Top-right, Bottom-right, Bottom-left** (Clockwise) |
+| `animation`           | Multiple values in one shorthand (name, time, etc.) | Based on **property order**, not directional                   |
+| `transition`          | Like animation, follows keyword order               | No directional logic                                           |
+| `flex`                | `flex: grow shrink basis`                           | Functional order                                               |
+| `grid-template-areas` | Defines layout using named lines                    | Visual layout pattern                                          |
+| `box-shadow`          | `h-offset v-offset blur spread color`               | Not directional                                                |
+
+
 
 
 ## `text transofrmation` ##
@@ -96,6 +124,7 @@ relative
 fixed
 absolute
 sticky
+
 Elements are then positioned using the top, bottom, left, and right properties. However, these properties will not work unless the position property is set first. They also work differently depending on the position value.
 
 `position: static;`
@@ -113,7 +142,6 @@ Setting the top, right, bottom, and left properties of a relatively-positioned e
 ------------------
 An element with position: fixed; is positioned relative to the viewport, which means it always stays in the same place even if the page is scrolled. The top, right, bottom, and left properties are used to position the element.
 A fixed element does not leave a gap in the page where it would normally have been located.
-Notice the fixed element in the lower-right corner of the page. Here is the CSS that is used
 
 `position: absolute;`
 ---------------------
@@ -130,9 +158,7 @@ A sticky element toggles between relative and fixed, depending on the scroll pos
 
 ## `CSS Overflow` ##
 =====================
-The overflow property specifies whether to clip the content or to add scrollbars when the content of an element is too big to fit in the specified area.
-
-The overflow property has the following values:
+The overflow property specifies whether to clip the content or to add scrollbars when the content of an element is too big to fit in the specified area. The overflow property has the following values:
 
 visible - Default. The overflow is not clipped. The content renders outside the element's box
 hidden - The overflow is clipped, and the rest of the content will be invisible
@@ -142,7 +168,7 @@ auto - Similar to scroll, but it adds scrollbars only when necessary
 
 ## `The float Property` ##
 ==========================
-The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
+The float property is used to position an element to the left or right of its container, allowing inline content (like text or images) to wrap around it.
 
 The float property can have one of the following values:
 
