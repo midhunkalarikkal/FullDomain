@@ -22,7 +22,7 @@ Declaration defines that this document is an HTML5 document
 It should be the very first thing in HTML file, before the <html> tag.
 It helps the browser know how to display the web page using HTML5 standards.
 HTML5 uses the simple <!DOCTYPE html>. Previous versions had longer, more complex declarations.
-This declaration ensures the page is rendered correctly in standars mode, avoiding old, inconsistent rendering methods.
+This declaration ensures the page is rendered correctly in standard mode, avoiding old, inconsistent rendering methods.
 
 
 `<html>`
@@ -41,15 +41,15 @@ It provides essential information to the browser and search engines about the we
 
 `````uses``
 ===========
-    Defining the Document Title
-    Character Encoding
-    Linking Stylesheets
-    Including JavaScript Files
-    Specifying Metadata
-    Favicon
-    Responsive Design
-    Loading Fonts and Other Resources
-    External resources like fonts or APIs can be linked.
+  Defining the Document Title
+  Character Encoding
+  Linking Stylesheets
+  Including JavaScript Files
+  Specifying Metadata
+  Favicon
+  Responsive Design
+  Loading Fonts and Other Resources
+  External resources like fonts or APIs can be linked.
 
 
 `<title>`
@@ -57,13 +57,16 @@ It provides essential information to the browser and search engines about the we
 Element specifies a title for the HTML page (which is shown in the browser's title bar or in the page's tab)
 It’s important for SEO (Search Engine Optimization) as the title is often used in search results.
 
+
+`<body>`
+========
 The <body> element defines the document's body, and is a container for all the visible contents, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
 
 
 `favicon`
 =========
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 A favicon image is displayed to the left of the page title in the browser tab
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
 
 `Introduction and History`
@@ -111,15 +114,6 @@ Limited Functionality: By itself, HTML cannot handle complex tasks like database
 ## `What is XML?` ##
 ====================
 XML (eXtensible Markup Language) is a markup language used for storing and transporting data in a structured and readable format. Unlike HTML, which is used for displaying data, XML is designed to describe data and its structure. It is both human-readable and machine-readable, and is primarily used for data exchange between systems.
-
-
-`Connection between HTML and XML`
-==================================
-While HTML and XML serve different purposes, they share some common characteristics because they are both markup languages. Here’s how they connect:
-
-Both Use Tags: HTML and XML both use tags to describe data, making them similar in syntax.
-Text-Based Format: Both are text-based and can be read by humans and machines.
-Separation of Content and Presentation: Both technologies allow a separation of content (structure) and presentation (styling/logic). For example, HTML uses CSS for styling, and XML can be used alongside technologies like XSLT (Extensible Stylesheet Language Transformations) for displaying or transforming the data.
 
 
 `What is XHTML?`
@@ -222,8 +216,6 @@ _blank - Opens the document in a new window or tab
 _parent - Opens the document in the parent frame
 _top - Opens the document in the full body of the window
 
-## Link color ##
-------------------
 a:link , a:visited , a:hover , a:active
 
 ## Link Bookmarks ##
@@ -347,9 +339,7 @@ An inline element only takes up as much width as necessary.
 
 ## `The <div> Element` ##
 =========================
-The <div> element is by default a block element, meaning that it takes all available width, and comes with line breaks before and after.
-A <div> element takes up all available width:
-The <div> element is often used to group sections of a web page together.
+The <div> element is by default a block element, meaning that it takes all available width, and comes with line breaks before and after. The <div> element is often used to group sections of a web page together.
 
 
 ## `Attribute` ##
@@ -395,7 +385,7 @@ Common uses for JavaScript are image manipulation, form validation, and dynamic 
 
 ## `HTML` <picture> `tag` ##
 ============================
-The HTML <picture> element allows you to define different images for different browser window sizes.
+The HTML <picture> element allows us to define different images for different browser window sizes.
 
 ## Example ##
 --------------
@@ -418,11 +408,9 @@ The <pre> element defines preformatted text
 
 ## `HTML Semantic elements` ##
 ==============================
-<article>	
-Defines independent, self-contained content
+<article> - Defines independent, self-contained content
 
-<aside>	
-Defines content aside from the page content
+<aside>	- Defines content aside from the page content
 
 <details>	
 Defines additional details that the user can view or hide
@@ -461,7 +449,7 @@ Defines a date/time
 ## `HTML Entities` ##
 ======================
 Some characters are reserved in HTML.
-If you use the less than (<) or greater than (>) signs in your HTML text, the browser might mix them with tags.
+If we use the less than (<) or greater than (>) signs in your HTML text, the browser might mix them with tags.
 
 < (less than) = &lt;
 > (greather than) = &gt;
@@ -469,7 +457,7 @@ If you use the less than (<) or greater than (>) signs in your HTML text, the br
 A commonly used HTML entity is the non-breaking space: &nbsp;
 
 <	less than	&lt;	&#60;	
->	greater than	&gt;	&#62;	
+>	greater than &gt;	&#62;	
 &	ampersand	&amp;	&#38;	
 "	double quotation mark	&quot;	&#34;	
 '	single quotation mark	&apos;	&#39;	
@@ -502,6 +490,7 @@ Numbers (0-9)
 Special characters like ! $ + - ( ) @ < >.
 
 `The ANSI Character Set`
+Stands for American National Standards Institute
 ANSI (Windows-1252) was the original Windows character set:
 
 Identical to ASCII for the first 127 characters
@@ -519,7 +508,7 @@ Identical to ANSI and UTF-8 from 160 to 255
 is identical to ASCII for the values from 0 to 127
 Does not use the characters from 128 to 159
 Identical to ANSI and 8859-1 from 160 to 255
-Continues from the value 256 to 10 000 characters
+Continues from the value 256 to 10000 characters
 
 
 ## `HTML Uniform Resource Locators` ##
@@ -537,16 +526,35 @@ port - defines the port number at the host (default for http is 80)
 path - defines a path at the server (If omitted: the root directory of the site)
 filename - defines the name of a document or resource
 
-Common url schemes : http, https, ftp, file
+Common url schemes
+
+http – Used for accessing web pages over an unencrypted connection.
+
+https – Secure version of HTTP that uses encryption (SSL/TLS).
+
+ftp – Used to transfer files between computers over a network.
+
+mailto – Opens the default email client to send an email.
+
+file – Accesses files stored locally on the user's device.
+
+tel – Initiates a phone call on supported devices.
+
+data – Embeds small data items (like images or text) directly in the URL.
+
+ws – WebSocket protocol used for real-time communication (insecure).
+
+wss – Secure WebSocket protocol using encryption.
+
+javascript – Executes JavaScript code directly from a URL (mostly deprecated for security).
 
 
 ## `HTML FORM` ##
 ==================
 The HTML <form> element is used to create an HTML form for user input:
-The action attribute defines the action to be performed when the form is submitted.
-
-The HTML <input> element is the most used form element.
-form tags : input, label
+The `action` attribute defines the action to be performed when the form is submitted.
+`method` defines the method of the action
+`enctype="multipart/form-data"`Must be set to allow file uploads like images.
 
 `Input types`
 ------------
@@ -574,20 +582,13 @@ form tags : input, label
 <input type="week">
 
 
-`target`
-The target attribute specifies where to display the response that is received after submitting the form.
-The target attribute can have one of the following values:
+`target` The target attribute specifies where to display the response that is received after submitting the form.
 
-_blank	The response is displayed in a new window or tab
 _self	The response is displayed in the current window
+_blank	The response is displayed in a new window or tab
 _parent	The response is displayed in the parent frame
 _top	The response is displayed in the full body of the window
 framename	The response is displayed in a named iframe
-
-`method`
-<form action="/action_page.php" method="get">
-The method attribute specifies the HTTP method to be used when submitting the form data.
-The form-data can be sent as URL variables (with method="get") or as HTTP post transaction (with method="post").
 
 `autocomplete`
 <form action="/action_page.php" autocomplete="on">
@@ -604,6 +605,7 @@ When present, it specifies that the form-data (input) should not be validated wh
 <input>
 <label>
 <button>
+<select>
 <option>
 <output> - The <output> element represents the result of a calculation (like one performed by a script).
 <optgroup> - Defines a group of related options in a drop-down list
@@ -660,9 +662,8 @@ The list attribute of the <input> element, must refer to the id attribute of the
 
 ## `HTML Canvas` ##
 ====================
-The input formaction attribute specifies the URL of the file that will process the input when the form is submitted.
-Note: This attribute overrides the action attribute of the <form> element.
-The formaction attribute works with the following input types: submit and image.
+The <canvas> element in HTML is used to draw graphics on the fly using JavaScript — like shapes, images, animations, graphs, games, and even signatures.
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #000000;"></canvas>
 
 
 ## `SVG` ##
@@ -697,7 +698,6 @@ Your browser does not support the audio element.
 
 `object`
 ---------
-The <object> element is supported by all browsers.
 The <object> element defines an embedded object within an HTML document.
 
 <object width="100%" height="500px" data="snippet.html"></object>
@@ -750,7 +750,6 @@ localStorage.removeItem("username");
 
 // Clearing all items in Local Storage
 localStorage.clear();
-
 ```
 
 `The sessionStorage Object`
@@ -758,7 +757,7 @@ localStorage.clear();
 Session Storage is a Web Storage API feature that stores data only for the duration of a browser session. Data is cleared as soon as the browser tab is closed.
 
 Temporary Storage: Data is deleted when the browser tab is closed.
-Scope: Data is accessible only within the same tab and origin (domain).
+Scope: Data is accessible only within the same tab.
 Capacity: Similar to Local Storage, typically allows up to 5-10 MB.
 Data Format: Stores key-value pairs in string format.
 Isolation: Each browser tab has its own session storage; data is not shared across tabs.
@@ -779,39 +778,63 @@ sessionStorage.removeItem("sessionID");
 
 // Clearing all items in Session Storage
 sessionStorage.clear();
-
 ```
 
 
 ## `What is a Web Worker?` ##
 ===============================
-A Web Worker is a JavaScript feature that allows you to run scripts in the background, separate from the main execution thread of a web page. This helps avoid blocking the UI or causing the browser to freeze when performing computationally intensive tasks.
+A Web Worker is a JavaScript feature that allows us to run scripts in the background, separate from the main thread of a web page. This prevents the UI from freezing during heavy tasks.
 
-Background Processing: Run heavy computations (e.g., mathematical operations or data parsing) without freezing the user interface.
-Thread-like Behavior: Enables multithreading-like functionality in JavaScript, which is traditionally single-threaded.
-Asynchronous Tasks: Perfect for tasks like data fetching, image processing, or large file manipulations.
-Improved Performance: Frees up the main thread for smoother user interactions.
+Background Processing
+Runs heavy tasks (like big calculations or data parsing) without slowing down the user interface.
+
+Multi-threading Behavior
+Simulates multi-threading in JavaScript, which normally runs in a single thread.
+
+Asynchronous Operations
+Great for background tasks like image processing, data fetching, or working with large files.
+
+Improved Performance
+Keeps the main thread free, allowing smooth user interactions and animations.
 
 ## Example
 -----------
 ```js
-// worker.js
+// Create a new Web Worker
+const worker = new Worker("worker.js");
+
+function calculate() {
+  const number = parseInt(document.getElementById("numberInput").value);
+
+  if (isNaN(number) || number < 0) {
+    alert("Please enter a valid non-negative number.");
+    return;
+  }
+
+  // Send number to the worker
+  worker.postMessage(number);
+
+  document.getElementById("result").textContent = "Calculating...";
+}
+
+// Listen for messages (result) from the worker
+worker.onmessage = function (e) {
+  document.getElementById("result").textContent = e.data;
+};
+
 self.onmessage = function (e) {
-  console.log("Message received from main thread:", e.data);
-
-  // Perform a computation (e.g., calculating factorial)
-  const result = factorial(e.data);
-
-  // Send result back to the main thread
-  postMessage(result);
+  const number = e.data;
+  const result = factorial(number);
+  postMessage(result); // Send the result back
 };
 
 function factorial(n) {
   if (n === 0 || n === 1) return 1;
   return n * factorial(n - 1);
 }
-
 ```
+In a Web Worker, self refers to the global scope of the worker 
+
 
 ## `HTML SSE` ##
 ================
@@ -840,49 +863,15 @@ The browser listens for events and updates the UI accordingly.
 
 
 ## `HTML drag and Drop` ##
-===========================
-`Make an Element Draggable`
-<img draggable="true">
-
-`What to Drag - ondragstart and setData()`
-Then, specify what should happen when the element is dragged.
-In the example above, the ondragstart attribute calls a function, drag(event), that specifies what data to be dragged.
-The dataTransfer.setData() method sets the data type and the value of the dragged data
-
-`Where to Drop - ondragover`
-The ondragover event specifies where the dragged data can be dropped.
-By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element.
-This is done by calling the event.preventDefault() method for the ondragover event
-
-
-## `Some tags` ##
-==================
-1. <area>
-----------
- Defines an area inside an image map (an image map is an image with clickable areas).<area> elements are always nested inside a <map> tag.
-
-2. <aside>
------------
-The <aside> tag defines some content aside from the content it is placed in.
-The aside content should be indirectly related to the surrounding content.
-
-
-## `HTML Canvas` ##
-====================
-The HTML <canvas> element is used to draw graphics, on the fly, via JavaScript.
-The <canvas> element is only a container for graphics. You must use JavaScript to actually draw the graphics.
-Canvas has several methods for drawing paths, boxes, circles, text, and adding images.
-
-<canvas id="myCanvas" width="200" height="100"></canvas>
-
-use the script tag and javascript to draw in the canvas
+=========================== 
+HTML Drag and Drop is a feature that allows users to click and drag elements (like images or files) and drop them into a designated area. It uses events like ondragstart to set the data being dragged, and ondragover (with event.preventDefault()) to allow dropping in a target area.
 
 
 ## `Prefetch` ##
 ===================
-Purpose: Prefetch is used to download resources in advance that the browser anticipates might be needed in the future, such as assets for future navigation or upcoming pages.
-Behavior: Resources fetched with prefetch have low priority and are downloaded when the browser is idle.
-Use Case: Helpful for resources on pages the user is likely to visit next.
+Purpose: Load resources that might be needed later (future pages).
+Priority: Low priority, loaded when the browser is idle.
+Use Case: Non-critical assets for future navigation.
 
 <!-- Prefetching an image for a future page -->
 <link rel="prefetch" href="next-page-image.jpg" as="image">
@@ -893,9 +882,9 @@ Use Case: Helpful for resources on pages the user is likely to visit next.
 
 ## `Preload` ##
 ===================
-Purpose: Preload is used to load resources with high priority that are needed early in the page load process. It informs the browser to start fetching critical resources as soon as possible.
-Behavior: Resources fetched with preload are given high priority.
-Use Case: Helpful for resources like scripts, styles, fonts, or images that are required to render the current page quickly.
+Purpose: Load resources needed early in the current page.
+Priority: High priority.
+Use Case: Critical assets like fonts, CSS, or scripts required immediately.
 
 <!-- Preload a critical CSS file -->
 <link rel="preload" href="styles.css" as="style">
@@ -905,3 +894,25 @@ Use Case: Helpful for resources like scripts, styles, fonts, or images that are 
 
 <!-- Preload a script -->
 <link rel="preload" href="app.js" as="script">
+
+
+## `Some tags` ##
+==================
+1. <area>
+----------
+ Defines an area inside an image map (an image map is an image with clickable areas).<area> elements are always nested inside a <map> tag.
+
+## Example
+------------
+<img src="https://via.placeholder.com/500x300" alt="Example Image" usemap="#image-map" width="500" height="300">
+
+<map name="image-map">
+  <!-- Rectangle: x1, y1, x2, y2 -->
+  <area shape="rect" coords="34,44,270,150" href="https://example.com/rectangle" alt="Rectangle">
+
+  <!-- Circle: center-x, center-y, radius -->
+  <area shape="circle" coords="350,100,50" href="https://example.com/circle" alt="Circle">
+
+  <!-- Polygon: x1,y1,x2,y2,... -->
+  <area shape="poly" coords="300,200,350,250,400,200,375,150,325,150" href="https://example.com/polygon" alt="Polygon">
+</map>

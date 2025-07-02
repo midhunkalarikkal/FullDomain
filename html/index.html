@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <blockquote>Hi this is a normal block quote</blockquote>
     <q>Hi this is a q quote</q>
     <table>
-    <colgroup>
-        <col span="2" style="background-color: #D6EEEE">
-    </colgroup>
-    <thead>
-        <tr>
-            <th>MON</th>
-            <th>TUE</th>
-            <th>TUE</th>
-            <th>TUE</th>
-        </tr>
-        <tr>
-            <th>MON</th>
-            <th>TUE</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>data1</td>
-            <td>data2</td>
-            <td>data2</td>
-            <td>data2</td>
-        </tr>
-        <tr>
-            <td>data1</td>
-            <td>data2</td>
-            <td>data2</td>
-        </tr>
-    </tbody>
-</table>
+        <colgroup>
+            <col span="2" style="background-color: #D6EEEE">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>MON</th>
+                <th>TUE</th>
+                <th>TUE</th>
+                <th>TUE</th>
+            </tr>
+            <tr>
+                <th>MON</th>
+                <th>TUE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>data1</td>
+                <td>data2</td>
+                <td>data2</td>
+                <td>data2</td>
+            </tr>
+            <tr>
+                <td>data1</td>
+                <td>data2</td>
+                <td>data2</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
+
 </html>
 
 <dl>
@@ -52,3 +55,55 @@
         console.log(name)
     }
 </code>
+
+
+
+<time>
+    02:00 PM
+</time>
+
+<form>
+    <select id="cars" name="cars" size="3" multiple>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="fiat">Fiat</option>
+        <option value="audi">Audi</option>
+    </select>
+
+
+
+
+    <fieldset>
+        <legend>Personalia:</legend>
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" value="John"><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" value="Doe"><br><br>
+        <input type="text" list="browsers" />
+
+
+        <datalist id="browsers">
+            <option value="Edge">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+    </fieldset>
+    <input type="submit" value="Submit">
+</form>
+
+<img src="../data/sample.jpg" alt="image" width="30%" draggable="true" ondragstart="drag(event)" usemap="#image-map" />
+
+<h2>Click on the different shapes</h2>
+
+<map name="image-map">
+  <!-- Rectangle: x1, y1, x2, y2 -->
+  <area shape="rect" coords="34,44,270,150" href="https://example.com/rectangle" alt="Rectangle">
+
+  <!-- Circle: center-x, center-y, radius -->
+  <area shape="circle" coords="350,100,50" href="https://example.com/circle" alt="Circle">
+
+  <!-- Polygon: x1,y1,x2,y2,... -->
+  <area shape="poly" coords="300,200,350,250,400,200,375,150,325,150" href="https://example.com/polygon" alt="Polygon">
+</map>
