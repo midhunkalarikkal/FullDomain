@@ -180,11 +180,8 @@ inherit - The element inherits the float value of its parent
 
 ## `The clear Property` ##
 ===========================
+The clear property is used to prevent elements from wrapping around floated elements.
 When we use the float property, and we want the next element below (not on right or left), we will have to use the clear property.
-
-The clear property specifies what should happen with the element that is next to a floating element.
-
-The clear property can have one of the following values:
 
 none - The element is not pushed below left or right floated elements. This is default
 left - The element is pushed below left floated elements
@@ -193,13 +190,58 @@ both - The element is pushed below both left and right floated elements
 inherit - The element inherits the clear value from its parent
 
 
-## `The display: inline-block Value` ##
+## `The display property` ##
 ========================================
-Compared to display: inline, the major difference is that display: inline-block allows to set a width and height on the element.
+The display property in CSS determines how an element is displayed in the document layout. It's one of the most important layout properties.
 
-Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not.
+| **Value**      | **Description**                                                         |
+| -------------- | ----------------------------------------------------------------------- |
+| `none`         | Hides the element (it won’t take up any space).                         |
+| `block`        | Displays the element as a block-level element. Takes full width.        |
+| `inline`       | Displays the element as an inline element. Doesn’t start on a new line. |
+| `inline-block` | Like `inline`, but allows setting width and height.                     |
+| `flex`         | Enables Flexbox layout for flexible box layouts.                        |
+| `inline-flex`  | Like `flex` but behaves as an inline element.                           |
+| `grid`         | Enables CSS Grid layout for two-dimensional layouts.                    |
+| `inline-grid`  | Like `grid` but behaves as an inline element.                           |
+| `table`        | Behaves like an HTML `<table>`.                                         |
+| `table-row`    | Behaves like a table row (`<tr>`).                                      |
+| `table-cell`   | Behaves like a table cell (`<td>`).                                     |
+| `list-item`    | Behaves like a `<li>` with a bullet/number.                             |
+| `inherit`      | Inherits the `display` value from the parent element.                   |
+| `initial`      | Resets the `display` to its default value.                              |
+| `revert`       | Resets to the browser/user-agent style sheet’s default.                 |
 
-Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.
+
+## `Flexbox Properties` ##
+============================
+| **Property**      | **Definition (Single Line)**                                                                                                                    |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `justify-content` | Aligns items **horizontally** along the main axis. Values: `flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly`. |
+| `align-items`     | Aligns items **vertically** along the cross axis. Values: `stretch`, `flex-start`, `flex-end`, `center`, `baseline`.                            |
+| `align-self`      | Overrides `align-items` for a specific item. Same values as `align-items`.                                                                      |
+| `flex-direction`  | Sets the direction of the flex items. Values: `row`, `row-reverse`, `column`, `column-reverse`.                                                 |
+| `flex-wrap`       | Controls if items wrap to next line. Values: `nowrap`, `wrap`, `wrap-reverse`.                                                                  |
+| `flex`            | Shorthand to define grow, shrink, and basis. Example: `flex: 1`, `flex: 1 0 100px`.                                                             |
+| `flex-grow`       | Defines how much a flex item should grow relative to others. Values: any positive number.                                                       |
+| `flex-shrink`     | Defines how much a flex item should shrink relative to others. Values: any positive number.                                                     |
+| `flex-basis`      | Sets the initial size of the item before growing or shrinking. Example: `flex-basis: 100px`.                                                    |
+| `align-content`   | Aligns flex lines (only for multi-line). Values: `flex-start`, `center`, `space-between`, etc.                                                  |
+
+
+## `Grid properties` ##
+========================
+| **Property**            | **Definition (Single Line)**                                                                    |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| `display: grid`         | Turns container into a grid layout system.                                                      |
+| `grid-template-columns` | Defines number and size of columns. Example: `grid-template-columns: 1fr 2fr`.                  |
+| `grid-template-rows`    | Defines number and size of rows. Example: `grid-template-rows: 100px auto`.                     |
+| `grid-column`           | Specifies a grid item's start and end column. Example: `grid-column: 1 / 3`.                    |
+| `grid-row`              | Specifies a grid item's start and end row. Example: `grid-row: 2 / 4`.                          |
+| `gap` / `grid-gap`      | Sets space between rows and columns. Example: `gap: 10px`.                                      |
+| `justify-items`         | Aligns grid items horizontally within their cells. Values: `start`, `center`, `end`, `stretch`. |
+| `align-items` (Grid)    | Aligns grid items vertically within their cells. Values: same as Flexbox.                       |
+| `place-items`           | Shorthand for `align-items` and `justify-items`. Example: `place-items: center`.                |
 
 
 ## `Combinators` ##

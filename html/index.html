@@ -113,17 +113,17 @@
     </map>
 
     <!-- Positioning Examples -->
-    <h2>CSS Position: Static</h2>
+    <h2>Position: Static</h2>
     <div style="position: static; background: lightgray; padding: 10px;">
         This is static. Top/left/right/bottom won't affect it.
     </div>
 
-    <h2>CSS Position: Relative</h2>
+    <h2>Position: Relative</h2>
     <div style="position: relative; top: 20px; left: 30px; background: lightblue; padding: 10px;">
         This is relative. Offset 20px from top and 30px from left.
     </div>
 
-    <h2>CSS Position: Absolute</h2>
+    <h2>Position: Absolute</h2>
     <div style="position: relative; height: 100px; border: 1px solid gray; margin-top: 20px;">
         <div style="position: absolute; top: 10px; left: 10px; background: lightgreen; padding: 10px;">
             This is absolute inside a relative parent.
@@ -140,11 +140,11 @@
     </div>
 
     <div style="position: fixed; bottom: 10px; right: 10px; background: tomato; color: white; padding: 10px;">
-        <h2>CSS Position: Fixed</h2>
+        <h2>Position: Fixed</h2>
         Fixed position. Always stays at bottom-right.
     </div>
 
-    <h2>CSS Position: Sticky</h2>
+    <h2>Position: Sticky</h2>
     <div style="position: sticky; top: 0; background: gold; padding: 10px;">
         Sticky header. It sticks to the top when scrolling.
     </div>
@@ -155,21 +155,21 @@
 
 
 
-    <h2>CSS Overflow: visible</h2>
+    <h2>Overflow: visible</h2>
     <div style="width: 200px; height: 100px; background: #d1e7dd; border: 1px solid #000; overflow: visible;">
         This box has <strong>overflow: visible</strong>. The content will spill outside the box and still be visible.
         <div style="width: 300px; background: #0d6efd; color: white;">Extra wide content outside the box.</div>
     </div>
     <br>
 
-    <h2>CSS Overflow: hidden</h2>
+    <h2>Overflow: hidden</h2>
     <div style="width: 200px; height: 100px; background: #f8d7da; border: 1px solid #000; overflow: hidden;">
         This box has <strong>overflow: hidden</strong>. Extra content is cut off and hidden.
         <div style="width: 300px; background: #dc3545; color: white;">You won’t see this overflow.</div>
     </div>
     <br>
 
-    <h2>CSS Overflow: scroll</h2>
+    <h2>Overflow: scroll</h2>
     <div style="width: 200px; height: 100px; background: #fff3cd; border: 1px solid #000; overflow: scroll;">
         This box has <strong>overflow: scroll</strong>. Scrollbars always appear.
         <div style="width: 300px; height: 150px; background: #ffc107;">Scroll to view the hidden content.</div>
@@ -251,6 +251,98 @@
             porta. Cras ac leo purus. Mauris quis diam velit.</p>
     </div>
 
+    <br>
+    <br>
+    <br>
+
+    <h2>Clear Property</h2>
+    <div style="float: left; width: 100px; height: 100px; background: red;"></div>
+    <p>This text wraps around the floated box.</p>
+    <p style="clear: both;">This text starts below the floated box.</p>
+
+    <br>
+    <br>
+    <br>
+
+    <h2 style="text-align: center;">Flexbox Layout Example</h2>
+
+    <div style="
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+    flex-wrap: wrap;
+    background-color: #f2f2f2;
+    height: 300px;
+    padding: 10px;
+    border: 2px solid #ccc;
+  ">
+        <div style="
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      width: 100px;
+      text-align: center;
+      margin: 10px;
+      flex-grow: 1;
+    ">Box 1</div>
+
+        <div style="
+      background-color: #2196F3;
+      color: white;
+      padding: 20px;
+      width: 100px;
+      text-align: center;
+      margin: 10px;
+      flex-grow: 2;
+    ">Box 2</div>
+
+        <div style="
+      background-color: #f44336;
+      color: white;
+      padding: 20px;
+      width: 100px;
+      text-align: center;
+      margin: 10px;
+      flex-grow: 1;
+    ">Box 3</div>
+    </div>
+
+    <p style="text-align: center; margin-top: 20px;">
+        This layout uses <strong>flex-direction: row</strong>, <strong>justify-content: space-around</strong>,
+        <strong>align-items: center</strong>, and <strong>flex-grow</strong> to distribute space.
+    </p>
+
+
+    <h2>Flex Wrap + align-content (multi-line)</h2>
+    <div style="
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    height: 300px;
+    background: #f0f0f0;
+    border: 2px solid #ccc;
+  ">
+        <div style="background: #4CAF50; color: white; padding: 20px; margin: 5px;">Box 1</div>
+        <div style="background: #2196F3; color: white; padding: 20px; margin: 5px;">Box 2</div>
+        <div style="background: #f44336; color: white; padding: 20px; margin: 5px;">Box 3</div>
+        <div style="background: #FF9800; color: white; padding: 20px; margin: 5px;">Box 4</div>
+        <div style="background: #9C27B0; color: white; padding: 20px; margin: 5px;">Box 5</div>
+        <div style="background: #3F51B5; color: white; padding: 20px; margin: 5px;">Box 6</div>
+    </div>
+
+    <h2 style="margin-top: 40px;">flex-grow, flex-shrink, flex-basis</h2>
+    <div style="display: flex; border: 2px solid #ccc; background: #eee;">
+        <div
+            style="flex-grow: 1; flex-shrink: 1; flex-basis: 100px; background: #4CAF50; color: white; margin: 5px; padding: 20px;">
+            Grow 1</div>
+        <div
+            style="flex-grow: 2; flex-shrink: 1; flex-basis: 100px; background: #2196F3; color: white; margin: 5px; padding: 20px;">
+            Grow 2</div>
+        <div
+            style="flex-grow: 1; flex-shrink: 1; flex-basis: 100px; background: #f44336; color: white; margin: 5px; padding: 20px;">
+            Grow 1</div>
+    </div>
 
 
 </body>
