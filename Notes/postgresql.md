@@ -1,44 +1,4 @@
-POSTGRE SQL
-============
-1 . Databse
------------
-An organised collection of data . A method to manipulate and access the data.
-
-2 . Databse vs DBMS
---------------------
-DBMS (Database Management System): It's the software that helps you create, manage, and interact with databases. Think of it as a tool or program that lets you organize, store, and retrieve data efficiently.
-
-Database: It's the organized collection of data that you manage using the DBMS. You can think of it as a digital filing cabinet where all your information is stored.
-
-3 . 3 DBMS vs RDBMS
---------------------
-DBMS (Database Management System):
-----------------------------------
-Definition: A software system that allows you to create, manage, and manipulate databases.
-Data Storage: Can store data in various formats like files, hierarchical structures, or networks.
-Relationships: Does not necessarily support relationships between data in the form of tables.
-Query Language: May not always use a standard query language like SQL.
-Example: XML databases, File systems.
-
-RDBMS (Relational Database Management System):
-----------------------------------------------
-Definition: A type of DBMS that stores data in tables and supports relationships between these tables using keys.
-Data Storage: Data is stored in a structured format using rows and columns (tables).
-Relationships: Supports relationships between tables using primary keys, foreign keys, and joins.
-Query Language: Uses SQL (Structured Query Language) for querying and managing data.
-Example: MySQL, PostgreSQL, Oracle Database, SQL Server.
-
-4 . Sql VS Non sql
--------------------
-SQL (Relational Databases)
----------------------------
-SQL databases are relational databases that use structured query language (SQL) for defining and manipulating data. They store data in tables with predefined schemas, where each row represents a record, and each column represents an attribute of the record. Examples include MySQL, PostgreSQL, and Oracle.
-
-NoSQL (Non-Relational Databases)
---------------------------------
-NoSQL databases are non-relational databases that store data in a variety of formats, such as key-value pairs, documents, graphs, or wide-columns. They are designed for flexibility, scalability, and handling large amounts of unstructured or semi-structured data. Examples include MongoDB, Cassandra, and Redis.
-
-5 . 4 Overview of PostgreSQL
+Overview of PostgreSQL
 ----------------------------
 Developed by: PostgreSQL Global Development Group
 First released: 1996
@@ -46,7 +6,7 @@ Type: Open-source, Object-relational Database Management System (ORDBMS)
 Main use: Managing large-scale applications and ensuring data integrity
 Language support: SQL and PL/pgSQL, along with support for other languages (e.g., Python, Perl, Ruby)
 
-6 . Features of PostgreSQL
+Features of PostgreSQL
 --------------------------
 ACID compliance: Ensures reliable transactions (Atomicity, Consistency, Isolation, Durability).
 Support for advanced data types: Includes support for JSON, XML, arrays, and custom data types.
@@ -58,7 +18,7 @@ SQL and JSON querying: Supports traditional SQL and modern non-relational JSON q
 Cross-platform: Works on Windows, macOS, and Linux.
 Community support: Strong open-source community with regular updates and enhancements.
 
-7 . Advantages And Disadvantages of PostgreSQL
+Advantages And Disadvantages of PostgreSQL
 ----------------------------------------------
 7 . 1 Advantages
 ----------------

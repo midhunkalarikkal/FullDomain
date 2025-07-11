@@ -94,14 +94,14 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 - Break the main problem into smaller sub-problems, solve them independently, and combine results.  
 - Examples: Merge Sort, Quick Sort, Binary Search, Closest Pair of Points  
 
-6. Greedy Algorithms  
+6. Greedy Algorithm
 - Always makes the locally optimal choice at each step, hoping that this will lead to the globally optimal solution.
-- At every step of the algorithm, we make a choice that looks the best at the moment. To make the choice, we sometimes sort the array so that we can always get the next optimal choice quickly. We sometimes also use a priority queue to get the next optimal item.
+- At every step of the algorithm, we make a choice that looks the best at the moment. To make the choice, we sometimes sort the array or use a priority queue, so that we can always get the next optimal choice quickly.
 - After making a choice, we check for constraints (if there are any) and keep picking until we find the solution.
 - Examples: Activity Selection, Fractional Knapsack, Kruskal’s MST, Prim’s MST, Huffman Coding  
 
 7. Backtracking  
-- Backtracking is a problem-solving algorithmic technique that involves finding a solution incrementally by trying different options and undoing them if they lead to a dead end. It is commonly used in situations where you need to explore multiple possibilities to solve a problem, like searching for a path in a maze or solving puzzles like Sudoku.
+- Backtracking is a problem-solving algorithmic technique that involves finding a solution incrementally by trying different options and undoing them if they lead to a dead end. It is commonly used in situations where we need to explore multiple possibilities to solve a problem, like searching for a path in a maze or solving puzzles like Sudoku.
 - Examples: N-Queens, Sudoku Solver, Rat in a Maze, Subset Sum, Permutations  
 
 8. Dynamic Programming (DP)  
@@ -128,7 +128,6 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 13. Hashing Algorithms  
 - Convert data into a fixed-size hash to allow fast lookup, insert, and delete.  
 - Examples: Hash Maps, Hash Tables, Collision Handling, Anagram Grouping  
-
 
 14. Geometry Algorithms  
 - Used in problems involving 2D/3D space, shapes, and coordinates.  

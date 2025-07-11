@@ -66,6 +66,9 @@ h1, p, a {
 }
 ```
 
+`Attribute selectors`
+-----------------------
+
 
 ## `css background attachment` ##
 =================================
@@ -234,7 +237,7 @@ The display property in CSS determines how an element is displayed in the docume
 | **Property**            | **Definition (Single Line)**                                                                    |
 | ----------------------- | ----------------------------------------------------------------------------------------------- |
 | `display: grid`         | Turns container into a grid layout system.                                                      |
-| `grid-template-columns` | Defines number and size of columns. Example: `grid-template-columns: 1fr 2fr`.                  |
+| `grid-template-columns` | Defines nxumber and size of columns. Example: `grid-template-columns: 1fr 2fr`.                  |
 | `grid-template-rows`    | Defines number and size of rows. Example: `grid-template-rows: 100px auto`.                     |
 | `grid-column`           | Specifies a grid item's start and end column. Example: `grid-column: 1 / 3`.                    |
 | `grid-row`              | Specifies a grid item's start and end row. Example: `grid-row: 2 / 4`.                          |
@@ -464,3 +467,111 @@ flex-shrink
 flex-basis
 flex
 align-self
+
+
+
+## `BOX MODEL` ##
+===================
+The CSS box model is a fundamental concept that represents how elements are structured and how spacing works around them. Every element is essentially a rectangular box composed of:
+- Content: The actual text or image.
+- Padding: Space between the content and border.
+- Border: A line that wraps around padding and content.
+- Margin: Space outside the border, separating it from other elements.
+
+Example:
+<div style="margin: 10px; border: 5px solid black; padding: 15px;">
+  Hello World!
+</div>
+- Content: "Hello World!"
+- Padding: 15px inside the border
+- Border: 5px
+- Margin: 10px outside
+
+To make the element include padding and border in width:
+box-sizing: border-box;
+
+
+## `RESPONSIVE DESIGN` ##
+===========================
+Responsive design ensures that web content adapts to different screen sizes and devices using flexible layouts, media queries, and relative units.
+
+Example using media queries:
+<div style="width: 100%; background: lightblue;">Responsive Box</div>
+
+<style>
+@media (max-width: 600px) {
+  div {
+    background: lightgreen;
+  }
+}
+</style>
+
+This changes the div’s background to lightgreen on screens smaller than 600px.
+
+Units:
+- % (percentage of parent)
+- vw, vh (viewport width/height)
+- em, rem (relative to font-size)
+
+
+## `SPECIFICITY AND INHERITANCE` ##
+===================================
+Specificity defines which CSS rule applies when multiple rules match an element.
+
+Priority:
+1. Inline styles (style="color:red")
+2. IDs (#id)
+3. Classes (.class), attributes ([type="text"]), pseudo-classes (:hover)
+4. Elements (div, h1)
+
+Example:
+<p id="text" class="info" style="color: red;">Hello</p>
+
+<style>
+p { color: blue; }         --> specificity: 0,0,0,1
+.info { color: green; }    --> specificity: 0,0,1,0
+#text { color: purple; }   --> specificity: 0,1,0,0
+</style>
+
+Final color: red (inline wins)
+
+Inheritance:
+Some properties like `color`, `font-size` inherit by default. Others like `margin`, `padding` do not.
+
+
+## `ANIMATIONS AND TRANSITIONS` ##
+==================================
+CSS Transitions allow smooth changes from one state to another.
+
+Example:
+<button style="transition: background 0.3s ease;">Hover me</button>
+<style>
+button:hover { background: orange; }
+</style>
+
+CSS Animations allow keyframe-based transitions.
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+<div style="animation: bounce 1s infinite;">Bouncing Box</div>
+
+## `CSS FUNCTIONS AND VARIABLES` ##
+===================================
+Functions:
+- calc(): Allows dynamic calculation.
+  Example: width: calc(100% - 50px);
+
+- var(): Uses custom CSS variables.
+  Example:
+  :root {
+    --main-color: #3498db;
+  }
+
+  div {
+    background: var(--main-color);
+  }
+
+CSS variables help in theme control and consistency.

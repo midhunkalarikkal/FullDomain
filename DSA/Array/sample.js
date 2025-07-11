@@ -1,9 +1,15 @@
-let samplearr = [1,4,7,3,8,8]
-console.log(samplearr)
-const newsamplearr = samplearr.slice(2,4)
-console.log(newsamplearr)
+const arr = [1,2,3,4,5,6]
+console.log(arr)
 
-let splicearr = [1,6,3,8,3,7,9,38]
-console.log(splicearr)
-splicearr.splice(2,4,100)
-console.log(splicearr)
+arr[3] = 11
+console.log(arr)
+
+console.log(arr[2])
+
+arr.forEach(a=>console.log(a))
+
+arr.splice(0,0,6)
+console.log(arr)
+
+arr.splice(0,3)
+console.log(arr)
