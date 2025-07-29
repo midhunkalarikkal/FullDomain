@@ -1,5 +1,5 @@
 function heapSort(arr){
-    const heapifyDown = (arr, n , i) => {
+    const heapifyDown = (arr, n, i) => {
         let largest = i
         const left = 2 * i + 1
         const right = 2 * i + 2
@@ -14,7 +14,7 @@ function heapSort(arr){
 
         if(largest !== i){
             [arr[i], arr[largest]] = [arr[largest], arr[i]]
-            heapifyDown(arr , n , largest)
+            heapifyDown(arr, n, largest)
         }
     }
 
@@ -30,10 +30,10 @@ function heapSort(arr){
 
     for(let i = n-1; i > 0; i--){
         [arr[0], arr[i]] = [arr[i], arr[0]]
-        heapifyDown(arr , i , 0)
+        heapifyDown(arr, i, 0)
     }
 
-    return arr
+    return arr;
 }
 
 const arr = [4, 10, 3, 5, 1];

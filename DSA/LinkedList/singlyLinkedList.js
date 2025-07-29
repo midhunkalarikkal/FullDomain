@@ -42,7 +42,7 @@ class singlyLinkedList {
             prev.next = node
         }
         this.size++
-    }
+    } 
 
     insert(value,index){
         if(index < 0 || index >= this.size){

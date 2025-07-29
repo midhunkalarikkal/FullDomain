@@ -1,4 +1,5 @@
 function elementSearch(arr,target){
+    
     arr = arr.sort((a,b) => a-b)
     let left = 0
     let right = arr.length - 1

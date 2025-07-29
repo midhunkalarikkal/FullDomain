@@ -127,14 +127,14 @@ Bubble Sort is a simple comparison-based sorting algorithm also known as sinking
 `Advantages`
 -------------
 - Simplicity: Easy to implement and understand.
-- In-place sorting algorithm: Requires only a single additional memory space for the temporary variable used for swapping.
 - Stable sorting algorithm: Maintains the relative order of equal elements.
+- In-place sorting algorithm
 - Adaptive algorithm
 
 `Disadvantages`
 ----------------
-- Inefficiency: One of the least efficient sorting algorithms for large datasets. The number of comparisons and swaps can be significantly higher compared to other algorithms.
-- Performance: Poor performance on average and worst-case scenarios, making it impractical for most applications.
+- Inefficiency for large set of data
+- Poor performance on average and worst-case scenarios.
 - Redundant Comparisons: Even after the array becomes sorted, it continues to compare.
 
 `Best Case Scenario`
@@ -184,7 +184,8 @@ It has performance advantages over more complicated algorithms in certain situat
 
 `Disadvantages`
 ----------------
-Inefficient for Large Data Sets: Time complexity of O(n²) makes it impractical for large datasets.
+Inefficient for Large Data Sets
+Poor performance on average and worst xase scenario
 Not Adaptive: Does not take advantage of the existing order in the array.
 Unstable: Does not preserve the relative order of equal elements.
 
@@ -215,9 +216,9 @@ Space Complexity :-
 --------------
 Simple to Implement: Easy to understand and implement.
 Efficient for Small Data Sets: Performs well with small arrays.
-Stable: Preserves the relative order of equal elements.
-Adaptive: Efficient for nearly sorted arrays, with a time complexity approaching O(n).
-In place
+Stable algorithm
+Adaptive algorithm
+In-place algorithm
 
 `Disadvantages`
 -----------------
@@ -249,10 +250,10 @@ It works by choosing a "pivot" element and rearranging the other elements into t
 `Complexity Analysis`
 ------------------------
 Time Complexity :-
-  Best Case :-  O(n log n)
-  Average Case :-  O(n log n)
-  Worst Case :-  O(n²)
-Space Complexity :-  O(log n) (due to the recursion stack)
+  Best Case :- O(n log n)
+  Average Case :- O(n log n)
+  Worst Case :- O(n²)
+Space Complexity :- O(log n) (due to the recursion stack)
 
 `Best Case Scenario`
 ---------------------
@@ -266,7 +267,7 @@ In the average case, the pivot generally divides the array into reasonably balan
 ----------------------
 The worst-case time complexity is O(n^2). This occurs when the pivot choice results in highly unbalanced partitions. For example, if the array is already sorted or nearly sorted, and the last element is always chosen as the pivot, the array is divided into one large subarray and one empty subarray, leading to O(n^2) complexity.
 
-the worst-case scenario for quick sort arises when the pivot is consistently chosen poorly, such as always selecting the smallest or largest element in the array. In this situation, Quick Sort may require O(n^2) comparisons and swaps to complete the sorting process, which could be more efficient. For example, this worst-case scenario can occur when sorting an already sorted array or an array with many duplicate elements.
+the worst-case scenario for quick sort arises when the pivot is consistently chosen poorly, such as always selecting the smallest or largest element in the array. In this situation, Quick Sort may require O(n^2) comparisons and swaps to complete the sorting process, which could be more inefficient. For example, this worst-case scenario can occur when sorting an already sorted array or an array with many duplicate elements.
 
 `Advantages`
 --------------
@@ -279,6 +280,7 @@ Parallelizable: Can be easily parallelized as different parts of the array can b
 Worst-Case Complexity: Can degrade to O(n²) if the pivot selection is poor.
 Recursive: Recursive calls can lead to a stack overflow if the recursion depth is too large.
 unstable: Does not preserve the relative order of equal elements.
+Non adaptive
 
 `Applictions of quick sort`
 -----------------------------
@@ -418,7 +420,7 @@ Index 3 → [ (k1, v1) → (k2, v2) ]
 
   `Linear probing` - If a collision occure the algorithm checks the next slot in a sequencial manner until an empty slot is found
 
-  `Quadratic probing` - The algorithm uses a quafratic function to calculate next slot availability
+  `Quadratic probing` - The algorithm uses a quafratic function to calculate next available empty slot
 
   `Double hashing` - using a secondary hash function to calculate the step size for probing
 
@@ -431,7 +433,7 @@ During rehashing, the hash table is resized, and all existing keys are reinserte
 -------------
 The load factor is a metric that indicates the ratio of the number of elements stored in the hash table to the total number of slots available.
 
-Load Factor(α)= n / m
+Load Factor(α) = n / m
 n = Number of elements (keys) currently in the hash table.
 m = Number of slots (buckets) in the hash table.
 
@@ -454,7 +456,8 @@ Stable sort with a guaranteed O(nlogn) time complexity in all cases (best, avera
 `Linked list`
 ---------------
 1 . Merge sort
-Mergesort is particularly well-suited for linked lists. It can be implemented with O(1) extra space and maintains the O(nlogn) time complexity. The splitting and merging operations are more efficient with linked lists compared to arrays because they can be done in place without additional memory.
+Mergesort is particularly well-suited for linked lists. It can be implemented with O(1) extra space and maintains the 
+O(n log n) time complexity. The splitting and merging operations are more efficient with linked lists compared to arrays because they can be done in place without additional memory.
 
 2 . Insertion sort
 Simple to implement and works well with small datasets or nearly sorted lists. Its best-case time complexity is O(n).
@@ -517,8 +520,8 @@ Non - In place sorting algorithm - Merge sort
 
 
 
-## `Adaptive Algorithms` ##
-============================
+## `Adaptive Sorting Algorithms` ##
+======================================
 The algorithm takes advantage of existing order in the input (i.e., performs better on nearly sorted data).
 
 Adaptive

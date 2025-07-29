@@ -1,7 +1,7 @@
 class Stack{
     constructor(){
         this.items = []
-        this.count = 0
+        this.size = 0
     }
 
     isEmpty(){
@@ -9,16 +9,16 @@ class Stack{
     }
 
     push(element){
-        this.items[this.count] = element
-        console.log(`${element} is add to ${this.count}`)
-        this.count++
+        this.items[this.size] = element
+        console.log(`${element} is add to ${this.size}`)
+        this.size++
         return
     }
 
     pop(){
         if(!this.isEmpty()){
-            let deleteElement = this.items[this.count - 1]
-            this.count--
+            let deleteElement = this.items[this.size - 1]
+            this.size--
             console.log(`Popped element : ${deleteElement}`)
             return
         }else{
@@ -27,16 +27,16 @@ class Stack{
     }
 
     peek(){
-        console.log(`Peeking element : ${this.items[this.count - 1]}`)
+        console.log(`Peeking element : ${this.items[this.size - 1]}`)
     }
 
     getSize(){
-        console.log(`Stack size : ${this.count}`)
+        console.log(`Stack size : ${this.size}`)
     }
 
     display(){
         if(!this.isEmpty()){
-            for(let i = 0; i < this.count; i++){
+            for(let i = 0; i < this.size; i++){
                 console.log(`Stack ${i} : ${this.items[i]}`)
             }
         }else{
@@ -46,7 +46,7 @@ class Stack{
 
     clear(){
         this.items = []
-        this.count = 0
+        this.size = 0
         console.log("Stack cleared ",this.items)
     }
 }

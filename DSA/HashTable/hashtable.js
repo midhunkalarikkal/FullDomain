@@ -10,7 +10,7 @@ class HashTable{
         for(let i = 0; i < key.length; i++){
             total += key.charCodeAt(i)
         }
-        return total % this.size
+        return total % this.size;
     }
 
     set(key,value){
@@ -19,7 +19,7 @@ class HashTable{
         if(!bucket){
             this.table[index] = [[key,value]]
         }else{
-            const exisitng = bucket.find(item => item[0] === key)
+            const exisitng = bucket.find(item => item[0] === key);
             if(exisitng){
                 exisitng[1] = value
             }else{
@@ -28,7 +28,7 @@ class HashTable{
         }
         this.count ++
         if(this.count / this.size > 0.7){
-            this.resize()
+            this.resize();
         }
     }
 

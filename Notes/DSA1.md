@@ -42,16 +42,16 @@ Scalability
 Complexity
 Development Time
 Memory Overhead
-Performance Trade-offs
 Rigid Structure
+Performance Trade-of
 
 
 
 
 
-## `Algorithms` ##
+## `Algorithm` ##
 ====================
-Algorithms are step-by-step procedures or formulas for solving a problem or performing a task.
+Algorithm is a step-by-step procedures or formula for solving a problem or performing a task.
 
 `Characteristics of Algorithms`
 ---------------------------------
@@ -96,7 +96,7 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 
 6. Greedy Algorithm
 - Always makes the locally optimal choice at each step, hoping that this will lead to the globally optimal solution.
-- At every step of the algorithm, we make a choice that looks the best at the moment. To make the choice, we sometimes sort the array or use a priority queue, so that we can always get the next optimal choice quickly.
+- At every step of the algorithm, that will make a choice that looks the best at the moment. To make the choice, we sometimes sort the array or use a priority queue, so that we can always get the next optimal choice quickly.
 - After making a choice, we check for constraints (if there are any) and keep picking until we find the solution.
 - Examples: Activity Selection, Fractional Knapsack, Kruskal’s MST, Prim’s MST, Huffman Coding  
 
@@ -149,9 +149,9 @@ Algorithms are step-by-step procedures or formulas for solving a problem or perf
 
 `Dijkstra’s Algorithm` - A Greedy algorithm used to find the shortest path from a source node to all other nodes in a weighted graph (non-negative weights).
 
-`Huffman Coding` - Huffman Coding is a greedy algorithm used to compress data by assigning shorter binary codes to more frequent characters and longer codes to less frequent characters, reducing the overall size of the data.
-
 `Bellman-Ford Algorithm` - Similar to Dijkstra, but can handle negative weights. Slower but more versatile.
+
+`Huffman Coding` - Huffman Coding is a greedy algorithm used to compress data by assigning shorter binary codes to more frequent characters and longer codes to less frequent characters, reducing the overall size of the data.
 
 `Floyd-Warshall Algorithm` - A dynamic programming approach used to Find the shortest paths between all pairs of nodes in a graph.
 
@@ -176,8 +176,8 @@ Divide and conquer technique.
 Repeatedly divides the search range in half.
 Compares the middle element with the target:
     If equal → target found.
-    If target is smaller → search left half.
-    If target is larger → search right half.
+    If target is smaller → search on left half.
+    If target is larger → search on right half.
 Reduces the problem size logarithmically each time.
 Time Complexity: O(log n)
 
@@ -203,48 +203,7 @@ Performance Overhead :- Each recursive call adds a new frame to the call stack, 
 
 Stack Overflow :- Deep recursion can cause stack overflow errors if the recursion depth exceeds the stack size limit of the programming environment.
 
-Memory Usage :- Recursive solutions often use more memory due to the additional stack frames for each function call, which can be problematic for memory-constrained environments.
-
-
-
-
-
-## `Iterative` vs `Recursion` ##
-================================
-`Definition`
---------------
-Iterative :- Utilizes loops (for, while) to repeat a set of instructions until a certain condition is met.
-Recursive :- A function calls itself directly or indirectly to solve a problem, with a base case to stop the recursion.
-
-`Structure`
--------------
-Iterative :-
-Uses looping constructs.
-Typically involves a single function that contains the loop.
-
-Recursive :-
-A function that calls itself.
-Requires a base case to terminate the recursive calls and prevent infinite loops.
-
-`Performance`
---------------
-Iterative :-
-Generally more efficient in terms of time and space complexity.
-Uses constant space for loop control variables.
-
-Recursive :-
-Can lead to high memory usage due to multiple stack frames if not optimized (e.g., via memoization).
-Risk of stack overflow for deep recursion if the recursion depth exceeds the call stack limit.
-
-`Use of Stack`
----------------
-Iterative :-
-Utilizes the program’s main stack frame and does not add extra stack frames.
-Explicit stack data structures can be used if needed.
-
-Recursive :-
-Each recursive call adds a new frame to the call stack.
-Inherent stack management for maintaining state across function calls.
+Memory Usage :- Recursive solutions often use more memory due to the additional stack frames.
 
 
 
@@ -252,7 +211,7 @@ Inherent stack management for maintaining state across function calls.
 
 ## `Dynamic Programming` ##
 ==============================
-Dynamic Programming (DP) is a method for solving complex problems by breaking them down into simpler overlapping subproblems. It is particularly useful for optimization problems where the solution can be recursively defined in terms of the solutions to smaller instances of the same problem.
+Dynamic Programming (DP) is a method for solving complex problems by breaking them down into simpler overlapping subproblems. It is particularly useful for optimizating problems where the solution can be recursively defined in terms of the solutions to smaller instances of the same problem.
 
 `Memoize Approach`
 --------------------
@@ -329,7 +288,6 @@ Provides flexibility to allocate and deallocate memory as needed.
 - Larger in size, Flexibility, Life time control, Global access, Non contiguous
 - Accessing data in the heap memory is slower than in the stack because it involves pointers and dynamic allocation.
 - If dynamically allocated memory isn’t properly freed or released, it stays reserved — leading to memory leaks.
-- When memory is allocated and deallocated in small chunks, gaps (fragments) are created. This can reduce the usable continuous space, even if enough memory is free overall.
 - **Reference data types** like arrays, objects, and functions (in JS) are stored in heap memory.
 
 
@@ -482,9 +440,7 @@ Stores elements of different data types (available in languages like Python or J
 
 `Associative Array`
 --------------------
-An associative array (also known as a map, dictionary, or object) is a data structure that stores key–value pairs, where:
-- Each value is associated with a unique key.
-- Keys can be strings (and in some languages, other types too).
+An associative array is an array stores elements like key value pairs
 
 `Circular Array`
 -----------------
