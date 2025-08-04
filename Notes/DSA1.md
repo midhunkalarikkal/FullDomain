@@ -157,6 +157,8 @@ Algorithm is a step-by-step procedures or formula for solving a problem or perfo
 
 `Knapsack Problem` - A Dynamic Programming approach. Given items with weights and values, maximize value without exceeding the bag capacity. Two types: 0/1 and fractional.
 
+`Tarjans Algorithm` - Tarjan’s Algorithm is a graph traversal algorithm developed by Robert Tarjan in 1972. It is used to efficiently identify certain critical components in a graph. Used for finding Strongly Connected Components (SCCs) in a directed graph, finding Bridges and Articulation Points in an undirected graph.
+
 
 
 

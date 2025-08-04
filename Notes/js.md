@@ -21,6 +21,8 @@ JavaScript has only one main thread to execute code, meaning it can handle one t
 
 `event-driven language` means the flow of the program is determined by events, such as user actions (clicks, key presses), system messages, or other triggers. Instead of executing code sequentially, it waits for an event to occur and then runs the corresponding code.
 
+`Worker Threads`  In JavaScript, the main thread is single-threaded, meaning it handles tasks like UI updates, events, and running JavaScript code. However, in some cases, we might want to offload heavy computations or tasks to separate threads to avoid blocking the main thread. This is where Web Workers (also referred to as Worker Threads) come into picture.
+
 ## `Advantages of JavaScript`
 -----------------------------
 - Versatility: Used for both client and server-side development.
@@ -2474,7 +2476,7 @@ The continue statement is used to skip the current iteration of a loop and proce
 
 ## `Exceptions` ##
 =====================
-An exception is an error that occurs during the execution of a program and disrupts the normal flow of code.
+An exception is an error that occurs during the execution of a program and disrupts the normal flow of the code.
 
 `Types of Errors in JavaScript:`
 
@@ -2497,13 +2499,10 @@ try {
   // Optional: runs always, error or not
 }
 ```
-
 `When an exception is thrown`, JavaScript creates an Error object containing:
-
-name (type of error)
-message (details of the error)
-stack (where the error occurred)
-
+  name (type of error)
+  message (details of the error)
+  stack (where the error is occurred)
 `we can create and throw custom errors using the throw keyword.`
 
 
@@ -2517,11 +2516,7 @@ typeof returns a string indicating the type of a given operand.
 It works best for primitive types and functions.
 
 `instanceof`
-instanceof tests whether the prototype chain of an object includes the prototype of a constructor function.
-Checks wether the object is an instanceof constructor function
-
-we want to check if an object was created from a specific constructor
-we want to validate class instances (obj instanceof MyClass)
+It is used to check wether the object is an instance of the specific constructor function or class
 ```js
 object instanceof ConstructorFunction;
 
@@ -2540,8 +2535,8 @@ console.log(user instanceof Object); // true
 
 ## `jwt` ##
 =============
-- JWT (JSON Web Token) is an open standard (RFC 7519) used to securely transmit information between two parties (typically client and server) as a JSON object.
-This information can be verified and trusted because it's digitally signed.
+- JWT (JSON Web Token) is an open standard (RFC 7519) used to securely transmit information between client and server as a JSON object.
+- This information can be verified and trusted because it's digitally signed.
 - Size of the data is maximum 8kb, Recommended 1kb to 3kb
 - JWTs are commonly used for authentication and authorization in web applications.
 
@@ -2552,7 +2547,6 @@ Header  Payload Signature
 
 1. `Header`
 The header typically consists of two parts
-Base64-encoded to form the first part of the JWT.
 ```js
 {
   "alg": "HS256",       // algorithm used (e.g., HMAC SHA256)
@@ -2600,4 +2594,22 @@ try {
 } catch (err) {
   console.error("Invalid token:", err.message);
 }
+```
+
+
+
+
+
+## `Prototype Pollution`
+========================
+Prototype pollution happens when an attacker modifies the prototype of built-in objects like Object.prototype, affecting all objects in the app.
+It usually occurs in:
+- Insecure merge or extend logic
+- Unsafe JSON.parse() usage
+Always validate object keys before merging.
+Avoid setting properties from untrusted sources directly on objects.
+Use libraries with prototype pollution protection.
+```js
+const malicious = JSON.parse('{"__proto__": {"isAdmin": true}}');
+console.log({}.isAdmin); // true — because Object.prototype was polluted
 ```

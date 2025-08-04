@@ -1,4 +1,4 @@
-## `Node.js` ##
+# `Node.js`
 ================
 - Node.js is a `cross-platform`, `open-source` JavaScript runtime environment that can run on Windows, Linux, Unix, macOS, and more. 
 - Node.js runs on the V8 JavaScript engine, and executes JavaScript code outside of a web browser.
@@ -16,8 +16,6 @@ Initially, the project was named "WebJS" because Ryan believed he was creating i
 At the time, most servers were blocking in nature, which led Ryan to start developing Node.js as a non-blocking, event-driven runtime to handle asynchronous operations efficiently.
 
 So node.js is single threaded by default when there is only synchrnous code, but it is multi threaded when it have asynchrnous code because it will use libuv to run the asynchronous code and then libuv will use thread pool.
-
-`Worker Threads`  In JavaScript, the main thread is single-threaded, meaning it handles tasks like UI updates, events, and running JavaScript code. However, in some cases, we might want to offload heavy computations or tasks to separate threads to avoid blocking the main thread. This is where Web Workers (also referred to as Worker Threads) come into picture.
 
 2009
 ------
@@ -56,18 +54,16 @@ The JS Foundation and the Node.js Foundation merged to form the OpenJS Foundatio
 
 
 
-## `Chrome v8 javascript engine` ##
+## `Chrome v8 javascript engine`
 ===================================
-V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js, among others. It implements `ECMAScript` and `WebAssembly`, and runs on Windows, macOS, and Linux systems that use x64, IA-32, or ARM processors. `V8 can be embedded into any C++ application`.
+V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. It is used in Chrome and in Node.js. It implements `ECMAScript` and `WebAssembly`, and runs on Windows, macOS, and Linux systems, `V8 can be embedded into any C++ application`.
 
 `Whereever is javascript there is js engine`
-
 v8 for chrome
 spider monkey for firefox
 chakra for edge
 
 js code ---->  c++ code ------> assembly code --------> machine code ---------> binary
-
 
 Steps inside the v8 engine
 ---------------------------
@@ -87,9 +83,8 @@ Steps inside the v8 engine
 `The whole process of interpreter and compiler is called Just in time compiler`
 
 Javascript is neighther a interpreter language nor compiler language, but it uses both of them inside v8 engine.
-The compilation process inside the v8 engine is said to be the `JIT Compilation` that menas just in time compilation.
 
-## `JIT (Just in time)` ##
+## `JIT (Just in time)`
 ============================
 Just-In-Time (JIT) Compilation: JavaScript is traditionally an interpreted language, meaning code is executed directly without a compilation step. However, modern JavaScript engines like V8 use JIT compilation to improve performance.
 
@@ -104,7 +99,7 @@ However, there are cases where the optimized machine code becomes invalid. This 
 When such a mismatch occurs, de-optimization happens. The V8 engine discards the optimized hot code and falls back to the original bytecode, which is executed by the Ignition Interpreter. The engine can then adapt to the new input type, ensuring correct execution while trading off some performance.
 
 
-## `Core Components of Node.js Architecture` ##
+## `Core Components of Node.js Architecture`
 =====================================================
 `Single Thread`
 Node.js uses a single main thread for processing requests.
@@ -132,7 +127,8 @@ A C library that provides Node.js the ability to perform asynchronous I/O operat
 
 
 
-## `Design Patterns ` ##
+
+## `Design Patterns`
 ==========================
 - Design patterns in Node.js are proven solutions to common software design problems. They are structured approaches to solving challenges in coding, organization, architecture, and maintainability — especially for the larger applications.
 
@@ -169,7 +165,7 @@ Reduces bugs and technical debt
 
 
 
-## `Event driven architechture` ##
+## `Event driven architechture`
 ===================================
 Event-driven architecture (EDA) is a design paradigm in which the flow of a program is determined by events such as user actions, sensor outputs, or messages from other programs. It is commonly used in systems where asynchronous and dynamic responses are needed.
 
@@ -201,42 +197,43 @@ Debugging: Easier to debug, as there are fewer asynchronous tasks to manage.
 
 
 
-## `Server` ##
+
+## `Server`
 ==============
 A server is a powerful computer or system that provides services, data, or resources to other computers, known as clients, over a network. When a client machine, such as a user's computer or smartphone, makes a request to access a website like google.com, it sends the request to the server. The server is identified by an IP address, for example, 114.126.123.8, which uniquely points to the server machine hosting the website or service. The server processes the client's request and responds with the required data, such as a webpage.
 
 
 
 
-## `ECMA Script` ##
+
+## `ECMA Script`
 ===================
 ECMAScript is a standardized specification for scripting languages, which serves as the foundation for languages like JavaScript, JScript, and ActionScript. It defines the rules, guidelines, and features for scripting languages to ensure consistency and interoperability across different platforms and browsers.
 
 
 
 
-## `WebAssembly` ##
+
+## `WebAssembly`
 ===================
 WebAssembly (Wasm) is a binary instruction format designed for efficient execution on web browsers. It enables high-performance execution of code written in languages like C, C++, Rust, and others, directly in the browser, alongside JavaScript. WebAssembly allows developers to run computationally intensive tasks faster and with lower overhead compared to traditional JavaScript.
 
 
 
 
-## `REPL` ##
+
+## `REPL`
 =============
 Read, Evaluate, Print, Loop
 Quickest way of runnig nodejs code
 A REPL is an interactive programming environment that allows users to enter and execute code one line at a time.
-
 type `node` in command line for activate repl
-special comands :- .help , .break , .clear
-Auto completion :- Pressing the tab key can autocomplete the names of functions , varialbles and modules
 
 
 
 
 
-## `global` ##
+## `global`
 ==============
 One of the superpowers of Node.js is its ability to work seamlessly with the V8 engine, making development faster and more efficient.
 
@@ -255,14 +252,13 @@ To standardize how the global object is accessed across different runtimes (Node
 
 
 
-## `Module` ##
+## `Module`
 ==============
 In Node.js, each module is wrapped in a function when executed.This is an IIFE function. 
 
 This IIFE function makes the variables and functions private to the scope of the module itself and not accessible from other modules unless explicitly exported.
 
 When a Node.js module is executed, it is wrapped in a function like this internally
-
 ```js
 (function(exports, require, module, __filename, __dirname) {
   // Your module code here
@@ -279,7 +275,7 @@ No Global Pollution: Prevents accidental overwriting of global variables or func
 
 
 
-## `require` ##
+## `require`
 ================
 Used to include another modules in a module by using the require function and specifying the path inside it
 
@@ -313,16 +309,11 @@ Whenever the require function will call a module it will wrap the module inside 
   The loaded module is cached to improve performance.
   If the module is required again, the cached version is returned instead of re-executing the module code.
 
-## Example
-===========
-```js
-module.exports = {variable, function}
-```
 
 
 
 
-## `CommonJs module (cjs)` common js module system ##
+## `CommonJs module (cjs)` common js module system
 ==========================================================
 `Older Module System`
 Used primarily in Node.js before ES6 modules were introduced.
@@ -348,7 +339,6 @@ module.exports.name = 'Midhun';
 
 `Default in Node.js`
 If no module system is specified in package.json, Node.js treats files as CommonJS by default.
-
 ```js
 module.exports = sum; // Single export
 module.exports = {Sum, Multiply}; // Multiple export
@@ -366,7 +356,7 @@ object.Multiply
 
 
 
-## `ES modules (mjs)` es module system ##
+## `ES modules (mjs)` es module system
 ===============================================
 `Newer, Modern Module System`
 Introduced in ES6, now widely supported in browsers and Node.js (with configuration).
@@ -383,7 +373,6 @@ When importing, you must include the .js extension:
 ```js
 import { sum } from './utils.js';
 ```
-
 `Enable ESM in Node.js`
 In Node.js, set the type to module in package.json:
 ```js
@@ -393,7 +382,6 @@ In Node.js, set the type to module in package.json:
 ```
 
 `Exporting in ES Modules`
-
 Named Export – export individual items:
 ```js
 export function sum(a, b) {
@@ -407,7 +395,6 @@ export default utils;
 ```
 
 `Importing in ES Modules`
-
 Named Import:
 ```js
 import { sum } from './utils.js';
@@ -1591,8 +1578,25 @@ Form Submissions
 
 
 
-## `Throttling` ## 
+## `Throttling`
 ===================
 A technique to limit the number of times a function is executed within a given timeframe. 
 Used to control traffic (e.g., user input or server load).
  
+
+
+
+
+## `fs.link()`
+===============
+ fs.link() is a method in Node.js's fs module that creates a hard link between two files.
+
+ A hard link is like creating a second name (path) for the same file data on disk. Both links point to the same underlying data (inode), so changes to one will be reflected in the other. Deleting one does not delete the actual file unless all hard links are removed.
+ ```js
+ const fs = require('fs');
+
+fs.link('original.txt', 'hardlink.txt', (err) => {
+  if (err) throw err;
+  console.log('Hard link created: hardlink.txt');
+});
+ ```

@@ -1,12 +1,12 @@
-## `Databse` ##
+## `database` ##
 ================
-An organised collection of data or a type of data store based on the use of a databse management system
+A database is an organized collection of structured or unstructured data that is stored and accessed electronically. It is designed to efficiently store, manage, retrieve, and manipulate data for various applications.
 
-## `Databse management System` ##
+## `database management System` ##
 =================================
-Software that interacts with end users, applications and the databse itself to capture and analyze the data.
+A Software that interacts with end users applications and the database itself to capture and analyze the data.
 
-## `Types of Databses` ##
+## `Types of Databases` ##
 =========================
 - Relational DB - `mysql, postgresql`
 
@@ -38,8 +38,8 @@ Software that interacts with end users, applications and the databse itself to c
 - Uses SQL (Structured Query Language).
 - Scales vertically by adding resources to one server.
 - Ensures strong reliability with ACID properties (Atomicity, Consistency, Isolation, Durability).
-- Ideal for structured data, like banking apps or applications with complex relationships.
-- Examples: MySQL, PostgreSQL, Oracle.
+- Ideal for structured data,
+- Examples: MySQL, PostgreSQL
 
 If the db follows codds 12 rule [0 - 12] then the db becomes a relational db
 
@@ -50,9 +50,7 @@ postgresql is developed by michael stonebreaker
 -----------------------
 `MySQL` is primarily known for its speed and simplicity, making it a go-to choice for web applications and read-heavy workloads.
 
-`PostgreSQL` emphasizes advanced features and standards compliance, excelling in handling complex queries, extensibility, and support for diverse data types.
-
-extensibility means supports user defined functions, data types and operators and allows procedural language and advanced indexing and more.
+`PostgreSQL` emphasizes advanced features and standards compliance, excelling in handling complex queries, extensibility (user defined functions), and support for diverse data types.
 
 ## `No SQL  DB` ##
 ===================
@@ -82,19 +80,18 @@ Amazon Neptune
 ## `MongoDB` ##
 ================
 - MongoDB is a NoSQL database that stores data in a flexible, schema-free format. 
-- It is designed for high-performance, scalability, and ease of development, making it suitable for a wide range of applications. 
+- It is designed for high-performance, scalability, and ease of development
 - MongoDB uses collections and documents to organize data.
-- MongoDB known for its ability to handle large volumes of data and unstructured information efficiently.
+- MongoDB can handle large volumes of unstructured data
 - No need for joins
 - No need for data normalisation
 
-developed in times of 2009 by the company 10gen and the name comes from Humoungous means huge, very big. 
-Then the 10gen company later renamed to mongoDB inc.
+developed in times of 2009 by the company 10gen and the name comes from Humoungous means huge, very big. Then the 10gen company later renamed to mongoDB inc.
 
 `Collection`
 ------------
 - In MongoDB, a collection is a group of MongoDB documents. 
-- It is the equivalent of an table in a relational database. 
+- It is the equivalent of a table in a relational database. 
 - Collections are used to store and organize documents, which are BSON (Binary JSON) format data structures.
 
 `document`
@@ -102,12 +99,6 @@ Then the 10gen company later renamed to mongoDB inc.
 - Each collection contains one or more documents, which are like rows in a table. 
 - However, unlike rows, documents in a collection can have different structures and fields, 
   offering flexibility in data storage.
-
-1. Adding new document 
- insertOne()
- insertMany()
-
-2. `Nested documents` - Nested documents are documents that are embedded within the fields of another document.
 
 `Advanges of Nested documents`
 -------------------------------
@@ -123,8 +114,6 @@ Then the 10gen company later renamed to mongoDB inc.
 `View`
 -------
 - View allows you to create virtual collections based on aggregation pipelines. 
-- Views allow you to define complex data transformations, filtering, and aggregation logic .
-
 ```json
 db.createView(
   "electronicsView",       // Name of the view
@@ -133,15 +122,13 @@ db.createView(
     { $match: { category: "Electronics" } }  // Query to filter data 
   ]
 );
-
 db.electronicsView.find();
-
 ```
 `Query`
 -------
 - A query is a request for specific information or data from a database.
 - It is used to retrieve, filter, and manipulate data based on specific criteria.
-- Queries enable communication in between databse and Database Management System (DBMS).
+- Queries enable communication in between database and Database Management System (DBMS).
 - The purpose is to extract desired data efficiently.
 
 `fields`
@@ -163,7 +150,7 @@ BSON, short for Binary JSON, is a binary-encoded serialization format used prima
 - Flexible schema design.
 - Scalability and sharding capabilities.
 - High performance for read-heavy workloads.
-- JSON-like document format.
+- BJSON document format.
 - Rich query capabilities.
 - Replication and high availability.
 
@@ -197,7 +184,6 @@ a namespace refers to the combination of the database name and the collection na
 -----------
 - A schema is a blueprint or structure that defines the organization and format of data in a database. 
 - It specifies how data is organized, what types of data can be stored, and the relationships between different data elements.
-- Any key that is not present in the schema and we are passsing it to update that document, it will not make that field.
 - We can add properties to a field to control the value of that field and this method is called `data sanitizing`.
 
 `Schema flexibility` in MongoDB means that you don't have to define a fixed structure (schema) for your data before storing it. Each document in a collection can have a different structure, with varying fields, types, and sizes.
@@ -265,14 +251,6 @@ firstName : {
 10. Array
 11. null
 
-`Date vs Timestamp`
---------------------
-1. Date
-The "date" data type in MongoDB is used to store date and time information in a standard ISO 8601 format. It includes the year, month, day, hours, minutes, seconds, and milliseconds.
-
-2. Timestamp
-The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON timestamp. It is typically used for internal purposes and may not be as human-readable as the "date" data type.
-
 `Special Bson values`
 ----------------------
 1. Minkey - represents smallest possible key in mongodb , used as a placeholder
@@ -303,25 +281,18 @@ The "timestamp" data type, on the other hand, is used to represent a 8-byte BSON
 ## `Regex` ##
 =============
 /^a/ - first a
-
 /a$/ - last a
-
 /a/ - a in that field
-
 /iam/ - string
 
 /A.a/ - starting A then any single character and end with a, The dot (.) is used in regular expressions to match any single character except newline characters.
 ```js
-db.products.find({
-  name: /A.a/
-});
+db.products.find({ name: /A.a/ });
 ```
 
 '[aeiou]{2,3}' - specifies that you are looking for 2 or 3 consecutive vowels in the value of "testProperty".
 ```js
-db.words.find({
-  testProperty: /[aeiou]{2,3}/
-});
+db.words.find({ testProperty: /[aeiou]{2,3}/ });
 ```
 /^abcx*/ - starting with abc and is followed by zero or more x
 
@@ -337,7 +308,7 @@ db.words.find({
 
 ## `Cursor` ##
 ==============
-Cursor is a pointer to the result set  of a query , When we query a mongodb collection the database returns a cursor. The cursor allows for efficient retrieval of large result sets without consuming excessive memory. Cursors are lazy-loaded, meaning the data is fetched as we iterate over it, not all at once.
+Cursor is a pointer to the result set  of a query , When we query a mongodb collection the database returns a cursor. The cursor allows for efficient retrieval of large result sets without consuming excessive memory. Cursors are lazy-loaded.
 
 `Cursor methods`
 -----------------
@@ -361,10 +332,10 @@ eg : db.cm.find().map(doc => doc.name)
 7. skip(): used to skip a specified number of documents in the result set.
 eg : db.cm.find().skip()
 
-8. max(): Limits the results to documents with field values less than or equal to the specified value.
+8. max(): Limits the results to documents with field values greater than or equal to the specified value.
 eg : db.cm.find().max({ age: 30 })
 
-9. min(): Limits the results to documents with field values greater than or equal to the specified value.
+9. min(): Limits the results to documents with field values less than or equal to the specified value.
 eg : db.cm.find().min({ age: 30 })
 
 10. next(): Returns the next document in the cursor.
@@ -398,15 +369,17 @@ eg : db.cm.find().addOption(DBQuery.Option.tailable)
 
 ## `Collection Methods` ##
 ==========================
-Create databse - use db;
+Create database - use db;
 
-Delete databse - db.dropDatabse;
+Delete database - db.dropDatabase;
 
 Create Collection - db.createCollection("collection_name")
 
-show collection - show collections
+show collections - show collections
 
 remane collection - db.oldCollectionName.renameCollection("newCollectionName")
+
+delete a collection - db.collectionname.drop()
 
 `countDocuments()` - return the number of documents
 ```js
@@ -428,7 +401,7 @@ db.orders.explain();
 db.collectionName.drop();
 ```
 
-`distinct()` - Returns an array of documents that have distinct values for the specified field.
+`distinct()` - Returns an array of distinct values for the specified field.
 ```js
 db.collectionName.distinct("name");
 ```
@@ -525,7 +498,7 @@ db.collectionName.bulkWrite([
 ]);
 ```
 
-`updateOne()` - Modifies a single document in a collection.
+`updateOne()` - Modifies a single document in a collection. By default it will not return the updated document but it return `{ acknowledged: true, matchedCount: 1, modifiedCount: 1 }`
 ```js
 db.collectionName.updateOne(
   { _id: 21 },  // Filter
@@ -570,11 +543,16 @@ db.collectionName.deleteMany({ age: { $gte: 25 } });
 
 `createIndex()` - Create an index for one or more field it improves querying
 ```js
-db.collectionName.createIndex({ email : 1 });
+db.collectionName.createIndex({ name: 1 })
+db.collectionName.createIndex({ name: 1 }, { unique : true })
 ```
-`createIndexes()` - It allow us to create multiple indexes on a single operation
+`createIndexes()` - It allow us to create multiple indexes.
 ```js
-db.collectionName.createIndexes({email : 1, age : -1});
+db.collectionName.createIndexes([
+  { key: { email: 1 }, name: "email_index", unique: true },
+  { key: { age: -1 }, name: "age_desc_index" },
+  { key: { status: 1, createdAt: -1 }, name: "compound_index" }
+])
 ```
 `dropIndex()` - Removes a specified index on a collection.
 ```js
@@ -658,8 +636,8 @@ db.collectionName.find( { age : { $gte : 20 } } );
 
 `$lt` - less than , `$lte` - less than or equal
 ```js
-db.collectionName.find( { agr : { $lt : 20 } } );
-db.collectionName.find( { agr : { $lte : 20 } } );
+db.collectionName.find( { age : { $lt : 20 } } );
+db.collectionName.find( { age : { $lte : 20 } } );
 ```
 
 `$set` - Using with updateOne and updateMany to update a field value.
@@ -722,7 +700,7 @@ db.collectionName.updateOne( { _id : 26 },{ $set : { name : "Midhun" } },{ upser
 db.collectionName.find({ name : { $exists : true } } );
 ```
 
-`$currentDate` - used to set the value of a field to the current date and time or to a timestamp.
+`$currentDate` - used to set the value of a field to the current date and time in ISO format.
 ```js
 db.collectionName.updateOne(
   { _id: 1 },
@@ -739,7 +717,7 @@ db.collectionName.find({
 
 `$text` - used for performing full-text search in MongoDB. To use $text, you need to create a text index.
 ```js
-db.collectionName.createIndex( { "name": "text" } ) ;
+db.collectionName.createIndex( { title : "text" } ) ;
 db.collectionName.find( { $text : { $search : "mongodb"}})
 ```
 
@@ -782,7 +760,7 @@ db.collectionName.find( { hobbies : { $all : ['reading','cycling','coding'] } } 
   "scores": [{ "subject": "math", "score": 70 }, { "subject": "english", "score": 85 }]
 }
 
-db.collection.find({
+db.collectionName.find({
   scores: { $elemMatch: { subject: "math", score: { $gt: 85 } } }
 });
 ```
@@ -809,7 +787,7 @@ db.collectionName.updateOne( { _id : 2},{ $push : { roles : "trainer" } } );
 db.coolectionName.updateOne( { _id : 2 },{ $pull : { roles : "admin" } } );
 ```
 
-`$each` with `$push` - used to push multiple values to an array with in an array.
+`$push` with `$each` - used to push multiple values to an array with in an array.
  ```js
  db.collectionName.updateOne( { _id :2 },{ $push : { roles : { $each : [1,2,3] } } } );
  ```
@@ -824,6 +802,19 @@ db.coolectionName.updateOne( { _id : 2 },{ $pull : { roles : "admin" } } );
 db.collectionName.updateOne( { _id :2 },{ $pop : { roles : 1 } } );  // remove the first element of the array
 db.collectionName.updateOne( { _id :2 },{ $pop : { roles : -1 } } ); // remove the last element of the array
 ```
+
+
+
+
+
+### `Tip`
+=========
+| Operation Type | Syntax Pattern                   | Example                |
+| -------------- | -------------------------------- | ---------------------- |
+| **Query**      | `{ field: { operator: value } }` | `{ age: { $gt: 20 } }` |
+| **Update**     | `{ operator: { field: value } }` | `{ $inc: { age: 1 } }` |
+`Find documents where the age field is greater than 20`
+`Increment the age field by 1`
 
 
 
@@ -871,16 +862,10 @@ Unary operators are operators that are applied to a single operand or value
 
 ## `Aggregation` ##
 ====================
-Aggregation operations process multiple documents and return computed results
-
-An aggregation pipeline consists of one or more stages that process documents
+Aggregation in MongoDB is a powerful framework that processes and transforms data from a collection by passing documents through a sequence of stages, each performing a specific operation
 
 db.collectionName.aggregate(pipeline,options)
 pipeline = Array of operations
-
-1. How does it work ? 
-Aggregation in MongoDB is a framework for processing and transforming data within a collection. It allows us to perform various operations on documents, such as filtering, grouping, sorting, and computing new values. 
-Aggregation is a powerful tool for generating reports, extracting insights, and preparing data for analysis.
  
 `Advantages` 
 -------------
@@ -894,7 +879,6 @@ g. Pipelining
 
 `Aggregation stages`
 --------------------
-
 `$match` - used to filter documents based on specified criteria. It's similar to the find method.
 ```js
 db.collectionName.aggregate([{ $match: { age: { $gte: 25 } } }]);
@@ -942,7 +926,6 @@ db.collection.aggregate([
  ```
 
  `$lookup` - used for performing a left outer join between documents from the current collection and documents from another collection based on a common field.
- 
  ```js
  db.collectionName.aggregation([{
   $lookup: {
@@ -971,12 +954,12 @@ db.collectionName.aggregate([
 ]);
 ```
 
-`$addFields` - Adds new fields to the input documents or modifies existing ones.
+`$addFields` - Adds new field or modify existing field without removing the other fields.
 ```js
 db.collectionName.aggregate([{ $addFields: { fullName: { $concat: ["$firstName", " ", "$lastName"] } } }]);
 ```
 
-`$replaceRoot` - Replaces the input document with the specified document.
+`$replaceRoot` - Replaces the entire document with a specified subdocument.
 ```js
 db.collectionName.aggregate([{ $replaceRoot: { newRoot: "$address" } }]);
 ```
@@ -1005,7 +988,7 @@ db.collectionName.aggregate([{ $collStats: { storageStats: {} } }]);
 db.collectionName.aggregate([{ $sample: { size: 3 } }]);
 ```
 
-`$merge` - Writes the result of the aggregation pipeline to a collection, merging the data with an existing collection.
+`$merge` - merges the result of the aggregation pipeline to an existing collection.
 ```js
 db.sales.aggregate([
   {
@@ -1030,6 +1013,8 @@ db.sales.aggregate([
 
 ## `Accumulators Operators` ##
 ===============================
+Accumulator operators are special operators used inside aggregation pipelines, mainly within stages like $group and $project, to perform calculations across multiple documents and produce summary results.
+
 `$sum`
  eg : db.orders.aggregate([ { $group: { _id: { name: "$name", size: "$size" }, totalRevenue: { $sum: { $multiply: ["$price", "$quantity"] } } } } ] )
 
@@ -1056,18 +1041,18 @@ Sharding is a method for distributing data across multiple servers to ensure hor
 
 `Shard Key`: The shard key is a field or a combination of fields that determines how data is distributed across different shards in the sharded cluster. MongoDB uses the shard key to route documents to the appropriate shard
 
+`sharded cluster`: A group of shard servers, along with config servers and at least one query router (mongos), is collectively referred to as a sharded cluster in MongoDB.
+
 `Shard Servers`: These are individual MongoDB instances or replica sets, collectively referred to as shards. Each shard contains a portion of the entire dataset, and collectively they hold the complete dataset of the MongoDB deployment.
 
 `Config Servers`: Config servers store metadata about the sharded cluster, including the distribution of data across shards and the shard key ranges.
 
 `Query Router (mongoos)`: The query router is an interface between the application and the sharded cluster. It directs queries to the appropriate shard and aggregates the results.
 
-`sharded cluster`: A group of shard servers, along with config servers and at least one query router (mongos), is collectively referred to as a sharded cluster in MongoDB.
-
 `Chunks`: Data is divided into smaller segments called "chunks." Each chunk represents a contiguous range of shard key values and is stored on a specific shard. MongoDB automatically manages and balances chunks across shards to ensure even data distribution and load balancing.
 
-`shard hotspots`
----------------------
+`shard hotspot`
+--------------
 A shard hotspot occurs when a large proportion of read or write operations are directed to a single shard, causing that shard to become a bottleneck.
 
 `Advantages of sharding`
@@ -1163,7 +1148,7 @@ It is a guarentee the system continue to operate even if there is a  network iss
 
 `Capped collection`
 --------------------
-Capped collection is a type of collection with a fixed size that behaves differently from a regular collection. It has some unique characteristics such as fixed size , insertion order , auto deletion and no updation.
+Capped collection is a type of collection that behaves differently from a regular collection. It has some unique characteristics such as fixed size , insertion order , auto deletion and no updation.
 
 db.createCollection("logs", { capped: true, size: 1048576 });
 
@@ -1173,18 +1158,18 @@ db.createCollection("logs", { capped: true, size: 1048576 });
 
 ## `Index` ##
 ================
-Suppose the collection have millions of documenets the querying will be expensive this time we need indexing for the documents.
+Suppose the collection have millions of documents the querying will be expensive this time we need indexing for the documents.
 If we are making a filed in a model `unique : true` mongodb will make this filed automatically indexing.
 
 1 (Ascending): Sorts and queries data in ascending order.
 -1 (Descending): Sorts and queries data in descending order.
+text: Index for searching text fields with support for stemming, scoring, and language analysis.
+hashed: Index for hashing field values to distribute data evenly across shards.
 2d: Index for querying geospatial data in a flat, two-dimensional plane.
 2dsphere: Index for querying geospatial data on a spherical surface (Earth-like geometry).
 geoHaystack: Index for fast querying of geospatial data in small areas with a supporting field.
-hashed: Index for hashing field values to distribute data evenly across shards.
-text: Index for searching text fields with support for stemming, scoring, and language analysis.
 
-Example : If a collection is storing the user connection to other user data and suppose the application have 1000 users and 1000 users are send 100 request then the collection will have 100000 documents this time we need indexing for our databse.
+Example : If a collection is storing the user connection to other user data and suppose the application have 1000 users and 1000 users are send 100 request then the collection will have 100000 documents this time we need indexing for our database.
 
 `Types of index`
 -----------------
@@ -1200,7 +1185,8 @@ Example : If a collection is storing the user connection to other user data and 
  eg : db.collection.createIndex({ unique_field: 1 }, { unique: true });
 
 4. Text Index - Text indexes are used for performing full-text search on string content.
- eg : db.collection.createIndex({ text_content: "text" });
+ eg : db.collectionName.createIndex({ title: "text", content: "text" })
+ eg : db.collectionName.find({ $text : { $search : "Mongodb" }})
 
 5. Geospatial Index - Geospatial indexes are designed for efficient handling of location-based data.
 Functionality: They enable MongoDB to execute queries involving spatial data, such as finding documents near a specific location or within a certain distance.
@@ -1215,8 +1201,8 @@ Functionality: They enable MongoDB to execute queries involving spatial data, su
   { partialFilterExpression: { status: "A" } }
 );
 
-8. Wildcard Index - A wildcard index is a type of text index that supports wildcard and regex queries.
- eg : db.text_collection.createIndex({ text_content: "text" });
+8. Wildcard Index - A wildcard index ($**) creates indexes on all fields or on fields matching a path pattern, making it useful for documents with dynamic or varying structures.
+ eg : db.text_collection.createIndex({ "$**" : 1 })
 
 9. Background Index - Background indexes are created without blocking write operations on the database, improving overall performance during index creation.
  eg : db.collection.createIndex({ field_name: 1 }, { background: true });
@@ -1244,11 +1230,12 @@ An index that only includes documents that contain the indexed field.
 
 `ref` with `populate`
 ------------------------
-So ref field is used to reference a model to another model and then we use populate function with the query. Inside the query we can pass in which field we are using the `ref` and the array with fields which we need to get from the referencing model.
-
-`Embedding`
--------------
-Embedding involves nesting one or more documents or objects within another document.
+ref is used to reference one model from another.
+populate() is used to fetch the full document from the referenced model instead of just its ID.
+```js
+Post.find().populate('author', ['name', 'age'])
+Post.find().populate('author', "name age -_id");
+```
 
 `Linking (Normalization)`
 --------------------------
@@ -1260,11 +1247,11 @@ Linking involves storing references or foreign keys to related documents in sepa
 
 ## `Vertical scaling` ##
 =========================
-Vertical Scaling: involves increasing the capacity of a single server by adding more resources, such as CPU, RAM, or storage. It's also known as "scaling up."
+involves increasing the capacity of a single server by adding more resources, such as CPU, RAM, or storage.
 
 ## `Horizontal scaling` ##
 ===========================
-Horizontal Scaling: involves adding more servers to a cluster to distribute the workload. MongoDB's sharding is a form of horizontal scaling.
+Adding more servers to a cluster to distribute the workload. MongoDB's sharding is a form of horizontal scaling.
 
 ## `Zones` ##
 ==============
@@ -1284,7 +1271,7 @@ New Technology File System, is a file system developed by Microsoft. It is the d
 
 ## `Batch size` ##
 =====================
-The batchSize option specifies the maximum number of documents that should be returned in a single batch from the server to the client. A batch is essentially a chunk of query results.
+The batchSize option specifies the maximum number of documents that should be returned in a single batch from the server to the client
  eg : db.myCollection.find({}).batchSize(50);
 
 ## `Atomic operations` ##
@@ -1294,7 +1281,7 @@ set inc push pull addToset unset
 
 ## `Fault tolerance` ##
 =======================
-Fault tolerance in MongoDB refers to the system's ability to continue functioning and providing services in the presence of hardware failures, software errors, or other unexpected issues.
+The system's ability to continue operating even when some of its components fail.
 
 To achieve fault tolerance 
 Replica set
@@ -1312,10 +1299,6 @@ Scatter-gather is a query process where MongoDB sends a query to all shards and 
 =======================
 A query where all the fields in the query are covered by an index, and the index itself provides all the data needed to fulfill the query. 
 
-## `Connection mongoDB to using nodejs` ##
-===========================================
-- We need a npm `mongodb` , this is only for dev but for the production it will not use.
-- For the production we use `mongoose` npm.
-
-mongod - The database server.
-mongos - Sharding router.
+`mongoose` - The nodejs library that makes it easier to work with mongoDB
+`mongod` - The core server that runs the mongoDB database
+`mongos` - A query router used in sharded cluster.

@@ -324,6 +324,12 @@ A variant of the B-tree data structure where all keys and records are stored in 
 ----------------
 A Splay Tree is a self-blanacing binary search tree with the unique property that recently accessed elements are quick to access again. It achieves this by performing a series of tree rotations, known as splaying, to move the accessed element to the root of the tree.
 
+7. `Segment Tree`
+--------------------
+A Segment Tree is a binary tree used for storing intervals or segments. It allows querying and updating ranges of an array efficiently.
+Lazy propagation for range updates
+Range Sum Query (RSQ)
+
 
 
 

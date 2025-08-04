@@ -72,3 +72,37 @@ DELETE	Removes a resource from the server.	Deleting a user or removing a record.
 Once a use login the server will create a jwt token and wrap inside a cookie and send baxk to client then the client browser will store it and whenever a request go to the server the cookie will send alogn with that request and then validate that token and if the token is valid then only the next thing will work otherwise redirect to.
 
 JWT stands for `JSON web token` and it have header, payload and signature.
+
+## `TCP (Transmission Control Protocol)`
+=============================================
+Connection-oriented protocol (needs a connection before data transfer)
+Ensures reliable, ordered, error-checked delivery
+Slower but accurate
+Used in: HTTP, HTTPS, FTP, Email (SMTP/IMAP/POP)
+
+## `UDP (User Datagram Protocol)`
+=====================================
+Connectionless, fast, no guarantee of delivery or order
+
+## `TCP/IP (Internet Protocol Suite)`
+==========================================
+Real-world networking modelPractical model used on the internet
+Has 4 layers (sometimes seen as 5)
+Protocol suite = TCP, UDP, IP, etc.
+Lightweight, no acknowledgment
+Used in: Streaming (video/audio), gaming, DNS, VoIP
+
+## `OSI Model (Open Systems Interconnection)`
+Theoretical model, not used directly
+Has 7 layers
+Helps to understand and design network systems
+
+| Layer # | Name             | Function                               | Example Protocols     |
+| ------: | ---------------- | -------------------------------------- | --------------------- |
+|       7 | **Application**  | User interface, app-level protocols    | HTTP, FTP, DNS, SMTP  |
+|       6 | **Presentation** | Data translation, encryption, encoding | SSL, TLS, JPEG        |
+|       5 | **Session**      | Session control (start/end sessions)   | NetBIOS, PPTP         |
+|       4 | **Transport**    | Reliable/unreliable delivery (TCP/UDP) | TCP, UDP              |
+|       3 | **Network**      | Routing, addressing                    | IP, ICMP, IGMP        |
+|       2 | **Data Link**    | MAC addressing, error detection        | Ethernet, PPP, Switch |
+|       1 | **Physical**     | Transmission over cables, signals      | Cables, NIC, Hubs     |
