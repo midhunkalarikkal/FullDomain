@@ -23,6 +23,7 @@ class Binarytree {
       const queue = [this.root];
       while (queue.length) {
         let current = queue.shift();
+
         if (current.left === null) {
           current.left = newNode;
           return;
@@ -36,6 +37,7 @@ class Binarytree {
         } else {
           queue.push(current.right);
         }
+        
       }
     }
   }

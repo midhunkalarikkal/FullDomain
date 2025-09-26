@@ -75,7 +75,7 @@ class MinHeap {
 			if (this.hasRightChild(index) && this.rightChild(index) < this.leftChild(index)) {
 				smallerChildIndex = this.getRightChildIndex(index);
 			}
-			if (this.heap[index] < this.heap[smallerChildIndex]) {
+			if (this.heap[index] <= this.heap[smallerChildIndex]) {
 				break;
 			} else {
 				this.swap(index, smallerChildIndex);
@@ -94,9 +94,10 @@ heap.add(40);
 heap.add(50);
 heap.add(100);
 heap.add(40);
-console.log(heap.heap)
 
-console.log(heap.peek());
-console.log(heap.remove());
+console.log("Heap after adding elements:", heap.heap);
 
-console.log(heap.heap)
+console.log("Peek (smallest element):", heap.peek());
+console.log("Remove (extract min):", heap.remove());
+console.log("Heap after removal:", heap.heap);
+

@@ -1,8 +1,9 @@
-## `WEB` ##
+## `WEB`
 ===========
 The web is like a giant network where every device (node) is connected through unique IP addresses. These IP addresses allow devices to find and communicate with each other, forming a web-like structure.
 
-## `Protocols` ##
+
+## `Protocols`
 =================
 Protocols are rules that define how data is sent and received over the internet. Here are some key ones:
 
@@ -11,9 +12,22 @@ FTP (File Transfer Protocol): Allows uploading and downloading files between com
 SMTP (Simple Mail Transfer Protocol): Used for sending emails.
 TCP/IP (Transmission Control Protocol/Internet Protocol): Ensures data is broken into packets and delivered to the right destination over the internet.
 
-## `Server` ##
-===============
 
+## `HTTP`
+================
+A protocol used for communication between web browsers and servers over the Internet.
+It defines how messages are formatted and transmitted and the actions that web servers and browsers should take in response to various commands.
+Mthods :- Get ,  post , put , delete , patch 
+
+Get :-  The GET method is used to request data from a specified resource.
+Post :- The POST method is used to submit data to be processed to a specified resource.
+Put :- The PUT method is used to update a resource or create a new resource if it does not exist.
+Delete :- The DELETE method is used to request that a specified resource be removed or deleted.
+Patch :- The PATCH method is used to apply partial modifications to a resource.
+
+
+## `Server` 
+===============
 `Hardware Server`
 ----------------
 A hardware server is a powerful computer or machine specifically designed to store, manage, and process data. It is built to handle multiple requests from clients over a network.
@@ -45,21 +59,29 @@ This is a server that converts the domain name in to ip address
 `Proxy Server`
 --------------
 
+
+
 ## `Socket` ##
 ===============
+
+
 
 ## `Web Socket` ##
 =====================
 
-## `API` ##
+
+
+## `API`
 =============
-An API (Application Programming Interface) allows different software applications to communicate and exchange data with each other.
+An API (Application Programming Interface) is a way for one system to interact with another by using a set of defined rules. It allows clients (like web browsers or mobile apps) to communicate with a server to access its data or services.
+Examples are  :- Web api, library api, os api
 
 `REST api`
 -------------
-A REST (Representational State Transfer) API is a web service that follows principles for creating scalable, stateless, and resource-based interactions over the web using HTTP methods.
+A RESTful API (Representational State Transfer API) is an architectural style for designing networked applications, particularly web services. It consists of a set of principles and constraints that, when followed, lead to the development of scalable, flexible, and maintainable APIs.
 
-## `HTTP methods` ##
+
+## `HTTP methods`
 ======================
 GET	Retrieves data from the server.	Fetching a list of users or a specific user.
 POST	Sends new data to the server to create a resource.	Creating a new user or submitting a form.
@@ -67,11 +89,6 @@ PUT	Updates an entire resource with new data.	Replacing a user's details entirel
 PATCH	Partially updates a resource with specific data.	Changing just a user's email address.
 DELETE	Removes a resource from the server.	Deleting a user or removing a record.
 
-## `Authentication` ##
-========================
-Once a use login the server will create a jwt token and wrap inside a cookie and send baxk to client then the client browser will store it and whenever a request go to the server the cookie will send alogn with that request and then validate that token and if the token is valid then only the next thing will work otherwise redirect to.
-
-JWT stands for `JSON web token` and it have header, payload and signature.
 
 ## `TCP (Transmission Control Protocol)`
 =============================================
@@ -80,9 +97,11 @@ Ensures reliable, ordered, error-checked delivery
 Slower but accurate
 Used in: HTTP, HTTPS, FTP, Email (SMTP/IMAP/POP)
 
+
 ## `UDP (User Datagram Protocol)`
 =====================================
 Connectionless, fast, no guarantee of delivery or order
+
 
 ## `TCP/IP (Internet Protocol Suite)`
 ==========================================
@@ -92,7 +111,9 @@ Protocol suite = TCP, UDP, IP, etc.
 Lightweight, no acknowledgment
 Used in: Streaming (video/audio), gaming, DNS, VoIP
 
+
 ## `OSI Model (Open Systems Interconnection)`
+===============================================
 Theoretical model, not used directly
 Has 7 layers
 Helps to understand and design network systems
@@ -106,3 +127,124 @@ Helps to understand and design network systems
 |       3 | **Network**      | Routing, addressing                    | IP, ICMP, IGMP        |
 |       2 | **Data Link**    | MAC addressing, error detection        | Ethernet, PPP, Switch |
 |       1 | **Physical**     | Transmission over cables, signals      | Cables, NIC, Hubs     |
+
+
+## `Throttling`
+=================
+ -> A technique to limit the number of times a function is executed within a given timeframe. 
+Used to control traffic (e.g., user input or server load).
+ 
+
+ ## ``Rate Limiting`
+=====================
+A technique to limit the number of requests a client can make to a server within a specific timeframe.
+use of this is to prevent abuse, like spamming APIs.
+
+
+## `Authentication`
+==================
+Authentication is the process of verifying the identity of a user or  an entity trying to access a system or resource.
+
+
+## `Authorization`
+====================
+Authorization is the process of determining what actions or resources a user or entity is allowed to access within a system.
+
+
+## `Axios`
+==============
+A promise-based HTTP client for the browser and Node.js used to make HTTP requests.
+ ```js
+ import axios from 'axios';
+  axios.get('/api/data').then((response) => {
+    console.log(response.data);
+  });
+ ```
+
+`Axios interceptor` -> A way to modify requests or responses before they are sent or received. Used to add headers (like tokens) or handle errors globally.
+```js
+axios.interceptors.request.use((config) => {
+  config.headers.Authorization = 'Bearer token';
+  return config;
+});
+axios.interceptors.response.use((config) => {
+  config.headers.Authorization = 'Bearer token';
+  return config;
+});
+```
+
+`Axios CancelToken` -> A feature to cancel an ongoing Axios request. Used to avoid processing unnecessary or outdated requests, like when navigating between pages.
+```js
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
+axios.get('/api/data', { cancelToken: source.token });
+source.cancel('Request canceled!');
+```
+Use case :-
+Search Autocomplete (Live Search)
+  When a user types quickly, old API requests should be canceled to prevent outdated results.
+Navigation Changes
+  If a user navigates to another page before the response comes back, cancel the request to avoid side-effects.
+Form Submissions
+  If the user submits the form multiple times, cancel the previous request and only keep the latest.
+
+## `URI`
+=========
+A URI (Uniform Resource Identifier) is a string that uniquely identifies a resource on the Internet
+
+
+## `URL`
+========
+A URL (Uniform Resource Locator) is a type of URI (Uniform Resource Identifier) that specifies the location of a resource on a network and how to retrieve it.
+
+
+## `URN`
+========
+A URN (Uniform Resource Name) is a type of URI (Uniform Resource Identifier) that uniquely identifies a resource by name within a specific namespace, without providing information on how to locate or access it.
+
+
+## `SSL`
+=========
+SSL (Secure Sockets Layer) is a cryptographic protocol designed to provide secure communication over a computer network. It was created to ensure the confidentiality and integrity of data transmitted between a client (e.g., a web browser) and a server.
+
+
+## `TLS`
+========
+TLS (Transport Layer Security) is the successor to SSL (Secure Sockets Layer) and provides an updated, more secure version of the cryptographic protocol. TLS ensures the confidentiality and integrity of data transmitted between a client (e.g., a web browser) and a server, safeguarding the communication from potential threats.
+
+
+## `CORS`
+==============
+Cross origin resource sharing
+CORS is a security feature implemented by web browsers to control how web pages in one domain can request and interact with resources hosted on another domain.
+
+first preflight request from client to server
+then a optional acknowledgment from server to client
+
+The preflight request is an OPTIONS request that includes information about the actual request the browser wants to make.
+
+
+## `Status Codes`
+==================
+Informational
+100 - server has recieved inital part and expect the client to continue
+
+Success
+200 - Request was successfull and the server returned the data
+201 - request fullfilled and new resource has been created
+
+Redirection
+301 - requested resourse are permenantly moved to a new location
+302 - requested resourse are temporarly moved to a new location
+
+Client 
+400 - server didnot understand the request
+401 - unauthorised
+402 - payment required
+403 - Understood but server refused to autherise
+
+Server
+500 - Internal server error
+502 - Bad gateway
+503 - service unavailable

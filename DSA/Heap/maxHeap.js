@@ -75,7 +75,7 @@ class MaxHeap {
             if (this.hasRightChild(index) && this.rightChild(index) > this.leftChild(index)) {
                 largerChildIndex = this.getRightChildIndex(index);
             }
-            if (this.heap[index] > this.heap[largerChildIndex]) {
+            if (this.heap[index] >= this.heap[largerChildIndex]) {
                 break;
             } else {
                 this.swap(index, largerChildIndex);

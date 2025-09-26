@@ -151,7 +151,6 @@ Operations such as search, insert, and delete have linear time complexity, O(n).
 
 
 
-
 ## `Binary Search Tree (BST)` ##
 ================================
 A Binary Search Tree (BST) is a type of binary tree that maintains a specific order property, making it efficient for searching, insertion, and deletion operations. A standard BST does not allow duplicates — each node must contain a unique key
@@ -310,7 +309,7 @@ A self-balancing binary search tree where the difference in heights of left subt
 
 3. `M-way Search Tree`
 ------------------------
-A generalized form of a binary search tree that allows for more than two children per node. The exact number of children is specified by the order 'M' of the tree.
+A generalized form of a binary search tree that allows for more than two children per node. 
 
 4. `B- Tree`
 ------------
@@ -327,8 +326,6 @@ A Splay Tree is a self-blanacing binary search tree with the unique property tha
 7. `Segment Tree`
 --------------------
 A Segment Tree is a binary tree used for storing intervals or segments. It allows querying and updating ranges of an array efficiently.
-Lazy propagation for range updates
-Range Sum Query (RSQ)
 
 
 
@@ -367,7 +364,6 @@ Complex Implementation
 - Insertion: O(log n) – Inserting an element into a heap requires maintaining the heap property, which may involve percolating the element up the tree.
 - Deletion (usually of the root): O(log n) – Deleting the root requires replacing it with the last element and percolating down.
 - Peek (get max or min): O(1) – Accessing the root element is a constant time operation.
-- Heapify: O(n) – Converting an array into a heap.
 - Heap Sort: O(n log n) – Sorting an array using the heap data structure.
 
 `Min-Heap applications`
@@ -400,6 +396,23 @@ Heapify is the process of converting a binary tree into a heap (either min heap 
 - For each node it will check the heap property.
 - This approach is typically used when inserting an element into an already heapified structure.
 - The time complexity of Top-Down Heapify is O(logn).
+
+## `Delete the Root from a Heap`
+--------------------------------
+- Replace the root with the last element in the heap.
+- Remove the last element ( since its now at the root )
+- Heapify Down (also called percolate down or sift down):
+   - Compare the new root with its children.
+   - Swap it with the smaller child (for min heap) or larger child (for max heap) if the heap property is violated.
+   - Continue until the heap property is restored.
+
+## `Add an Element to a Heap`
+--------------------------------
+- Insert the new element at the end of the heap
+- Heapify Up (also called bubble up or sift up)
+   - Compare the inserted element with its parent.
+   - If the heap property is violated (e.g., child < parent in min heap), swap them.
+   - Repeat until the heap property is restored or you reach the root.
 
 
 
@@ -472,17 +485,17 @@ Space Complexity :-
 
 `Suffix Trie`
 ---------------
-A suffix trie is a compressed trie containing all the suffixes of a given string. It is used for fast pattern searching within a string.
+A suffix trie is a compressed trie containing all the suffix characters of a given string. It is used for fast pattern searching within a string.
 
 (root)
  ├── a
- │   └── na
- │       └── na *
+ │   └── n
+ │       └── a *
  ├── b
- │   └── anana *
+ │   └── a *
  └── n
-     └── ana *
-         └── na *
+     └── a *
+         └── n *
 
 `Suffix Trie Applications`
 ---------------------------
@@ -494,7 +507,7 @@ Compression algorithms (LZ-based techniques)
 
 `Prefix Trie (Standard Trie)`
 -----------------------------
-A prefix trie (also known as a standard trie) is a tree-based data structure used to store a dynamic set or associative array of strings. Each path from the root to a node represents a prefix shared by one or more stored strings.
+A prefix trie (also known as a standard trie) is a tree-based data structure used to store each character of a given string. Each path from the root to a node represents a prefix shared by one or more stored strings.
 
 (root)
  ├── c
@@ -553,8 +566,7 @@ Space Complexity: O(V^2).
 
 Time complexity
 ---------------
-Add Edge: O(1)
-Remove Edge: O(1)
+Add, Remove Edge: O(1)
 
 Advantages: Fast edge lookup, good for dense graphs.
 Disadvantages: Can be space-inefficient for sparse graphs.
@@ -593,14 +605,14 @@ A graph whose vertices can be divided into two disjoint sets X and Y such that e
 ---------------------
 Breadth-First Search (BFS)
 ---------------------------
-BFS is a graph traversal algorithm that explores vertices level by level, starting from a source vertex and exploring all its neighbors before moving on to their neighbors.
+BFS traversal algorithm that explores all the neighbors of a vertex before moving to the next level of vertices, typically using a queue.
 
 Time Complexity: O(V + E)
 Space Complexity: O(V)
 
 Depth-First Search (DFS)
 ---------------------------
-Depth-First Search (DFS) is a graph traversal algorithm that explores as deeply as possible along each branch before backtracking. It uses a stack (either explicitly or through recursion) to keep track of the nodes to be visited next and the current traversal path.
+DFS traversal algorithm that explores as far as possible along a branch before backtracking, typically using a stack (or recursion).
 
 Time Complexity: O(V + E)
 Space Complexity: O(V) (for recursion stack or an explicit stack)
@@ -639,7 +651,7 @@ Space Complexity: O(V)
 
 `Adjacency matrix vs Adjacency list`
 ----------------------------------------
-With an adjacency list we only need to store the values for the edges that exist withadjacency matrix. you store values irrespective of whether an edge  exist or not. Storage wise an adjacency list is way more efficient
+With an adjacency list we only need to store the values for the edges that exist with adjacency matrix. you store values irrespective of whether an edge  exist or not. Storage wise an adjacency list is way more efficient
 
 With adjacency list inserting and finding adjacent nodes is constant time complexity where as with adjacency matrix, it is linear time complexity
 

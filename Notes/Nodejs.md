@@ -406,18 +406,18 @@ import utils from './utils.js';
 
 `Core Difference: Named Export vs Default Export`
 
-| Feature                           | **Named Export**                                           | **Default Export**                                                    |
-| --------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------- |
-| **Name Binding**                  | Must use **exact same name** as exported                   | Can use **any name** while importing                                  |
-| **Number of Exports per File**    | Can export **multiple named items**                        | Only **one default export** per file                                  |
-| **Auto-import (in some editors)** | Suggests exact names                                       | May import with a generic name                                        |
-| **Use Case**                      | Best when exporting **multiple things** (utils, constants) | Best when exporting **one main thing** (React component, class, etc.) |
+| **Named Export**                                           | **Default Export**                                                    |
+| ---------------------------------------------------------- | --------------------------------------------------------------------- |
+| Must use **exact same name** as exported                   | Can use **any name** while importing                                  |
+| Can export **multiple named items**                        | Only **one default export** per file                                  |
+| Suggests exact names                                       | May import with a generic name                                        |
+| Best when exporting **multiple things** (utils, constants) | Best when exporting **one main thing** (React component, class, etc.) |
 
 
 
 
 
-## `Coomon file for importing and exporting` ##
+## `Coomon file for importing and exporting`
 ====================================================
 If we have a folder and inside it have multiple modules and each modules have mutiple exports, we can use an `index.js` file for importing all the modules things in to index.js file and then export all the things from the index.js file
 
@@ -429,7 +429,7 @@ the main advantage of this method is that we can encapsulate the modules and the
 
 
 
-## `LIBUV` ##
+## `LIBUV`
 ==============
 It is a cross platform  open source library written in c , handles asynchronous non blocking  operations in node js using thread pool and event loop
 
@@ -447,6 +447,16 @@ It is a cross platform  open source library written in c , handles asynchronous 
   JavaScript uses a single thread from the processor to execute code.
   This single thread is managed by the v8 engine inside the JavaScript runtime environment..
   All tasks (like variable declarations, function calls, etc.) are handled sequentially in this single thread.
+
+`Cores`
+  A core is a physical processing unit inside a CPU.
+  Each core can independently execute its own tasks.
+  So, more cores = more true multitasking.
+
+`Threads`
+  A thread is a virtual or logical core created by a technology called Hyper-Threading.
+  Each core can run 2 threads (usually), acting like two virtual cores.
+  Threads share the same core’s resources, so they are not as powerful as real cores.
 
 `Working synchronous`
 ------------------------
@@ -511,6 +521,14 @@ libuv registers the HTTP request with its callback function (let’s call it Cal
 
 The callback (Callback A) from the https.get (which internally uses libuv for I/O) is queued in the macrotask queue (also called the callback queue or task queue) once the I/O operation completes.
 
+JS code (https.get) runs in V8
+V8 hands off the HTTPS task to Node's core (C++ bindings)
+Node creates a non-blocking socket
+The socket is registered with libuv
+libuv tells the OS to notify when data is ready
+OS says: “Socket has data!” → libuv enqueues the callback
+V8 runs the callback during the event loop
+
 `setTimeout`
 "The setTimeout callback (Callback B) is registered in libuv with the timer, and once the 5000ms delay elapses, libuv moves Callback B to the macrotask queue (part of the Event Loop), waiting to be executed."
 
@@ -568,9 +586,9 @@ After execution is complete, the execution context is popped off the call stack.
 
 | Queue/Type       | Description                         | Owner        |
 | ---------------- | ----------------------------------- | ------------ |
-| Macro Task Queue | setTimeout, I/O, setImmediate, etc. | libuv        |
-| Microtask Queue  | Promises, `queueMicrotask`          | V8           |
 | Next Tick Queue  | process.nextTick (Node.js-specific) | Node.js Core |
+| Microtask Queue  | Promises, `queueMicrotask`          | V8           |
+| Macro Task Queue | setTimeout, I/O, setImmediate, etc. | libuv        |
 
 
 `Callback queue`
@@ -621,11 +639,11 @@ Event loop is a main hero inside the libuv it is continuesly running and checkin
                 |        |
                 <--------v
 
-So in this there are four phases timer, poll, check and close and when the event loop entering to the new phase it will first go through the process.nextTick() and promise.callback() like on starting of timer phase and then starting of poll phase and starting of check phase and also starting of the close phase
+So in this there are four phases timer, poll, check and close and when the event loop entering to the new phase it will first go through the nextTick queue and microtask queue (process.nextTick() and promise.callbacks are presented) like on starting of timer phase and then starting of poll phase and starting of check phase and also starting of the close phase
 
 `timer` phase is for the `setTimeout` and `setInterval` callbacks
   ## In between the timer pahse and the poll pahse there is two pahses
-  ## 1. Pending callbacks :- Execute i/o callbacks defered to the next loop iteration
+  ## 1. i/o callbacks :- Execute i/o callbacks defered to the next loop iteration
   ## 2. idle, prepare :- only used internaly.
 `poll` phase is for `i/o` callbacks like file reading/ writing, incoming connection, data, fs,crypto,https,util
 `check` phase for the `setImmediate` callback
@@ -638,7 +656,7 @@ So if the callback queue in the libuv is empty and the call stack is empty in th
 One full cycle of the event loop is known as one `tick`
 
 `Scenario`
-if there is a process.nextTick the event loop is in the poll phase and it is having multiple I/O callbacks in the poll pahse -> After this single callback finishes, Node will pause the Poll queue, drain the process.nextTick() queue, and then go back to continue with the remaining callbacks in the Poll phase.
+if there is a process.nextTick the event loop is in the poll phase and it is having multiple I/O callbacks in the poll pahse -> After this single callback finishes, Node will pause the Poll queue, drain the nextTick() queue, and then go back to continue with the remaining callbacks in the Poll phase.
 
 `Thread pool`
 -------------
@@ -652,6 +670,17 @@ if there is a process.nextTick the event loop is in the poll phase and it is hav
 process.env.UV_THREADPOOL_SIZE = size;
 ```
 
+`Process.nextTick()` -> process.nextTick() is a Node.js method that allows you to schedule a callback function to be invoked when the event lopp is entering to the next phase
+```js
+console.log('Start');
+
+process.nextTick(() => {
+  console.log('This runs after the current event loop cycle, but before any I/O tasks');
+});
+
+console.log('End');
+```
+
 `Libuv -> os api connection`
 ------------------------------
 `Socket Descriptor` All API connections require a socket from the OS, called a socket descriptor.
@@ -660,9 +689,9 @@ process.env.UV_THREADPOOL_SIZE = size;
 Each thread handling one socket descriptor is called thread-per-connection.
 This approach is inefficient because thousands of connections would require thousands of threads.
 
-`Epoll Mechanism`
+`Epoll / KQueue / IOCP Mechanism`
 epoll is a linux kernel system call
-To solve this, the OS provides epoll (or similar mechanisms like kqueue on macOS/BSD or IOCP on Windows).
+similar mechanisms like kqueue on macOS/BSD or IOCP on Windows.
 Epoll is a scalable I/O event notification system at the kernel level.
 It can handle multiple socket descriptors at once efficiently.
 
@@ -681,12 +710,11 @@ Internally, epoll uses a red-black tree to manage registered file descriptors an
 
 
 
-## `Server creation` ##
+## `Server creation`
 =======================
-The node core module `http` is used to create a server and the `createServer` property of http. And the createServer function have a function and that function have two objects request and response
+The node core module `http` is used to create a server and the `createServer` function of http. And the createServer function have a function and that function have two objects request and response
 
 in production we dont use this native module, we will use express framework built on top of nodejs.
-
 ```js
 const hppt = require('http');
 
@@ -703,7 +731,7 @@ const server = http.createServer(function(req, res){
 server.listen(7777);
 ```
 
-## `HTTP Response` ##
+## `HTTP Response`
 ======================
 Status line - http verion, status code, status message
 Header - Additional information send by the server to client	
@@ -717,7 +745,7 @@ Automatic setting content-type
 
 `res.write()`
 -----------
-Used to write a part of the response body.
+Used to send a part of the response body.
 It allows you to send chunks of data in a streaming fashion.
 It can be called multiple times to send different parts of the response.
 You need to end the response using res.end().
@@ -736,10 +764,36 @@ It is often used in middleware to store data that we want to pass to templates (
 `res.json()` -> Sends a JSON response to the client.
 `res.status()`-> Sets the HTTP status code for the response.
 `res.writeHead()` -> Sets the HTTP status code and headers at the same time.
+```js
+res.writeHead(200, {
+        'Content-Type': 'text/plain',
+        'X-Custom-Header': 'HelloWorld'
+    });
+```
 `res.cookie()` -> Sets a cookie on the client.
 ```js
-res.cookie('token', '123abc', { httpOnly: true });
+res.cookie(name, value, [options]);
+
+res.cookie('token', 'abc123', {
+        maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+        httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
+        secure: true,   // Only send cookie over HTTPS
+        sameSite: 'strict' // Prevent CSRF attacks
+    });
 ```
+| Option     | Type                          | Description                                                                |
+| ---------- | ----------------------------- | -------------------------------------------------------------------------- |
+| `maxAge`   | Number (ms)                   | Cookie expiry time in milliseconds (e.g., `86400000` for 1 day)            |
+| `expires`  | Date                          | Exact date when the cookie expires (overrides `maxAge` if both given)      |
+| `httpOnly` | Boolean                       | If `true`, cookie is inaccessible to JS in the browser (`document.cookie`) |
+| `secure`   | Boolean                       | If `true`, cookie is sent only over HTTPS                                  |
+| `path`     | String                        | The URL path the cookie is visible to (default is `/`)                     |
+| `domain`   | String                        | The domain the cookie is available to                                      |
+| `sameSite` | `'Strict'`, `'Lax'`, `'None'` | Controls cross-site cookie sending                                         |
+| `signed`   | Boolean                       | If `true`, signs the cookie (requires `cookie-parser` with secret)         |
+| `priority` | `'low'`, `'medium'`, `'high'` | Priority for browser (mostly used in Chromium)                             |
+| `encoding` | String                        | Encoding method (default is `'utf8'`) — rarely used directly               |
+
 `res.clearCookie()` -> Clears a specific cookie on the client.
 ```js
 res.clearCookie('token');
@@ -750,12 +804,7 @@ res.clearCookie('token');
 `res.get()` -> Retrieves a response header value.
 `res.download()` -> Sends a file to the client for download.
 
-`app.all`
---------------
-app.all is a method in Express.js used to match all HTTP methods (e.g., GET, POST, PUT, DELETE, etc.) for a specific route or path.
-It is commonly used for middleware or logging purposes.
-
-## `HTTP Request` ##
+## `HTTP Request`
 ======================
 Request line - http version, Method, URI
 Header - Additonal information that send by the client to server
@@ -820,7 +869,7 @@ Use Case: For optional parameters or filters.
 
 
 
-## `Route handler` ##
+## `Route handler`
 ========================
 A Route Handler is the server-side code (typically a function) that processes an incoming HTTP request and generates an appropriate response.
 if we not send any response back like example `res.send()` the request handler will be like a loop sending request
@@ -834,7 +883,8 @@ It sends back a response to the client.
 
 `Generic Route Handler`
 --------------------------
-This sample request handler will always respond with the same message regardless of the incoming path
+- This sample request handler will always respond with the same message regardless of the incoming path
+- handler for registering middleware in express globally
 
 ```js
 app.use((req,res)=>{
@@ -876,7 +926,7 @@ In this case
 -------------------------------------------------
 - In this the next function is called for trigger the next callback function
 - here we have two response but only the first callback functions response will work and we will get an error because `The server can only send a single response to a single url then if we try to send a second response it will throw an error`
-` Here the control will go to the next function after executing the first one but the second callback functions console will only work
+` Here the control will go to the next function after execution of the first one but the second callback functions console will only work
 - If there are multiple callback functions, we can wrap those callbacks inside an array, or we can wrap a specific set of callback functions.
 
 `but in this the first route handler is sending the response with res.write it will also run the res.send method from the second route handler`
@@ -911,11 +961,11 @@ app.get('/user',
 
 
 
-## `Working of express` ##
+## `Working of express`
 =================================
 If a request route comes to express js it will execute the code from top to bottom like it go through the middlewares and last it send the response back from the route handler
 
-## `Middlewares` ##
+## `Middlewares`
 =====================
 In Express.js, a middleware is a function that executes during the request-response cycle. Middleware functions have access to the request (req), response (res), and the next() function, which passes control to the next middleware or route handler. They are used to perform operations such as logging, authentication, parsing request bodies, handling errors, or modifying requests and responses before they reach the final route handler.
 ```js
@@ -929,11 +979,8 @@ app.use((req, res, next) => {
 ------------------------
 1. Application level middleware
 ----------------------------------
-That are bound to the entire application and are executed on every incoming request
-Example :- Body parsing middleware
-
+Middlewares that are bound to the entire application and are executed on every incoming request
 ```js
-// Body parsing middleware (application-level)
 app.use(express.json()); // To parse JSON request bodies
 app.use(express.urlencoded({ extended: true })); // To parse URL-encoded form data
 ```
@@ -941,7 +988,6 @@ app.use(express.urlencoded({ extended: true })); // To parse URL-encoded form da
 2. Router level middleware
 -----------------------------
  bound to a specific router instance using router.use().
-
  ```js
  // Router-level middleware
 userRouter.use((req, res, next) => {
@@ -952,7 +998,7 @@ userRouter.use((req, res, next) => {
 
 3. Error handling middleware
 -------------------------------
-Middleware functions with four parameters (err, req, res, next) are considered error-handling middleware.
+Middleware functions with four parameters (err, req, res, next) are considered as error-handling middleware.
 
 3. Third party middleware
 ----------------------------
@@ -970,7 +1016,7 @@ express.urlencoded
 5. express.json()
 ---------------------
 - This middleware is used to parse incoming requests with JSON payloads. 
-- The request suppose contains a JSON body it is not readable by the server so the express middleware `express.json` is used to parse JSON body and convert it in to a javascript object.
+- The request suppose contains a JSON body it is not readable by the server so the express middleware `express.json` is used to parse JSON body and convert it in to a javascript object and attach it to req.body.
 
 6. express.urlencoded()
 --------------------------
@@ -981,9 +1027,9 @@ express.urlencoded() is for URL-encoded form data.
 
 
 
-## `Dynamic routing` ##
+## `Dynamic routing`
 ==========================
-Dynamic routing refers to defining routes where part of the URL is a variable, allowing you to handle requests for multiple resources using a single route handler.
+Dynamic routing refers to a route handler allowing you to handle requests for multiple resources using a single route handler path with /:placeholder.
 ```js
 app.get('/profile/:username', (req, res) => {
   const username = req.params.username;
@@ -995,49 +1041,7 @@ app.get('/profile/:username', (req, res) => {
 
 
 
-Status code
------------
-Informational
-100 - server has recieved inital part and expect the client to continue
-
-Success
-200 - Request was successfull and the server returned the data
-201 - request fullfilled and new resource has been created
-
-Redirection
-301 - requested resourse are permenantly moved to a new location
-302 - requested resourse are temporarly moved to a new location
-
-Client 
-400 - server didnot understand the request
-401 - unauthorised
-402 - payment required
-403 - Understood but server refused to autherise
-
-Server
-500 - Internal server error
-502 - Bad gateway
-503 - service unavailable
-
-
-
-
-
-## `CORS` ##
-==============
-Cross origin resource sharing
-CORS is a security feature implemented by web browsers to control how web pages in one domain can request and interact with resources hosted on another domain.
-
-first preflight request from client to server
-then a option acknowledgment from server to client
-
-The preflight request is an OPTIONS request that includes information about the actual request the browser wants to make.
-
-
-
-
-
-## `Cookie` ##
+## `Cookie`
 ================
 - Cookies are small pieces of data stored on the client-side
 - managed by `cookie-parser`
@@ -1053,7 +1057,7 @@ The preflight request is an OPTIONS request that includes information about the 
 
 
 
-## `Session` ##
+## `Session`
 ==================
 - A session is a way to store user-specific data on the server between multiple requests from the same client.
 - Managed using libraries like `express-session`
@@ -1083,7 +1087,7 @@ rolling: true // Resets the cookie maxAge on every request (i.e., tracks inactiv
 
 
 
-## `Cache` ##
+## `Cache`
 ==============
 Caching is a mechanism used to store copies of resources (like web pages, images, or stylesheets) on either the client side or intermediary servers (such as proxies or content delivery networks) to reduce latency and server load.
 
@@ -1094,7 +1098,7 @@ Caching is a mechanism used to store copies of resources (like web pages, images
 
 
 
-## `Modules` ##
+## `Modules`
 ================
 `Core modules`
 ---------------
@@ -1105,19 +1109,16 @@ Examples: fs, path, http, os, url
 -------------------
 External modules are third party modules that we can install using npm
 
-## `CLI` ##
+## `CLI`
 ==============
 A CLI (Command Line Interface) is a text-based tool where we can type commands to interact with our computer or software. In Node.js, we can use the CLI to run scripts, start server applications, and perform tasks directly in the terminal or console.
-Used for:
-
-- Running full programs.
-- Managing packages.
-- Interacting with tools like Git, Node.js, etc.
 
 
 
-global
-------
+
+
+## `global`
+============
 If we declare a variable or function without var, let, or const, and not in strict mode, it becomes a property of the global object.
 
 `_dirname` -> is a global variable that Represents the absolute directory path of the current module.
@@ -1132,139 +1133,60 @@ If we declare a variable or function without var, let, or const, and not in stri
 
 
 
-## `Synchronous file operation` ##
-=======================================
-fs operations
+
+## `Synchronous & Asyncrhnous file operation`
+=============================================
+
+### Synchrnous
 -----------------
-`existsSync` -> The existsSync method checks whether a file or directory exists synchronously.
-`unlinksync` -> The unlinkSync method is used to delete a file synchronously.
+`fs.existsSync(path)` -> checks whether a file or directory exists synchronously.
+`fs.unlinkSync(path)` -> is used to delete a file synchronously.
+`fs.readFileSync(path, options)` -> Reads a file and returns its content synchronously.
+`fs.writeFileSync(path, data[, options])` -> Writes data to a file, replacing the file if it exists.
+`fs.appendFileSync(path, data[, options])` -> Appends data to a file. Creates it if it does not exist.
 
-readfilesync(path , option)
----------------------------
-Reads a file and returns its content synchronously.
+### Asynchronous
+-------------------
+`fs.access(path, fs.constants.F_OK, callback)` -> Checks whether a file or directory exists asynchronously. Preferred over exists.
+`fs.unlink(path, callback)` -> Deletes a file asynchronously.
+`fs.readFile(path, options, callback)` -> Reads a file and returns its content asynchronously.
+`fs.writeFile(path, data[, options], callback)` -> Writes data to a file asynchronously, replacing the file if it exists.
+`fs.appendFile(path, data[, options], callback)` -> Appends data to a file asynchronously. Creates the file if it doesn't exist.
+`fs.link()` ->  is a method in Node.js's fs module that creates a hard link between two files.
+ A hard link is like creating a second name for the same file. Both links point to the same underlying data (inode), so changes to one will be reflected in the other. Deleting one does not delete the actual file unless all hard links are removed.
+ ```js
+ const fs = require('fs');
 
-```js
-const fs = require('fs');
-
-try {
-  const data = fs.readFileSync('example.txt', 'utf-8');
-  console.log(data);
-} catch (error) {
-  console.error('Error reading file:', error);
-}
-```
-
-writefilesync(path , data , option)
------------------------------------
-Writes data to a file synchronously.
-Creates the file if it doesn't exist, overwrites its content if it does.
-
-```js
-const fs = require('fs');
-
-try {
-  fs.writeFileSync('example.txt', 'Hello, World!', 'utf-8');
-  console.log('File written successfully.');
-} catch (error) {
-  console.error('Error writing file:', error);
-}
-
-```
-## `Asynchronous file operation` ##
-========================================
-readfile(path , option , callback)    //callback = data , error
------------------------------------------------------------------
-Reads a file asynchronously and calls a callback function with the result.
-
-```js
-const fs = require('fs');
-
-fs.readFile('example.txt', 'utf-8', (error, data) => {
-  if (error) {
-    console.error('Error reading file:', error);
-  } else {
-    console.log(data);
-  }
+fs.link('original.txt', 'hardlink.txt', (err) => {
+  if (err) throw err;
+  console.log('Hard link created: hardlink.txt');
 });
-```
-
-writefile(path , data , option , callback)  //callback = data , error
----------------------------------------------------------------------
-Writes data to a file asynchronously.
-Creates the file if it doesn't exist, overwrites its content if it does.
-Calls a callback function once the operation is complete.
-
-```js
-const fs = require('fs');
-
-fs.writeFile('example.txt', 'Hello, World!', 'utf-8', (error) => {
-  if (error) {
-    console.error('Error writing file:', error);
-  } else {
-    console.log('File written successfully.');
-  }
-});
-```
+ ```
 
 
 
 
 
-## `Util` ##
+## `Util`
 =============
 Util is a module that provides utility functions
+- Debugging & logging: util.format(), util.inspect(), util.debuglog()
+- Migrating older callback APIs to Promises viseversa: util.promisify(), util.callbackify()
+- Deprecation handling: util.deprecate()
+- Type checking: util.types.isXYZ() methods
+- Object comparison: util.isDeepStrictEqual()
 
-inspect
--------
-util.inspect is a method in Node.js provided by the util module. It is used to convert objects into a readable string format, mainly for debugging purposes.
-```js
-const util = require('util');
-
-const obj = { name: 'John', age: 30 };
-console.log(util.inspect(obj));
-```
-
-format
-------
-util.format is a method in the Node.js util module that formats strings by replacing placeholders with their corresponding values. It is useful for creating dynamic strings with variables.
-```js
-const util = require('util');
-
-// Using format
-const name = 'Midhun';
-const age = 25;
-const formatted = util.format('Hello, my name is %s and I am %d years old.', name, age);
-
-console.log(formatted); // Output: Hello, my name is Midhun and I am 25 years old.
-```
-
-promisfy
---------
-util.promisify is a method in the Node.js util module that converts callback-based functions into Promise-based functions. This is especially useful for working with asynchronous code in a modern way using async/await.
-```js
-const util = require('util');
-const fs = require('fs');
-
-// Convert callback-based `fs.readFile` to a Promise-based function
-const readFile = util.promisify(fs.readFile);
-
-// Using the promisified function with async/await
-(async () => {
-  try {
-    const data = await readFile('example.txt', 'utf-8');
-    console.log(data); // Outputs file content
-  } catch (error) {
-    console.error('Error reading file:', error);
-  }
-})();
-```
+1. `util.inspect(object[, options])` -> Returns a string representation of an object,
+2. `util.format(string with %d %s,value, value)` -> formating string with printf like placeholders
+3. `util.promisify(fn)` -> Converts a callback-based function (err, result) => ... into one returning a Promise.
+4. `util.callbackify(asyncFn)` -> Converts a Promise-returning function into one that uses (err, result) callback style.
 
 
 
 
 
-## `Event` ##
-====================
+## `Event`
+===============
 The events module in Node.js provides an EventEmitter class, which helps us handle events and event listeners.
 
 on(): Used to register an event listener for a specific event.
@@ -1274,191 +1196,105 @@ emit(): Used to trigger an event and call the registered listeners.
 // Import the EventEmitter class from the 'events' module
 const EventEmitter = require('events');
 
-// Create an EventEmitter instance
-const myEmitter = new EventEmitter();
+// Create a new event emitter instance
+const eventEmitter = new EventEmitter();
 
-// Register an event listener for the 'myEvent' event
-myEmitter.on('myEvent', (arg1, arg2) => {
-  console.log('Event triggered with arguments:', arg1, arg2);
+// Define a listener for the 'userLoggedIn' event
+eventEmitter.on('userLoggedIn', (username) => {
+  console.log(`${username} has logged in successfully!`);
 });
 
-// Trigger the 'myEvent' event with two arguments
-myEmitter.emit('myEvent', 'First Argument', 'Second Argument');
+// Simulate a login function
+function loginUser(username) {
+  console.log("Verifying user credentials...");
+  
+  // After successful verification, trigger the event
+  eventEmitter.emit('userLoggedIn', username);
+}
+
+// Call the login function
+loginUser('midhun');
 ```
 
 
 
 
 
-## `Path` ##
-===================
+## `Path`
+=============
 join
 ----
 The join() method joins all the path segments provided as arguments and returns the resulting path.
-
 path.join('/path', 'to', 'directory', 'file.txt');
 
 basename
 --------
 The basename() method returns the last portion of a path, similar to the base name of a file.
 If the ext argument is provided, it removes that extension from the result.
-
 path.basename('/path/to/file.txt');
 
 resolve
 -------
 The resolve() method resolves a sequence of path segments into an absolute path starting from the current working directory.
-
 path.resolve('folder', 'subfolder', 'file.txt');
 
 
 
 
 
-## `API` ##
+## `Streams`
 =============
-An API (Application Programming Interface) is a way for one system to interact with another by using a set of defined rules. It allows clients (like web browsers or mobile apps) to communicate with a server to access its data or services.
+Node.js provides a built-in stream module to handle streaming data — for example, reading files, sending data over the network, or piping data between sources.
 
-In Node.js, APIs are often created using frameworks like Express or the core http module.
-APIs use protocols like HTTP/HTTPS to send and receive data.
+`Types of streams`
+| ------------- | ---------------------------------------------------------------------------------- |
+| **Readable**  | Data can be read from it (e.g., reading a file)                                    |
+| **Writable**  | Data can be written to it (e.g., writing to a file)                                |
+| **Duplex**    | Both readable and writable (e.g., sockets)                                         |
+| **Transform** | Duplex stream that can transform data as it’s written and read (e.g., compression) |
 
-Examples are  :- Web api, library api, os api
-
-
-
-
-
-## `HTTP` ##
-================
-A protocol used for communication between web browsers and servers over the Internet.
-It defines how messages are formatted and transmitted and the actions that web servers and browsers should take in response to various commands.
-Mthods :- Get ,  post , put , delete , patch 
-
-Get :-  The GET method is used to request data from a specified resource.
-Post :- The POST method is used to submit data to be processed to a specified resource.
-Put :- The PUT method is used to update a resource or create a new resource if it does not exist.
-Delete :- The DELETE method is used to request that a specified resource be removed or deleted.
-Patch :- The PATCH method is used to apply partial modifications to a resource.
-
-`SSR` -> SSR stands for Server-Side Rendering, and it is a technique used in web development to render web pages on the server before sending them to the client's browser.
-Features :- Improved SEO , Faster inital page load , Better performance
-
-`URI` -> A URI (Uniform Resource Identifier) is a string that uniquely identifies a name or a resource on the Internet
-
-`URL` -> A URL (Uniform Resource Locator) is a type of URI (Uniform Resource Identifier) that specifies the location of a resource on a network and how to retrieve it.
-
-`URN` -> A URN (Uniform Resource Name) is a type of URI (Uniform Resource Identifier) that uniquely identifies a resource by name within a specific namespace, without providing information on how to locate or access it.
-
-`SSL` -> SSL (Secure Sockets Layer) is a cryptographic protocol designed to provide secure communication over a computer network. It was created to ensure the confidentiality and integrity of data transmitted between a client (e.g., a web browser) and a server.
-
-`TLS` -> TLS (Transport Layer Security) is the successor to SSL (Secure Sockets Layer) and provides an updated, more secure version of the cryptographic protocol. TLS ensures the confidentiality and integrity of data transmitted between a client (e.g., a web browser) and a server, safeguarding the communication from potential threats.
-
-`View engines` -> View engines are components in web development frameworks that manage the rendering of dynamic content on the server side before sending it to the client's browser.
-Examples :- Ejs , Handlebars , Pug , Twing , Mustache
-
-`REST-API` -> A RESTful API (Representational State Transfer API) is an architectural style for designing networked applications, particularly web services. It consists of a set of principles and constraints that, when followed, lead to the development of scalable, flexible, and maintainable APIs.
-
-`Streams` -> Streams are instances of EventEmitter class in Node.js and are designed to handle large amounts of data by breaking it into smaller, more manageable chunks.
-
-`Readable stream` -> A readable stream is a type of stream from which data can be read. Examples include reading data from a file or receiving an HTTP request body.
+`Pipe()` -> The pipe() method is used to connect the output of one stream to the input of another. It simplifies the process of transferring data from one stream to another.
 
 ```js
 const fs = require('fs');
-const readableStream = fs.createReadStream('example.txt');
 
-// Reading data from the stream
-readableStream.on('data', (chunk) => {
+const readable = fs.createReadStream('example.txt', 'utf8');
+readable.on('data', (chunk) => {
   console.log('Received chunk:', chunk);
 });
-
-readableStream.on('end', () => {
-  console.log('Reading complete');
+readable.on('end', () => {
+  console.log('No more data.');
 });
 
-```
 
-`Writable stream` -> A writable stream is a type of stream to which data can be written. Examples include writing data to a file or sending an HTTP response.
-
-```js
-const fs = require('fs');
 const writableStream = fs.createWriteStream('output.txt');
-
 // Writing data to the stream
 writableStream.write('Hello, this is some text data!\n');
 writableStream.write('This is another line of text.\n');
-
 // Ending the writable stream
 writableStream.end(() => {
   console.log('Data written to file successfully');
 });
-```
 
-`Duplex stream` -> Streams that are both readable and writable. Examples include TCP sockets.
-
-`Transform stream` -> These are a type of duplex streams, commonly used for data transformation tasks, such as compressing or decompressing data, encoding or decoding data, or performing other types of data manipulation.
-
-`Pipe()` -> The pipe() method is used to connect the output of one stream to the input of another. It simplifies the process of transferring data from one stream to another.
-```js
-const fs = require('fs');
 
 // Create a readable stream
 const readableStream = fs.createReadStream('example.txt');
-
 // Create a writable stream
 const writableStream = fs.createWriteStream('output.txt');
-
 // Use pipe() to transfer data from readableStream to writableStream
 readableStream.pipe(writableStream);
-
 readableStream.on('end', () => {
   console.log('Data has been successfully copied to output.txt');
 });
 ```
 
-`Process.nextTick()` -> process.nextTick() is a Node.js method that allows you to schedule a callback function to be invoked when the event lopp is entering to the next phase
-```js
-console.log('Start');
-
-process.nextTick(() => {
-  console.log('This runs after the current event loop cycle, but before any I/O tasks');
-});
-
-console.log('End');
-```
-
-`Origin module` -> The origin module in Node.js represents the starting point or root directory of the application.
-It provides information about the current working directory of the Node.js process.
-
-`Authentication` -> Authentication is the process of verifying the identity of a user or  an entity trying to access a system or resource.
-
-`Authorization` -> Authorization is the process of determining what actions or resources a user or entity is allowed to access within a system.
-
-`Thread` -> A thread is a sequence of instructions that can be executed independently by the CPU.
-
-`app.local` -> object is available throughout the entire lifecycle of the application.
-```js
-app.locals.title = 'My App';
-```
-`res.local` -> object is specific to the current request-response cycle.
-```js
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  next();
-});
-```
-`app.set` -> app.set() method is used to assign or modify application-level settings. 
-```js
-app.set('appName', 'My Express App');
-```
 
 
 
 
-
-## `Router chaining` ##
+## `Router chaining`
 =========================
 Router chaining allows you to chain multiple HTTP method handlers using router.route() method
-
 ```js
 router.route('/user')
   .get((req, res) => {
@@ -1479,12 +1315,9 @@ router.route('/user')
 
 
 
-## `setImmediate (Node.js only)` ##
+## `setImmediate (Node.js only)`
 =====================================
-The setImmediate function is used to schedule a task to execute after a specified delay (in milliseconds) and executes after only the i/o functions like after the poll phase of the event loop.
-
-## Example
-===========
+Node.js-specific function used to schedule a callback function to be executed after the current event loop check phase finishes.
 ```js
 console.log("Before setImmediate");
 
@@ -1495,16 +1328,34 @@ setImmediate(() => {
 console.log("After setImmediate");
 ```
 
-`What is Concurrency in Node.js?` -> Concurrency in Node.js refers to its ability to manage multiple tasks simultaneously without waiting for one task to finish before starting another. Even though Node.js is single-threaded, it can handle numerous tasks concurrently using its event-driven, non-blocking I/O model.
 
-`Partials` -> Partials are related to templating engines (e.g., EJS, Pug, Handlebars) in Express.js, not Node.js directly.
-They are reusable pieces of HTML code, like headers, footers, or navigation bars, that can be included in multiple views.
+
+
+
+`Origin module` -> The origin module in Node.js represents the starting point or root directory of the application.
+It provides information about the current working directory of the Node.js process.
+
+`Thread` -> A thread is a sequence of instructions that can be executed independently by the CPU.
+
+`app.locals` -> object is available throughout the entire lifecycle of the application.
 ```js
-<!-- Include a partial file -->
-<%- include('header') %>
+app.locals.title = 'My App';
+```
+`res.local` -> object is specific to the current request-response cycle.
+```js
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+```
+`app.set` -> method is used to assign or modify application-level settings. 
+```js
+app.set('appName', 'My Express App');
 ```
 
-`Option methods` -> The OPTIONS method is an HTTP request method that is used to:
+`What is Concurrency in Node.js?` -> Concurrency in Node.js refers to its ability to manage multiple tasks simultaneously without waiting for one task to finish before starting another. Even though Node.js is single-threaded, it can handle numerous tasks concurrently using its event-driven, non-blocking I/O model.
+
+`Options method` -> The OPTIONS method is an HTTP request method that is used to:
 Ask the server which HTTP methods are allowed for a specific resource
 
 Think of it as a way for a client (e.g., a browser) to ask the server:
@@ -1514,9 +1365,6 @@ app.options('/example', (req, res) => {
   res.set('Allow', 'GET, POST, PUT').send(); // Send allowed methods
 });
 ```
-
-`Rate Limiting` -> A technique to limit the number of requests a client can make to a server within a specific timeframe.
-use of this is to prevent abuse, like spamming APIs.
 
 `Content Negotiation` -> A process where the client and server agree on the best content format (e.g., JSON, XML, HTML) for the response. Used to make APIs more flexible and user-friendly.
 ```js
@@ -1529,74 +1377,34 @@ app.get('/data', (req, res) => {
 });
 ```
 
-`Event Pooling` -> A technique used to efficiently reuse event objects in memory instead of creating new ones for every event. Used to optimize performance in event-driven systems.
+`View engines` -> View engines are components in web development frameworks that manage the rendering of dynamic content on the server side before sending it to the client's browser.
+Examples :- Ejs , Handlebars , Pug , Twing , Mustache
 
-
-
-
-
-## `Axios` ##
-==============
-
-`Axios` -> A promise-based HTTP client for the browser and Node.js. Used to make HTTP requests. mostly used in the frontend and also can use in backend for api calling.
- ```js
- import axios from 'axios';
-  axios.get('/api/data').then((response) => {
-    console.log(response.data);
-  });
- ```
-
-`Axios interceptor` -> A way to modify requests or responses before they are sent or received. Used to add headers (like tokens) or handle errors globally.
+`Partials` -> Partials are related to templating engines (e.g., EJS, Pug, Handlebars) in Express.js, not Node.js directly.
+They are reusable pieces of HTML code, like headers, footers, or navigation bars, that can be included in multiple views.
 ```js
-axios.interceptors.request.use((config) => {
-  config.headers.Authorization = 'Bearer token';
-  return config;
-});
-axios.interceptors.response.use((config) => {
-  config.headers.Authorization = 'Bearer token';
-  return config;
-});
+<!-- Include a partial file -->
+<%- include('header') %>
 ```
 
-`Axios CancelToken` -> A feature to cancel an ongoing Axios request. Used to avoid processing unnecessary or outdated requests, like when navigating between pages.
-```js
-const CancelToken = axios.CancelToken;
-const source = CancelToken.source();
+`Worker Threads`  In JavaScript, the main thread is single-threaded, meaning it handles tasks like UI updates, events, and running JavaScript code. However, in some cases, we might want to offload heavy computations or tasks to separate threads to avoid blocking the main thread. This is where Web Workers (also referred to as Worker Threads) come into picture.
 
-axios.get('/api/data', { cancelToken: source.token });
-source.cancel('Request canceled!');
-```
-Use case :-
-Search Autocomplete (Live Search)
-  When a user types quickly, old API requests should be canceled to prevent outdated results.
-Navigation Changes
-  If a user navigates to another page before the response comes back, cancel the request to avoid side-effects.
-Form Submissions
-  If the user submits the form multiple times, cancel the previous request and only keep the latest.
+- You need the worker_threads module (built into Node.js v10.5+).
+- Worker runs the file in a separate thread.
+- workerData is used to send initial data from main to worker.
+- parentPort.postMessage() sends data back to the main thread.
 
+`Child Process`
+In Node.js, child_process is the core module that allows you to create and control child processes from your main Node.js process.
+Child processes can run:
 
+Shell commands
+Other scripts
+Even another Node.js program
 
+It provides multiple methods, including:
 
-
-## `Throttling`
-===================
-A technique to limit the number of times a function is executed within a given timeframe. 
-Used to control traffic (e.g., user input or server load).
- 
-
-
-
-
-## `fs.link()`
-===============
- fs.link() is a method in Node.js's fs module that creates a hard link between two files.
-
- A hard link is like creating a second name (path) for the same file data on disk. Both links point to the same underlying data (inode), so changes to one will be reflected in the other. Deleting one does not delete the actual file unless all hard links are removed.
- ```js
- const fs = require('fs');
-
-fs.link('original.txt', 'hardlink.txt', (err) => {
-  if (err) throw err;
-  console.log('Hard link created: hardlink.txt');
-});
- ```
+spawn() - Runs a command in a new process.
+fork() - Special case of spawn() specifically for Node.js scripts.
+exec()
+execFile()

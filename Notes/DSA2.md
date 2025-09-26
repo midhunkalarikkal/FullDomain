@@ -58,7 +58,7 @@ Implemented using linked lists. Can grow or shrink dynamically as needed.
 - The first element added to the queue is the first one to be removed.
 - Operations in a queue occur at two ends
 - Enqueue: Add an element at the rear (end) of the queue.
-- Dequeue: Delete an element from the front.
+- Dequeue: Delete an element from the front of the queue.
 
 `Complexity analysis`
 ---------------------
@@ -349,7 +349,7 @@ Not In-Place: Uses extra memory for the temporary arrays.
 
 `How is O(1) achieved?`
 - Good hash functions spread keys uniformly across the array.
-- Avoid too many collisions (same index for different keys) by uses seperate chaining and open addressing for resolvong collitions.
+- Avoid too many collisions (same index for different keys) by uses seperate chaining and open addressing for resolving collitions.
 
 `Complexity Analysis`
 ---------------------
@@ -541,7 +541,7 @@ merge sort
 
 ## `Tabulation` ##
 ===================
-Tabulation is a bottom-up dynamic programming technique where you solve subproblems first and use their solutions to build up solutions to larger problems. It uses an iterative approach and typically involves filling up a table (often an array or a matrix) with the solutions of subproblems, starting from the smallest subproblems and working up to the original problem.
+Tabulation is a bottom-up dynamic programming technique where you solve subproblems first and use their solutions to build up solutions to larger problems.
 
 ## `Sliding window` ##
 =======================

@@ -1,4 +1,4 @@
-## `database` ##
+## `Database` ##
 ================
 A database is an organized collection of structured or unstructured data that is stored and accessed electronically. It is designed to efficiently store, manage, retrieve, and manipulate data for various applications.
 
@@ -50,7 +50,7 @@ postgresql is developed by michael stonebreaker
 -----------------------
 `MySQL` is primarily known for its speed and simplicity, making it a go-to choice for web applications and read-heavy workloads.
 
-`PostgreSQL` emphasizes advanced features and standards compliance, excelling in handling complex queries, extensibility (user defined functions), and support for diverse data types.
+`PostgreSQL` known for excelling in handling complex queries, extensibility (user defined functions), and support for diverse data types.
 
 ## `No SQL  DB` ##
 ===================
@@ -97,8 +97,7 @@ developed in times of 2009 by the company 10gen and the name comes from Humoungo
 `document`
 ---------
 - Each collection contains one or more documents, which are like rows in a table. 
-- However, unlike rows, documents in a collection can have different structures and fields, 
-  offering flexibility in data storage.
+- However, unlike rows, documents in a collection can have different structures and fields, offering flexibility in data storage.
 
 `Advanges of Nested documents`
 -------------------------------
@@ -194,7 +193,7 @@ const userSchema = new mongoose.Schema({
       type : String
    }
 })
-module.export = mongoose.model("User",userSchema);
+module.exports = mongoose.model("User",userSchema);
 ```
 
 - We can also add `schema methods` that handles functions example creating jwt token etc...., we must use normal function there and use `this` keyword for referencing the schema.
@@ -206,12 +205,19 @@ userSchema.methods.generateJWT = async function() {
     return token;
 };
 ```
-- We can also add `Schema.pre` function to call this function on everytime while saving the model;
+- We can also add `Schema.pre` function to call this function on everytime while saving the model; these are known as middlewares in mongoose
 ```js
 userSchema.pre("save",function(){
    const schmea = this; // Here this is pointing the Schema;
 });
 ```
+pre('save') → before saving a document
+post('save') → after saving
+pre('validate') → before validation
+post('validate') → after validation
+pre('remove') → before removing a document
+post('remove') → after removing
+
 - Validate function in schema is used to velidate  specific value
 ```js
 firstName : {
@@ -369,15 +375,15 @@ eg : db.cm.find().addOption(DBQuery.Option.tailable)
 
 ## `Collection Methods` ##
 ==========================
-Create database - use db;
+Create database - use databaseName;
 
-Delete database - db.dropDatabase;
+Delete database - databaseName.dropDatabase;
 
 Create Collection - db.createCollection("collection_name")
 
 show collections - show collections
 
-remane collection - db.oldCollectionName.renameCollection("newCollectionName")
+remane collection - databaseName.oldCollectionName.renameCollection("newCollectionName")
 
 delete a collection - db.collectionname.drop()
 
@@ -403,7 +409,7 @@ db.collectionName.drop();
 
 `distinct()` - Returns an array of distinct values for the specified field.
 ```js
-db.collectionName.distinct("name");
+db.collectionName.distinct("fieldnName");
 ```
 
 `find()` - Performs a query on a collection or a view and returns a cursor object.
@@ -541,31 +547,6 @@ db.collectionName.deleteOne({ name: "Bob" });
 db.collectionName.deleteMany({ age: { $gte: 25 } });
 ```
 
-`createIndex()` - Create an index for one or more field it improves querying
-```js
-db.collectionName.createIndex({ name: 1 })
-db.collectionName.createIndex({ name: 1 }, { unique : true })
-```
-`createIndexes()` - It allow us to create multiple indexes.
-```js
-db.collectionName.createIndexes([
-  { key: { email: 1 }, name: "email_index", unique: true },
-  { key: { age: -1 }, name: "age_desc_index" },
-  { key: { status: 1, createdAt: -1 }, name: "compound_index" }
-])
-```
-`dropIndex()` - Removes a specified index on a collection.
-```js
-db.collectionName.dropIndex({email : 1});
-```
-`dropIndexes()` - Removes all indexes on a collection.
-```js
-db.collectionName.dropIndexes();
-```
-`getIndexes()` - List all the indexes on the collection
-```js
-db.collectionName.getIndexes();
-```
 
 `mapReduce()` - The mapReduce() method is used for processing data and generating aggregated results using a map and reduce function.
 ```js
@@ -604,13 +585,6 @@ db.collectionName.remove({}); // remove all documents
 2. insertMany
 
 3. bulkWrite
-```js
-const bulkInsertOperations = [
-   { insertOne: { document: { orderNumber: "124", customerName: "Jane Smith" } } },
-   { insertOne: { document: { orderNumber: "125", customerName: "Tom Johnson" } } }
-];
-db.collectionName.bulkWrite(bulkInsertOperations);
-```
 
 4. aggregate
 ```js
@@ -692,7 +666,7 @@ db.collectionName.find( { _id :2 },{ age : { $ne : 30 } } );
 
 `$upsert` - The upsert operation can be useful when you want to modify a document if it exists, or create a new one if it doesn't
 ```js
-db.collectionName.updateOne( { _id : 26 },{ $set : { name : "Midhun" } },{ upsert : true } );
+db.collectionName.updateOne( { _id : 26 },{ $set : { name : "Midhun" } },{ $upsert : true } );
 ```
 
 `$exists` - used to check for the existence of a field within a document. If the field exist the query will return the document
@@ -715,7 +689,7 @@ db.collectionName.find({
 });
 ```
 
-`$text` - used for performing full-text search in MongoDB. To use $text, you need to create a text index.
+`$text` - used for performing full-text search in MongoDB. To use $text, we need to create a text index.
 ```js
 db.collectionName.createIndex( { title : "text" } ) ;
 db.collectionName.find( { $text : { $search : "mongodb"}})
@@ -848,13 +822,24 @@ db.collection.find().skip(num);
 
 ## `Unary Operators` ##
 =======================
-Unary operators are operators that are applied to a single operand or value
-1. $type 
-2. $lt 
-3. $gt 
-4. $or 
-5. $and
-6. $multiply
+- A unary operator is an operator that works on just one operand (one field/value).
+- In MongoDB, these are mainly used inside aggregation pipelines to perform transformations, calculations, or type conversions.
+
+1. $type - Returns the BSON data type of the field.  
+  Example: { $type: "$age" } → "int", "string", etc.
+
+2. $abs - Returns the absolute value of a number.  
+  Example: { $abs: "$balance" }
+
+3. $ceil - Rounds a number up to the nearest integer.  
+  Example: { $ceil: "$price" }
+
+4. $floor - Rounds a number down to the nearest integer.  
+  Example: { $floor: "$price" }
+
+5. $sqrt  
+   Square root of a number.  
+   Example: { $sqrt: "$num" }
 
 
 
@@ -888,7 +873,7 @@ db.collectionName.aggregate([{ $match: { age: { $gte: 25 } } }]);
 ```js
  db.collectionName.aggregate( [ { $project : { _id : 0, name : "Prod_name", total_revenue : { $multiply : [ "price","quantity" ] } } } ] );
 
- db.collectionName.aggregate( [ { $project : { name : 1, age : 1, _id : 0 } } ] );
+ db.collectionName.aggregate( [ { $project : { fullname : "$name", age : 1, _id : 0 } } ] );
 ```
 
 `$group` - Groups documents by a specified identifier
@@ -931,7 +916,7 @@ db.collection.aggregate([
   $lookup: {
     from: "targetedCollectionName",        // The target collection to join
     localField: "fieldFromOurCurrentCollection",  // Field from the current collection
-    foreignField: "fieldFrom fromOurTargetedCollection", // Field from the target collection
+    foreignField: "fieldFromOurTargetedCollection", // Field from the target collection
     as: "outputArray"             // The name of the array to store the matched results
   }
 }]);
@@ -1214,6 +1199,58 @@ Functionality: They are useful for managing data that has a temporal aspect, lik
 
 11. Sparse Index:-
 An index that only includes documents that contain the indexed field. 
+
+`createIndex()` - Create an index for one or more field it improves querying
+```js
+db.collectionName.createIndex({ name: 1 })
+db.collectionName.createIndex({ name: 1 }, { unique : true })
+```
+`createIndexes()` - It allow us to create multiple indexes.
+```js
+db.collectionName.createIndexes([
+  { key: { email: 1 }, name: "email_index", unique: true },
+  { key: { age: -1 }, name: "age_desc_index" },
+  { key: { status: 1, createdAt: -1 }, name: "compound_index" }
+])
+```
+`dropIndex()` - Removes a specified index on a collection.
+```js
+db.collectionName.dropIndex({email : 1});
+```
+`dropIndexes()` - Removes all indexes on a collection.
+```js
+db.collectionName.dropIndexes();
+```
+`getIndexes()` - List all the indexes on the collection
+```js
+db.collectionName.getIndexes();
+```
+
+# Disadvantages of Indexing in MongoDB
+
+- Increased Storage Usage  
+  Indexes require additional disk space, sometimes as large as the data itself.
+
+- Slower Write Operations  
+  Every insert, update, or delete must also update the index, which adds overhead.
+
+- Memory Overhead  
+  Frequently used indexes are kept in RAM, which can consume significant memory.
+
+- Index Maintenance Cost  
+  As data grows, indexes need to be rebuilt or maintained, impacting performance.
+
+- Limited Index Size  
+  Very large or complex indexes can hit MongoDB’s index size limits.
+
+- Wrong Index Choice Can Hurt Performance  
+  Poorly designed or unused indexes can slow down queries instead of speeding them up.
+
+- Initial Index Creation Overhead  
+  Building indexes on large collections can take time and lock resources.
+
+- Cannot Always Cover All Queries  
+  You might still need collection scans if queries don’t match available indexes.
 
 
 

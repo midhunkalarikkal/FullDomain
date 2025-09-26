@@ -2266,7 +2266,7 @@ export default counterSlice.reducer;
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../features/counterSlice";
 
-export const store = configureStore({
+export const appStore = configureStore({
   reducer: {
     counter: counterReducer
   }
@@ -2297,11 +2297,11 @@ export default Counter;
 
 import React from "react";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { appStore } from "./app/store";
 import Counter from "./Counter";
 
 const App = () => (
-  <Provider store={store}>
+  <Provider store={appStore}>
     <Counter />
   </Provider>
 );

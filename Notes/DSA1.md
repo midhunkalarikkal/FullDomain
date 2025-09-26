@@ -1,4 +1,4 @@
-## `Data Structure` ##
+## `Data Structure`
 ========================
 Data structures are ways of organizing and storing data so that it can be accessed and modified efficiently.
 
@@ -101,13 +101,13 @@ Algorithm is a step-by-step procedures or formula for solving a problem or perfo
 - Examples: Activity Selection, Fractional Knapsack, Kruskal’s MST, Prim’s MST, Huffman Coding  
 
 7. Backtracking  
-- Backtracking is a problem-solving algorithmic technique that involves finding a solution incrementally by trying different options and undoing them if they lead to a dead end. It is commonly used in situations where we need to explore multiple possibilities to solve a problem, like searching for a path in a maze or solving puzzles like Sudoku.
+- Backtracking is that involves finding a solution incrementally by trying different options and undoing them if they lead to a dead end. It is commonly used in situations where we need to explore multiple possibilities to solve a problem, like searching for a path in a maze or solving puzzles like Sudoku.
 - Examples: N-Queens, Sudoku Solver, Rat in a Maze, Subset Sum, Permutations  
 
 8. Dynamic Programming (DP)  
 - Dynamic Programming (DP) is a method for solving complex problems by breaking them down into smaller overlapping subproblems,
 - solving each subproblem only once, and storing the results (usually in a table or memory) to avoid redundant computations.
-- Examples: Fibonacci (Memoization), 0/1 Knapsack, LCS, Edit Distance, Coin Change, Matrix Chain Multiplication  
+- Examples: Fibonacci (Memoization), 0/1 Knapsack, Edit Distance, Coin Change, Matrix Chain Multiplication  
 
 9. Bit Manipulation  
 - Operate on binary representations of numbers to optimize time and space.  
@@ -129,21 +129,13 @@ Algorithm is a step-by-step procedures or formula for solving a problem or perfo
 - Convert data into a fixed-size hash to allow fast lookup, insert, and delete.  
 - Examples: Hash Maps, Hash Tables, Collision Handling, Anagram Grouping  
 
-14. Geometry Algorithms  
-- Used in problems involving 2D/3D space, shapes, and coordinates.  
-- Examples: Convex Hull, Closest Pair of Points, Line Intersection, Area of Polygon  
-
-15. Machine Learning Algorithms  
-- Used for predictions, classifications, and clustering based on data patterns.  
-- Examples: Linear Regression, Decision Trees, K-Means Clustering, Naive Bayes, Neural Networks  
-
 
 
 
 
 ## `Some IMP algorithms good to know` ##
 =========================================
-`Kruskal’s Algorithm` -	A Greedy algorithm used to find the Minimum Spanning Tree (MST) of a graph. It picks the smallest weight edge and connects components without forming cycles. Useful for network design.
+`Kruskal’s Algorithm` -	A Greedy algorithm used to find the Minimum Spanning Tree (MST) of a graph. It picks the smallest weight edge and connects components without forming cycles.
 
 `Prim’s Algorithm` - Greedy algorithm used to find the MST. It starts from any node and keeps adding the minimum edge connected to the tree.
 
@@ -151,13 +143,13 @@ Algorithm is a step-by-step procedures or formula for solving a problem or perfo
 
 `Bellman-Ford Algorithm` - Similar to Dijkstra, but can handle negative weights. Slower but more versatile.
 
-`Huffman Coding` - Huffman Coding is a greedy algorithm used to compress data by assigning shorter binary codes to more frequent characters and longer codes to less frequent characters, reducing the overall size of the data.
+`Huffman Coding` - Huffman Coding is a greedy algorithm used to compress data by assigning shorter binary codes to more frequent characters and longer binary codes to less frequent characters, reducing the overall size of the data.
 
 `Floyd-Warshall Algorithm` - A dynamic programming approach used to Find the shortest paths between all pairs of nodes in a graph.
 
-`Knapsack Problem` - A Dynamic Programming approach. Given items with weights and values, maximize value without exceeding the bag capacity. Two types: 0/1 and fractional.
+`Knapsack Problem` - A Dynamic Programming approach. Given items with weights and values, maximize value without exceeding the bag capacity.
 
-`Tarjans Algorithm` - Tarjan’s Algorithm is a graph traversal algorithm developed by Robert Tarjan in 1972. It is used to efficiently identify certain critical components in a graph. Used for finding Strongly Connected Components (SCCs) in a directed graph, finding Bridges and Articulation Points in an undirected graph.
+`Tarjans Algorithm` - Tarjan’s Algorithm is a graph traversal algorithm. It is used to efficiently identify certain critical components in a graph. Used for finding Strongly Connected Components (SCCs) in a directed graph, finding Bridges and Articulation Points in an undirected graph.
 
 
 
@@ -213,7 +205,7 @@ Memory Usage :- Recursive solutions often use more memory due to the additional 
 
 ## `Dynamic Programming` ##
 ==============================
-Dynamic Programming (DP) is a method for solving complex problems by breaking them down into simpler overlapping subproblems. It is particularly useful for optimizating problems where the solution can be recursively defined in terms of the solutions to smaller instances of the same problem.
+Dynamic Programming (DP) is a method for solving complex problems by breaking them down into simpler overlapping subproblems.
 
 `Memoize Approach`
 --------------------
@@ -451,8 +443,7 @@ When the end of the array is reached, it wraps around to the beginning.
 
 `Bit Array`
 ------------
-A Bit Array is a compact array structure that stores bits (0s and 1s) instead of regular data types.
-It is memory-efficient, especially useful when you only need to represent true/false or on/off states.
+A Bit Array is a compact array structure that stores bits (0s and 1s) instead of regular data types. It is memory-efficient, especially useful when you only need to represent true/false or on/off states.
 
 
 
@@ -646,7 +637,7 @@ Common Methods: Object.keys, Object.values, Object.entries.
 Key-Value Pairs: Stores data in key-value pairs.
 Any Data Type for Keys: Keys can be of any data type (including objects and functions).
 No Prototype Chain: Does not inherit property from any prototype.
-Efficient for Large Data Sets: Designed to handle a large number of key-value pairs efficiently.
+Efficient for Large Data Sets
 Common Methods: set, get, has, delete, clear, forEach.
 
 

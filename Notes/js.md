@@ -2,7 +2,11 @@
 ===================
 Created by `Brendan Ech` in 1995
 
-JavaScript is a high-level, dynamic, interpreted programming language primarily used for adding interactivity and dynamic behavior to web pages. It is a single-threaded, synchronous, and event-driven language that supports both functional and object-oriented programming paradigms. JavaScript runs in the browser and server environments (like Node.js) using engines such as V8, which execute its code.
+- JavaScript is a high-level, dynamic, interpreted programming language.
+- Used for adding interactivity and dynamic behavior to web pages. 
+- It is a single-threaded, synchronous, and event-driven language.
+- It supports both functional and object-oriented programming paradigms.
+- It runs in the browser and server environments (like Node.js) using engines such as V8
 
 Chrome, Opera, Edge (new) -> V8
 Firefox -> SpiderMonkey 
@@ -20,8 +24,6 @@ JavaScript executes code line by line, in  an order. It waits for one task to co
 JavaScript has only one main thread to execute code, meaning it can handle one task at a time.
 
 `event-driven language` means the flow of the program is determined by events, such as user actions (clicks, key presses), system messages, or other triggers. Instead of executing code sequentially, it waits for an event to occur and then runs the corresponding code.
-
-`Worker Threads`  In JavaScript, the main thread is single-threaded, meaning it handles tasks like UI updates, events, and running JavaScript code. However, in some cases, we might want to offload heavy computations or tasks to separate threads to avoid blocking the main thread. This is where Web Workers (also referred to as Worker Threads) come into picture.
 
 ## `Advantages of JavaScript`
 -----------------------------
@@ -82,11 +84,11 @@ lexical environment means -> where is the code physically appear
 
 ## `Primitive data` ##
 ======================
-1. `Number` : 
+1. `Number`
 The Number type in JavaScript is used to represent both integers and floating-point numbers. it can only store up to 64 bit.
 
-2. `BigInt` : 
-BigInt is a primitive data type introduced in ES2020 that allows we to work with integers of large bit length.
+2. `BigInt`
+BigInt is a primitive data type introduced in ES2020 that allows us to work with integers of large bit length.
 
 3. `String`
 It is a sequence of Unicode characters, enclosed in:
@@ -100,6 +102,7 @@ JavaScript strings are immutable — once created, they cannot be changed (modif
 4. `Boolean`
 
 5. `Null` - A value that explicitly represents "nothing" or an empty value.
+typeof null returns "object"
 ```js
 let y = null; // y is explicitly set to "no value"
 ```
@@ -214,6 +217,22 @@ methods are add(value), has(value), delete(value)
 
 
 
+## `NaN`
+=========
+type of NaN is number
+It shows up when we do an invalid mathematical operation
+NaN is special because it’s the only value in JavaScript that is not equal to itself
+To check if something is NaN, use Number.isNaN():
+```js
+console.log(NaN === NaN); //false
+console.log("abc" * 5); // NaN
+console.log(0 / 0);     // NaN
+console.log(Number.isNaN(NaN)); // true
+```
+
+
+
+
 
 ## `Window` ##
 ===============
@@ -274,10 +293,6 @@ Variables declared inside a function or block have local scope and are accessibl
 -----------------
 Each function creates its own scope, and variables declared inside that function are not accessible outside of it.
 
-`Block Scope`
-----------------
-Introduced in ECMAScript 6 (ES6) with let and const, block scope defines variables within curly braces {}.
-
 `Lexical scope`
 ------------------
 Lexical environment is the local memory + reference to the lexical environment of parent
@@ -296,8 +311,8 @@ Lexical scope promotes encapsulation and helps in avoiding naming conflicts, as 
 
 ## `Function` ##
 ==================
-`Function statement`
----------------------
+`Function statement` / `Function declaration`
+----------------------------------------------
 ```js
 function a(){
 console.log("a called")
@@ -314,16 +329,10 @@ console.log("b called")
 ```
 This is a function expression , in the hoisting phase it will get undefined because js engine treat it as a variable so that it wont be accessible before its definition
 
-
-`Function declaration`
------------------------
-It is same as function statement
-
 `Anonymous function`
 ---------------------
 ```js
-function (){
-}
+function (){ }
 ```
 This will cause a syntax error by using an anonymous function we need to assign it to a vaiable. The anonymous function is used as a value.
 it is used in callbacks and iife function 
@@ -337,7 +346,7 @@ console.log("xyz called");
 xyz();
 }
 ```
-This is named function expression , which is nothing but a normal function statement is assinged to a variable
+Which is nothing but a normal function statement is assinged to a variable
 
 But we cant invoke the function using xyz() like this in outside , it will cause an reference error
 
@@ -368,7 +377,7 @@ Inside an Immediately Invoked Function Expression (IIFE) in `non-strict mode`:
 
 If the IIFE is running in `strict mode` ('use strict';), the value of `this` keyword refers to `undefined`.
 
-`Wrapping the function in parentheses () makes it an expression rather than a declaration.`
+`Wrapping the anonyms function in parentheses () makes it an expression rather than a declaration.`
 Only function expressions can be invoked immediately, making the use of parentheses crucial for IIFE syntax.
 
 `Generator function`
@@ -444,23 +453,154 @@ it modifies the external state (result variable) as a side effect.
 
 `Default parameters`
 ---------------------
-Default parameters in JavaScript allow we to assign default values to function parameters. If a parameter is not provided when the function invokation, the default value will be used.
+Default parameters in JavaScript allow us to assign default values to function parameters. If a parameter is not provided when the function invokation, the default value will be used.
 
 `Contructor or constructor function`
 ---------------------------------------
-A constructor is a special function used to create and initialize objects.
-When called with the new keyword, it sets up a new object with properties and methods defined inside the constructor.
+- A constructor is usually a regular function that is invoked with new keyword.
 ```js
 function Dog(name) {
   this.name = name;
 }
 ```
+- By convention, constructor function names are written in PascalCase (capitalized).
+- When you call a function with new keyword:
+  - A new empty object {} is created.
+  - this inside the constructor is set to that new object.
+  - Properties/methods are added to the object.
+  - The new object is returned automatically (unless you explicitly return another object).
+- With new → acts as a constructor and creates an object.
+- Without new → acts as a normal function
+- If you don’t return anything → the new object (this) is returned by default.
+- If you return a primitive value → it’s ignored, and the object is returned.
+- If you return an object → that object replaces this.
+```js
+function Test() {
+  this.val = 10;
+  return { override: true };
+}
+console.log(new Test()); // { override: true }
+```
+- Methods should be added to the constructor’s prototype to avoid duplication across instances.
+```js
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.sayHi = function() {
+  console.log("Hi " + this.name);
+};
+
+const p1 = new Person("Alice");
+const p2 = new Person("Bob");
+
+p1.sayHi(); // Hi Alice
+p2.sayHi(); // Hi Bob
+```
+- ES6 class is just a cleaner way to write constructor functions + prototypes.
+```js
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  sayHi() {
+    console.log(`Hi, ${this.name}`);
+  }
+}
+
+const p1 = new Person("Alice");
+p1.sayHi(); // Hi, Alice
+```
+- instanceof operator Used to check if an object was created by a constructor.
+- Static methods defined on the constructor itself (not on its prototype).
+```js
+class MathUtil {
+  static add(a, b) {
+    return a + b;
+  }
+}
+console.log(MathUtil.add(2, 3)); // 5
+```
+- Arrow functions cannot be used as constructors
+  `Why arrow functions cannot be constructors`
+
+    1. No [[Construct]] internal method
+   - Regular functions (declared with function) have two internal methods:
+     [[Call]] → lets them be invoked normally (fn()).
+     [[Construct]] → lets them be called with new.
+   - Arrow functions only have [[Call]], not [[Construct]].
+   👉 That’s why new (() => {}) throws a TypeError.
+
+    2. No prototype property
+      - Regular functions used as constructors have a prototype object,
+        where methods are shared between instances.
+      - Arrow functions do not have a prototype property.
+      👉 So they cannot create instances with shared methods.
+
+    3. Lexical this binding
+      - Arrow functions do not have their own this.
+      - They inherit this from their surrounding scope.
+      👉 This makes them unsuitable for object initialization,
+          where each new instance should have its own this.
+
 `type of constructor`
-Default constructor :- normal constrcutor function without any parameters
-Parameterized constructor : - constructor function with parameter
-Constructor in ES6 class syntax :-In ES6 classes, the constructor keyword is mandatory to define the constructor method.
+Default constructor 
+Parameterized constructor
+Constructor in ES6 class syntax
 
+`Difference between Arrow function and Regular function`
+---------------------------------------------------------
+- Arrow function shorter and cleaner. Regular function longer.
+```js
+const add = (a, b) => a + b;
 
+function add(a, b) {
+  return a + b;
+}
+```
+- this binding
+  - Arrow function does not have its own this. It lexically inherits this from the surrounding scope.
+  - Regular function this depends on how the function is called.
+```js
+const obj = {
+  value: 10,
+  regular: function () {
+    console.log(this.value); // 10
+  },
+  arrow: () => {
+    console.log(this.value); // undefined (or from outer scope)
+  }
+};
+
+obj.regular();
+obj.arrow();
+```
+- arguments object
+  - Arrow function has no arguments object.
+  - Regular function: gets its own arguments object.
+```js
+function regularFn(a, b) {
+  console.log(arguments); // [Arguments] { '0': 1, '1': 2, '2': 3 }
+}
+regularFn(1, 2, 3);
+
+const arrowFn = (a, b) => {
+  console.log(arguments); // ❌ ReferenceError
+};
+arrowFn(1, 2, 3);
+```
+- new keyword (constructor usage)
+  - Arrow function: ❌ Cannot be used as constructors (new ArrowFn() throws error).
+  - Regular function: ✅ Can be used as constructors.
+- Prototype
+  - Arrow function: does not have a prototype property.
+  - Regular function: has a prototype property.
+- super and new.target
+  - Arrow function: inherits super and new.target from enclosing scope.
+  - Regular function: defines its own.
+- Hoisting
+  - Regular function declarations are hoisted (you can call them before definition).
+  - Arrow functions (when assigned to variables) are not hoisted — they behave like variables
 
 
 
@@ -548,7 +688,7 @@ arr.__proto__.__proto__.__proto__      is an  object.prototype.prototype == null
 
 ## `Closure` ##
 ================
-When a function "remembers" the variables from its lexical scope, even after the outer function has finished execution.
+When a function "remembers" the variables and function (basically anything in the outer function) from its lexical scope, even after the outer function has finished execution.
 
 it is because the the function is binded with its local memory and the lexical environment of its parents memory
 
@@ -706,14 +846,23 @@ In event handlers, `this` typically refers to the element that triggered the eve
 
 `Arrow Functions`
 ------------------
-Arrow functions do not have their own `this`. They inherit this from the enclosing scope. In other words, they do not have the concept of dynamic this.
-In global scope, the surrounding context is the global object.
-  in browser it is window and nodejs it is empty object
-```js
-const myFunction = () => {
-  console.log(this); // 'this' is determined by the surrounding scope
-};
-```
+Arrow functions do not have their own `this`.
+They use `lexical` this — meaning they take this from the scope in which they were defined, not from where they are called.
+
+obj.arrow() →
+- in browser
+  - Arrow functions don’t have their own this.
+  - They use this from where they were created (the outer scope).
+  - Since obj is created in the top-level browser scope,
+  → this = window (or undefined in strict mode / ES modules).
+- in node js
+  - In Node.js top-level, `this` is {} (empty object in CommonJS) or undefined (in ES modules).
+
+obj.normal() →
+- browser and nodejs
+  - Normal functions bind this to the caller.
+  - → Caller is obj, so this = obj.
+
 
 
 
@@ -746,8 +895,7 @@ greet.apply(person, ['Hello', 'How are we?']); // Outputs: Hello, How are we?, J
 
 `Bind()`
 --------
-- The bind method is similar to the call method it does not immediately invoke the function. Instead, it returns a new copy of the function
-- It returns a new function with this permanently bound to the object we pass.we can optionally pass arguments, just like call().
+- The bind method is similar to the call method it does not immediately invoke the function. Instead, it returns a new copy of the function with `this` permanently bound to the object we pass. we can optionally pass arguments, just like call().
 ```js
 function greet(message) {
   console.log(`${message}, ${this.name}`);
@@ -775,7 +923,7 @@ const bindResult = object1.greet.bind(object2);
 console.log(bindResult());
 ```
 
-- if the function is an arrow function the `this` will be undefined because ther is not this for the arrow function
+- if the function is an arrow function the `this` will be undefined because there is no `this` for the arrow function
 - they inherit this from the parent scope where they are defined (i.e., outside object1).
 - So this.name and this.question refer to the global scope (or undefined in strict mode), not object1.
 
@@ -785,7 +933,6 @@ console.log(bindResult());
 
 ## `String methods` ##
 =======================
-
 `Length`
 ---------
 Used to get the length of a string
@@ -818,7 +965,7 @@ var str = " Hello Midhun "
 console.log(str.trim())  // "Hello Midhun"
 ```
 
-`PadStart / padEnd`
+`padStart / padEnd`
 --------------------
 Used to add characters in the starting or ending to achieve a desired length
 ```js
@@ -841,6 +988,16 @@ Used to split a string to an array of substrings based on a specified delimiter
 ```js
 var str = "Hello midhun k paniker"
 console.log(str.split(" "))  // ["Hello","midhun","k","paniker"]
+```
+
+`join`
+----------
+The join() method creates a string by concatenating all elements of an array, separated by whatever separator you give it.
+```js
+const arr = ["Hello", "World", "!"];
+console.log(arr.join());        // "Hello,World,!"
+console.log(arr.join(" "));     // "Hello World !"
+console.log(arr.join("-"));     // "Hello-World-!"
 ```
 
 `concat`
@@ -1156,7 +1313,7 @@ console.log(newarr)
 ==============
 allows us to iterate over the elements of an array and perform a specified action for each element.
 ```js
-array.forEach(function(element, index, array) {});
+array.forEach(function(currentValue, currentIndex, array) {});
 ```
 
 `Modifying the array elements`
@@ -1225,7 +1382,7 @@ console.log(arr)  // [2,3,4,5,6]    // 1 will be removed
 
 9. `Unshift`
 =============
-that adds one or more elements to the beginning of an array. It modifies the original array and returns the new length of the array.
+That adds one or more elements to the beginning of an array. It modifies the original array and returns the new length of the array.
 ```js
 var newLength = array.unshift(element1, element2, ..., elementN);
 ```
@@ -1241,7 +1398,7 @@ console.log(arr2) // [1,2,3,4]
 
 10. `Slice`
 ===========
-That returns a shallow copy of a portion of an array. It does not modify the original array but instead creates a new array containing the elements from the specified start index to the specified end index (excluding the end index).
+That returns a portion of an array. It does not modify the original array but instead creates a new array containing the elements from the specified start index to the specified end index (excluding the end index).
 ```js
 var newArray = array.slice(startIndex, endIndex);
 ```
@@ -1494,7 +1651,7 @@ console.log(ob);  // {name : "midhun",age : 23}
 
 ## `Proxy Object` ##
 ====================
-- A Proxy is an object that wraps another object and allows we to intercept and customize operations on that object, such as:
+- A Proxy is an object that wraps another object and allows us to intercept and customize operations on that object, such as:
 reading (get)
 writing (set)
 function calls
@@ -1568,7 +1725,7 @@ const copy = structuredClone(original);
 
 ## `Callback` ##
 ===================
-A callback in JavaScript is a function that is passed as an argument to another function and is executed after the completion of a specific task. Callbacks are a crucial concept in asynchronous programming, allowing we to control the flow of the program and handle asynchronous operations such as fetching data, processing events, or performing I/O operations.
+A callback in JavaScript is a function that is passed as an argument to another function and is executed after the completion of a specific task. Callbacks are a crucial concept in asynchronous programming, allowing us to control the flow of the program and handle asynchronous operations such as fetching data, processing events, or performing I/O operations.
 
 Used in setTimeout , setInterval , Promises , Event handling , Higherorder functions
 
@@ -1664,7 +1821,7 @@ console.log(add(1)(2)(3)) // 6
 ## `Promises` ##
 ====================
 - A Promise is an object representing the eventual completion or failure of an asynchronous operation and its resulting value. 
-- It allows we to write more readable and manageable asynchronous code compared to traditional callback-based approaches.
+- It allows us to write more readable and manageable asynchronous code compared to traditional callback-based approaches.
 
 `parameters`
 resolve: a function we call when the async task succeeds
@@ -1786,12 +1943,11 @@ An Observable is a design pattern in JavaScript used to manage asynchronous data
 
 ## `DOM` ##
 ==============
-Document Object Model
-The DOM is an API (Application Programming Interface) for HTML and XML documents.
-Represents the document as a hierarchical tree of nodes (objects).
-Each node corresponds to a part of the document (element, attribute, text, etc.).
-Developers can add, remove, or change elements and content using JavaScript.
-The DOM allows real-time updates to the page without needing a reload.
+- The DOM is an API (Application Programming Interface) for HTML and XML documents.  
+- It represents the document as a hierarchical tree of nodes (objects).  
+- Each node corresponds to a part of the document (element, attribute, text, or content).  
+- JavaScript can access and manipulate the DOM to add, remove, or change elements and content.  
+- DOM manipulation enables real-time updates to a web page without requiring a reload.  
 
 `Nodes`
 Nodes are the building blocks of the DOM.
@@ -1822,8 +1978,14 @@ onload.
 
 ## `BOM` ##
 ===========
-The Browser Object Model (BOM) is a set of objects provided by the browser, separate from the document, that allows interaction with the browser itself and the user's environment.
-Components are :- Window , navigator , location , history
+- The BOM is a set of objects provided by the browser, separate from the DOM.  
+- It allows interaction with the browser itself and the user's environment.  
+- Developers can use BOM objects to control browser features (outside the document).  
+📌 Main Components:
+- window   → the global object representing the browser window.  
+- navigator → information about the browser and the device.  
+- location → the current URL, allows navigation and redirection.  
+- history  → the browsing history of the current tab.  
 
 
 
@@ -1869,6 +2031,29 @@ When the function completes, its frame is popped off the stack, and the control 
 
 - The browser’s JavaScript engine like V8 doesn’t have a thread pool like Node.js. Instead, the browser uses Web APIs to handle asynchronous task
 - Once the tasks are completed the callback function is stored in the callback queue for the execution
+- example apis
+  - Timers API
+   - setTimeout()
+   - setInterval()
+   - clearTimeout(), clearInterval()
+  - DOM Events API
+   - addEventListener()
+   - click, input, submit, keypress events, etc.
+  - Network / HTTP API
+   - XMLHttpRequest (XHR)
+   - fetch()
+   - WebSockets
+  - Storage APIs
+   - localStorage
+   - sessionStorage
+   - IndexedDB
+   - Cache API
+  -  Worker APIs
+   - Web Workers
+   - Service Workers
+  -  History & Navigation
+    - window.history
+    - window.location
 
 
 
@@ -1902,6 +2087,10 @@ console.log(firstFruit); // Output: apple
 console.log(secondFruit);// Output: banana
 console.log(restFruits); // Output: ['cherry', 'mango']
 ```
+
+`Spread Operator`
+------------------
+It is used to expand an array, object, or iterable into individual elements or properties.
 
 `Arithmetic Operators`
 =============================
@@ -2003,13 +2192,14 @@ console.log(value4 ?? 'Default'); // 'Hello' (value4 is a non-null value)
 
 ## `Variable Shadowing` ##
 ==============================
-- Variable shadowing occurs when a variable declared within a certain scope (e.g., a function or block) has the same name as a variable declared in an outer scope.
-- The inner variable "shadows" or hides the outer variable within its scope
+- Variable shadowing happens when a variable declared within a certain scope 
+  (local/block) has the same name as a variable in an outer scope.  
+- The inner variable "shadows" (hides) the outer variable within its scope.  
 ```js
 let name = "Alice";  // Outer variable
 
 function greet() {
-  let name = "Bob";  // Inner variable shadows the outer variable
+  var name = "Bob";  // Inner variable shadows the outer variable
   console.log(name);  // Bob, because the inner variable 'name' is in scope
 }
 
@@ -2023,16 +2213,18 @@ console.log(name);  // Output: Alice, because the outer variable is still in sco
 
 ## `Illegal shadowing` ##
 ===========================
-- Illegal shadowing happens when we try to declare varibales with let or const in a way that conflits with a var variable in the same or overlapping scope. which javascript does not allow 
+- Illegal shadowing occurs when a variable declared with `let` or `const`
+  is shadowed by a `var` in the same or inner scope.  
+- This happens because `var` is function-scoped and `let`/`const` are block-scoped,
+  which creates a conflict.  
 ```js
-let userName = "Bob"; // Declared with `let`
+let x = 10;
 
-function greetOuter() {
-  var userName = "Alice"; // Error: Illegal shadowing of `userName`
-  console.log(userName);
+{
+  var x = 20;  // ❌ Illegal shadowing
+  console.log(x);
 }
-
-greetOuter();
+// SyntaxError: Identifier 'x' has already been declared
 ```
 
 
@@ -2042,6 +2234,7 @@ greetOuter();
 ## `Classes` ##
 =====================
 Classes in JavaScript provide a more structured and intuitive way to work with object-oriented programming concepts.
+Classes are the cleaner way to create constructor function and prototype
 
 `Static methods`
 -----------------
@@ -2106,7 +2299,7 @@ symbol.iterator returns an iterator object for the collection
 
 ## `Pass by value` ##
 =========================
-When a primitive data type (e.g., number, string, boolean) is passed as an argument to a function, a copy of the actual value is passed. Changes made to the parameter within the function do not affect the original variable outside the function.
+When a primitive data type (e.g., number, string, boolean) is passed as an argument to a function, a copy of the actual value is passed. Changes made to the argument within the function do not affect the original variable outside the function.
 because the function received a copy of the value, not a reference to the original variable.
 
 
@@ -2286,6 +2479,9 @@ res.cookie('token', 'abc123', {
     sameSite: 'strict'  // CSRF protection
 });
 ```
+SameSite: Strict → only works if frontend & backend are on exactly the same site.
+SameSite: Lax → works for most normal navigation, but not AJAX cross-site.
+SameSite: None → needed for different domains (e.g. frontend.com → api.com).
 
 
 
@@ -2543,7 +2739,7 @@ console.log(user instanceof Object); // true
 `JWT Structure`
 xxxxx.yyyyy.zzzzz
  ↑      ↑      ↑
-Header  Payload Signature
+Header Payload Signature
 
 1. `Header`
 The header typically consists of two parts

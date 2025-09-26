@@ -454,3 +454,113 @@ Examples:
 - Redirection: Something didn’t work, but led you to a better path
 
 ------------------------------------------------------------
+
+# ATS (Applicant Tracking System) — Summary Notes
+
+What is an ATS?
+----------------
+An Applicant Tracking System (ATS) is software used by organizations to streamline,
+automate, and manage the recruitment process — from posting job vacancies to screening
+and hiring candidates.
+
+Key Features of ATS
+--------------------
+- Job Posting & Distribution
+- Resume Parsing
+- Database Management
+- Applicant Screening
+- Interview Scheduling & Collaboration
+- Reporting & Analytics
+
+Benefits of Using ATS
+----------------------
+- Time Efficiency: Automates tasks like sorting resumes and scheduling interviews.
+- Improved Quality of Hire: Smart matching helps identify better candidates.
+- Better Job Fit: Matches applicants to relevant roles based on skills.
+- Data Insights: Recruitment trends and performance reports.
+- Scalability: Handles large volumes of applications efficiently.
+- Cost Savings: Reduces manual work and accelerates hiring.
+
+Challenges / Drawbacks of ATS
+------------------------------
+- Over-reliance on Keywords: Can miss qualified candidates without exact matches.
+- High Cost: Premium ATS tools can be expensive for small businesses.
+- Data Privacy: Must comply with strict data protection laws.
+- Training Required: Recruiters need proper training to use it effectively.
+
+How Does an ATS Parse a Resume?
+-------------------------------
+1. Text Extraction
+   - Strips raw text from resumes.
+   - Ignores visuals (images, charts, tables, etc.)
+
+2. Information Identification
+   - Extracts:
+     - Contact Information
+     - Education
+     - Work Experience
+     - Skills
+     - Certifications
+
+3. Data Structuring
+   - Organizes data under fields like:
+     - Job Title
+     - Employer Name
+     - Duration
+     - Key Responsibilities
+
+4. Keyword Matching
+   - Compares resume content with job description keywords.
+
+Resume Formatting Tips for ATS
+-------------------------------
+- ❌ Avoid images, charts, tables, graphics
+- ✅ Use simple fonts: Arial, Times New Roman
+- ✅ Font Sizes:
+  - Name: 14–16 (bold)
+  - Headings: 12–14 (bold)
+  - Body Text: 10–12
+  - Cover Letter: 11–12
+
+Popular ATS Platforms
+----------------------
+- Workday – Enterprise-level HR & recruitment platform
+- Lever – ATS with built-in CRM features
+- Greenhouse – Focus on structured hiring & analytics
+- Jobvite – End-to-end recruitment & applicant tracking
+
+Panel Interview Etiquette Tips
+-------------------------------
+- Maintain Balanced Eye Contact (60-20-20 Rule)
+  60% to main questioner, 20% each to side panelists
+
+- Acknowledge Silent Panelists
+  Brief eye contact, polite nod, smile if they respond
+
+Sample Closings
+---------------
+- "Thank you all for having me here today."
+- "It was great to meet the whole panel—thank you again."
+- "That’s a great question. Here’s how I would approach it..."
+- "Happy to go deeper if anyone wants me to explain more."
+
+Talking About Research in Interviews
+-------------------------------------
+Why It Matters:
+- Shows you're serious about the role
+- Reflects research and initiative
+- Builds a stronger connection with the interviewer
+
+Natural Ways to Admit Preparation:
+- "I saw your recent LinkedIn post about ___..."
+- "I noticed your team launched ___..."
+- "I looked at the job description and what stood out to me..."
+
+Show Curiosity:
+- "While exploring your website, I had some thoughts..."
+- "Something that struck me while researching your company was..."
+
+Key Tips:
+- Personalize your responses
+- Be conversational
+- Avoid robotic memorization
