@@ -40,14 +40,14 @@ through URLs, form inputs, or other entry points. These scripts can
 execute in the victim's browser and lead to serious security risks.
 and in some cases the victims ( the user ) private credentails like access tokens are stolen
 
-Vulnerabilities are
+### Vulnerabilities
 - User session hijacking
 - Unathorized activities
 - Capturing Keystrokes
 - Stealing critical information
 - Phishing attacks
 
-Mitigations
+### Mitigations
 - Validate and sanitize all user inputs (from forms, URLs, headers, etc.)
 - Avoid using innerHTML; prefer textContent or innerText
 - Use escaping mechanisms (e.g., regex-based sanitization)
@@ -86,6 +86,34 @@ script-src              → Defines which sources JavaScript can be loaded from
 'unsafe-inline'         → Allows all inline scripts (weakens security, avoid if possible)
 http://unsecure.com     → Explicitly allows scripts to be loaded from this domain
 
+
+
+
+
+## 2. `IFrame Security Threats`
+=================================
+
+### Vulnerabilities
+- Clickjacking
+- Data theft via javascript
+- Session and cookie theft
+
+### Mitigations
+- X-Frame-Options: Deny
+- Adding sandbox attribute `allow-same-origin` in the iframes that we are suing inside our website avoid using `allow-script`
+- setting headers in server middleware
+    csp with `iframe-ancestors none
+- Set three main fields in cookies
+    - httpOnly: true -> for making this site content is not accessible by js
+    - secure: true -> only send the pages through https
+    - sameSite: "strict" -> only use the same frontend url
+
+```js
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "iframe-ancestors 'none'");
+    next();
+});
+```
 
 # Client Storage Security
 
