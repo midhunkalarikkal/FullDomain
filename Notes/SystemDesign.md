@@ -115,6 +115,68 @@ app.use((req, res, next) => {
 });
 ```
 
+
+## 3. `Security Headers`
+=========================
+
+1. X-Powered-By
+   This header reveals which server is serving the request (for example, Express, PHP, etc.). Exposing this information can create a security risk, as attackers may exploit known vulnerabilities in that server technology. Therefore, it is considered a best practice to remove this header using middleware.
+
+2. Referrer-Policy
+   The HTTP Referrer-Policy response header controls how much referrer information (sent with the Referer header) should be included with requests. This determines how much of the URL data is exposed when navigating from one application to another, or even within the same domain. 
+
+   Examples of Referrer-Policy values:
+   - Referrer-Policy: no-referrer
+   - Referrer-Policy: no-referrer-when-downgrade
+   - Referrer-Policy: origin
+   - Referrer-Policy: origin-when-cross-origin
+   - Referrer-Policy: same-origin
+   - Referrer-Policy: strict-origin
+   - Referrer-Policy: strict-origin-when-cross-origin
+   - Referrer-Policy: unsafe-url
+
+3. X-Content-Type-Options
+   When a client requests a file, some browsers attempt "MIME type sniffing," guessing the file type for convenience. If an attacker tampers with the file during transmission, the browser may misinterpret the file type and fail to detect the attack. 
+   The X-Content-Type-Options header instructs the browser not to perform MIME type sniffing and to strictly follow the declared Content-Type of the file. 
+   Example value: nosniff
+
+4. X-XSS-Protection
+   This HTTP header was used in older browsers like Internet Explorer, Chrome, and Safari to prevent pages from loading when reflected cross-site scripting (XSS) attacks were detected. However, it is now deprecated and largely unnecessary because modern browsers rely on Content-Security-Policy (CSP) to prevent XSS attacks. 
+
+5. HSTS (Strict-Transport-Security)
+   The Strict-Transport-Security header ensures that browsers always connect to the server using HTTPS, even if the user initially types or clicks an HTTP link. 
+   How it works:
+   - The first time a client requests the site over HTTP, the server responds with a redirect to HTTPS and includes the Strict-Transport-Security header.
+   - For all future requests, the browser automatically enforces HTTPS and does not allow insecure HTTP connections to the server.
+   - This prevents protocol downgrade attacks and cookie hijacking.
+
+   Example middleware to enforce HTTPS:
+   
+   ```js
+   const redirectToHTTPS = (req, res, next) => {
+       if (req.headers['x-forwarded-proto'] !== 'https') {
+           return res.redirect(['https://', req.get('Host'), req.url].join(''));
+       }
+       next();
+   };
+    ```
+
+    `All five Examples of Headers`
+    ------------------------------
+
+     ```js
+    app.use((req,res,next) => {
+        res.removeHeader("X-Powered-By");
+        res.setHeader("Referrer-Policy", "origin");
+        res.setHeader("X-Content-Type-Options", "nosniff");
+        res.setHeader("X-XSS-Protection: 1; mode=block");
+        res.setHeader("Strict-Transport-Security", "max-age=31526000; includeSubDoamins; preload");
+        next();
+    })
+    ```
+
+
+
 # Client Storage Security
 
 1. Storing sensitive datain client storage
