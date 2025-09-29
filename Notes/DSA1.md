@@ -354,6 +354,19 @@ O(n!) - Factorial time.
 - An array is a collection of items stored at contiguous memory locations. Items are accessed using an index.
 - In JavaScript, arrays are not strictly typed. This means they can hold different types of data (heterogeneous), such as numbers, strings, objects, etc., in the same array.
 
+- In JavaScript, arrays are specialized objects with numeric keys.
+- typeof [] === "object" is true.
+- The prototype is Array.prototype
+- if we do arr.length = 0; it will clear the array
+- shift() slower than pop()? => shift() reindexes all elements, pop() just removes the last.
+- Dense arrays are faster (optimized in V8). Sparse arrays are slower since they break the optimization.
+- Zero-based Indexing, The first element is at index 0.
+- Most modern languages (C, Java, JavaScript, Python) use zero-based indexing.
+- Direct pointer arithmetic → address = base + (index * size).
+- One-based Indexing, The first element is at index 1.
+- in JavaScript, every regular function automatically gets an arguments object, which behaves like an array in some ways but isn’t a true array. It has numeric indices: arguments[0], arguments[1], It has a length property`. It doesn’t have array methods like map, filter, or forEach
+- Spread Operator Works for iterables, Plain objects cannot be spread directly into an array..
+
 `Complexity analysis`
 ---------------------
 `Access`
