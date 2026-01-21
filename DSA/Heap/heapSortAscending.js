@@ -1,8 +1,8 @@
 function heapSort(arr){
     const heapifyDown = (arr, n, i) => {
         let largest = i
-        const left = 2 * i + 1
-        const right = 2 * i + 2
+        let left = 2 * i + 1
+        let right = 2 * i + 2
 
         if(left < n && arr[left] > arr[largest]){
             largest = left

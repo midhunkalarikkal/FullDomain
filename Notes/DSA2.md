@@ -115,7 +115,7 @@ A Concurrent Queue is a type of queue that is designed to be safely used by mult
 
 ## `Bubble sort` ##
 ====================
-Bubble Sort is a simple comparison-based sorting algorithm also known as sinking sort. It works by repeatedly iterating through the array to be sorted, comparing each pair of adjacent elements, and swapping them if they are in the wrong order. This process is repeated for multiple passes through the array until the entire array is sorted.
+Bubble Sort is a simple comparison-based sorting algorithm also known as sinking sort. Bubble Sort works by repeatedly swapping adjacent elements if they are in the wrong order.
 
 `Complexity Analysis`
 ----------------------
@@ -265,9 +265,7 @@ In the average case, the pivot generally divides the array into reasonably balan
 
 `Worst Case Scenario`
 ----------------------
-The worst-case time complexity is O(n^2). This occurs when the pivot choice results in highly unbalanced partitions. For example, if the array is already sorted or nearly sorted, and the last element is always chosen as the pivot, the array is divided into one large subarray and one empty subarray, leading to O(n^2) complexity.
-
-the worst-case scenario for quick sort arises when the pivot is consistently chosen poorly, such as always selecting the smallest or largest element in the array. In this situation, Quick Sort may require O(n^2) comparisons and swaps to complete the sorting process, which could be more inefficient. For example, this worst-case scenario can occur when sorting an already sorted array or an array with many duplicate elements.
+The worst-case time complexity is O(n^2). This occurs when the pivot choice results in highly unbalanced partitions. 
 
 `Advantages`
 --------------
@@ -284,7 +282,7 @@ Non adaptive
 
 `Applictions of quick sort`
 -----------------------------
-- General-purpose sorting – Used in many language libraries (like Python’s sort() internally uses Timsort, which includes QuickSort).
+- General-purpose sorting
 - Database systems – For in-memory sorting operations.
 - File systems – To sort directory entries or file metadata.
 - Web applications – Sorting lists or tables client-side efficiently.
@@ -330,7 +328,7 @@ Not In-Place: Uses extra memory for the temporary arrays.
 ## `Hash table` ##
 ===================
 - Hash table is a data structure used to store key-value pairs.
-- Uses a hash function to convert keys (like strings) into numeric indices in an array.
+- Uses a hash function to convert keys into number that points to an indices in an array.
 
 `How it Works`
 1. The key (e.g., "name") is passed into a hash function.
@@ -545,7 +543,7 @@ Tabulation is a bottom-up dynamic programming technique where you solve subprobl
 
 ## `Sliding window` ##
 =======================
-The sliding window technique is used to efficiently solve problems involving subarrays or substrings by maintaining a window (a contiguous range of elements) that slides over the array or string. This method reduces the number of computations by reusing results from previous windows and adjusting the window's boundaries as needed.
+The sliding window technique is used to efficiently solve problems involving subarrays or substrings by maintaining a window (a contiguous range of elements) that slides over the array or string.
 
 ## `Memoization` ##
 ====================

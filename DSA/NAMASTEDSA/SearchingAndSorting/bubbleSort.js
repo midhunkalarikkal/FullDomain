@@ -1,7 +1,7 @@
 function bubbleSort(arr) {
   let n = arr.length;
   let iterations = 0;
-  for (let i = 0; i < n - 1; i++) { // n - 1iterations for we need to check all elements with each element
+  for (let i = 0; i < n - 1; i++) { // n - 1 iterations for we need to check all elements with each element
     let swapped = false;
     for (let j = 0; j < n - 1 - i; j++) { // n - 1 - i because on each iterations we only need less comparison because, on each iteration the last element will be sorted
       if (arr[j] > arr[j + 1]) {

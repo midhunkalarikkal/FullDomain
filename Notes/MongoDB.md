@@ -2,9 +2,10 @@
 ================
 A database is an organized collection of structured or unstructured data that is stored and accessed electronically. It is designed to efficiently store, manage, retrieve, and manipulate data for various applications.
 
-## `database management System` ##
+## `Database management System` ##
 =================================
 A Software that interacts with end users applications and the database itself to capture and analyze the data.
+MySQL, PostgreSQL, Oracle Database, MongoDB, CouchDB, Firestore
 
 ## `Types of Databases` ##
 =========================
@@ -142,7 +143,6 @@ BSON, short for Binary JSON, is a binary-encoded serialization format used prima
 -----------------
 - An interactive command-line interface for MongoDB
 - It connects to MongoDB databases.
-- Supports JavaScript-based queries and commands.
 
 `Advantages of MongoDB`
 ------------------------
@@ -205,7 +205,7 @@ userSchema.methods.generateJWT = async function() {
     return token;
 };
 ```
-- We can also add `Schema.pre` function to call this function on everytime while saving the model; these are known as middlewares in mongoose
+- We can also add `Schema.pre or Schema.post` function to call this function on everytime while befor or after saving the model; these are known as middlewares in mongoose
 ```js
 userSchema.pre("save",function(){
    const schmea = this; // Here this is pointing the Schema;
@@ -217,6 +217,8 @@ pre('validate') → before validation
 post('validate') → after validation
 pre('remove') → before removing a document
 post('remove') → after removing
+
+save, validate, remove, find, findOne, updateOne, aggregate
 
 - Validate function in schema is used to velidate  specific value
 ```js
@@ -399,12 +401,7 @@ db.collectionName.dataSize();
 
 `explain()` - Returns information on the query execution of various methods.
 ```js
-db.orders.explain();
-```
-
-`drop()` - Removes the specified collection from the database.
-```js
-db.collectionName.drop();
+db.collectionName.explain();
 ```
 
 `distinct()` - Returns an array of distinct values for the specified field.
@@ -691,8 +688,15 @@ db.collectionName.find({
 
 `$text` - used for performing full-text search in MongoDB. To use $text, we need to create a text index.
 ```js
-db.collectionName.createIndex( { title : "text" } ) ;
-db.collectionName.find( { $text : { $search : "mongodb"}})
+db.products.insertMany([
+  { name: "Apple iPhone 14", description: "A smartphone by Apple" },
+  { name: "Samsung Galaxy S23", description: "Flagship Android device" },
+  { name: "Sony Headphones", description: "Noise cancelling headphones" }
+]);
+db.products.createIndex(
+  { name: "text", description: "text" }
+);
+db.products.find({ $text: { $search: "Apple" } });
 ```
 
 `$where` - used to run JavaScript expressions within our queries.
@@ -1103,11 +1107,14 @@ A single MongoDB instance running without replication or sharding. It does not i
 
 `Journaling Working`
 ---------------------
-Write Operations: When data is written to MongoDB, it is first written to an in-memory data structure known as the "write-ahead log" (WAL) or "journal."
+Write Operations
+When MongoDB receives a write operation, it updates the in-memory data and records the operation in the journal (WAL).
 
-Asynchronous Disk Write: Periodically, MongoDB flushes the in-memory write-ahead log to disk in a sequential and efficient manner.
+Journal Flush
+MongoDB periodically flushes the journal from memory to disk (fast, sequential write).
 
-Commit to Data Files: Once the data is safely stored in the journal, MongoDB writes it to the permanent data files on disk.
+Data File Commit
+After the journal is safely on disk, MongoDB writes the changes to the actual data files (storage engine).
 
 
 
@@ -1143,67 +1150,173 @@ db.createCollection("logs", { capped: true, size: 1048576 });
 
 ## `Index` ##
 ================
+An index in MongoDB is a special data structure that stores a small portion of the collection’s data in an easy-to-traverse form. It allows MongoDB to find and retrieve documents faster without scanning the entire collection.
+
 Suppose the collection have millions of documents the querying will be expensive this time we need indexing for the documents.
 If we are making a filed in a model `unique : true` mongodb will make this filed automatically indexing.
 
-1 (Ascending): Sorts and queries data in ascending order.
--1 (Descending): Sorts and queries data in descending order.
-text: Index for searching text fields with support for stemming, scoring, and language analysis.
-hashed: Index for hashing field values to distribute data evenly across shards.
-2d: Index for querying geospatial data in a flat, two-dimensional plane.
-2dsphere: Index for querying geospatial data on a spherical surface (Earth-like geometry).
-geoHaystack: Index for fast querying of geospatial data in small areas with a supporting field.
+index values
+-------------
+1. 1 (Ascending): Sorts and queries data in ascending order.
+
+2. -1 (Descending): Sorts and queries data in descending order.
+
+3. text: Index for searching text fields with support for stemming, scoring, and language analysis.
+
+4. hashed: Index for hashing field values to distribute data evenly across shards.
+
+5. 2d index - Designed for flat (2D plane) coordinates — like x, y on a map.
+
+6. 2dsphere index - Designed for Earth-like spherical coordinates (longitude, latitude).
+
+7. geoHaystack index - optimized for grouping location-based data, typically many points close together like users, stores, or events in a small area.
+
+### eg geohaystack
+Imagine you divide a map into small “buckets” or grids (like squares).
+Each square groups all the points (documents) that fall inside it.So instead of searching the entire map, MongoDB only looks inside the few nearby buckets.
 
 Example : If a collection is storing the user connection to other user data and suppose the application have 1000 users and 1000 users are send 100 request then the collection will have 100000 documents this time we need indexing for our database.
+
+Disadvantages of Indexing
+-------------------------
+1. Increased storage usage
+   - Indexes take up additional disk space (can be large for big collections).
+
+2. Slower write operations
+   - Every insert, update, or delete must also update the index, making writes slower.
+
+3. Index maintenance overhead
+   - MongoDB must keep indexes up to date, which increases CPU and I/O usage.
+
+4. Memory consumption
+   - Frequently used indexes are loaded into RAM, consuming memory that could be used for data.
+
+5. Limited number of indexes per collection
+   - There’s a practical limit — too many indexes can degrade performance instead of improving it.
+
+6. Complexity in management
+   - Choosing and maintaining the right indexes requires careful analysis; unnecessary indexes hurt performance.
+
+```js
+db.users.insertMany([
+  { name: "Alice", age: 25, city: "Kochi", createdAt:  },
+  { name: "Bob", age: 30, city: "Bangalore", createdAt:  },
+  { name: "Charlie", age: 28, city: "Kochi", createdAt:  }
+]);
+```
 
 `Types of index`
 -----------------
 1. Single Field Index
- eg : db.demo.createIndex({name : 1})
- eg: Schema.index({ field : 1}) // 1 for ascending and -1 for descending
+```js
+db.users.createIndex({ age: 1 }); // ascending order, -1 for descending order
+
+`Now when you query like this`
+db.users.find({ age: 25 });
+`MongoDB will use the index on age to quickly locate matching documents instead of scanning the entire collection.`
+```
 
 2. Compound Index - A compound index is created on multiple fields within a document. It is useful when queries involve multiple fields and can improve the efficiency of queries that filter or sort by a combination of these fields.
- eg : db.demo.createIndex({name : 1,age : 1})
- eg: Schema.index({ field1 : 1, field2 : 1})
+```js
+db.users.createIndex({ age: 1, city: -1 });
+
+`Query using both fields (best performance when following index order)`
+db.users.find({ age: 25, city: "Kochi" });
+```
+# Compound indexes support queries on the prefix fields:
+# ✅ Uses index: { age }
+# ✅ Uses index: { age, city }
+# ❌ Does NOT use index if query starts with { city } only
 
 3. Unique Index - ensures that the values for a specified field or a combination of fields are unique across all documents in a collection. 
- eg : db.collection.createIndex({ unique_field: 1 }, { unique: true });
+```js
+db.users.createIndex({ email: 1 }, { unique: true });
+
+`Prevents duplicate email entries`
+db.users.insertOne({ name: "Alice", email: "alice@example.com" });
+db.users.insertOne({ name: "Bob", email: "alice@example.com" });  
+```
 
 4. Text Index - Text indexes are used for performing full-text search on string content.
- eg : db.collectionName.createIndex({ title: "text", content: "text" })
- eg : db.collectionName.find({ $text : { $search : "Mongodb" }})
+```js
+db.users.createIndex({ name: "text" });
+db.users.find({ $text: { $search: "Bob" } });
+```
 
 5. Geospatial Index - Geospatial indexes are designed for efficient handling of location-based data.
 Functionality: They enable MongoDB to execute queries involving spatial data, such as finding documents near a specific location or within a certain distance.
- eg : db.places.createIndex({ location: "2dsphere" });
+```js
+db.places.insertMany([
+  { name: "Cafe Aroma", location: { type: "Point", coordinates: [76.28, 10.02] } },
+  { name: "Tech Park",  location: { type: "Point", coordinates: [77.59, 12.97] } }
+]);
 
-6. Hashed Index - Hashed indexes are used to index a single field and store hashed values.
- eg : db.collection.createIndex({ hashed_field: "hashed" });
+db.places.createIndex({ location: "2dsphere" });
+
+`Find places near a coordinate (within 5000 meters)`
+db.places.find({
+  location: {
+    $near: {
+      $geometry: { type: "Point", coordinates: [76.28, 10.02] },
+      $maxDistance: 5000
+    }
+  }
+});
+```
+
+6. Hashed Index - A hashed index in MongoDB stores hash values of a field instead of the actual field values.
+```js
+db.users.createIndex({ age: "hashed" });
+db.users.find({ age: 30 });
+```
+# ❌ Range queries are NOT efficient with hashed index
+## db.users.find({ age: { $gt: 25, $lt: 30 } });
+# Hashed index cannot preserve order, so range queries are not optimized
 
 7. Partial Index - A partial index is created on a subset of documents in a collection based on a filter expression.
- eg : db.collection.createIndex(
-  { status: "A", qty: { $lt: 30 } },
-  { partialFilterExpression: { status: "A" } }
+```js
+db.users.createIndex(
+  { age: 1 },
+  { partialFilterExpression: { city: "Kochi" } }
 );
+```
+# Now only documents with city: "Kochi" are indexed for 'age'
+# Example query that uses the partial index:
+## db.users.find({ age: 25, city: "Kochi" });
 
-8. Wildcard Index - A wildcard index ($**) creates indexes on all fields or on fields matching a path pattern, making it useful for documents with dynamic or varying structures.
- eg : db.text_collection.createIndex({ "$**" : 1 })
+8. Wildcard Index - A wildcard index ($**) is a special type of index that lets you index all fields or unknown dynamic fields inside a document — even if those fields don’t exist yet.
+```js
+{
+  "name": "John",
+  "address": {
+    "city": "Kochi",
+    "pincode": 682001
+  },
+  "preferences": {
+    "color": "blue",
+    "language": "English"
+  }
+}
+db.users.createIndex({ "preferences.$**": 1 });
+```
 
 9. Background Index - Background indexes are created without blocking write operations on the database, improving overall performance during index creation.
- eg : db.collection.createIndex({ field_name: 1 }, { background: true });
-
-10. TTL Indexes:-
-Purpose: TTL indexes, or Time-To-Live indexes, automatically remove documents from a collection after a specified amount of time.
+```js
+db.users.createIndex({ age: 1 }, { background: true });
+```
+10. TTL Indexes - TTL indexes, or Time-To-Live indexes, automatically remove documents from a collection after a specified amount of time.
+for the TTL index we need to have a createdAt field in the document
 
 Functionality: They are useful for managing data that has a temporal aspect, like logs or sessions that should be automatically removed after a certain duration.
 
-11. Sparse Index:-
-An index that only includes documents that contain the indexed field. 
-
-`createIndex()` - Create an index for one or more field it improves querying
 ```js
-db.collectionName.createIndex({ name: 1 })
-db.collectionName.createIndex({ name: 1 }, { unique : true })
+`Create TTL index to automatically delete documents after 60 seconds`
+db.users.createIndex({ createdAt: 1 }, { expireAfterSeconds: 60 });
+```
+
+11. Sparse Index - Indexes only documents that contain the indexed field
+```js
+db.users.createIndex({ nickname: 1 }, { sparse: true });
 ```
 `createIndexes()` - It allow us to create multiple indexes.
 ```js
@@ -1225,33 +1338,11 @@ db.collectionName.dropIndexes();
 ```js
 db.collectionName.getIndexes();
 ```
-
-# Disadvantages of Indexing in MongoDB
-
-- Increased Storage Usage  
-  Indexes require additional disk space, sometimes as large as the data itself.
-
-- Slower Write Operations  
-  Every insert, update, or delete must also update the index, which adds overhead.
-
-- Memory Overhead  
-  Frequently used indexes are kept in RAM, which can consume significant memory.
-
-- Index Maintenance Cost  
-  As data grows, indexes need to be rebuilt or maintained, impacting performance.
-
-- Limited Index Size  
-  Very large or complex indexes can hit MongoDB’s index size limits.
-
-- Wrong Index Choice Can Hurt Performance  
-  Poorly designed or unused indexes can slow down queries instead of speeding them up.
-
-- Initial Index Creation Overhead  
-  Building indexes on large collections can take time and lock resources.
-
-- Cannot Always Cover All Queries  
-  You might still need collection scans if queries don’t match available indexes.
-
+`Multikey Index` - Index on an array field
+If tags: ["node", "react"], MongoDB indexes each value.
+```js
+db.students.createIndex({ tags: 1 });
+```
 
 
 
@@ -1272,6 +1363,14 @@ populate() is used to fetch the full document from the referenced model instead 
 ```js
 Post.find().populate('author', ['name', 'age'])
 Post.find().populate('author', "name age -_id");
+Post.find()
+  .populate({
+    path: "author",
+    select: "name"
+  })
+  .exec((err, posts) => {
+    console.log(posts);
+  });
 ```
 
 `Linking (Normalization)`
@@ -1282,41 +1381,41 @@ Linking involves storing references or foreign keys to related documents in sepa
 
 
 
-## `Vertical scaling` ##
+### `Vertical scaling`
 =========================
 involves increasing the capacity of a single server by adding more resources, such as CPU, RAM, or storage.
 
-## `Horizontal scaling` ##
+### `Horizontal scaling`
 ===========================
 Adding more servers to a cluster to distribute the workload. MongoDB's sharding is a form of horizontal scaling.
 
-## `Zones` ##
+### `Zones`
 ==============
 Zones in MongoDB are used for data partitioning and routing control. We can create zones to control which data is stored on specific shards within a sharded cluster.
 
-## `Auto balancing` ##
+### `Auto balancing`
 ========================
 The auto-balancer is a feature in MongoDB that automatically redistributes data across the shards in a sharded cluster to maintain even data distribution.
 
-## `Gridfs` ##
+### `Gridfs`
 ================
 GridFS (Grid File System) is a specification for storing and retrieving large binary objects, such as audio, video, images, and other binary data, in MongoDB. which has a 16 MB size limit for individual documents. GridFS allows us to store and manage files larger than this size limit by dividing them into smaller chunks.
 
-## `NTFS` ##
+### `NTFS`
 ==============
 New Technology File System, is a file system developed by Microsoft. It is the default file system for Windows operating systems
 
-## `Batch size` ##
+## `Batch size`
 =====================
 The batchSize option specifies the maximum number of documents that should be returned in a single batch from the server to the client
- eg : db.myCollection.find({}).batchSize(50);
+db.myCollection.find({}).batchSize(50);
 
-## `Atomic operations` ##
+### `Atomic operations`
 ==========================
 Atomic operations are database operations that are guaranteed to be executed as a single, indivisible unit. 
 set inc push pull addToset unset
 
-## `Fault tolerance` ##
+### `Fault tolerance`
 =======================
 The system's ability to continue operating even when some of its components fail.
 
@@ -1328,13 +1427,25 @@ Data distribution
 Journaling
 Backup and restore
 
-## `Scatter gather` ##
+### `Scatter gather`
 =========================
 Scatter-gather is a query process where MongoDB sends a query to all shards and then gathers the results to return a complete response. This happens when the query cannot use the shard key to target a specific shard.
 
-## `Covered query` ##
+### `Covered query`
 =======================
 A query where all the fields in the query are covered by an index, and the index itself provides all the data needed to fulfill the query. 
+
+so MongoDB doesn’t need to read the actual documents
+# Create a compound index on 'age' and 'city'
+```js
+db.users.createIndex({ age: 1, city: 1 });
+
+# Query only using fields in the index
+db.users.find(
+  { age: 25, city: "Kochi" },  # query uses index fields
+  { _id: 0, age: 1, city: 1 }   # projection only uses index fields
+);
+```
 
 `mongoose` - The nodejs library that makes it easier to work with mongoDB
 `mongod` - The core server that runs the mongoDB database

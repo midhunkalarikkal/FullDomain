@@ -14,10 +14,10 @@ It's called `React` because it `reacts`. It was developed by Facebook to improve
 
 ## `FRAMEWORK`
 ===============
-A framework provides a structure and rules — it calls your code instead.
-The framework is in control.
-You fill in parts of it (hooks, lifecycle, routing).
-It decides the flow and architecture of the application.
+- A framework provides structure and rules for building applications.  
+- The framework controls the flow — it calls your code (Inversion of Control).  
+- You fill in parts of it (like routes, hooks, or lifecycle methods).  
+- Example: Express.js, Angular, Django.
 
 
 
@@ -25,9 +25,9 @@ It decides the flow and architecture of the application.
 
 ## `LIBRARY`
 ============
-A library is a collection of pre-written code that you call to help with tasks.
-You are in control of the application flow.
-You pick when and how to use the library.
+- A library is a set of reusable functions or tools you can call in your code.  
+- You control the flow — you decide when and how to use it.  
+- Example: Lodash, React, Axios.
 
 
 
@@ -79,13 +79,15 @@ Provides methods like `ReactDOM.createRoot()` and `ReactDOM.render()` to render 
 
 `CORS (Cross-Origin Resource Sharing) in script tag`
 ----------------------------------------------------
+When you load a React (or any JS/CSS) file from a CDN, the browser treats it as a cross-origin request
+
 The `crossorigin` attribute is used to handle CORS (Cross-Origin Resource Sharing) when loading scripts (like React or ReactDOM) from a CDN (different domain).
 
 It tells the browser how to treat the request when fetching the script from another origin.
 
 `Common values`
-"anonymous" – No credentials (cookies, HTTP auth) sent.
-"use-credentials" – Credentials are sent with the request.
+"anonymous" – No credentials (most common, safe for public CDNs)
+"use-credentials" – Sends cookies and credentials (only if CORS allows it)
 
 `CORS` is a security feature implemented by web browsers to restrict web pages from making requests to a domain different from the one that served the web page.
 
@@ -119,7 +121,7 @@ Helps prevent errors or security warnings during resource loading.
 `Actual DOM`
 -------------
 - The Actual DOM is the real representation of the UI components in a web application.
-- Updating the Actual DOM is slow because it involves complex operations that require recalculating styles and re-rendering elements.
+- Updating the Actual DOM is slow and expensive because it involves complex operations that require recalculating styles and re-rendering elements.
 - Any change in the Actual DOM triggers a complete re-render of the entire UI, which can lead to performance issues.
 
 `Virtual DOM`
@@ -169,7 +171,8 @@ const virtualDOM = {
 ===============================================================
 `Single Page Application (SPA)`
 --------------------------------
-- An SPA loads a single HTML page from the server once, and then dynamically updates the page in the browser as the user interacts — without reloading the whole page.
+- A SPA loads a single HTML page from the server once where the frontend is deployed, and then dynamically updates the page in the browser as the user interacts — without reloading the whole page.
+- On the inital load index.html JavaScript files CSS Assets will load 
 - SPAs offer a smooth user experience with faster load times after the initial load.
 - After the inital load only the data is tranfered between the server and client
 - Uses client-side routing.
@@ -177,7 +180,7 @@ const virtualDOM = {
 
 `Multi Page Application (MPA)`
 -------------------------------
-- An MPA consists of multiple HTML pages, each linked to different URLs. Each page reloads the entire application.
+- A MPA consists of multiple HTML pages, each linked to different URLs. Each page reloads the entire application.
 - Each link in the application leads to a different HTML page, causing the browser to request a new page from the server.
 - PHP, Django, .Net
 - Examples are Amzon, Wikipedia Banking portals etc
@@ -186,8 +189,6 @@ const virtualDOM = {
 
 
 
-## `CSR` vs `SSR` vs `SSG` ##
-=============================
 `Client-Side Rendering (CSR)`
 ------------------------------
 - In CSR, the rendering of the web application occurs in the browser, using JavaScript to fetch and display data.
@@ -209,6 +210,18 @@ When we build our website using for example Next.js
   - Fetches our data
   - Generate full HTML page
   - Save them as .html file
+
+`ISR (Incremental Static Regeneration)`
+---------------------------------------
+- ISR is a feature used in frameworks like Next.js that allows you to update static content incrementally without needing to rebuild the entire site.
+- Combines the benefits of static and dynamic rendering.
+- Enables faster page loads while keeping content fresh.
+- Pages can be statically generated and updated on demand, making it ideal for sites with frequently changing data.
+
+`How React sites still do SEO?`
+Even if we are using React, there are ways to improve SEO:
+  - Use React Helmet or <Head> to set <title>, <meta>, etc.
+  - Use tools like Google Search Console to check how Google views our site.
 
 
 
@@ -255,22 +268,6 @@ In Server-Side Rendering, like in Next.js or EJS:
 
 
 
-## `ISR` (Incremental Static Regeneration)
-===========================================
-- ISR is a feature used in frameworks like Next.js that allows you to update static content incrementally without needing to rebuild the entire site.
-- Combines the benefits of static and dynamic rendering.
-- Enables faster page loads while keeping content fresh.
-- Pages can be statically generated and updated on demand, making it ideal for sites with frequently changing data.
-
-`How React sites still do SEO?`
-Even if we are using React, there are ways to improve SEO:
-  - Use React Helmet or <Head> to set <title>, <meta>, etc.
-  - Use tools like Google Search Console to check how Google views our site.
-
-
-
-
-
 ## Why React is `Fast`
 =======================
 `Reconciliation`
@@ -288,7 +285,7 @@ The **Diff Algorithm** is used by React to efficiently compare the old virtual D
 
 `Hydration`
 -------------
-Hydration is the process where React attaches event listeners and makes the page interactive on the client side using the already-rendered HTML.
+Hydration is when React takes the HTML already rendered on the server and adds JavaScript to it so the page becomes interactive.
 
 `Concurrent Mode`
 ------------------
@@ -353,26 +350,25 @@ null → the props (none in this case)
 
 ## `React 19 hooks
 ===================
-1. `useActionState`
-  Simplifies managing asynchronous form submissions by handling form state, validation, and error messages. It provides a pending state to indicate ongoing operations.
+1. `useActionState` -  Handle form actions + async logic
   ```js
   const [state, action, isPending] = useActionState(actionFunction, initialState);
   ```
 
-2. `useFormStatus`
-  gives us the status of a form submission
+2. `useFormStatus` - gives us the status of a form submission
  ```js
 const { pending, data, method, action } = useFormStatus();
 ```
 
-3. `useOptimistic`
+3. `useOptimistic` - 
   Lets us optimistically update the UI before the server responds, creating a fast and responsive user experience.
 ```js
-const [optimisticState, addOptimistic] = useOptimistic( actualState, (prevState, newData=> {});
+const [optimisticState, addOptimistic] = useOptimistic( actualState, (prevState, newData=> {}));
 ```
 
-4. `use`
-  A new API that allows reading the value of a Promise or Context directly within a component.
+4. `use` - A new API that allows reading the value of a Promise or Context directly within a component.
+
+5. `useDeferredValue` – Defer expensive UI updates
 
 `Main Update`
   Automatic Memoization
@@ -566,19 +562,18 @@ Symbols in dependency versions:
 ## `BUNDLERS`
 =============
 Bundlers are tools that combine all the files and dependencies in our project into a single (or a few smaller) bundle(s). This improves loading performance by reducing the number of HTTP requests and minimizing file sizes
-- **Minification** (removing unnecessary characters or whitespace).
-- **Code splitting** (splitting the code into chunks to load them as needed).
 
 Example: **Create React App** uses `Webpack` as its default bundler.
+`webpack` is a older, powerful and highly configurable bundler
+
 **Vite** uses `esbuild` as the development bundler it is super fast because it’s written in Go. `Rollup` as the production bundler and it provides excellent tree-shaking and optimized output for production.
 
-`Parcel`
-Parcel is a fast, zero-config bundler used in frontend development to handle JavaScript, TypeScript, CSS, HTML, and other assets.
+`Parcel` - Parcel is a fast, zero-config bundler used in frontend development
 
 ### **Features**  
 - **Fast Dev Build**: Quick build process for development.  
 - **Local Server**: Runs a development server locally.  
-- **HMR (Hot Module Replacement)**: Automatically updates modules without full-page refresh.  
+- **HMR (Hot Module Replacement)**: Automatically updates modules without full-page refresh. HMR allows your app to update only the changed file
 - **Image Optimization**: Compresses images for faster loading.  
 - **Minification & Compression**: Reduces file size for better performance.  
 - **Tree Shaking**: Eliminates unused code to reduce bundle size.  
@@ -652,11 +647,9 @@ Special plugins used by bundlers to transform files
 
 ## `Rendering Steps`
 =======================
-React follows specific steps during the rendering process to efficiently update the UI. 
-
 1. Triggering
 --------------
-An event or state change, or props update that is what is a trigger.
+An event occur or state change, or props update that is what is a trigger.
 
 2. Rendering
 ------------
@@ -758,7 +751,7 @@ Code Maintainability: Writing everything in one place ensures that UI changes ar
 
 8. **JSX Prevents Injection Attacks:**  
 ---------------------------------------
-  - In React, JSX automatically escapes any values you insert into the UI (like variables).
+  - In React, JSX automatically escapes any values you insert into the UI.
   - This means if someone tries to add harmful code like a `<script>` tag React will not run it as code, but instead show it as plain text.
   - This helps keep our app safe from XSS (Cross-Site Scripting) attacks.
 
@@ -906,23 +899,6 @@ NOTE THAT :- never use the index of the looping as the unique key
 
 
 
-## `DOM Concept in JavaScript`
-=================================
-The **Document Object Model (DOM)** is a programming interface api that provided by the browser for web documents, representing the structure of an HTML or XML document as a tree of objects. It allows JavaScript to interact with and manipulate the content, structure, and style of web pages dynamically.
-
-`Key Concepts in the DOM`
---------------------------
-- **Document object**: It is the root of the DOM, representing the entire HTML document, and providing access to all other nodes.
-- **Nodes**: Everything in the document is represented as nodes—elements, attributes, text, and comments.
-
-`Tree Structure of the DOM`
----------------------------
-The DOM represents the HTML document as a tree, with the document object as the root. Each element becomes a node in this tree, and the relationships between elements are represented as parent-child relationships.
-
-
-
-
-
 ## Concept of `Reusability in React`
 ========================================
 **Reusability** in React refers to creating modular, independent components that can be used across different parts of an application or even across multiple projects. React’s component-based architecture is designed to promote reusability, which makes it easier to build scalable and maintainable applications.
@@ -936,10 +912,31 @@ Props allow components to be reusable with different data inputs, enabling devel
 # `Higher-Order Components (HOCs)`
 -----------------------------------
 **HOCs** are functions that take a component and return a new component, allowing you to add reusable logic to multiple components without changing their implementations.
+```js
+export const WrappingComponent = (Component) => { // HOC
+  return function enhancedComponent() {
+    return (
+      <div className="bg-orange-500 p-10">
+        <Component />
+      </div>
+    );
+  };
+};
 
-# `Render Props`
+const Sample = () => {
+  return <h1>My name is Midhun</h1>;
+};
+
+export const HigherOrderComponent = WrappingComponent(Sample);
+```
+
+# `Render Props` ( Props decides what to render )
 ------------------
-The **Render Props** pattern allows a component to share reusable logic by passing a function as a prop to decide what to render, providing flexibility in rendering logic while promoting reusability.
+A React pattern where a component receives a function as a prop.
+That function controls what gets rendered.
+```js
+<DataProvider render={(data) => <h1>{data.user}</h1>} />
+```
 
 # `Custom Hooks`
 ------------------
@@ -971,9 +968,8 @@ We can create libraries of reusable components, such as buttons, forms, or modal
    - Once the event handler finishes executing, React clears the event object’s properties (like event.type, event.target, etc.), making them unavailable for future use.
 
     `Why event.persist()?`
-    - If we need to access the event's properties asynchronously (e.g., inside a setTimeout or a promise), the event's data might already be cleared due to pooling.
-    - Calling event.persist() tells React not to recycle or clear the specific event object
-    - This allows you to safely use the event’s properties later in async code.
+    - If you want to use the event later
+    - you must call event.persist() so React doesn’t wipe it.
 
    - **Example of Persisting an Event:**
      ```jsx
@@ -994,9 +990,9 @@ We can create libraries of reusable components, such as buttons, forms, or modal
 
 3. **Advantages of Synthetic Events:**  
 ---------------------------------------
-   - **Cross-browser Compatibility:** Provides uniform behavior across different browsers.
-   - **Performance:** Uses event delegation by attaching handlers to the root, reducing the need for multiple listeners.
-   - **Abstraction:** Makes handling events simpler by wrapping the native browser events.
+   - **Cross-browser Compatibility**
+   - **Performance optimization** 
+   - **Abstraction** 
 
 
 
@@ -1032,12 +1028,6 @@ We can create libraries of reusable components, such as buttons, forms, or modal
    - **Performance Optimization:**
    - **Avoids Redundant Logic:**
    - **Improves User Experience:**
-
-5. **When to Use Memoization in React:**  
------------------------------------------
-   - **Expensive Calculations:** Use `useMemo` for computations that take significant time.
-   - **Callback Functions Passed as Props:** Use `useCallback` to ensure that child components don’t re-render unnecessarily.
-   - **Rendering Pure Components:** Use `React.memo` to memoize components that rely only on props, avoiding re-renders unless the props change.
 
 
 
@@ -1159,7 +1149,7 @@ First the parent class constructor and render function will call and then if the
 
 
 
-## `Life CYcle Methods Phases`
+## `Life Cycle Methods Phases`
 ==================================
 # Render phase
 ----------------
@@ -1243,11 +1233,11 @@ this.state.variableName = this.state.variableName + 1;
 ```
 Directly mutating the state can lead to unexpected behavior and bugs, as React relies on its internal mechanisms to manage re-renders.
 
-Using this.setState(): Instead, use the this.setState() method provided by React to update state variables. This method accepts an object containing the state variables we want to update.
+`this.setState()`: use the this.setState() method provided by React to update state variables. This method accepts an object containing the state variables we want to update.
 ```js
 this.setState({ variableName: this.state.variableName + 1 });
 ```
-Reactivity: When we call this.setState(), React merges the provided object with the current state. React then compares the previous state object with the new state object to determine what has changed. If there are differences, React triggers a re-render of the component, ensuring the UI reflects the latest state.
+`Reactivity`: When we call this.setState(), React merges the provided object with the current state. React then compares the previous state object with the new state object to determine what has changed. If there are differences, React triggers a re-render of the component, ensuring the UI reflects the latest state.
 
 ## Eaxmple
 -----------
@@ -1255,6 +1245,10 @@ Reactivity: When we call this.setState(), React merges the provided object with 
 import React from 'react'
 
 class Component extends React.component{
+
+  static defaultProps = {
+    greeting: "Hello"
+  };
 
    constructor(props) {
     super(props); // Required to access `this.props`
@@ -1271,6 +1265,7 @@ class Component extends React.component{
     return(
       <div>
       <h1>count : {this.state.count}</h1>
+      <h1>count : {this.greetings}</h1>
       <button onClick={() => {
         this.setState({
           count : this.state.count + 1
@@ -1331,27 +1326,6 @@ Function Components: In functional components, props are received as arguments.
 Class Components: In class components, props are accessed using this.props.
 Default Props: You can define default values for props using the defaultProps property in class components or default parameters in functional components.
 
-# Example
----------
-```js
-function Greeting(props) {
-  return <h1>Hello, {props.name}!</h1>;
-}
-
-// Usage
-<Greeting name="Midhun" />
-
-// Default props
-const Greeting = ({ name }) => {
-  return <h1>Hello, {name}!</h1>;
-};
-
-// Set default props
-Greeting.defaultProps = {
-  name: "Guest",
-};
-```
-
 
 
 
@@ -1407,24 +1381,7 @@ function Wrapper({ children }) {
 
 ## Importance of `Pure Components`
 ======================================
-A pure component behaves predictably by rendering the same output for the same input (props or state). Avoiding side effects helps ensure the component's integrity.
-```js
-function PureGreeting({ name }) {
-  return <h1>Hello, {name}</h1>;
-}
-```
-
-
-
-
-
-## `Local Mutation` and Why to Avoid It
-==========================================
-Directly modifying state or props can lead to unpredictable behavior. React promotes immutability by encouraging controlled updates using setState or hooks.
-```js
-this.state.count = this.state.count + 1; // ❌ Avoid direct mutation.
-this.setState({ count: this.state.count + 1 }); // ✅ Use setState instead.
-```
+A pure component behaves predictably by rendering the same output for the same input.
 
 
 
@@ -1466,10 +1423,10 @@ const { id } = useParams();
 ----------------
 Dynamic routing also supports nested routes where a route can have sub-routes based on the URL.
 ```js
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./HomePage";
-import CategoryPage from "./CategoryPage";
 import ProductPage from "./ProductPage";
+import CategoryPage from "./CategoryPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -1522,7 +1479,7 @@ A control flow component that renders only the first matching <Route>. Ensures t
 ===================
 `createBrowserRouter`
 ----------------------
-This function is used to create a router instance with the routes of a application.
+This function is used to create a router instance with the routes of an application.
 
 `RouterProvider`
 ----------------
@@ -1662,8 +1619,7 @@ If no dependency array is assigned, useEffect is called on every render
 If the dependency array is an empty array, useEffect is called on inital render (just once)
 If the dependency array have value like eg: a stateVariable, the useEffect is called whenever the stateVariable updated
 
-Like in the class component we use componentWillUnmount there is no method in functional compoenent but we can use a
-return inside the useEffect and this returns a an arrow function inside this arrow function we can control the whatever we need to stop like compoenentWillUnmount
+Like in the class component we use componentWillUnmount there is no method in functional compoenent but we can use a return inside the useEffect and this returns an arrow function inside this arrow function we can control the whatever we need to stop like compoenentWillUnmount
 ```js
 import React, { useEffect, useState } from 'react';
 
@@ -1685,8 +1641,6 @@ function DataFetcher() {
 3. `useRef`
 ---------------
 useRef is a React hook that allows us to create a mutable object with a .current property. 
-- Access a DOM element directly.
-- Hold a value that doesn't cause re-renders when changed.
 - Changing ref.current does not trigger re-renders, making it suitable for performance optimization.
 - Helps us to interact directly with DOM elements (e.g., focusing an input field).
 - The value stored in .current persists between re-renders.
@@ -1698,7 +1652,7 @@ function TextInput() {
   const inputRef = useRef(null);
 
   const focusInput = () => {
-    inputRef.current.focus(); // Focus the input element
+    inputRef.current.focus();
   };
 
   return (
@@ -1800,7 +1754,7 @@ function Counter() {
 
 4. `useRouterError`
 -------------------
-The useRouteError hook is used inside an error boundary route element to retrieve the error that occurred during: 
+The useRouterError hook is used inside an error boundary route element to retrieve the error that occurred during: 
 - A loader() or action() function,
 - A thrown error from a component rendered by a route,
 - A redirect that failed,
@@ -1850,7 +1804,12 @@ export default UserComponent;
 
 6. `useLayoutEffect`
 ------------------------
-useLayoutEffect is a hook provided by react that runs synchronously after the DOM updates but before the browser paints the screen. It blocks the rendering process until the effect completes, ensuring that DOM updates are applied before the browser performs any visual painting.
+- It runs *right after* React updates the DOM,
+- but *before* the screen is shown to the user.
+- Because it runs so early, it can block the screen from showing
+- until your code inside it finishes.
+- Use it when you need to measure or change the DOM
+- before the user sees anything.
 ```js
 import React, { useLayoutEffect, useRef } from 'react';
 
@@ -1928,6 +1887,8 @@ function Counter() {
 
 10. `useContext`
 ----------------------
+- It is used to avoid props drilling
+- we can make a context file and import it in any module
 - The react is providing the `createContext` method
 - The Context API in React allows us to share state and data globally across components without the need to pass props down the component tree manually. It is useful when multiple components need access to the same data.
 - We access the context inside components using the `useContext()` react hook.
@@ -1936,15 +1897,30 @@ function Counter() {
 ```js
 const UserContext = createContext({ userName: "Midhun Kalarikkal" });
 ```
-If we don't use <UserContext.Provider>, then components using useContext(UserContext) will receive this default value.
-
+`Funtional Component`
 `Using Context With a Provider`
 ```js
 <UserContext.Provider value={{ userName: "Midhun Paniker" }}>
   <App />
 </UserContext.Provider>
 ```
+If we don't use <UserContext.Provider>, then components using `useContext(UserContext)` will receive this default value.
+
 Now, all components inside this provider get this provided value, overriding the default.
+
+`Class Component`
+Class components don’t support hooks like useContext.
+Instead, React gives us a special component: <ContextName.Consumer>.
+```js
+<UserContext.Consumer>
+  {(value) => (
+    <div>Hello {value.userName}</div>
+  )}
+</UserContext.Consumer>
+```
+It uses a callback function inside curly braces {}.
+That function receives the context value as a parameter.
+
 
 11. `React.memo`
 ------------------
@@ -2071,8 +2047,7 @@ export default App;
 ## `Shadow DOM`
 ==================
 - A hidden mini-DOM inside an element
-- Isolate styles and structure
-- Avoid style conflicts, reusable components                             
+- This hidden DOM has its own HTML and its own CSS, so outside styles cannot affect it,                         
 
 
 
@@ -2101,40 +2076,6 @@ const ProductPage = React.lazy(() => import('./ProductPage'));
   <ProductPage />
 </Suspense>
 ```
-
-
-
-
-
-## `React context`
-======================
-It is used to avoid props drilling
-we can make an context file and import it in any module
-
-so in functional component for using the context react is giving a hook that is `useContext` and we can pass the specific context we have created to that useContext hook and extract the data inside the context
-
-Class components don’t support hooks like useContext.
-Instead, React gives us a special component: <ContextName.Consumer>.
-```js
-<MyContext.Consumer>
-  {value => (
-    <div>Hello {value.userName}</div>
-  )}
-</MyContext.Consumer>
-```
-It uses a callback function inside curly braces {}.
-That function receives the context value as a parameter.
-
-`.Provider in Class or Functional Components`
-```js
-<MyContext.Provider value={{ userName: "Midhun Kalarikkal" }}>
-  <App />
-</MyContext.Provider>
-```
-Use .Provider to wrap components that need access to shared data.
-We must pass a value prop this is the data we want to share.
-We can Wrap the entire app (for global data)
-Wrap a single component (for localized data)
 
 
 
@@ -2206,7 +2147,7 @@ This is used to handle Actions from other slices or Async actions like createAsy
 - store
 - middleware (optional)
 - `Important Rule` : we should never mutate the state directly.
-- `Why?` : Redux expects pure functions, and mutating state directly will cause bugs in time-travel debugging and unexpected UI behavior.
+- `Why?` : Redux expects pure functions otherwise it will break the predicatable data bahaviour.
 
 `How do we handle state in Vanilla Redux?`
 ```js
@@ -2312,7 +2253,19 @@ export default App;
 `Middleware in Redux`
 ----------------------
 A middleware in Redux is a function that runs between dispatching an action and the reducer receiving it.
-Use Case are :- Logging, Async handling, Error catching, Analytics
+Use case :- log actions, modify actions stop actions, run async code
+```js
+const logger = store => next => action => {
+  console.log("Action:", action);
+  return next(action); // send action to reducer
+};
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(logger)
+);
+```
+
 
 `Thunk (redux-thunk)`
 ----------------------
@@ -2381,7 +2334,6 @@ const prefetch = usePrefetch("getProducts");
 ------------------
 1. Single Source of Truth
 - The entire application's state's are stored in a single JavaScript object called the store.
-- This ensures consistency and makes it easier to debug,
 
 2. State is Read-Only
 - We cannot directly modify the state; instead must dispatch an action to make changes.
@@ -2392,7 +2344,6 @@ const prefetch = usePrefetch("getProducts");
 - Reducers must not mutate the state but instead return a copy with the necessary updates.
 
 4. Unidirectional Data Flow
-- State flows in one direction:
 - Action → Reducer → New State → UI Update
 - This makes the data flow predictable and easy to debug.
 
@@ -2406,7 +2357,7 @@ const prefetch = usePrefetch("getProducts");
 ## `Controlled and Uncontrolled component`
 ==============================================
 `Controlled Component`
-- The form element's value is controlled by React state variables.
+- The element's value is controlled by React state variables.
 - The component renders based on the state and updates the state using event handlers.
 
 ```js
@@ -2426,7 +2377,7 @@ function ControlledInput() {
 ```
 
 `Uncontrolled Component`
-- The form element's value is managed by the DOM itself, not React state.
+- The element's value is managed by the DOM itself, not React state.
 - We use a ref to access the value.
 
 ```js
@@ -2479,3 +2430,8 @@ componentDidCatch(error, info)
 
 
 
+## `Props Lifting (Lifting State Up)`
+=============================================
+Moving state from a child component up to a common parent component
+So that multiple components can share and use the same data
+The parent holds the state, and children get the data + functions through props.

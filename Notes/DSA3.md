@@ -109,9 +109,6 @@ This technique offers two main advantages:
    - **Single Threaded:** Threads point either to inorder predecessor or successor.
    - **Double Threaded:** Threads point to both inorder predecessor and successor.
 
-💡 Use Case:
-   - Efficient in-order traversal in memory-constrained environments.
-
 `Time complexity` - Insertion Deletion Search and all traversals - all cases - o(n)
 
 
@@ -155,8 +152,8 @@ Operations such as search, insert, and delete have linear time complexity, O(n).
 ================================
 A Binary Search Tree (BST) is a type of binary tree that maintains a specific order property, making it efficient for searching, insertion, and deletion operations. A standard BST does not allow duplicates — each node must contain a unique key
 
-To validate whether a given binary tree is a Binary Search Tree (BST), we need to ensure that for each node
----------------------------------------------------------------------------------------------------------------
+To validate whether a given binary tree is a Binary Search Tree (BST), we need to ensure order that for each node
+------------------------------------------------------------------------------------------------------------------
 The left subtree of a node contains only nodes with values less than the node's value.
 The right subtree of a node contains only nodes with values greater than the node's value.
 Both the left and right subtrees must also be binary search trees.
@@ -317,7 +314,7 @@ A self-balancing tree data structure that keeps data sorted and allows insertion
 
 5. `B+ Tree`
 -------------
-A variant of the B-tree data structure where all keys and records are stored in leaf nodes, and internal nodes only store keys to guide the search. This structure is optimized for indexing and database systems.
+A variant of the B-tree data structure where all keys and records are stored in leaf nodes, and internal nodes only store keys to guide the search. This structure is optimized for indexing database systems.
 
 6. `Spaly tree`
 ----------------
@@ -465,7 +462,7 @@ A Trie is a specialized tree-like data structure that is used primarily for stor
 ----------------------
 Efficient Search
 Prefix Matching
-Suffix matching
+Suffix Matching
 Space Efficiency
 
 `Disadvantages of Trie`
@@ -478,7 +475,7 @@ Space Efficiency
 -----------------------------
 Insertion, Search, Deletion
 Time Complexity: O(m), where m is the length of the string being inserted.
-Space Complexity: O(m * n) insertion and o(1) for search and deletion
+Space Complexity: O(m * n) insertion and O(1) for search and deletion
 
 Space Complexity :- 
  The overall space complexity for a Trie is O(ALPHABET_SIZE * m * n) in the worst case, where ALPHABET_SIZE is the number of possible characters, m is the average length of the strings, and n is the number of strings.
@@ -643,11 +640,6 @@ Adjacency Matrix
 Space Complexity: O(V^2)
 Insertion: O(1)
 Deletion: O(1)
-
-Graph Traversal
----------------
-BFS/DFS Time Complexity: O(V + E)
-Space Complexity: O(V)
 
 `Adjacency matrix vs Adjacency list`
 ----------------------------------------

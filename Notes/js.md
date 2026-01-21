@@ -59,7 +59,7 @@ The code is executed one line at a time.
 This component is also known as the Thread of Execution.
 
 `When executing a program its first phase is memory creation`
-In this phase inside the memory component for variales is assigned to undefined and the functions are stored with the functions whole code
+In this phase inside the memory component for variales is assigned to undefined and the functions are stored with the functions whole code ( only for normal function not for arrow function )
 
 `The second phase is code execution phase`
 In this phase the variables will assign with thier actual value in the program
@@ -196,6 +196,14 @@ Prevents memory leaks by allowing garbage collection of unused object keys.
 Useful for storing private data related to DOM nodes or objects.
 It does not preserve insertion order and is not iterable.
 Methods are set(key, value), get(key), has(key), delete(key)
+```js
+const weakMap = new WeakMap();
+
+const user = { name: "Alice" }; // key
+const settings = { theme: "dark" }; // value
+
+weakMap.set(user, settings);
+```
 
 8. `set`
 A Set is a collection of unique values
@@ -211,6 +219,14 @@ Objects are held weakly, allowing garbage collection if there are no other refer
 It is not iterable and does not preserve insertion order.
 Used to store temporary or private data tied to objects.
 methods are add(value), has(value), delete(value)
+```js
+const weakSet = new WeakSet();
+
+const user1 = { name: "Alice" };
+const user2 = { name: "Bob" };
+
+weakSet.add(user1);
+```
 
 10. `Error`
 
@@ -219,7 +235,7 @@ methods are add(value), has(value), delete(value)
 
 ## `NaN`
 =========
-type of NaN is number
+type of `NaN` is number
 It shows up when we do an invalid mathematical operation
 NaN is special because it’s the only value in JavaScript that is not equal to itself
 To check if something is NaN, use Number.isNaN():
@@ -466,11 +482,11 @@ function Dog(name) {
 - By convention, constructor function names are written in PascalCase (capitalized).
 - When you call a function with new keyword:
   - A new empty object {} is created.
-  - this inside the constructor is set to that new object.
+  - `this` keyword inside the constructor is set to that new object.
   - Properties/methods are added to the object.
   - The new object is returned automatically (unless you explicitly return another object).
-- With new → acts as a constructor and creates an object.
-- Without new → acts as a normal function
+- With `new` keyword → acts as a constructor and creates an object.
+- Without `new` keyword → acts as a normal function
 - If you don’t return anything → the new object (this) is returned by default.
 - If you return a primitive value → it’s ignored, and the object is returned.
 - If you return an object → that object replaces this.
@@ -561,6 +577,13 @@ function add(a, b) {
 - this binding
   - Arrow function does not have its own this. It lexically inherits this from the surrounding scope.
   - Regular function this depends on how the function is called.
+
+    Non–strict mode (default)
+    In the browser → this refers to the global object, which is window.
+    In Node.js → this refers to the global object, which is global.
+
+    Strict mode ('use strict')
+    `Undefined`
 ```js
 const obj = {
   value: 10,
@@ -576,8 +599,8 @@ obj.regular();
 obj.arrow();
 ```
 - arguments object
-  - Arrow function has no arguments object.
-  - Regular function: gets its own arguments object.
+  - Arrow function has no `arguments` object.
+  - Regular function: gets its own `arguments` object.
 ```js
 function regularFn(a, b) {
   console.log(arguments); // [Arguments] { '0': 1, '1': 2, '2': 3 }
@@ -690,9 +713,20 @@ arr.__proto__.__proto__.__proto__      is an  object.prototype.prototype == null
 ================
 When a function "remembers" the variables and function (basically anything in the outer function) from its lexical scope, even after the outer function has finished execution.
 
-it is because the the function is binded with its local memory and the lexical environment of its parents memory
+it is because the function is binded with its local memory and the lexical environment of its parents memory
 
 `Function bind together with its lexical environment creates a closure`
+```js
+function one {
+  var a = 10;
+  return function two () {
+    console.log("a : ",a);
+  }
+}
+
+const result = one();
+console.log("result : ", result());
+```
 
 `Uses`
 ------
@@ -733,10 +767,10 @@ The most common garbage collection algorithm used in JavaScript is the Mark and 
 During the mark phase, the garbage collector identifies and marks all objects that are reachable or in use by the program. It starts from the root objects, such as global variables and local variables in execution context, and traverses the object graph.
 
 `Sweep Phase`
-In the sweep phase, the garbage collector scans the entire heap and deallocates (frees up) memory occupied by objects that were not marked. These are considered garbage and are candidates for removal.
+In the sweep phase, the garbage collector scans the entire heap and deallocates (frees up) memory occupied by objects that were not marked. These are considered as garbage and are candidates for removal.
 
 `Memory Reclamation`
-After the sweep phase, the memory occupied by the unreferenced objects is reclaimed and made available for future use.
+After the sweep phase, the memory occupied by the unreferenced objects are reclaimed and made available for future use.
 
 
 
@@ -817,7 +851,7 @@ In the arrow function in case of let or const instead of var the error will be r
 
 `Function Context`
 -------------------
-Inside a function, the value of this depends on how the function is invoked.
+Inside a function, the value of `this` depends on how the function is invoked.
 ```js
 function showThis() {
   console.log(this);
@@ -875,57 +909,14 @@ The three functions call(), apply(), and bind() are often referred to as "functi
 ---------
 `function borrowing`
 The call method is used to invoke a function immediately with a specified this context and arguments passed individually seperated by commas.
-```js
-const person = { name: 'John' };
-function sayHello(greeting, home) {
-  console.log(`${greeting}, ${this.name}!, ${home}`);
-}
-sayHello.call(person, 'Hello',"homename");
-```
+
 `Apply()`
 ----------
 The apply method is similar to call, but arguments are passed as a single array or an array-like object.
-```js
-const person = { name: 'John' };
-function greet(message1, message2) {
-  console.log(`${message1}, ${message2}, ${this.name}`);
-}
-greet.apply(person, ['Hello', 'How are we?']); // Outputs: Hello, How are we?, John
-```
 
 `Bind()`
 --------
-- The bind method is similar to the call method it does not immediately invoke the function. Instead, it returns a new copy of the function with `this` permanently bound to the object we pass. we can optionally pass arguments, just like call().
-```js
-function greet(message) {
-  console.log(`${message}, ${this.name}`);
-}
-
-const person = { name: 'John' };
-
-const greetJohn = greet.bind(person);
-greetJohn('Hi'); // Outputs: Hi, John
-
-const object1 = {
-    name: "Midhun",
-    question: "How Are we ?",
-    greet: function() {
-        return `Hi ${this.name} ${this.question}`;
-    }
-};
-
-const object2 = {
-    name: "Tom",
-    question: "Where are we?",
-};
-
-const bindResult = object1.greet.bind(object2);
-console.log(bindResult());
-```
-
-- if the function is an arrow function the `this` will be undefined because there is no `this` for the arrow function
-- they inherit this from the parent scope where they are defined (i.e., outside object1).
-- So this.name and this.question refer to the global scope (or undefined in strict mode), not object1.
+The bind method is similar to the call method it does not immediately invoke the function. Instead, it returns a new copy of the function with `this` permanently bound to the object we pass. we can optionally pass arguments, just like call().
 
 
 
@@ -1011,8 +1002,8 @@ console.log(str2.concat(str1))
 
 `substring`
 ------------
-Extracts characters between start and end (excluding end).
-If start > end, it swaps them.
+Extracts characters between start and end index (excluding end index).
+If start > end, it swaps the values of the index.
 Negative values are treated as 0.
 ```js
 var str = "Midhun k paniker"
@@ -1080,7 +1071,7 @@ console.log(newarr)
 
 2. `reduce`
 ============
-The reduce is used to reduce the elements of an array to a single value. It iterates over each element of the array, applying a callback function, and accumulates a result. The result could be of any type.
+The reduce is used to reduce the elements of an array to a single value. It iterates over each element of the array from left to right, applying a callback function, and accumulates a result. The result could be of any type.
 
 ```js
 array.reduce(function(accumulator, currentValue, currentIndex, array) {
@@ -1142,7 +1133,7 @@ let avg = arr.reduce((acc,cv,ci,arr)=>{
     }else{
         return acc 
     }
-})
+},0)
 
 console.log(avg)
 ```
@@ -1563,6 +1554,15 @@ for (let value of arr.values()) {
 }
 ```
 
+21. `flat()`
+============
+flat method is used to flattern an array, we need to specify the level of the flattering 
+```js
+let arr = [1,2,[3,4],[5,6,7]];
+const result1 = arr.flat(2);
+const result2 = arr.flat(Infinity);
+```
+
 
 
 
@@ -1645,6 +1645,15 @@ let ob = Object.fromEntries(arr);
 console.log(ob);  // {name : "midhun",age : 23}
 ```
 
+9. `Object.Create(object)`
+==========================
+It allows you to create an object and directly set its prototype, instead of using a constructor function or class.
+```js
+Object.create(proto, propertiesObject?)
+```
+proto → The object that should be the prototype of the new object.
+propertiesObject (optional) → Additional properties for the new object (same format as Object.defineProperties).
+
 
 
 
@@ -1657,24 +1666,40 @@ writing (set)
 function calls
 property deletion
 enumeration, etc.
-- Target - The target object
-- Handler - Defined which operations can be intercepted and redefined
-- Trap - Handler functions (get, set, deleteProperty, ownKeys, has, defineProperty, getOwnPropertyDescriptions)
-```js
-const person = {
-  name: "Tom"
-};
 
-const proxy = new Proxy(person, {
-  get(target, prop) {
-    return target.prop ? target[prop] : "Not found"
+Vue.js 3’s reactivity is built entirely on Proxies.
+
+- Target - The object that we are passing to the proxy
+- Trap - Handler functions (get, set, deleteProperty, ownKeys, has, defineProperty, getOwnPropertyDescriptions)
+- Handler - Defined which operations can be intercepted and redefined,
+  here:- 
+    get(target, key);
+    set(target, key, value);
+```js
+const user = { name: "Alice", age: 25 };
+
+const proxyUser = new Proxy(user, {
+  get(target, key) {
+    console.log(`Accessed: ${key}`);
+    return target[key];
   },
-  set(target, prop, value) {
-    target[prop] = value;
+  set(target, key, value) {
+    console.log(`Updated: ${key} → ${value}`);
+    target[key] = value;
     return true;
   }
-})
+});
+
+console.log(proxyUser.name);   // Logs: Accessed: name
+proxyUser.age = 26;            // Logs: Updated: age → 26
 ```
+`Benefits`
+--------------
+- Logging / debugging — know when a property is read or written.
+- Validation — check values before assignment.
+- Reactivity — frameworks like Vue 3 use Proxy to auto-update the UI when a property changes.
+- Virtual properties — you can generate values on-the-fly, without storing them.
+- Access control — hide or restrict certain properties.
 
 
 
@@ -1877,7 +1902,7 @@ Promise chaining in JavaScript is a technique where we chain multiple asynchrono
 --------------
 - Promise.all() takes an iterable (usually an array) of promises 
 - If all the input promises resolve, returns a single promise
-- That single Promise resolves to an array of results (in the same order).
+- That single Promise resolves to an array of results (in the same order input promise).
 - Rejects immediately with reason, if any one of the input promises is rejected.
 - Other promises continue running, but their results are ignored.
 
@@ -1899,7 +1924,7 @@ Promise chaining in JavaScript is a technique where we chain multiple asynchrono
  `Promise.any(iterable)`
 -------------------------
 - Promise.any() takes an iterable (usually an array) of promises 
-- Immediately returns a single promise that Resolves as soon as the any promise resolves.
+- Immediately returns a single promise that Resolves as soon as the any input promise resolves.
 - Rejects only if all promises are rejected, and it throws an AggregateError containing all rejection reasons.
 
 `Then`
@@ -1934,58 +1959,42 @@ async and await are keywords in JavaScript that simplify handling the asynchrono
 
 ## `Observable` ##
 ====================
-An Observable is a design pattern in JavaScript used to manage asynchronous data streams. It allows us to work with data that can change over time, such as user inputs, server responses, or other events. 
-- Unlike promises, Observables can emit multiple values over time, and subscribers can react to each emitted value.
+An Observable is a design pattern in JavaScript used to manage asynchronous data streams. Observables can emit multiple values over time, and subscribers can react to each emitted value.
 
 
 
 
 
-## `DOM` ##
-==============
-- The DOM is an API (Application Programming Interface) for HTML and XML documents.  
-- It represents the document as a hierarchical tree of nodes (objects).  
-- Each node corresponds to a part of the document (element, attribute, text, or content).  
-- JavaScript can access and manipulate the DOM to add, remove, or change elements and content.  
-- DOM manipulation enables real-time updates to a web page without requiring a reload.  
+## `DOM` (Document Object Model)
+=================================
+- Represents the **HTML document structure** as a tree of objects.
+- Each HTML element (like <div>, <p>, <img>) is a **node** in this tree.
+- Allows JavaScript to **access, modify, or delete** HTML and CSS content.
+- Browser creates the DOM when the page loads.
+- Belongs to the document (not the window).
+- Part of the **Web API** defined by the W3C.
+- Example: document.getElementById(), document.querySelector(), etc.
 
-`Nodes`
-Nodes are the building blocks of the DOM.
-
-Document node (document),
-Element nodes (e.g., <div>),
-Text nodes (e.g., text inside an element),
-Attribute nodes.
-
-`Methods`
-Methods are functions provided by the DOM to interact with or manipulate nodes.
-getElementById(),
-querySelector(),
-createElement(),
-appendChild(),
-removeChild().
-
-`Events`
-Events are actions or occurrences that happen in the document and can be handled using JavaScript.
-onclick,
-onmouseover,
-onkeydown,
-onload.
+📘 Example:
+-----------
+document.title = "New Title";
+document.body.style.background = "lightblue";
 
 
+## `BOM` (Browser Object Model)
+=================================
+- Represents the **browser environment** outside the webpage content.
+- Allows JavaScript to interact with the browser itself.
+- Includes objects like **window**, **navigator**, **screen**, **location**, and **history**.
+- The `window` object is the **global object** in browsers.
+- Not standardized by W3C — implementation may vary between browsers.
+- DOM is part of the BOM (`window.document`).
 
-
-
-## `BOM` ##
-===========
-- The BOM is a set of objects provided by the browser, separate from the DOM.  
-- It allows interaction with the browser itself and the user's environment.  
-- Developers can use BOM objects to control browser features (outside the document).  
-📌 Main Components:
-- window   → the global object representing the browser window.  
-- navigator → information about the browser and the device.  
-- location → the current URL, allows navigation and redirection.  
-- history  → the browsing history of the current tab.  
+📘 Example:
+-----------
+window.alert("Hello!");
+console.log(window.location.href);
+window.history.back();
 
 
 
@@ -2026,32 +2035,32 @@ When the function completes, its frame is popped off the stack, and the control 
 ## `Event Loop` ##
 ===================
 - The event loop is a crucial part of JavaScript's concurrency model.
-- The event loop constantly checks the callback queue for completed asynchronous operations.
+- The event loop constantly checks the callback queue for completed asynchronous callback operations.
 - If the call stack is empty, the event loop takes the first callback from the queue and pushes it to the call stack for execution.
 
 - The browser’s JavaScript engine like V8 doesn’t have a thread pool like Node.js. Instead, the browser uses Web APIs to handle asynchronous task
 - Once the tasks are completed the callback function is stored in the callback queue for the execution
 - example apis
-  - Timers API
+  1. Timers API
    - setTimeout()
    - setInterval()
    - clearTimeout(), clearInterval()
-  - DOM Events API
+  2. DOM Events API
    - addEventListener()
    - click, input, submit, keypress events, etc.
-  - Network / HTTP API
+  3. Network / HTTP API
    - XMLHttpRequest (XHR)
    - fetch()
    - WebSockets
-  - Storage APIs
+  4. Storage APIs
    - localStorage
    - sessionStorage
    - IndexedDB
    - Cache API
-  -  Worker APIs
+  5.  Worker APIs
    - Web Workers
    - Service Workers
-  -  History & Navigation
+  6.  History & Navigation
     - window.history
     - window.location
 
@@ -2064,6 +2073,16 @@ When the function completes, its frame is popped off the stack, and the control 
 `Destructuring`
 ---------------------
 Destructuring in JavaScript is a feature that allows us to unpack values from arrays or properties from objects into distinct variables. It simplifies extracting data from complex structures.
+```js
+const obj = {
+  name: "a",
+  place: "b"
+};
+const { name, place } = obj;
+
+console.log(name);  // "a"
+console.log(place); // "b"
+```
 
 `Ternary Operator`
 --------------------
@@ -2091,6 +2110,16 @@ console.log(restFruits); // Output: ['cherry', 'mango']
 `Spread Operator`
 ------------------
 It is used to expand an array, object, or iterable into individual elements or properties.
+```js
+const nums = [1, 2, 3];
+
+function sum(a, b, c) {
+  return a + b + c;
+}
+
+console.log(sum(...nums)); // 6
+
+```
 
 `Arithmetic Operators`
 =============================
@@ -2196,16 +2225,58 @@ console.log(value4 ?? 'Default'); // 'Hello' (value4 is a non-null value)
   (local/block) has the same name as a variable in an outer scope.  
 - The inner variable "shadows" (hides) the outer variable within its scope.  
 ```js
-let name = "Alice";  // Outer variable
+`using var shadowing in function scope`
+var name = "Alice";
 
 function greet() {
-  var name = "Bob";  // Inner variable shadows the outer variable
-  console.log(name);  // Bob, because the inner variable 'name' is in scope
+  var name = "Bob"; // shadows outer 'name'
+  console.log(name); // Bob
 }
 
-greet();  // Output: Bob
-console.log(name);  // Output: Alice, because the outer variable is still in scope outside the function
+greet();
+console.log(name);
+
+`ussing var not really shadowing in normal scope`
+var x = 10;
+
+if (true) {
+  var x = 20; // overwrites outer x (not really shadowing)
+  console.log(x); // 20
+}
+
+console.log(x); // 20
+
+`using let shadowing in function scope`
+let age = 25;
+
+function showAge() {
+  let age = 30; // shadows outer 'age'
+  console.log(age); // 30
+}
+
+showAge();
+console.log(age); // 25 (outer variable unchanged)
+
+`using let and const shadowing in normal block`
+let x = 10;
+const city = "Kochi";
+
+if (true) {
+  let x = 20; // shadows outer x safely
+  const city = "Bangalore"; // shadows outer 'city'
+  console.log(x); // 20
+}
+
+console.log(x); // 10
+
 ```
+
+| Keyword | Scope    | Shadowing          | Notes                                         |
+| ------- | -------- | ------------------ | --------------------------------------------- |
+| `var`   | Function | Yes, but not block | Can accidentally overwrite outer var in block |
+| `let`   | Block    | Yes                | Safer shadowing, outer variable safe          |
+| `const` | Block    | Yes                | Same as let, but cannot reassign              |
+
 
 
 
@@ -2217,6 +2288,7 @@ console.log(name);  // Output: Alice, because the outer variable is still in sco
   is shadowed by a `var` in the same or inner scope.  
 - This happens because `var` is function-scoped and `let`/`const` are block-scoped,
   which creates a conflict.  
+  - whenever a block scpoed varibale is again declared with function scope
 ```js
 let x = 10;
 
@@ -2371,15 +2443,14 @@ setTimeout , setInterval , eventListener , i/o operations
 
 
 
-
-## `Coercion & Convertion` ##
+## `Coercion & Convertion OR Type Casring` ##
 =================================
 `Implicit coercion`
 --------------------
 Implicit coercion occurs automatically when the JavaScript engine converts values from one type to another during an operation, attempting to make sense of the context without explicit instructions from the programmer.
 
-`Explicit conversion` or `Type casting`
-----------------------------------------
+`Explicit conversion`
+----------------------
 Explicit conversion is the deliberate transformation of a value from one type to another, performed using built-in functions or methods provided by JavaScript.
 
 

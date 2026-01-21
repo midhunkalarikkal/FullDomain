@@ -32,7 +32,7 @@ const app = express();
 // in this we can get different response
 
 // app.get('/getData',(req,res) => {
-//     res.send({fname : "Midhun", lname : "K Paniker"});
+//     res.json({fname : "Midhun", lname : "K Paniker"});
 // })
 
 // app.post("/postData",(req,res) => {
@@ -44,7 +44,7 @@ const app = express();
 // })
 
 // ## fourth
-// just rout example with constraints
+// just route example with constraints
 
 // app.get('/use+r',(req,res) => {
 //     res.send("user GET call with + in route");
@@ -59,14 +59,17 @@ const app = express();
 // ## req.params
 // app.get('/user/:userId',(req,res) => {
 //     console.log(req.params);
-//     res.send("response from server with req.params");
+//     res.send(`response from server with req.params userId : ${req.params.userId}`);
 // })
 
 // ## req.query
-// app.get('/user',(req,res) => {
-//     console.log(req.query);
-//     res.send("response from server with req.query");
-// })
+// app.get("/user", (req, res) => {
+//   console.log(req.query);
+//   res.send({
+//     message: "response from server with req.query : ",
+//     query: req.query,
+//   });
+// });
 
 // ## Five
 // ## request hanlder with multiple callback with next parameter
@@ -165,10 +168,15 @@ const app = express();
 // Six
 // MIddlewares
 // the middle ware is exporte from the middleware/auth
-// const { adminAuth } = require('./middlewares/auth');
+// const { adminAuth, userMiddleware } = require('./middlewares/auth');
 // const { adminErr } = require('./middlewares/err');
 
 // app.use("/admin",adminAuth);
+// app.use('/user', userMiddleware,(req, res) => {
+//   res.send({
+//     message: "User"
+//   })
+// });
 
 // app.get("/admin/getData", (req, res) => {
 //     res.send("adin authenticated");
@@ -184,9 +192,34 @@ const app = express();
 //     next(new Error("User data send."));
 // })
 
-// app.use('/',adminErr); 
+// app.use('/',adminErr);
 
+// creating and sending cookie
+// app.get("/user", (req, res) => {
+//   const token = "ABCD";
 
+//   res.cookie("token",token,{
+//     maxAge: 60 * 1000,
+//     sameSite: true,
+//     httpOnly: true,
+//     secure: false,
+//   });
+
+//   res.send({
+//     message: "User created",
+//     data: "user",
+//   })
+// });
+// const session = require("express-session");
+
+// app.use(session({
+//   secret: "secret-key",
+//   resvae: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     maxAge: 60 * 1000
+//   }
+// }))
 
 app.listen(4000, () => {
   console.log("Server is listening on port 4000");

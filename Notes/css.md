@@ -45,6 +45,8 @@ p .center {
 }
 ```
 
+query 
+
 `Universal Selector`
 --------------------
 The universal selector (*) selects all HTML elements on the page.

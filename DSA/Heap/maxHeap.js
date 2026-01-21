@@ -95,10 +95,10 @@ heap.add(40);
 heap.add(50);
 heap.add(100);
 heap.add(40);
-console.log(heap.heap)
+console.log(heap.heap);
 
 console.log(heap.peek());
 console.log(heap.remove());
 
-console.log(heap.heap)
+console.log(heap.heap);
 

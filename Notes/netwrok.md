@@ -248,3 +248,46 @@ Server
 500 - Internal server error
 502 - Bad gateway
 503 - service unavailable
+
+
+
+## API
+======
+Application Programming Interface, defines how software components should interact
+
+Client ----> Api [A contract that defines, what requests can be made, How to make them, What responses to expect] --------> Server
+
+Abstraction Mechanism, Service boundaries
+
+## Types
+=========
+Rest
+    - Resource based: Organized around resources using HTTP methods
+    - Stateless: Each request contains all information needed
+    - Standardized methods: GET, POST PUT, DELETE, PATCH
+    - Used in Web and mobile apps
+
+GRAPHQL
+    - Query Language: Clients request exactly what they need
+    - Single Endpoint: One endpoint for all operations
+    - Operations: 
+        1. Query (read)
+        2. Mutation (write)
+        3. Subscription (realtime)
+    - Used in complex UIS
+
+gRPC ( Google Remote Procedural Call )
+    - Protocol Buffers: Binary serialization with schema definition
+    - Service Definition: Methods Defined as RPSs in .proto files
+    - Communication Types: Unary, Server Streaming, Client Streaming, Bidirectional streaming
+    - Used in microservices
+
+
+
+    Public Network 
+
+    Private Network
+
+    Public IP
+
+    

@@ -6,6 +6,13 @@ var a = 100;
 var b = 200;
 
 // async
+// PBKDF2(
+//     password,
+//     salt,
+//     iterations,
+//     keyLength,
+//     hashFunction
+// )
 crypto.pbkdf2("password","salt",50000,50,"sha512",(err,data) => {
     console.log("async crypto done");
 });

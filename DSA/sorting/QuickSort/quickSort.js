@@ -3,7 +3,8 @@ function quickSort(arr, count = { comparisons: 0 }) {
         return arr;
     }
 
-    let pivot = arr[arr.length - 1];
+    let pivotIndex = Math.floor(Math.random() * arr.length);
+    let pivot = arr[pivotIndex];
     let leftarr = [];
     let rightarr = [];
 

@@ -371,7 +371,7 @@ The <script> element either contains script statements, or it points to an exter
 Common uses for JavaScript are image manipulation, form validation, and dynamic changes of content.
 
 
-## `HTML Layout` ##
+## `HTML Layout / Semantic tags` ##
 ===================
 <header> - Defines a header for a document or a section
 <nav> - Defines a set of navigation links

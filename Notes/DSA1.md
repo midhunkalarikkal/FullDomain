@@ -75,8 +75,7 @@ Algorithm is a step-by-step procedures or formula for solving a problem or perfo
 ## `Types of Algorithms` ##
 ===========================
 1. Brute Force Algorithms  
-- Brute Force is a straightforward problem-solving approach that tries all possible solutions to find the correct one, without using any optimization or shortcuts. Simple to implement but often inefficient (especially for large inputs).
-- Examples: Linear Search, Trial Division (Prime check), Generate all subsets  
+- Brute Force is a straightforward problem-solving approach that tries all possible solutions to find the correct one, without using any optimization or shortcuts.
 
 2. Searching Algorithms  
 - Used to find a specific value or an element from a collection or dataset.  
@@ -95,9 +94,7 @@ Algorithm is a step-by-step procedures or formula for solving a problem or perfo
 - Examples: Merge Sort, Quick Sort, Binary Search, Closest Pair of Points  
 
 6. Greedy Algorithm
-- Always makes the locally optimal choice at each step, hoping that this will lead to the globally optimal solution.
-- At every step of the algorithm, that will make a choice that looks the best at the moment. To make the choice, we sometimes sort the array or use a priority queue, so that we can always get the next optimal choice quickly.
-- After making a choice, we check for constraints (if there are any) and keep picking until we find the solution.
+Builds a solution step-by-step by always choosing the best optimal choice at each step hoping it will lead to the best solution
 - Examples: Activity Selection, Fractional Knapsack, Kruskal’s MST, Prim’s MST, Huffman Coding  
 
 7. Backtracking  
@@ -458,6 +455,11 @@ When the end of the array is reached, it wraps around to the beginning.
 ------------
 A Bit Array is a compact array structure that stores bits (0s and 1s) instead of regular data types. It is memory-efficient, especially useful when you only need to represent true/false or on/off states.
 
+`Sorted Non-Decreasing order array`
+-----------------------------------
+Which is a sorted array but it will have duplicates
+const a = [1,2,3,3,3,3,4,5,5,5,6,9,9,9];
+a[i+1] >= a[i]
 
 
 
